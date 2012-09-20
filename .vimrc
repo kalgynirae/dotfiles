@@ -4,10 +4,11 @@ syntax on
 " indentation
 set expandtab
 set tabstop=4 softtabstop=4 shiftwidth=4
-set autoindent smartindent
+set autoindent
 autocmd Syntax html setlocal ts=2 sts=2 sw=2
 autocmd Syntax htmldjango setlocal ts=2 sts=2 sw=2
 autocmd Syntax css setlocal ts=2 sts=2 sw=2
+autocmd Syntax tex setlocal ts=2 sts=2 sw=2
 " Don't wrap lines
 set nowrap
 " line numbers
