@@ -1,4 +1,4 @@
-set runtimepath+=/usr/share/lilypond/2.14.2/vim/
+set runtimepath+=/usr/share/lilypond/2.16.0/vim/
 filetype plugin indent on
 syntax on
 " indentation
