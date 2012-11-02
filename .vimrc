@@ -9,6 +9,7 @@ autocmd Syntax html setlocal ts=2 sts=2 sw=2
 autocmd Syntax htmldjango setlocal ts=2 sts=2 sw=2
 autocmd Syntax css setlocal ts=2 sts=2 sw=2
 autocmd Syntax tex setlocal ts=2 sts=2 sw=2
+autocmd Syntax markdown setlocal tw=72
 " Don't wrap lines
 set nowrap
 " line numbers
@@ -40,7 +41,3 @@ autocmd Syntax java setlocal noexpandtab
 set showcmd
 " vim-python from the AUR
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-" Map command for swapping words separated by a comma
-"nmap gt :set opfunc=SwapWords<CR>g@
-"function! SwapWords(type, ...)
-"    silent exe "normal! `[\"ayt,f,\"cyww\"by`]"
