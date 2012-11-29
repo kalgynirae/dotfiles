@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Disable Nvidia card
+sudo /usr/local/bin/disable-alternate-graphics-card
+
+# User specific environment and startup programs
+# Fix horizontal scrolling with touchpad
+synclient HorizScrollDelta=200
+
+# Start timidity++ daemon
+#timidity -iA &
+
+# Make X sleep the display after 5 minutes
+#xset dpms 310
