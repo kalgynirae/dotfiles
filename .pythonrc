@@ -1,0 +1,8 @@
+# Enable tab completion
+try:
+    import readline
+except ImportError:
+    print(".pythonrc: Module readline not available.")
+else:
+    import rlcompleter
+    readline.parse_and_bind('tab: complete')
