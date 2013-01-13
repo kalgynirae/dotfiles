@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Disable Nvidia card
-sudo /usr/local/bin/disable-alternate-graphics-card
+#sudo /usr/local/bin/disable-alternate-graphics-card
 
 # User specific environment and startup programs
 # Fix horizontal scrolling with touchpad
