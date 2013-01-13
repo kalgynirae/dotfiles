@@ -55,3 +55,8 @@ man() {
         LESS_TERMCAP_us=$(printf "\e[1;32m") \
         man "$@"
 }
+
+mkcd() {
+    mkdir -p "$1"
+    cd "$1"
+}
