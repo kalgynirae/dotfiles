@@ -1,14 +1,11 @@
 filetype plugin indent on
 syntax on
-" indentation
+" Formatting and indentation
 set expandtab autoindent
-set tabstop=4
-set softtabstop=4 shiftwidth=4
-" Unusual indentation for specific types
-autocmd Syntax html setlocal ts=2 sts=2 sw=2
-autocmd Syntax htmldjango setlocal ts=2 sts=2 sw=2
-autocmd Syntax css setlocal ts=2 sts=2 sw=2
-autocmd Syntax tex setlocal ts=2 sts=2 sw=2
+set tabstop=4 softtabstop=4 shiftwidth=4
+set textwidth=79
+" Unusual formatting for specific types
+autocmd Syntax css,html,xhtml,htmldjango,tex setlocal ts=2 sts=2 sw=2
 autocmd Syntax markdown setlocal tw=72
 autocmd Syntax java setlocal noexpandtab
 " General view settings
@@ -19,7 +16,6 @@ set number
 set ruler
 set scrolloff=3
 set showcmd
-set textwidth=80
 " Custom shortcuts
 nmap <Leader>n :noh<CR>
 nmap <Leader>p :set invpaste paste?<CR>
