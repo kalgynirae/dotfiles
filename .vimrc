@@ -31,3 +31,5 @@ autocmd BufWinLeave * call clearmatches()
 set wildmenu wildmode=longest,list
 " vim-python from the AUR
 autocmd FileType python set omnifunc=pythoncomplete#Complete
+" Project specific configuration files
+set exrc secure
