@@ -25,7 +25,6 @@ alias ll='ls -hl'
 alias tree='tree -C'
 alias diff='colordiff'
 alias grep='grep -n --color'
-alias :q=exit
 
 # Disallow overwriting files by redirection with > (use >| instead)
 set -o noclobber
