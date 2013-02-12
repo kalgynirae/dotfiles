@@ -1,12 +1,11 @@
 filetype plugin indent on
 syntax on
 " Formatting and indentation
-set expandtab autoindent
-set tabstop=4 softtabstop=4 shiftwidth=4
+set autoindent
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 set textwidth=79
 " Unusual formatting for specific types
-autocmd Syntax css,html,xhtml,htmldjango,tex setlocal ts=2 sts=2 sw=2
-autocmd Syntax markdown setlocal tw=72
+autocmd Syntax html,xhtml,htmldjango,tex setlocal ts=2 sts=2 sw=2
 autocmd Syntax java setlocal noexpandtab
 " General view settings
 set hlsearch incsearch

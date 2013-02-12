@@ -8,7 +8,7 @@ PATH=$PATH:$HOME/bin
 HISTCONTROL=ignoreboth
 HISTIGNORE="history*:bg*:fg*:ls:ll:la:cd ..:su:git status:git diff:git diff --cached:git log:startx:python:python2:python3:open *"
 EDITOR=vim
-export PATH HISTCONTROL HISTIGNORE EDITOR GOPATH
+export PATH HISTCONTROL HISTIGNORE EDITOR
 
 # Python environment variables
 PYTHONSTARTUP=~/.pythonrc
@@ -25,6 +25,7 @@ alias ll='ls -hl'
 alias tree='tree -C'
 alias diff='colordiff'
 alias grep='grep -n --color'
+alias less='less -R'
 
 # Disallow overwriting files by redirection with > (use >| instead)
 set -o noclobber
