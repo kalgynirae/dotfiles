@@ -20,12 +20,12 @@ export PYTHONSTARTUP PYTHONDONTWRITEBYTECODE PYTHONPATH
 # Aliases
 alias su='su -'
 alias open='xdg-open'
-alias ls='ls --color=auto'
+alias ls='ls --color=always'
 alias la='ls -AF'
 alias ll='ls -hl'
-alias tree='tree -C'
+alias tree='tree -CF --charset=utf-8'
 alias diff='colordiff'
-alias grep='grep -n --color'
+alias grep='grep -n --color=always'
 alias less='less -R'
 
 # Disallow overwriting files by redirection with > (use >| instead)
