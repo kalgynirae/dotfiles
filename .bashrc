@@ -19,7 +19,6 @@ export PYTHONSTARTUP PYTHONDONTWRITEBYTECODE PYTHONPATH
 
 # Aliases
 alias su='su -'
-alias open='xdg-open'
 alias ls='ls --color=always'
 alias la='ls -AF'
 alias ll='ls -hl'
@@ -60,4 +59,8 @@ man() {
 mkcd() {
     mkdir -p "$1"
     cd "$1"
+}
+
+open() {
+    xdg-open "$1" >/dev/null 2>&1
 }
