@@ -64,3 +64,7 @@ mkcd() {
 open() {
     xdg-open "$1" >/dev/null 2>&1
 }
+
+if [[ -f ~/.localrc ]]; then
+    source ~/.localrc
+fi
