@@ -6,7 +6,6 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 set textwidth=79
 " Unusual formatting for specific types
 autocmd Syntax html,xhtml,htmldjango,tex setlocal ts=2 sts=2 sw=2
-autocmd Syntax java setlocal noexpandtab
 " General view settings
 set hlsearch incsearch
 set list listchars=tab:‣\ ,extends:»,precedes:«
@@ -17,8 +16,11 @@ set scrolloff=3
 set showcmd
 " Custom shortcuts
 nmap <Leader>n :noh<CR>
-nmap <Leader>p :set invpaste paste?<CR>
-nmap <Leader>m :set invnumber<CR>
+nmap <Leader>p :setlocal invpaste paste?<CR>
+nmap <Leader>m :setlocal invnumber number?<CR>
+nmap <Leader>s :setlocal invspell spell?<CR>
+" Spell check
+set spelllang=en
 " Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
