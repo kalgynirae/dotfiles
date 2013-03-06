@@ -6,9 +6,10 @@ export PS1
 # Environment variables
 PATH=$PATH:$HOME/bin
 HISTCONTROL=ignoreboth
-HISTIGNORE="history*:bg*:fg*:ls:ll:la:cd ..:su:git status:git diff:git diff --cached:git log:startx:python:python2:python3:open *"
+HISTIGNORE="history:bg*:fg*:ls:ll:la:su"
+HISTSIZE=2000
 EDITOR=vim
-export PATH HISTCONTROL HISTIGNORE EDITOR
+export PATH HISTCONTROL HISTIGNORE HISTSIZE EDITOR
 
 # Python environment variables
 PYTHONSTARTUP=~/.pythonrc
