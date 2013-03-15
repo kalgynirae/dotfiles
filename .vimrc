@@ -4,6 +4,8 @@ syntax on
 set autoindent
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 set textwidth=79
+" Backspace operation
+set backspace=2
 " Unusual formatting for specific types
 autocmd Syntax html,xhtml,htmldjango,tex setlocal ts=2 sts=2 sw=2
 " General view settings
