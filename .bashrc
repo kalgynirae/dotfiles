@@ -26,6 +26,9 @@ alias tree='tree -CF --charset=utf-8'
 alias diff='colordiff'
 alias grep='grep -n --color=always'
 alias less='less -R'
+alias qemu='qemu-system-x86_64 -enable-kvm'
+alias wget='echo CURL!
+'
 
 # Disallow overwriting files by redirection with > (use >| instead)
 set -o noclobber
@@ -37,7 +40,7 @@ shopt -s checkwinsize
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUPSTREAM='verbose'
-source ~/.git-completion.bash
+source ~/.git-prompt.sh
 
 # Complete partially-typed commands using the up/down arrow keys
 bind '"\e[A":history-search-backward'
