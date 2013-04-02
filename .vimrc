@@ -7,7 +7,7 @@ set textwidth=79
 " Backspace operation
 set backspace=2
 " Unusual formatting for specific types
-autocmd Syntax html,xhtml,htmldjango,tex setlocal ts=2 sts=2 sw=2
+autocmd Syntax html,xhtml,htmldjango,tex,lilypond setlocal ts=2 sts=2 sw=2
 " General view settings
 set hlsearch incsearch
 set list listchars=tab:‣\ ,extends:»,precedes:«
