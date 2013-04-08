@@ -9,4 +9,5 @@ synclient HorizScrollDelta=200
 #    nm-online && pidgin&
 #fi
 
-conky &
+killall conky; conky &
+#killall xflux; xflux -z 32603 &
