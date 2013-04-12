@@ -4,7 +4,7 @@ PS1=$PS1'[\j]\$ '
 export PS1
 
 # Environment variables
-PATH=$PATH:$HOME/bin
+PATH=$PATH:$HOME/dotfiles:$HOME/bin
 HISTCONTROL=ignoreboth
 HISTIGNORE="history:bg*:fg*:ls:ll:la:su"
 HISTSIZE=2000

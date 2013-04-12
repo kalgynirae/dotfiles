@@ -36,3 +36,5 @@ set wildmenu wildmode=longest,list
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 " Project specific configuration files
 set exrc secure
+" Sudo write
+cmap w!! %!sudo tee > /dev/null %

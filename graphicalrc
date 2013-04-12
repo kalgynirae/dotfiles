@@ -4,10 +4,10 @@
 synclient HorizScrollDelta=200
 
 # Start Pidgin
-#if [ `date +%H` -ge 6 ]
-#then
-#    nm-online && pidgin&
-#fi
+if [ `date +%H` -ge 6 ]
+then
+    pidgin &
+fi
 
 killall conky; conky &
 #killall xflux; xflux -z 32603 &
