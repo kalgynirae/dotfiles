@@ -10,38 +10,15 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
-
--- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
-if awesome.startup_errors then
-    naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
-end
-
--- Handle runtime errors after startup
-do
-    local in_error = false
-    awesome.connect_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
-
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = err })
-        in_error = false
-    end)
-end
--- }}}
+-- Moar widgets!
+local vicious = require("vicious")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init("/home/lumpy/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -73,7 +50,9 @@ local layouts =
 -- {{{ Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        --gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        local wallpaper = "/home/share/wallpaper_1920x1080.png"
+        gears.wallpaper.maximized(wallpaper, s, true)
     end
 end
 -- }}}
@@ -90,8 +69,8 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
+   { "manual", terminal .. " -e 'man awesome'" },
+   { "edit config", terminal .. " -e '" .. editor .. " " .. awesome.conffile .. "'" },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
@@ -101,8 +80,8 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+--mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+--                                     menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -111,6 +90,15 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
+
+-- Create a battery bar widget
+batterybar = awful.widget.progressbar()
+batterybar:set_width(30)
+batterybar:set_vertical(false)
+batterybar:set_background_color("#494B4F")
+batterybar:set_border_color(nil)
+batterybar:set_color("#8ae234")
+vicious.register(batterybar, vicious.widgets.bat, "$2", 61, "BAT1")
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -182,13 +170,14 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(mylauncher)
+    --left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(batterybar)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -270,6 +259,11 @@ globalkeys = awful.util.table.join(
               end),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end)
+
+    -- Custom
+    -- awful.key({}, "XF86AudioRaiseVolume",
+    --awful.key({ "Control", "Mod1" }, "l", function () awful.util.spawn("/home/lumpy/scripts/dotfiles/lumeh-lock") end),
+    --awful.key({ "Control", "Mod1" }, "m", function () awful.util.spawn("/home/lumpy/bin/muzics") end)
 )
 
 clientkeys = awful.util.table.join(
