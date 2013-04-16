@@ -5,7 +5,6 @@ filetype plugin indent on
 syntax enable
 " Indentation
 set autoindent
-set shiftround
 set softtabstop=4 shiftwidth=4 expandtab smarttab
 autocmd Syntax html,xhtml,htmldjango,tex,lilypond,yaml setlocal ts=2 sts=2 sw=2
 " Wrapping
