@@ -1,17 +1,22 @@
+set nocompatible
+set encoding=utf-8
+" Syntax highlighting
 filetype plugin indent on
-syntax on
-" Formatting and indentation
+syntax enable
+" Indentation
 set autoindent
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+set shiftround
+set softtabstop=4 shiftwidth=4 expandtab smarttab
+autocmd Syntax html,xhtml,htmldjango,tex,lilypond,yaml setlocal ts=2 sts=2 sw=2
+" Wrapping
+set nowrap
 set textwidth=79
 " Backspace operation
-set backspace=2
-" Unusual formatting for specific types
-autocmd Syntax html,xhtml,htmldjango,tex,lilypond,yaml setlocal ts=2 sts=2 sw=2
+set backspace=indent,eol,start
 " General view settings
+set display=lastline
 set hlsearch incsearch
-set list listchars=tab:‣\ ,extends:»,precedes:«
-set nowrap
+set list listchars=tab:‣\ ,extends:»,precedes:«,nbsp:‧
 set number
 set ruler
 set scrolloff=3
@@ -21,6 +26,8 @@ nmap <Leader>n :noh<CR>
 nmap <Leader>p :setlocal invpaste paste?<CR>
 nmap <Leader>m :setlocal invnumber number?<CR>
 nmap <Leader>s :setlocal invspell spell?<CR>
+nmap Y y$
+cmap w!! %!sudo tee > /dev/null %
 " Spell check
 set spelllang=en
 " Highlight trailing whitespace
@@ -36,5 +43,3 @@ set wildmenu wildmode=longest,list
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 " Project specific configuration files
 set exrc secure
-" Sudo write
-cmap w!! %!sudo tee > /dev/null %
