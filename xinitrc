@@ -13,7 +13,7 @@ xrandr --output HDMI1 --auto --pos 0x0 \
 #xset dpms 0 0 300
 
 ## Keyboard settings
-xset r rate 200 30
+xset r rate 200 35
 numlockx
 
 # Applets and such

@@ -10,4 +10,4 @@ then
 fi
 
 killall conky; conky &
-#killall xflux; xflux -z 32603 &
+killall redshift; redshift &

@@ -4,7 +4,7 @@ PS1=$PS1'[\j]\$ '
 export PS1
 
 # Environment variables
-PATH=$PATH:$HOME/dotfiles:$HOME/bin
+PATH=$PATH:$HOME/dotfiles:$HOME/bin:$HOME/.gem/ruby/2.0.0/bin
 HISTCONTROL=ignoreboth
 HISTIGNORE="history:bg*:fg*:ls:ll:la:su"
 HISTSIZE=2000
