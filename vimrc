@@ -15,7 +15,8 @@ set backspace=indent,eol,start
 " General view settings
 set display=lastline
 set hlsearch incsearch
-set list listchars=tab:‣\ ,extends:»,precedes:«,nbsp:‧
+set laststatus=2
+set list listchars=tab:‣\ ,extends:»,precedes:«,nbsp:‧,trail:░
 set number
 set ruler
 set scrolloff=3
@@ -29,13 +30,6 @@ nmap Y y$
 cmap w!! %!sudo tee > /dev/null %
 " Spell check
 set spelllang=en
-" Highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
 " Tab completion in commands
 set wildmenu wildmode=longest,list
 " vim-python from the AUR
