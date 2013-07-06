@@ -1,0 +1,14 @@
+[core]
+	editor = vim
+[color]
+	ui = true
+[user]
+	name = Colin Chan
+	email = colinchan@lumeh.org
+[alias]
+	graph = log --graph --all --pretty=format:'%C(auto)%h %s %Cblue[%cn]%C(auto)%n %d'
+	pull = pull --ff-only
+[push]
+	default = simple
+[diff]
+	algorithm = patience
