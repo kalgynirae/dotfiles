@@ -32,7 +32,7 @@ cmap w!! %!sudo tee > /dev/null %
 set spelllang=en
 " Tab completion in commands
 set wildmenu wildmode=longest,list
-" vim-python from the AUR
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+" Python syntax highlighting options
+let g:python_highlight_all = 1
 " Project specific configuration files
 set exrc secure
