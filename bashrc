@@ -25,10 +25,9 @@ alias ll='ls -hl'
 alias tree='tree -CF --charset=utf-8'
 alias diff='colordiff'
 alias grep='grep -n --color=always'
-alias less='less -R'
+alias less='less -RSXF'
 alias qemu='qemu-system-x86_64 -enable-kvm'
-alias wget='echo CURL!
-'
+alias lilypond='lilypond -dno-point-and-click'
 
 # Disallow overwriting files by redirection with > (use >| instead)
 set -o noclobber
