@@ -10,6 +10,7 @@ autocmd Syntax html,xhtml,htmldjango,tex,lilypond,yaml setlocal ts=2 sts=2 sw=2
 " Wrapping
 set nowrap
 set textwidth=79
+autocmd Syntax markdown,pandoc,txt setlocal textwidth=72
 " Backspace operation
 set backspace=indent,eol,start
 " General view settings
@@ -21,6 +22,7 @@ set number
 set ruler
 set scrolloff=3
 set showcmd
+set viminfo='20,<50,s10,h
 " Custom shortcuts
 nmap <Leader>n :noh<CR>
 nmap <Leader>p :setlocal invpaste paste?<CR>
