@@ -10,7 +10,7 @@ autocmd Syntax html,xhtml,htmldjango,tex,lilypond,yaml setlocal ts=2 sts=2 sw=2
 " Wrapping
 set nowrap
 set textwidth=79
-autocmd Syntax markdown,pandoc,txt setlocal textwidth=72
+autocmd Syntax gitcommit,markdown,pandoc,txt setlocal textwidth=72
 " Backspace operation
 set backspace=indent,eol,start
 " General view settings
