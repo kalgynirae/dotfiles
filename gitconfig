@@ -1,5 +1,6 @@
 [core]
 	editor = vim
+	excludesfile = ~/dotfiles/gitignore
 [color]
 	ui = true
 [user]
