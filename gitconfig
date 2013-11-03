@@ -8,7 +8,7 @@
 	email = colinchan@lumeh.org
 [alias]
 	graph = log --graph --all --pretty=format:'%C(auto)%h %s %Cblue[%cn]%C(auto)%n %d'
-	pull = pull --ff-only
+	logg = log --all --graph --decorate
 [push]
 	default = simple
 [diff]
