@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fix horizontal scrolling with touchpad
-synclient HorizScrollDelta=200
+#synclient HorizScrollDelta=200
 
 # Start Pidgin
 if [ `date +%H` -ge 6 ]
@@ -9,5 +9,8 @@ then
     pidgin &
 fi
 
-killall conky; conky &
+nm-applet &
+
+#xbindkeys &
+#killall conky; conky &
 killall redshift; redshift &

@@ -1,3 +1,0 @@
-#!/bin/sh
-
-i3lock -c 000000 -i /home/share/wallpaper_1920x1080.png
