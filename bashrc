@@ -1,33 +1,21 @@
-# Prompt
-PS1='\[\e[1;30m\]\u@\h\[\e[0m\]:\[\e[1;30m\]\W\[\e[0m\]$(__git_ps1 " (%s)")\n'
-PS1=$PS1'[\j]\$ '
-export PS1
-
 # Environment variables
-PATH=$PATH:$HOME/dotfiles:$HOME/bin:$HOME/.gem/ruby/2.0.0/bin
-HISTCONTROL=ignoreboth
-HISTIGNORE="history:bg*:fg*:ls:ll:la:su"
-HISTSIZE=2000
-EDITOR=vim
-export PATH HISTCONTROL HISTIGNORE HISTSIZE EDITOR
-
-# Python environment variables
-PYTHONSTARTUP=~/.pythonrc
-PYTHONDONTWRITEBYTECODE=1
-PYTHONPATH="/home/lumpy/python"
-export PYTHONSTARTUP PYTHONDONTWRITEBYTECODE PYTHONPATH
+export EDITOR=vim
+export HISTCONTROL=ignoreboth
+export HISTIGNORE="history:bg*:fg*:ls:ll:la:su"
+export HISTSIZE=2000
+export LESS='--chop-long-lines --no-init --quit-if-one-screen --RAW-CONTROL-CHARS'
+export PATH=$PATH:$HOME/dotfiles:$HOME/bin:$HOME/.gem/ruby/2.0.0/bin
+export PYTHONPATH=/home/lumpy/python
+export PYTHONSTARTUP=~/.pythonrc
 
 # Aliases
-alias su='su -'
-alias ls='ls --color=always'
-alias la='ls -AF'
-alias ll='ls -hl'
+alias su='su --login'
+alias ls='ls --color'
+alias la='ls --almost-all --classify'
+alias ll='ls -l --human-readable'
 alias tree='tree -CF --charset=utf-8'
-alias diff='colordiff'
-alias grep='grep -n --color=always'
-alias less='less -RSXF'
-alias qemu='qemu-system-x86_64 -enable-kvm'
-alias lilypond='lilypond -dno-point-and-click'
+alias grep='grep --line-number --color'
+alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
 alias python='python3'
 
 # Disallow overwriting files by redirection with > (use >| instead)
@@ -36,18 +24,19 @@ set -o noclobber
 # Fix the window size periodically, so resizing while in e.g. VIM doesn't break it
 shopt -s checkwinsize
 
-# Git completion and prompt string
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWSTASHSTATE=1
-export GIT_PS1_SHOWUPSTREAM='verbose'
-source ~/.git-prompt.sh
-
 # Complete partially-typed commands using the up/down arrow keys
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
-# Colored man pages
-man() {
+diff() {
+    colordiff "$@" | less
+}
+
+make() {
+    colormake "$@" | less
+}
+
+man() { # Display man pages with color
     env \
         LESS_TERMCAP_mb=$(printf "\e[1;31m") \
         LESS_TERMCAP_md=$(printf "\e[1;31m") \
@@ -68,6 +57,25 @@ open() {
     xdg-open "$1" >/dev/null 2>&1
 }
 
+# Prompt defaults (PS1 is actually set further down)
+prompt_color='\[\e[1;30m\]'
+prompt_reset='\[\e[0m\]'
+prompt_user=$prompt_color'\u@\h'$prompt_reset
+prompt_dir=$prompt_color'\W'$prompt_reset
+prompt_git=
+
+# Git completion and prompt string
+if [[ -f ~/.git-prompt.sh ]]; then
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    export GIT_PS1_SHOWSTASHSTATE=1
+    export GIT_PS1_SHOWUPSTREAM='verbose'
+    source ~/.git-prompt.sh
+    prompt_git='$(__git_ps1 " (%s)")'
+fi
+
+# Source the localrc if there is one
 if [[ -f ~/.localrc ]]; then
     source ~/.localrc
 fi
+
+export PS1=$prompt_user':'$prompt_dir$prompt_git'\n[\j]\$ '
