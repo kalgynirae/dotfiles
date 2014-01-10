@@ -35,4 +35,4 @@ if amixer -D pulse get Master | grep -q 'off'; then
     current=0
 fi
 
-notify-send -i $icon -h int:value:$current "Volume: $current%"
+#notify-send -i $icon -h int:value:$current "Volume: $current%"
