@@ -1,0 +1,8 @@
+#!/bin/sh
+
+rsync --progress --itemize-changes \
+      --recursive --update --inplace \
+      --delete --delete-excluded \
+      --exclude christmas/ \
+      /home/lumpy/music/audio/ \
+      colin@fruitron:/var/zachary/music/
