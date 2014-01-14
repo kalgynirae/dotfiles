@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if mpc --host fruitron | grep -q playing; then
+    # Disable repeat
+    mpc repeat off
+
+    # Move the current playing song to the end of the list
+    mpc move $(mpc -f %position% | head -n 1) $(mpc playlist | wc -l)
+
+    # Queue the songs
+    mpc ls bedtime | sort | mpc add
+
+    # Enable crossfade for the first song
+    mpc crossfade 10
+
+    # Wait until the song changes
+    mpc current --wait
+
+    # Increase the volume if it's below 50%
+    volume=$(mpc volume | cut -d ' ' -f 2 | sed 's/%//')
+    if [ $volume -lt 50 ]; then
+        mpc volume 50
+    fi
+
+    # Disable crossfade
+    mpc crossfade 0
+fi
