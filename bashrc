@@ -23,6 +23,7 @@ set -o noclobber
 
 # Fix the window size periodically, so resizing while in e.g. VIM doesn't break it
 shopt -s checkwinsize
+shopt -s histappend
 
 # Complete partially-typed commands using the up/down arrow keys
 bind '"\e[A":history-search-backward'
