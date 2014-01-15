@@ -1,27 +1,56 @@
 #!/bin/bash
 
-if mpc --host fruitron | grep -q playing; then
-    # Disable repeat
-    mpc repeat off
+MPC='mpc'
+BEDTIME_VOLUME=50
+BEDTIME_CROSSFADE=8
 
-    # Move the current playing song to the end of the list
-    mpc move $(mpc -f %position% | head -n 1) $(mpc playlist | wc -l)
+if $MPC | grep -q playing; then
+
+    last_song_position=$($MPC playlist | wc -l)
+    remaining_time=$($MPC | grep playing | cut -d ' ' -f 5 |
+                     awk -F '[:/]' '{ print ($3 * 60 + $4) - ($1 * 60 + $2) }')
+    volume=$($MPC volume | cut -d ' ' -f 2 | sed 's/%//')
+
+    # Disable repeat
+    $MPC repeat off
+
+    # Enable bedtime crossfade
+    $MPC crossfade $BEDTIME_CROSSFADE
 
     # Queue the songs
-    mpc ls bedtime | sort | mpc add
+    $MPC ls bedtime | sort | $MPC add
 
-    # Enable crossfade for the first song
-    mpc crossfade 10
+    if [ $remaining_time -gt 600 ]; then
 
-    # Wait until the song changes
-    mpc current --wait
+        # Fade out current song
+        newvolume=$volume
+        while [ $newvolume -gt 0 ]; do
+            sleep 0.5
+            $MPC volume $newvolume
+            newvolume=$(($newvolume - 3))
+        done
+        $MPC stop
+        $MPC volume $volume
 
-    # Increase the volume if it's below 50%
-    volume=$(mpc volume | cut -d ' ' -f 2 | sed 's/%//')
-    if [ $volume -lt 50 ]; then
-        mpc volume 50
+        # Start with Papillon
+        $MPC play $(($last_song_position + 2))
+
+    else
+
+        # Move the current playing song to just before the bedtime songs
+        $MPC move $($MPC -f %position% | head -n 1) $last_song_position
+
+        # Wait until Nemo ends
+        $MPC current --wait
+        $MPC current --wait
+
     fi
 
-    # Disable crossfade
-    mpc crossfade 0
+    # Wait a bit and then reset the crossfading
+    sleep $BEDTIME_CROSSFADE
+    $MPC crossfade 0
+
+    # Reset the volume after Papillon ends
+    $MPC current --wait
+    $MPC volume $BEDTIME_VOLUME
 fi
