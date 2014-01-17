@@ -1,69 +1,65 @@
 #!/bin/bash
 
 MPC='mpc'
-BEDTIME_VOLUME=50
+BEDTIME_VOLUME=45
 BEDTIME_CROSSFADE=8
-LATE_START_TIME=1355
+LATE_START_TIME=$(((22 * 60 + 42) * 60))
 
 if $MPC | grep -q playing; then
+    echo "mpd is playing; scheduling..." >&2
 
-    # Wait until we get close to the end of a song or it gets too late
-    while true; do
-        sleep 10
-        remaining_time=$($MPC | grep playing | cut -d ' ' -f 5 |
-                         awk -F '[:/]' '{ print ($3 * 60 + $4) - ($1 * 60 + $2) }')
-        if [[ $remaining_time -lt $((10 + $BEDTIME_CROSSFADE * 3)) ]]; then
-            end_early=
-            break
-        elif [[ $(date +'%H %M' | awk '{ print $1 * 60 + $2 }') -ge \
-                $LATE_START_TIME ]]; then
-            end_early=yes
-            break
-        fi
-    done
+    remaining_time=$($MPC | grep playing |
+                     awk -F ':|/| +' '{ print ($6 * 60 + $7) - ($4 * 60 + $5) }')
 
     # Disable repeat
-    $MPC repeat off
+    $MPC repeat off >/dev/null
 
     # Enable bedtime crossfade
-    $MPC crossfade $BEDTIME_CROSSFADE
+    $MPC crossfade $BEDTIME_CROSSFADE >/dev/null
 
     # Queue the songs
     last_song_position=$($MPC playlist | wc -l)
-    $MPC ls bedtime | sort | $MPC add
+    $MPC ls bedtime | sort | $MPC add >/dev/null
 
-    if [[ $end_early ]]; then
+    current_time=$(date +'%H %M %S' | awk '{ print ($1 * 60 + $2) * 60 + $3 }')
+
+    if [[ $(($current_time + $remaining_time)) -lt $LATE_START_TIME ]]; then
+        echo "queueing songs for later..." >&2
+
+        # Move the current playing song to just before the bedtime songs
+        $MPC move $($MPC -f %position% | head -n 1) $last_song_position >/dev/null
+
+        # Wait until Nemo ends
+        $MPC current --wait >/dev/null
+        $MPC current --wait >/dev/null
+
+    else
+        echo "current song is too long. fading out..." >&2
 
         # Fade out current song
         volume=$($MPC volume | cut -d ' ' -f 2 | sed 's/%//')
         newvolume=$volume
         while [ $newvolume -gt 0 ]; do
             sleep 0.4
-            $MPC volume $newvolume
+            $MPC volume $newvolume >/dev/null
             newvolume=$(($newvolume - 3))
         done
-        $MPC stop
-        $MPC volume $volume
+        $MPC stop >/dev/null
+        $MPC volume $volume >/dev/null
 
         # Start with Papillon
-        $MPC play $(($last_song_position + 2))
-
-    else
-
-        # Move the current playing song to just before the bedtime songs
-        $MPC move $($MPC -f %position% | head -n 1) $last_song_position
-
-        # Wait until Nemo ends
-        $MPC current --wait
-        $MPC current --wait
+        $MPC play $(($last_song_position + 2)) >/dev/null
 
     fi
 
     # Wait a bit and then reset the crossfading
     sleep $BEDTIME_CROSSFADE
-    $MPC crossfade 0
+    $MPC crossfade 0 >/dev/null
 
     # Reset the volume after Papillon ends
-    $MPC current --wait
-    $MPC volume $BEDTIME_VOLUME
+    $MPC current --wait >/dev/null
+    $MPC volume $BEDTIME_VOLUME >/dev/null
+else
+    echo "mpd is not playing." >&2
 fi
+echo "done." >&2
