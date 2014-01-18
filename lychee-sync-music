@@ -6,4 +6,4 @@ rsync --progress --itemize-changes \
       --delete --delete-excluded \
       --exclude christmas/ \
       /home/lumpy/music/audio/ \
-      lychee:/home/music/
+      lychee:/var/music/
