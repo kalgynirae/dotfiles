@@ -180,7 +180,7 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight + 10 -time 100
 bindsym XF86AudioRaiseVolume exec --no-startup-id /home/lumpy/dotfiles/volume.sh up
 bindsym XF86AudioLowerVolume exec --no-startup-id /home/lumpy/dotfiles/volume.sh down
 bindsym XF86AudioMute exec --no-startup-id /home/lumpy/dotfiles/volume.sh mute
-bindsym $mod+Shift+Return exec /home/lumpy/bin/calculator
+bindsym $mod+Shift+Return exec gnome-terminal -e /home/lumpy/dotfiles/calculator
 bindsym Ctrl+Mod1+f exec firefox
 bindsym $mod+Escape exec --no-startup-id i3lock -dti /home/share/wallpaper_1920x1080.png
 bindsym XF86ScreenSaver exec --no-startup-id i3lock -dti /home/share/wallpaper_1920x1080.png

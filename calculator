@@ -1,0 +1,3 @@
+#!/bin/bash
+
+PYTHONPATH=~/python ipython --quick --color-info --no-confirm-exit -i ~/dotfiles/calc.py
