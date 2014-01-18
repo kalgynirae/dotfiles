@@ -190,13 +190,11 @@ bindsym XF86Display exec --no-startup-id /home/lumpy/dotfiles/refresh-monitors
 bindsym $mod+F1 exec --no-startup-id /home/lumpy/bin/buzzer
 bindsym $mod+F5 exec --no-startup-id ssh colin@fruitron /home/colin/bin/buzzer
 
-#bindsym Escape exec --no-startup-id paplay /home/lumpy/sounds/system/short_buzzer.wav
-#bindsym --release Escape exec --no-startup-id xdotool keyup Escape
-
 for_window [window_role="conversation"] floating enable
 for_window [class="Wine"] floating enable
 
 # Startup programs
+exec --no-startup-id sxhkd
 exec --no-startup-id /home/lumpy/dotfiles/refresh-monitors
 exec --no-startup-id compton --backend glx
 exec --no-startup-id nm-applet
