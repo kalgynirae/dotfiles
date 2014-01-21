@@ -20,35 +20,46 @@ $MPC crossfade $BEDTIME_CROSSFADE >/dev/null
 last_song_position=$($MPC playlist | wc -l)
 $MPC ls bedtime | sort | $MPC add >/dev/null
 
-current_time=$(date +'%H %M %S' | awk '{ print ($1 * 60 + $2) * 60 + $3 }')
+if $MPC | grep -q playing; then
+    current_time=$(date +'%H %M %S' | awk '{ print ($1 * 60 + $2) * 60 + $3 }')
 
-if [[ $(($current_time + $remaining_time)) -lt $LATE_START_TIME ]]; then
-    echo "queueing songs for later..." >&2
+    if [[ $(($current_time + $remaining_time)) -lt $LATE_START_TIME ]]; then
+        echo "queueing songs for later..." >&2
 
-    # Move the current playing song to just before the bedtime songs
-    $MPC move $($MPC -f %position% | head -n 1) $last_song_position >/dev/null
+        # Move the current playing song to just before the bedtime songs
+        $MPC move $($MPC -f %position% | head -n 1) $last_song_position >/dev/null
+
+        # Wait until Nemo ends
+        $MPC current --wait >/dev/null
+        $MPC current --wait >/dev/null
+
+    else
+        echo "current song is too long. fading out..." >&2
+
+        # Fade out current song
+        volume=$($MPC volume | cut -d ' ' -f 2 | sed 's/%//')
+        newvolume=$volume
+        while [ $newvolume -gt 0 ]; do
+            sleep 0.4
+            $MPC volume $newvolume >/dev/null
+            newvolume=$(($newvolume - 3))
+        done
+        $MPC stop >/dev/null
+        $MPC volume $volume >/dev/null
+
+        # Start with Papillon
+        $MPC play $(($last_song_position + 2)) >/dev/null
+
+    fi
+
+else
+    echo "starting to play now..." >&2
+
+    $MPC volume $BEDTIME_VOLUME >/dev/null
+    $MPC play $(($last_song_position + 1)) >/dev/null
 
     # Wait until Nemo ends
     $MPC current --wait >/dev/null
-    $MPC current --wait >/dev/null
-
-else
-    echo "current song is too long. fading out..." >&2
-
-    # Fade out current song
-    volume=$($MPC volume | cut -d ' ' -f 2 | sed 's/%//')
-    newvolume=$volume
-    while [ $newvolume -gt 0 ]; do
-        sleep 0.4
-        $MPC volume $newvolume >/dev/null
-        newvolume=$(($newvolume - 3))
-    done
-    $MPC stop >/dev/null
-    $MPC volume $volume >/dev/null
-
-    # Start with Papillon
-    $MPC play $(($last_song_position + 2)) >/dev/null
-
 fi
 
 # Wait a bit and then reset the crossfading
