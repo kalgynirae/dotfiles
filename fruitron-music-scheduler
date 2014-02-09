@@ -9,6 +9,9 @@ echo "starting to schedule for bedtime..." >&2
 
 remaining_time=$($MPC | grep playing |
                  awk -F ':|/| +' '{ print ($6 * 60 + $7) - ($4 * 60 + $5) }')
+if [[ $remaining_time -lt 0 ]]; then
+    remaining_time=9001
+fi
 
 # Disable repeat
 $MPC repeat off >/dev/null
