@@ -10,5 +10,5 @@ xrandr \
 feh --bg-fill /home/share/wallpaper_1920x1080.png
 
 # Reset the keyboard repeat and enable numlock
-xset r rate 200 35
+xset r rate 180 38
 numlockx
