@@ -1,10 +1,12 @@
 from collections import Counter, defaultdict
 from decimal import Decimal, getcontext
+import itertools
 import math
 from math import cos, e, factorial, pi, sin, sqrt
 from math import log as ln
 from math import log10 as log
-from random import choice
+import operator
+import random
 from unicodedata import name as unicode_name
 
 from kalgynirae.random.maths import factors, primes, prime_factors

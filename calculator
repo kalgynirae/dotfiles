@@ -1,3 +1,9 @@
 #!/bin/bash
 
-PYTHONPATH=~/python ipython --quick --color-info --no-confirm-exit -i ~/dotfiles/calc.py
+PYTHONPATH=~/python ipython \
+    --quick \
+    --no-banner \
+    --color-info \
+    --nosep \
+    --no-confirm-exit \
+    -i ~/dotfiles/calc.py
