@@ -1,0 +1,7 @@
+[Unit]
+Description=lumeh Battery Monitor
+
+[Service]
+ExecStart=/home/lumpy/dotfiles/battery-monitor.sh
+
+[Install]
