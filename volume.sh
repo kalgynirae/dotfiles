@@ -35,4 +35,15 @@ if amixer -D pulse get Master | grep -q 'off'; then
     current=0
 fi
 
+# Notify-send way. Disabled because there's no way to replace a previous
+# notification, so they stack up annoyingly.
 #notify-send -i $icon -h int:value:$current "Volume: $current%"
+
+# Dbus-send way. Doesn't work because dbus-send doesn't support passing an
+# array of variants.
+#dbus-send \
+#    --print-reply --dest=org.freedesktop.Notifications \
+#    /org/freedesktop/Notifications org.freedesktop.Notifications.Notify \
+#    string:"Volume" uint32:1 string:"$icon" \
+#    string:"" string:"Volume: $current%" \
+#    array:string:'' dict:string:string:'','' int32:2
