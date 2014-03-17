@@ -73,4 +73,8 @@ $MPC crossfade 0 >/dev/null
 $MPC current --wait >/dev/null
 $MPC volume $BEDTIME_VOLUME >/dev/null
 
+echo "waiting until it's all done..." >&2
+while $MPC status | grep 'playing'; do
+    sleep 30
+done
 echo "done." >&2
