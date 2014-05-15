@@ -8,8 +8,10 @@
 	email = colinchan@lumeh.org
 [alias]
 	diffc = diff --cached
+	ff = merge --ff-only
 	graph = log --graph --all --pretty=format:'%C(auto)%h %s %Cblue[%cn]%C(auto)%n %d'
 	logg = log --graph --decorate
+	noff = merge --no-ff
 [push]
 	default = simple
 [diff]
