@@ -6,7 +6,7 @@ syntax enable
 " Indentation
 set autoindent
 set softtabstop=4 shiftwidth=4 expandtab smarttab
-autocmd Syntax html,xhtml,htmldjango,tex,lilypond,yaml setlocal ts=2 sts=2 sw=2
+autocmd Syntax html,xhtml,htmldjango,tex,lilypond,yaml setlocal sts=2 sw=2
 " Wrapping
 set nowrap
 set textwidth=79
@@ -28,13 +28,14 @@ nmap <Leader>n :noh<CR>
 nmap <Leader>p :setlocal invpaste paste?<CR>
 nmap <Leader>m :setlocal invnumber number?<CR>
 nmap <Leader>s :setlocal invspell spell?<CR>
+cmap w!! %!sudo tee >/dev/null %
+" Consistent behavior for Y, D, and C
 nmap Y y$
-cmap w!! %!sudo tee > /dev/null %
 " Spell check
-set spelllang=en
+set spelllang=en_us
 " Tab completion in commands
 set wildmenu wildmode=longest,list
 " Python syntax highlighting options
 let g:python_highlight_all = 1
-" Project specific configuration files
+" Project-specific configuration files
 set exrc secure
