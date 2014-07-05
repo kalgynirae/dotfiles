@@ -1,20 +1,18 @@
-[core]
-	editor = vim
-	excludesfile = ~/dotfiles/gitignore
-[color]
-	ui = true
 [user]
 	name = Colin Chan
 	email = colinchan@lumeh.org
 [alias]
 	diffc = diff --cached
 	ff = merge --ff-only
-	graph = log --graph --all --pretty=format:'%C(auto)%h %s %Cblue[%cn]%C(auto)%n %d'
+	graph = log --all --graph --pretty=format:'%C(auto)%h %s%n%C(cyan)%an%C(blue) %cr%C(auto)%d%C(reset)'
 	logg = log --graph --decorate
 	noff = merge --no-ff
-[push]
-	default = simple
-[diff]
-	algorithm = patience
+[color]
+	ui = true
+[core]
+	editor = vim
+	excludesfile = ~/dotfiles/gitignore
 [merge]
 	conflictstyle = diff3
+[push]
+	default = simple

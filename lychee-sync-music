@@ -1,9 +1,15 @@
 #!/bin/sh
 
-rsync --progress --itemize-changes \
-      --recursive --times --perms \
-      --update --inplace \
-      --delete --delete-excluded \
-      --exclude christmas/ \
-      /home/lumpy/music/audio/ \
-      lychee:/var/music/
+#EXCLUDE="--exclude christmas"
+
+for dry in --dry-run ''; do
+    echo ">> Running: rsync $dry"
+    rsync $dry \
+          --progress --itemize-changes \
+          --recursive --times --perms \
+          --update --inplace \
+          --delete --delete-excluded \
+          $EXCLUDE \
+          /home/lumpy/music/audio/ \
+          lychee:/var/music/
+done

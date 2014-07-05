@@ -4,8 +4,8 @@ LINK='ln --symbolic --relative --backup --suffix=.old'
 
 LINK bashrc ~/.bashrc
 LINK gitconfig ~/.gitconfig
-mkdir -p ~/.config/i3/
-LINK i3config ~/.config/i3/config
+LINK profile ~/.profile
 LINK pythonrc ~/.pythonrc
+LINK tmux.conf ~/.tmux.conf
 LINK vimrc ~/.vimrc
 LINK xinitrc ~/.xinitrc

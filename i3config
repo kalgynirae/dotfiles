@@ -156,7 +156,7 @@ set $red3 #a40000
 # finds out, if available)
 bar {
     position top
-    status_command i3status | /home/lumpy/python/i3-weather/weather.py 2408354 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit}'
+    status_command i3status | /home/lumpy/python/i3-weather/weather.py 12797128 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit}'
     colors {
         background $bg3
         separator $line
@@ -177,15 +177,15 @@ client.urgent           $red1   $red2   $text   $yellow2
 
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight - 10 -time 100
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight + 10 -time 100
-bindsym XF86AudioRaiseVolume exec --no-startup-id /home/lumpy/dotfiles/volume.sh up
-bindsym XF86AudioLowerVolume exec --no-startup-id /home/lumpy/dotfiles/volume.sh down
-bindsym XF86AudioMute exec --no-startup-id /home/lumpy/dotfiles/volume.sh mute
-bindsym $mod+Shift+Return exec gnome-terminal -e /home/lumpy/dotfiles/calculator
+bindsym XF86AudioRaiseVolume exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/volume.sh up
+bindsym XF86AudioLowerVolume exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/volume.sh down
+bindsym XF86AudioMute exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/volume.sh mute
+bindsym $mod+Shift+Return exec gnome-terminal -e /home/lumpy/dotfiles/lumeh-scripts/calculator
 bindsym Ctrl+Mod1+f exec firefox
 bindsym $mod+Escape exec --no-startup-id dm-tool lock
 bindsym $mod+Shift+Escape exec --no-startup-id dm-tool lock && systemctl suspend
 bindsym XF86ScreenSaver exec --no-startup-id i3lock -dti /home/share/wallpaper_1920x1080.png
-bindsym XF86Display exec --no-startup-id /home/lumpy/dotfiles/refresh-monitors
+bindsym XF86Display exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
 
 # Soundboard
 bindsym $mod+F1 exec --no-startup-id /home/lumpy/bin/buzzer
@@ -196,7 +196,7 @@ for_window [class="Wine"] floating enable
 
 # Startup programs
 exec --no-startup-id sxhkd
-exec --no-startup-id /home/lumpy/dotfiles/refresh-monitors
+exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
 exec --no-startup-id pulseaudio --start
 #exec --no-startup-id compton --backend glx
 exec --no-startup-id pidgin
