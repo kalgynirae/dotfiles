@@ -1,10 +1,9 @@
 # Aliases
-alias su='su --login'
+alias grep='grep --color'
 alias ls='ls --color'
 alias la='ls --almost-all --classify'
 alias ll='ls -l --human-readable'
 alias tree='tree -CF --charset=utf-8'
-alias grep='grep --line-number --color'
 alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
 alias python='python3'
 
