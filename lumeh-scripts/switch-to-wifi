@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sudo netctl stop ethernet-dhcp
+sudo systemctl start netctl-auto@wlp3s0.service
