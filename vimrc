@@ -39,3 +39,5 @@ set wildmenu wildmode=longest,list
 let g:python_highlight_all = 1
 " Project-specific configuration files
 set exrc secure
+" Count hyphen as a word character
+set iskeyword+=-
