@@ -2,9 +2,9 @@
 
 op=${1:-lolnope}
 if [ $op == "up" ]; then
-    change=10%+
+    change=5%+
 elif [ $op == "down" ]; then
-    change=10%-
+    change=5%-
 elif [ $op == "mute" ]; then
     change=toggle
 elif [ $op == "set" ]; then
