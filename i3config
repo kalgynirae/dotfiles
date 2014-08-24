@@ -155,7 +155,8 @@ for_window [window_role="conversation"] floating enable
 for_window [class="Wine"] floating enable
 
 # Startup programs
+exec --no-startup-id sxhkdrc
 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
+exec --no-startup-id xmodmap -e 'add mod3 = Scroll_Lock'
 exec --no-startup-id pidgin
 exec --no-startup-id pulseaudio --start
-exec --no-startup-id xmodmap -e 'add mod3 = Scroll_Lock'

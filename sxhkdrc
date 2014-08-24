@@ -1,2 +1,2 @@
-~Escape
-    paplay /home/lumpy/sounds/system/short_buzzer.wav
+button9
+    i3-msg workspace next_on_output
