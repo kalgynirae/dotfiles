@@ -117,7 +117,7 @@ set $red3 #a40000
 
 bar {
     position top
-    status_command i3status | /home/lumpy/python/i3-weather/weather.py 12797128 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
+    status_command i3status | /home/lumpy/python/i3-weather/weather.py 2408354 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
     colors {
         background $bg3
         separator $line
