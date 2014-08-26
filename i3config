@@ -117,7 +117,7 @@ set $red3 #a40000
 
 bar {
     position top
-    status_command i3status | /home/lumpy/python/i3-weather/weather.py 12797128 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit}'
+    status_command i3status | /home/lumpy/python/i3-weather/weather.py 12797128 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
     colors {
         background $bg3
         separator $line
@@ -155,7 +155,7 @@ for_window [window_role="conversation"] floating enable
 for_window [class="Wine"] floating enable
 
 # Startup programs
-exec --no-startup-id sxhkdrc
+exec --no-startup-id sxhkd
 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
 exec --no-startup-id xmodmap -e 'add mod3 = Scroll_Lock'
 exec --no-startup-id pidgin
