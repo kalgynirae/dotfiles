@@ -148,8 +148,11 @@ bindsym Shift+XF86ScreenSaver exec --no-startup-id dm-tool lock && systemctl sus
 bindsym XF86Display exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
 
 # Soundboard
-bindsym $mod+F1 exec --no-startup-id /home/lumpy/bin/buzzer
-#bindsym $mod+F5 exec --no-startup-id ssh colin@fruitron /home/colin/bin/buzzer
+bindsym $mod+F1 exec --no-startup-id /home/lumpy/bin/soundboard buzzer
+bindsym $mod+F2 exec --no-startup-id /home/lumpy/bin/soundboard ding
+bindsym $mod+F3 exec --no-startup-id /home/lumpy/bin/soundboard secret
+bindsym $mod+F4 exec --no-startup-id /home/lumpy/bin/soundboard mac
+bindsym $mod+F5 exec --no-startup-id /home/lumpy/bin/soundboard short_buzzer
 
 for_window [window_role="conversation"] floating enable
 for_window [class="Wine"] floating enable
