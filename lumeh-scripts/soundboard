@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if (( $# != 1 )); then
+    echo "usage: $0 SOUND_NAME"
+    exit 1
+fi
+
+SOUNDS_DIR=/home/lumpy/sounds
+
+declare -A soundfiles
+soundfiles=(
+    ["buzzer"]=$SOUNDS_DIR/system/delete.wav
+    ["ding"]=$SOUNDS_DIR/freedesktop/complete-media-burn.ogg
+    ["mac"]=$SOUNDS_DIR/mac.wav
+    ["short_buzzer"]=$SOUNDS_DIR/short_buzzer.wav
+    ["secret"]=$SOUNDS_DIR/Zelda/Oracle_Secret.wav
+)
+
+echo paplay "${soundfiles[$1]}"
+paplay "${soundfiles[$1]}"
