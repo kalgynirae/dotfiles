@@ -6,11 +6,12 @@ syntax enable
 " Indentation
 set autoindent
 set softtabstop=4 shiftwidth=4 expandtab smarttab
-autocmd Syntax html,xhtml,htmldjango,tex,lilypond,yaml setlocal sts=2 sw=2
+autocmd Syntax html,htmldjango,lilypond,tex,xhtml,xml,yaml setlocal sts=2 sw=2
 " Wrapping
 set nowrap
-set textwidth=79
-autocmd Syntax gitcommit,markdown,pandoc,txt setlocal textwidth=72
+set colorcolumn=81
+highlight ColorColumn ctermbg=0
+autocmd Syntax gitcommit setlocal textwidth=72
 " Backspace operation
 set backspace=indent,eol,start
 " General view settings
