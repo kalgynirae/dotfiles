@@ -11,7 +11,8 @@ autocmd Syntax html,htmldjango,lilypond,tex,xhtml,xml,yaml setlocal sts=2 sw=2
 set nowrap
 set colorcolumn=81
 highlight ColorColumn ctermbg=0
-autocmd Syntax gitcommit setlocal textwidth=72
+autocmd filetype markdown,pandoc,text setlocal textwidth=80
+autocmd filetype gitcommit setlocal textwidth=72
 " Backspace operation
 set backspace=indent,eol,start
 " General view settings
