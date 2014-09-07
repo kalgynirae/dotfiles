@@ -8,6 +8,7 @@
 	graph = log --all --graph --pretty=format:'%C(auto)%h %s%n%C(cyan)%an%C(blue) %cr%C(auto)%d%C(reset)'
 	logg = log --graph --decorate
 	noff = merge --no-ff
+	pu = push --set-upstream origin HEAD
 [color]
 	ui = true
 [core]
