@@ -18,14 +18,6 @@ shopt -s histappend
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
-diff() {
-    colordiff "$@" | less
-}
-
-make() {
-    colormake "$@" | less
-}
-
 man() { # Display man pages with color
     env \
         LESS_TERMCAP_mb=$(printf "\e[1;31m") \
