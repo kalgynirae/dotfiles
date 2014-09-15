@@ -6,8 +6,8 @@ for dry in --dry-run ''; do
     echo ">> Running: rsync $dry"
     rsync $dry \
           --progress --itemize-changes \
-          --recursive --times --perms \
-          --update --inplace \
+          --recursive --perms \
+          --inplace --checksum \
           --delete --delete-excluded \
           $EXCLUDE \
           /home/lumpy/music/audio/ \
