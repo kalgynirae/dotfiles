@@ -6,13 +6,10 @@ syntax enable
 " Indentation
 set autoindent
 set softtabstop=4 shiftwidth=4 expandtab smarttab
-autocmd Syntax html,htmldjango,lilypond,tex,xhtml,xml,yaml setlocal sts=2 sw=2
 " Wrapping
 set nowrap
 set colorcolumn=81
 highlight ColorColumn ctermbg=0
-autocmd filetype markdown,pandoc,text setlocal textwidth=80
-autocmd filetype gitcommit setlocal textwidth=72
 " Backspace operation
 set backspace=indent,eol,start
 " General view settings
@@ -30,6 +27,7 @@ nmap <Leader>n :noh<CR>
 nmap <Leader>p :setlocal invpaste paste?<CR>
 nmap <Leader>m :setlocal invnumber number?<CR>
 nmap <Leader>s :setlocal invspell spell?<CR>
+nmap <Leader>c :setlocal colorcolumn= colorcolumn?<CR>
 cmap w!! %!sudo tee >/dev/null %
 " Consistent behavior for Y, D, and C
 nmap Y y$
@@ -43,3 +41,16 @@ let g:python_highlight_all = 1
 set exrc secure
 " Count hyphen as a word character
 set iskeyword+=-
+" Specific language settings
+autocmd syntax gitcommit setlocal textwidth=72
+autocmd syntax html setlocal sts=2 sw=2
+autocmd syntax htmldjango setlocal sts=2 sw=2
+autocmd syntax lilypond setlocal sts=2 sw=2
+autocmd syntax lisp setlocal sts=2 sw=2
+autocmd syntax markdown setlocal textwidth=80
+autocmd syntax pandoc setlocal textwidth=80
+autocmd syntax tex setlocal sts=2 sw=2
+autocmd syntax text setlocal textwidth=80
+autocmd syntax xhtml setlocal sts=2 sw=2
+autocmd syntax xml setlocal sts=2 sw=2
+autocmd syntax yaml setlocal sts=2 sw=2
