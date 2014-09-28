@@ -4,6 +4,7 @@
 [alias]
 	amend = commit --amend --no-edit
 	diffc = diff --cached
+	edit = commit --amend --only
 	ff = merge --ff-only
 	graph = log --all --graph --pretty=format:'%C(auto)%h %s%n%C(cyan)%an%C(blue) %cr%C(auto)%d%C(reset)'
 	logg = log --graph --decorate
