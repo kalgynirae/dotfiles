@@ -5,7 +5,7 @@ alias la='ls --almost-all --classify'
 alias ll='ls -l --human-readable'
 alias tree='tree -CF --charset=utf-8'
 alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
-alias python='python3'
+alias python='python2'
 
 # Disallow overwriting files by redirection with > (use >| instead)
 set -o noclobber
