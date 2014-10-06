@@ -39,6 +39,10 @@ open() {
     xdg-open "$1" >/dev/null 2>&1
 }
 
+p() {
+    pygmentize -g "$@" | less
+}
+
 # Prompt defaults (PS1 is actually set further down)
 prompt_color='\[\e[1;30m\]'
 prompt_reset='\[\e[0m\]'
