@@ -21,6 +21,7 @@ set number
 set ruler
 set scrolloff=3
 set showcmd
+set splitbelow splitright
 set viminfo='20,<50,s10,h
 " Custom shortcuts
 nmap <Leader>n :noh<CR>
