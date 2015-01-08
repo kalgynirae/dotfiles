@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ACTION=$(dmenu -p systemctl <<EOF
+poweroff
+reboot
+suspend
+EOF
+)
+
+if [[ -n $ACTION ]]; then
+    echo >&2 systemctl "$ACTION"
+    systemctl --quiet --no-block "$ACTION"
+fi

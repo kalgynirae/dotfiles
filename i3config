@@ -10,6 +10,7 @@ font pango:monospace 8
 bindsym $mod+Escape kill
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+space exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Shift+s exec --no-startup-id shutdown-prompt
 
 # change focus
 bindsym $mod+h focus left
@@ -26,6 +27,9 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+Shift+z move scratchpad
+bindsym $mod+z scratchpad show
 
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -117,7 +121,9 @@ set $red3 #a40000
 
 bar {
     position top
-    status_command i3status | /home/lumpy/python/i3-weather/weather.py 2408354 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
+    #status_command i3status | /home/lumpy/python/i3-weather/weather.py 2408354 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
+    #status_command i3status | /home/lumpy/python/i3-weather/weather.py 2444409 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
+    status_command i3status
     colors {
         background $bg3
         separator $line
@@ -147,19 +153,24 @@ bindsym Ctrl+Mod1+f exec firefox
 bindsym XF86ScreenSaver exec --no-startup-id dm-tool lock
 bindsym Shift+XF86ScreenSaver exec --no-startup-id dm-tool lock && systemctl suspend
 bindsym XF86Display exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
+bindsym XF86AudioPlay exec --no-startup-id quodlibet --play
+bindsym XF86AudioStop exec --no-startup-id quodlibet --pause
+bindsym XF86AudioPrev exec --no-startup-id quodlibet --previous
+bindsym XF86AudioNext exec --no-startup-id quodlibet --next
 
 # Soundboard
-bindsym $mod+F1 exec --no-startup-id /home/lumpy/bin/soundboard buzzer
-bindsym $mod+F2 exec --no-startup-id /home/lumpy/bin/soundboard ding
-bindsym $mod+F3 exec --no-startup-id /home/lumpy/bin/soundboard secret
-bindsym $mod+F4 exec --no-startup-id /home/lumpy/bin/soundboard mac
-bindsym $mod+F5 exec --no-startup-id /home/lumpy/bin/soundboard short_buzzer
+bindsym $mod+F1 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard buzzer
+bindsym $mod+F2 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard ding
+bindsym $mod+F3 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard secret
+bindsym $mod+F4 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard short_buzzer
+bindsym $mod+F5 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard mac
+bindsym $mod+F6 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard ohhh
+bindsym $mod+F7 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard bye
 
 for_window [window_role="buddy_list"] floating enable
 for_window [window_role="conversation"] floating enable
 for_window [class="Wine"] floating enable
 for_window [class="feh"] floating enable
-for_window [title="NETLAB\+"] floating enable
 
 # Startup programs
 exec --no-startup-id sxhkd
