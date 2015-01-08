@@ -10,4 +10,4 @@ rsync \
       --recursive \
       --times \
       /home/lumpy/music/audio/ \
-      fruitron:/var/zachary/music/
+      lemon:/home/share/music/
