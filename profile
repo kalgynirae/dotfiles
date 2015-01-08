@@ -7,6 +7,10 @@ export PAGER=less
 export PATH=$PATH:$HOME/dotfiles/lumeh-scripts:$HOME/bin:$HOME/.gem/ruby/2.0.0/bin
 export PYTHONSTARTUP=~/.pythonrc
 
+if [[ -n $DISPLAY ]]; then
+    export $(gnome-keyring-daemon --start)
+fi
+
 if [[ $- == *i* && -r ~/.bashrc ]]; then
     source ~/.bashrc
 fi
