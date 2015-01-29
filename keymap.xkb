@@ -1,0 +1,14 @@
+xkb_keymap {
+    xkb_keycodes { include "evdev+aliases(qwerty)" };
+    xkb_types { include "complete" };
+    xkb_compat { include "complete" };
+    xkb_symbols {
+        include "pc"
+        include "us"
+        include "inet(evdev)"
+        include "capslock(ctrl_modifier)"
+        include "compose(ralt)"
+        include "terminate(ctrl_alt_bksp)"
+        include "scrolllock"  // dotfiles/xkb/symbols/scrolllock
+    };
+};

@@ -1,0 +1,4 @@
+partial modifier_keys
+xkb_symbols "scrolllock" {
+    modifier_map Mod3 { Scroll_Lock };
+};
