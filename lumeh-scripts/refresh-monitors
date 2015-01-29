@@ -3,7 +3,7 @@
 # Enable whatever monitors are connected
 xrandr \
     --output HDMI1 --auto --pos 0x0 \
-    --output LVDS1 --auto --pos 1920x400 \
+    --output LVDS1 --auto --pos 1400x1080 \
     --output VGA1 --auto --same-as LVDS1
 
 # Reset the wallpaper
