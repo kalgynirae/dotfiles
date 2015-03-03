@@ -7,7 +7,7 @@ floating_modifier $mod
 
 font pango:monospace 8
 
-bindsym $mod+Escape kill
+bindsym $mod+grave kill
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+space exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+Shift+s exec --no-startup-id shutdown-prompt
@@ -19,7 +19,7 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 bindsym $mod+a focus parent
 bindsym $mod+d focus child
-bindsym $mod+` focus mode_toggle
+bindsym $mod+Tab focus mode_toggle
 bindsym $mod+f fullscreen
 bindsym $mod+g split h
 bindsym $mod+v split v
@@ -171,10 +171,10 @@ for_window [window_role="buddy_list"] floating enable
 for_window [window_role="conversation"] floating enable
 for_window [class="Wine"] floating enable
 for_window [class="feh"] floating enable
+for_window [class="Minecraft"] floating enable
 
 # Startup programs
 exec --no-startup-id sxhkd
 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
-exec --no-startup-id xmodmap -e 'add mod3 = Scroll_Lock'
 exec --no-startup-id pidgin
 exec --no-startup-id pulseaudio --start
