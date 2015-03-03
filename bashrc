@@ -1,10 +1,13 @@
 # Aliases
+alias cp='cp -i'
 alias grep='grep --color'
 alias ls='ls --color'
 alias la='ls --almost-all --classify'
 alias ll='ls -l --human-readable'
 alias tree='tree -CF --charset=utf-8'
 alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
+alias mplayer='mplayer -softvol'
+alias mv='mv -i'
 alias python='python2'
 
 # Disallow overwriting files by redirection with > (use >| instead)
@@ -17,6 +20,8 @@ shopt -s histappend
 # Complete partially-typed commands using the up/down arrow keys
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
+bind '"\C-p":history-search-backward'
+bind '"\C-n":history-search-forward'
 
 man() { # Display man pages with color
     env \
