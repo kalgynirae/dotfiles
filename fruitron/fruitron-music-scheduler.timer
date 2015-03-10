@@ -2,7 +2,7 @@
 Description=Run Fruitron Music Scheduler daily
 
 [Timer]
-OnCalendar=21:58
+OnCalendar=22:28
 Unit=fruitron-music-scheduler.service
 
 [Install]
