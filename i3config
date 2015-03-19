@@ -172,6 +172,8 @@ for_window [window_role="conversation"] floating enable
 for_window [class="Wine"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="Minecraft"] floating enable
+for_window [class="qemu-system-x86_64"] floating enable
+for_window [class="Skype"] floating enable
 
 # Startup programs
 exec --no-startup-id sxhkd
