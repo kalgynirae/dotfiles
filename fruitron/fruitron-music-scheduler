@@ -1,5 +1,11 @@
 #!/bin/bash
 
+colinishome=$(curl -s "http://fence.lumeh.org/colin/ishome")
+if [[ $colinishome == False ]]; then
+    echo "skipping because Colin isn't home..." >&2
+    exit
+fi
+
 MPC='mpc'
 BEDTIME_VOLUME=40
 BEDTIME_CROSSFADE=8
