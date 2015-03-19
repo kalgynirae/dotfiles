@@ -1,15 +1,15 @@
 #!/bin/bash
 
-colinishome=$(curl -s "http://fence.lumeh.org/colin/ishome")
-if [[ $colinishome == False ]]; then
-    echo "skipping because Colin isn't home..." >&2
-    exit
-fi
-
 MPC='mpc'
 BEDTIME_VOLUME=40
 BEDTIME_CROSSFADE=8
 LATE_START_TIME=$(((22 * 60 + 38) * 60))
+
+colinishome=$(ssh lemon curl -s http://fence.lumeh.org/colin/ishome)
+if [[ $colinishome == False ]]; then
+    echo "skipping because Colin isn't home..." >&2
+    exit
+fi
 
 echo "starting to schedule for bedtime..." >&2
 
@@ -81,6 +81,6 @@ $MPC volume $BEDTIME_VOLUME >/dev/null
 
 echo "waiting until it's all done..." >&2
 while $MPC status | grep 'playing'; do
-    sleep 30
+    sleep 5
 done
 echo "done." >&2
