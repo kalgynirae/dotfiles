@@ -1,18 +1,21 @@
 set nocompatible
 set encoding=utf-8
+execute pathogen#infect()
 " Syntax highlighting
 filetype plugin indent on
 syntax enable
+let g:molokai_original=1
+colo molokai
 " Indentation
 set autoindent
 set softtabstop=4 shiftwidth=4 expandtab smarttab
 " Wrapping
 set nowrap
 set colorcolumn=81
-highlight ColorColumn ctermbg=0
 " Backspace operation
 set backspace=indent,eol,start
 " General view settings
+set background=dark
 set display=lastline
 set hlsearch incsearch
 set laststatus=2
@@ -36,8 +39,6 @@ nmap Y y$
 set spelllang=en_us
 " Tab completion in commands
 set wildmenu wildmode=longest,list
-" Python syntax highlighting options
-let g:python_highlight_all = 1
 " Project-specific configuration files
 set exrc secure
 " Count hyphen as a word character
@@ -50,8 +51,11 @@ autocmd syntax lilypond setlocal sts=2 sw=2
 autocmd syntax lisp setlocal sts=2 sw=2
 autocmd syntax markdown setlocal textwidth=80
 autocmd syntax pandoc setlocal textwidth=80
-autocmd syntax tex setlocal sts=2 sw=2
 autocmd syntax text setlocal textwidth=80
-autocmd syntax xhtml setlocal sts=2 sw=2
 autocmd syntax xml setlocal sts=2 sw=2
 autocmd syntax yaml setlocal sts=2 sw=2
+" Specific plugin settings
+let g:pandoc#syntax#conceal#use=0
+let python_highlight_file_headers_as_comments=1
+let python_highlight_string_format=1
+let python_highlight_string_formatting=1
