@@ -31,8 +31,10 @@ nmap <Leader>n :noh<CR>
 nmap <Leader>p :setlocal invpaste paste?<CR>
 nmap <Leader>m :setlocal invnumber number?<CR>
 nmap <Leader>s :setlocal invspell spell?<CR>
-nmap <Leader>c :setlocal colorcolumn= colorcolumn?<CR>
+nmap <Leader>c :setlocal colorcolumn=<CR>
 cmap w!! %!sudo tee >/dev/null %
+nnoremap <tab> <c-w>w
+nnoremap <s-tab> <c-w>W
 " Consistent behavior for Y, D, and C
 nmap Y y$
 " Spell check
