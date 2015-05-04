@@ -5,7 +5,7 @@
 set $mod Mod4
 floating_modifier $mod
 
-font pango:monospace 8
+font pango:DejaVu Sans 8
 
 bindsym $mod+grave kill
 bindsym $mod+Return exec i3-sensible-terminal
@@ -158,6 +158,10 @@ bindsym XF86AudioPlay exec --no-startup-id quodlibet --play
 bindsym XF86AudioStop exec --no-startup-id quodlibet --pause
 bindsym XF86AudioPrev exec --no-startup-id quodlibet --previous
 bindsym XF86AudioNext exec --no-startup-id quodlibet --next
+#bindsym XF86Calculator exec
+bindsym XF86Explorer exec soundboard ffkkqshhhp & exec thunar
+#bindsym XF86Mail exec
+bindsym XF86HomePage exec soundboard nnnnnnywww & epiphany
 
 # Soundboard
 bindsym $mod+F1 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard buzzer
