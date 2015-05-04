@@ -51,8 +51,8 @@ p() {
 # Prompt defaults (PS1 is actually set further down)
 prompt_color='\[\e[1;30m\]'
 prompt_reset='\[\e[0m\]'
-prompt_user=$prompt_color'\u@\h'$prompt_reset
-prompt_dir=$prompt_color'\W'$prompt_reset
+prompt_user="$prompt_color\u@\h$prompt_reset"
+prompt_dir="$prompt_color\W$prompt_reset"
 prompt_git=
 
 # Git completion and prompt string
@@ -69,4 +69,4 @@ if [[ -f ~/.localrc ]]; then
     source ~/.localrc
 fi
 
-export PS1=$prompt_user':'$prompt_dir$prompt_git'\n[\j]\$ '
+export PS1="$prompt_user:$prompt_dir$prompt_git\n[\j]\$ "
