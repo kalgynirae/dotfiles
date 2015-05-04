@@ -1,19 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
-THRESHOLD=5
+THRESHOLD=10
 
-previous_capacity=$(cat /sys/class/power_supply/BAT1/capacity)
 while sleep 1m; do
-    capacity=$(cat /sys/class/power_supply/BAT1/capacity)
-    if [[ $capacity -lt $THRESHOLD && $previous_capacity -ge $THRESHOLD ]]; then
-        systemctl suspend
-    fi
-
-    if [ $capacity -ne $previous_capacity ]; then
-        #if [ $capacity -lt $previous_capacity ]; then
-        #    notify-send --icon=battery --hint=int:value:$capacity \
-        #        "Battery discharging: $capacity%"
-        #fi
-        previous_capacity=$capacity
+    previous_capacity=${capacity:-100}
+    capacity=$(</sys/class/power_supply/BAT1/capacity)
+    if (( $capacity < $THRESHOLD )); then
+        if (( $capacity < $previous_capacity )); then
+            notify-send --icon=battery --hint=int:value:$capacity \
+                "Battery getting low: $capacity%"
+        fi
     fi
 done
