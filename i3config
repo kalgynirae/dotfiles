@@ -181,7 +181,8 @@ for_window [class="qemu-system-x86_64"] floating enable
 for_window [class="Skype"] floating enable
 
 # Startup programs
-exec --no-startup-id sxhkd
-exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
-exec --no-startup-id pidgin
 exec --no-startup-id pulseaudio --start
+exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id sxhkd
+exec --no-startup-id pidgin
