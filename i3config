@@ -186,3 +186,4 @@ exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id sxhkd
 exec --no-startup-id pidgin
+exec --no-startup-id skype
