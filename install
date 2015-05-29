@@ -3,6 +3,7 @@
 maybelink() {
     if [[ ! -h $2 ]]; then
         echo ln --symbolic --relative --backup --suffix=.old "$1" "$2"
+        ln --symbolic --relative --backup --suffix=.old "$1" "$2"
     else
         echo "$2 is already a symlink; skipping"
     fi
