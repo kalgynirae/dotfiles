@@ -1,11 +1,14 @@
 set nocompatible
 set encoding=utf-8
-execute pathogen#infect()
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+if exists("g:loaded_pathogen")
+    execute pathogen#infect()
+endif
 " Syntax highlighting
 filetype plugin indent on
 syntax enable
 let g:molokai_original=1
-colo molokai
+silent! colo molokai
 " Indentation
 set autoindent
 set softtabstop=4 shiftwidth=4 expandtab smarttab
