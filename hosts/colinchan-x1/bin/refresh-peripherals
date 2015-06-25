@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Set the keyrepeat, screensaver timeout, and numlock
+xkbcomp -I$HOME/dotfiles/xkb $HOME/dotfiles/keymap.xkb $DISPLAY
+xset r rate 160 40
+xset s 285 15
+numlockx
+
+# middle-click with three-finger tap; do nothing with one or two fingers
+synclient TapButton1=0 TapButton2=0 TapButton3=2
+
+xrandr \
+    --output eDP1 --auto --pos 0x1000 \
+    --output DP1-8 --auto --pos 2560x0 \
+    --output HDMI1 --auto --same-as eDP1
+
+feh --bg-fill /home/colinchan/pictures/wallpapers/Facebook_Backgrounds--node_world.png
+paplay /usr/share/sounds/freedesktop/stereo/window-attention.oga

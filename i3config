@@ -3,6 +3,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $bin /home/colinchan/bin
 floating_modifier $mod
 
 font pango:DejaVu Sans 8
@@ -63,6 +64,7 @@ mode "move container" {
     bindsym l move right
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym Ctrl+bracketleft mode "default"
 }
 bindsym $mod+m mode "move container"
 
@@ -73,6 +75,7 @@ mode "move workspace" {
     bindsym l move workspace to output right
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym Ctrl+bracketleft mode "default"
 }
 bindsym $mod+Shift+m mode "move workspace"
 
@@ -87,6 +90,7 @@ mode "resize" {
     bindsym Mod1+l resize grow width 4 px or 1 ppt
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym Ctrl+bracketleft mode "default"
 }
 bindsym $mod+r mode "resize"
 
@@ -143,34 +147,21 @@ client.focused_inactive $line   $bg1    $text2  $bg2
 client.unfocused        $line   $bg2    $text2  $bg1
 client.urgent           $red1   $red2   $text   $yellow2
 
+bindsym $mod+Shift+Return exec gnome-terminal -e $bin/calculator
+bindsym $mod+Mod1+Return exec cool-retro-term
+bindsym $mod+BackSpace exec --no-startup-id xset s activate
+bindsym Ctrl+Mod1+f exec chromium
+bindsym XF86Display exec --no-startup-id $bin/refresh-peripherals
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight - 10 -time 100
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight + 10 -time 100
-bindsym XF86AudioRaiseVolume exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/volume.sh up
-bindsym XF86AudioLowerVolume exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/volume.sh down
-bindsym XF86AudioMute exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/volume.sh mute
-bindsym $mod+Shift+Return exec gnome-terminal -e /home/lumpy/dotfiles/lumeh-scripts/calculator
-bindsym $mod+Mod1+Return exec cool-retro-term
-bindsym Ctrl+Mod1+f exec firefox
-bindsym XF86ScreenSaver exec --no-startup-id dm-tool lock
-bindsym Shift+XF86ScreenSaver exec --no-startup-id dm-tool lock && systemctl suspend
-bindsym XF86Display exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
+bindsym XF86AudioRaiseVolume exec --no-startup-id $bin/volume.sh up
+bindsym XF86AudioLowerVolume exec --no-startup-id $bin/volume.sh down
+bindsym XF86AudioMute exec --no-startup-id $bin/volume.sh mute
 bindsym XF86AudioPlay exec --no-startup-id quodlibet --play
 bindsym XF86AudioStop exec --no-startup-id quodlibet --pause
 bindsym XF86AudioPrev exec --no-startup-id quodlibet --previous
 bindsym XF86AudioNext exec --no-startup-id quodlibet --next
-#bindsym XF86Calculator exec
-bindsym XF86Explorer exec soundboard ffkkqshhhp & exec thunar
-#bindsym XF86Mail exec
-bindsym XF86HomePage exec soundboard nnnnnnywww & epiphany
-
-# Soundboard
-bindsym $mod+F1 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard buzzer
-bindsym $mod+F2 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard ding
-bindsym $mod+F3 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard secret
-bindsym $mod+F4 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard short_buzzer
-bindsym $mod+F5 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard mac
-bindsym $mod+F6 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard ohhh
-bindsym $mod+F7 exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/soundboard bye
+bindsym XF86Explorer exec exec nautilus
 
 for_window [window_role="buddy_list"] floating enable
 for_window [window_role="conversation"] floating enable
@@ -179,11 +170,7 @@ for_window [class="feh"] floating enable
 for_window [class="Minecraft"] floating enable
 for_window [class="qemu-system-x86_64"] floating enable
 for_window [class="Skype"] floating enable
+for_window [class="cool-retro-term"] floating enable
 
 # Startup programs
-exec --no-startup-id pulseaudio --start
-exec --no-startup-id /home/lumpy/dotfiles/lumeh-scripts/refresh-monitors
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id sxhkd
-exec --no-startup-id pidgin
-exec --no-startup-id skype
+exec --no-startup-id $bin/startup

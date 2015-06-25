@@ -17,4 +17,4 @@ maybelink tmux.conf ~/.tmux.conf
 maybelink vim ~/.vim
 maybelink vimrc ~/.vimrc
 
-echo Run 'git submodule update --init' to update the vim plugins
+echo Run \'git submodule update --init\' to update the vim plugins

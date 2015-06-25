@@ -1,0 +1,17 @@
+#!/bin/bash
+
+pgrep sxhkd || sxhkd &
+
+pgrep redshift || redshift -l 37.48:-122.15 -t 5800:3000 -b 1.0:0.8 &
+
+pgrep xss-lock || xss-lock --notifier='i3-nagbar -t warning -m "Hello! Your screensaver is about to activate."' -- \
+    i3lock --nofork --ignore-empty-password --dpms --color=181818 --tiling --image=/home/colinchan/pictures/wallpapers/Facebook_Backgrounds--node_facebook.png \
+    &
+
+pgrep polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+pgrep nm-applet || nm-applet &
+
+pulseaudio --check || pulseaudio --start &
+
+$HOME/bin/refresh-peripherals
