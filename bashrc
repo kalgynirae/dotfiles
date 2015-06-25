@@ -66,6 +66,6 @@ _hashcolor() {
     echo -E "\e[${style};3${color}m"
 }
 
-color='$(echo -e $(_hashcolor "$(hostname):$(pwd -P)"))'
+color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
 reset='\[\e[0m\]'
 export PS1="${color}\u@\h${reset}:${color}\W${reset}${git_ps1}\n[\j]\$ "
