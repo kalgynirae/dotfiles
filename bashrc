@@ -8,6 +8,7 @@ alias tree='tree -CF --charset=utf-8'
 alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
 alias mplayer='mplayer -softvol'
 alias mv='mv -i'
+alias rm='rm -I --one-file-system'
 alias python='python2'
 
 # Disallow overwriting files by redirection with > (use >| instead)
