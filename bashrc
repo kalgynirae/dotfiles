@@ -51,12 +51,12 @@ p() {
     pygmentize -g "$@" | less
 }
 
-# Prompt defaults (PS1 is actually set further down)
-prompt_color='\[\e[1;30m\]'
-prompt_reset='\[\e[0m\]'
-prompt_user="$prompt_color\u@\h$prompt_reset"
-prompt_dir="$prompt_color\W$prompt_reset"
-prompt_git=
+_hashcolor() {
+    hash=$(echo -n "$1" | md5sum)
+    color=$(( 0x${hash:0:8} % 6 + 1 ))
+    style=$(( 0x${hash:8:8} % 5 ))
+    echo -E "\e[${style};3${color}m"
+}
 
 # Git completion and prompt string
 if [[ -f ~/.git-prompt.sh ]]; then
@@ -67,9 +67,6 @@ if [[ -f ~/.git-prompt.sh ]]; then
     prompt_git='$(__git_ps1 " (%s)")'
 fi
 
-# Source the localrc if there is one
-if [[ -f ~/.localrc ]]; then
-    source ~/.localrc
-fi
-
-export PS1="$prompt_user:$prompt_dir$prompt_git\n[\j]\$ "
+color='$(echo -e $(_hashcolor "$(hostname):$(pwd -P)"))'
+reset='\[\e[0m\]'
+export PS1="${color}\u@\h${reset}:${color}\W${reset}${prompt_git}\n[\j]\$ "
