@@ -51,6 +51,14 @@ p() {
     pygmentize -g "$@" | less
 }
 
+if [[ -f ~/.git-prompt.sh ]]; then
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    export GIT_PS1_SHOWSTASHSTATE=1
+    export GIT_PS1_SHOWUPSTREAM='verbose'
+    source ~/.git-prompt.sh
+    git_ps1='$(__git_ps1 " (%s)")'
+fi
+
 _hashcolor() {
     hash=$(echo -n "$1" | md5sum)
     color=$(( 0x${hash:0:8} % 6 + 1 ))
@@ -58,15 +66,6 @@ _hashcolor() {
     echo -E "\e[${style};3${color}m"
 }
 
-# Git completion and prompt string
-if [[ -f ~/.git-prompt.sh ]]; then
-    export GIT_PS1_SHOWDIRTYSTATE=1
-    export GIT_PS1_SHOWSTASHSTATE=1
-    export GIT_PS1_SHOWUPSTREAM='verbose'
-    source ~/.git-prompt.sh
-    prompt_git='$(__git_ps1 " (%s)")'
-fi
-
 color='$(echo -e $(_hashcolor "$(hostname):$(pwd -P)"))'
 reset='\[\e[0m\]'
-export PS1="${color}\u@\h${reset}:${color}\W${reset}${prompt_git}\n[\j]\$ "
+export PS1="${color}\u@\h${reset}:${color}\W${reset}${git_ps1}\n[\j]\$ "
