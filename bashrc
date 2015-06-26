@@ -1,15 +1,14 @@
-# Aliases
 alias cp='cp -i'
 alias grep='grep --color'
-alias ls='ls --color'
 alias la='ls --almost-all --classify'
-alias ll='ls -l --human-readable'
-alias tree='tree -CF --charset=utf-8'
 alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
+alias ll='ls -l --human-readable'
+alias ls='ls --color'
 alias mplayer='mplayer -softvol'
 alias mv='mv -i'
-alias rm='rm -I --one-file-system'
 alias python='python2'
+alias rm='rm -I --one-file-system'
+alias tree='tree -CF --charset=utf-8'
 
 # Disallow overwriting files by redirection with > (use >| instead)
 set -o noclobber
@@ -59,13 +58,15 @@ if [[ -f ~/.git-prompt.sh ]]; then
     git_ps1='$(__git_ps1 " (%s)")'
 fi
 
+_prompt_colors=(0 1 2 3 4 5 6)
+_prompt_styles=(0 1 3 4)
 _hashcolor() {
     hash=$(echo -n "$1" | md5sum)
-    color=$(( 0x${hash:0:8} % 6 + 1 ))
-    style=$(( 0x${hash:8:8} % 5 ))
-    echo -E "\e[${style};3${color}m"
+    color=$(( 0x${hash:0:8} % ${#_prompt_colors[@]} ))
+    style=$(( 0x${hash:8:8} % ${#_prompt_styles[@]} ))
+    echo -E "\e[${_prompt_styles[style]};3${_prompt_colors[color]}m"
 }
 
 color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
 reset='\[\e[0m\]'
-export PS1="${color}\u@\h${reset}:${color}\W${reset}${git_ps1}\n[\j]\$ "
+export PS1="${color}\u@\h${reset}:${color}\W${reset}${git_ps1}\n[\j]\\$ "
