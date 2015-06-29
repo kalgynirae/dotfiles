@@ -162,6 +162,7 @@ bindsym XF86AudioStop exec --no-startup-id quodlibet --pause
 bindsym XF86AudioPrev exec --no-startup-id quodlibet --previous
 bindsym XF86AudioNext exec --no-startup-id quodlibet --next
 bindsym XF86Explorer exec exec nautilus
+bindsym Print exec $bin/screenshot
 
 for_window [window_role="buddy_list"] floating enable
 for_window [window_role="conversation"] floating enable
