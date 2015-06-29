@@ -14,7 +14,7 @@ xrandr \
 feh --bg-fill /home/colinchan/pictures/wallpapers/Facebook_Backgrounds--node_world.png
 
 # Start redshift if it isn't running already
-pgrep redshift || redshift -l 29.65:-82.35 -t 5800:3000 -b 1.0:0.8 &
+pgrep redshift || redshift -l 37.42:-122.20 -t 5800:2800 -b 1.0:0.8 &
 
 # Reset the keyboard repeat and enable numlock
 xset r rate 160 40
