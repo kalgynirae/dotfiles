@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import argparse
 import io
 import subprocess
@@ -5,12 +6,17 @@ import subprocess
 from flask import Flask, request
 app = Flask(__name__)
 
-DASH_MACS = '00:bb:3a:04:d2:65 74:c2:46:e9:d6:64'.split()
+DASH_MACS = """
+00:bb:3a:04:d2:65
+74:c2:46:dc:e3:7e
+10:ae:60:fb:1f:dc
+""".strip().split()
+print("Macs: %r" % DASH_MACS)
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--host')
-    parser.add_argument('--port', type=int)
+    parser.add_argument('--host', default='0.0.0.0')
+    parser.add_argument('--port', type=int, default='8000')
     parser.add_argument('--debug', action='store_true')
     args = parser.parse_args()
     app.run(**vars(args))
