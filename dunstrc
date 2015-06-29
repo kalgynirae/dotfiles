@@ -16,3 +16,18 @@ close = mod4+c
 close_all = mod4+shift+c
 history = mod4+x
 context = mod4+shift+period
+
+[urgency_low]
+background = "#ad7fa8"
+foreground = "#522f59"
+timeout = 10
+
+[urgency_normal]
+background = "#728fcf"
+foreground = "#1a3d6e"
+timeout = 30
+
+[urgency_critical]
+background = "#ef2929"
+foreground = "#700000"
+timeout = 0
