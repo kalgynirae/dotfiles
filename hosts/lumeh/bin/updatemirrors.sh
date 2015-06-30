@@ -1,0 +1,1 @@
+/home/lumpy/src/updatemirrors.sh

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ ! -t 1 ]; then
+    zenity --info --no-wrap --text='You must run capture-window in a terminal!'
+    exit 2
+fi
+if (( $# != 1 )); then
+    echo "Please provide a destination filename!"
+    exit 1
+fi
+
+ffmpeg_command="ffmpeg -f video4linux2 -i /dev/video0 -f alsa -ac 2 -i pulse -acodec libvorbis -ar 44100 -vcodec libvpx $1"
+echo Executing: $ffmpeg_command
+$ffmpeg_command

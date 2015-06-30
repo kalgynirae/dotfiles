@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Execute Rockuefort with the local (virtualenv) Python
+/home/lumpy/python/rockuefort/env/bin/rockuefort "$@"

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+youtube-dl "$1" -q -o - | mplayer -vo aa -monitorpixelaspect 0.6 -

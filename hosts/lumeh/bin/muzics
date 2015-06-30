@@ -1,0 +1,18 @@
+#!/bin/bash
+
+MUSIC_DIR=~/music/audio/
+
+if [ -z "$1" ]
+then
+  search=`zenity --entry --title="Play muzics" --text="Which muzics?"`
+  if [ -z "$search" ]; then
+    exit
+  fi
+else
+  search=$1
+fi
+
+find $MUSIC_DIR -iwholename "*$search*" -type f \
+  | zenity --list --title="Play muzics" --text="Which muzics?" --multiple --column "muzic" --separator=":" --width 800 --height 500 \
+  | tr -d '\n' \
+  | xargs -rd ":" vlc --one-instance --playlist-enqueue
