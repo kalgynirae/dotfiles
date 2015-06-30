@@ -1,0 +1,14 @@
+#!/bin/bash
+
+pgrep sxhkd || sxhkd &
+
+pgrep redshift || redshift -l 37.42:-122.20 -t 5600:2800 -b 1.0:0.8 &
+
+pgrep polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+pulseaudio --check || pulseaudio --start &
+
+pgrep pidgin || pidgin &
+pgrep skype || skype &
+
+$HOME/bin/refresh-peripherals

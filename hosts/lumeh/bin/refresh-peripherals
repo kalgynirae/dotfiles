@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Set the keyrepeat, screensaver timeout, and numlock
+xkbcomp -I$HOME/dotfiles/xkb $HOME/dotfiles/keymap.xkb $DISPLAY
+xset r rate 160 40
+xset s 285 15
+numlockx
+
+xrandr \
+    --output HDMI1 --auto --pos 0x0 \
+    --output LVDS1 --auto --pos 1920x420 \
+    --output VGA1 --auto --same-as LVDS1
+
+feh --bg-fill /home/share/wallpaper_1920x1080.png
+paplay /usr/share/sounds/freedesktop/stereo/window-attention.oga
