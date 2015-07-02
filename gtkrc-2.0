@@ -1,3 +1,5 @@
+gtk-button-images = 0
 gtk-cursor-blink = 0
 gtk-font-name = "Liberation Sans 10"
 gtk-icon-theme-name = "gnome-brave"
+gtk-menu-images = 0
