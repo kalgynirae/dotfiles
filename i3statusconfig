@@ -17,20 +17,26 @@ general {
     output_format = "i3bar"
 }
 
-order += "wireless wlp3s0"
-order += "ethernet enp2s0"
+order += "wireless wlan0"
+order += "ethernet eth1"
 order += "disk /"
 order += "cpu_usage"
 order += "cpu_temperature 0"
-order += "battery 1"
+order += "cpu_temperature 1"
+order += "battery BAT0"
 order += "volume pulse"
 order += "tztime local"
 
-battery 1 {
+battery BAT0 {
     format = "%status %percentage %remaining"
 }
 
 cpu_temperature 0 {
+    format = "%degrees°C"
+    max_threshold = 70
+}
+
+cpu_temperature 1 {
     format = "%degrees°C"
     max_threshold = 70
 }
@@ -43,7 +49,7 @@ disk "/" {
     format = "%free"
 }
 
-ethernet enp2s0 {
+ethernet eth1 {
     color_bad = "#d3d7cf"
     format_up = "E: %ip"
     format_down = "E: down"
@@ -60,7 +66,7 @@ volume pulse {
     mixer_idx = 0
 }
 
-wireless wlp3s0 {
+wireless wlan0 {
     color_bad = "#d3d7cf"
     format_up = "W: (%quality at %essid) %ip"
     format_down = "W: down"
