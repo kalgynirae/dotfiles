@@ -1,1 +1,1 @@
-../../lumeh/volume.sh
+../../lumeh/bin/volume.sh
