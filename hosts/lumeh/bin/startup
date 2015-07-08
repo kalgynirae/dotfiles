@@ -8,7 +8,4 @@ pgrep polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent
 
 pulseaudio --check || pulseaudio --start &
 
-pgrep pidgin || pidgin &
-pgrep skype || skype &
-
 $HOME/bin/refresh-peripherals
