@@ -8,4 +8,4 @@ mode="$1" # "add", "del", or "old"
 mac="$2"
 ip="$3"
 host="$4"
-wget -O - "http://lumeh.lan:8000/dash?mode=$mode&mac=$mac&ip=$ip&host=$host" >/dev/null &
+wget -O - "http://fruitron.lan:8002/dash?mode=$mode&mac=$mac&ip=$ip&host=$host" >/dev/null &
