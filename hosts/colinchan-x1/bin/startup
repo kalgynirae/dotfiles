@@ -10,8 +10,6 @@ pgrep xss-lock || xss-lock --notifier='notify-send -t 15 Note "Your screensaver 
 
 pgrep polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-pgrep nm-applet || nm-applet &
-
 pulseaudio --check || pulseaudio --start &
 
 $HOME/bin/refresh-peripherals
