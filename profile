@@ -7,9 +7,9 @@ export PAGER=less
 export PATH=$PATH:$HOME/bin
 export PYTHONSTARTUP=~/.pythonrc
 
-if [[ -n $DISPLAY ]]; then
-    export $(gnome-keyring-daemon --start)
-fi
+#if [[ -n $DISPLAY ]]; then
+#    export $(gnome-keyring-daemon --start)
+#fi
 
 if [[ $- == *i* && -r ~/.bashrc ]]; then
     source ~/.bashrc
