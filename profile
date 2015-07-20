@@ -1,7 +1,8 @@
 export EDITOR=vim
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="history:bg*:fg*:ls:ll:la:su"
-export HISTSIZE=5000
+export HISTSIZE=-1
+export HISTFILESIZE=10000
 export LESS='--chop-long-lines --no-init --quit-if-one-screen --RAW-CONTROL-CHARS'
 export PAGER=less
 export PATH=$PATH:$HOME/bin
