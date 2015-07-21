@@ -1,0 +1,16 @@
+#!/bin/bash
+
+number=$(i3-msg -t get_workspaces |
+         jq '.[] | select(.focused) | .name' | tr -d '"' |
+         cut -d: -f1)
+
+unsafe_name=$(dmenu -p 'rename workspace to:' </dev/null)
+unsafe_name=${unsafe_name//\\/\\\\}
+unsafe_name=${unsafe_name//\"/\\\"}
+name=$unsafe_name
+
+if [[ $name ]]; then
+    i3-msg rename workspace to '"'$number:$name'"'
+else
+    i3-msg rename workspace to $number
+fi
