@@ -40,6 +40,9 @@ nnoremap <tab> <c-w>w
 nnoremap <s-tab> <c-w>W
 " Consistent behavior for Y, D, and C
 nmap Y y$
+" Emacs shortcuts in insert mode
+imap <c-a> <c-o>^
+imap <c-e> <c-o>$
 " Spell check
 set spelllang=en_us
 " Tab completion in commands
