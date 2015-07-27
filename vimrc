@@ -43,6 +43,8 @@ nmap Y y$
 " Emacs shortcuts in insert mode
 imap <c-a> <c-o>^
 imap <c-e> <c-o>$
+imap <c-f> <c-o>l
+imap <c-b> <c-o>h
 " Spell check
 set spelllang=en_us
 " Tab completion in commands
