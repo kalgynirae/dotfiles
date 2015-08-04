@@ -1,4 +1,4 @@
 #!/bin/sh
 
-scrot ~/pictures/screenshots/'%Y-%m-%d-$wx$h.png'
+scrot "$@" ~/pictures/screenshots/'%Y-%m-%d-$wx$h-%s.png'
 notify-send -a screenshot -t 2000 -u low screenshot "Screenshot saved to ~/pictures/screenshots"
