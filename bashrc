@@ -17,6 +17,9 @@ set -o noclobber
 shopt -s checkwinsize
 shopt -s histappend
 
+# Disable C-s/C-q pausing and resuming output
+stty -ixon
+
 # Complete partially-typed commands using the up/down arrow keys
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
