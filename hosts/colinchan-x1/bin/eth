@@ -1,0 +1,7 @@
+#!/bin/sh
+
+(( $# != 1 )) && echo "usage: eth [on|off]" && exit 1
+case $1 in
+    (on) sudo systemctl start netctl-ifplugd@eth1 ;;
+    (off) sudo systemctl stop netctl-ifplugd@eth1 ;;
+esac
