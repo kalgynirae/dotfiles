@@ -1,0 +1,10 @@
+// Run `xkbcomp -xkb :0 dump.xkb` to dump the current configuration into dump.xkb.
+// Then run xev to figure out the keycodes of the keys you want to move around.
+// Find the symbolic names in dump.xkb, and then reassign them here.
+xkb_keycodes "colin" {
+  <AE11> = 48; // ' moves to the _ key
+  <AE12> = 35; // = moves to the ] key
+  <AD11> = 20; // [ moves to the - key
+  <AD12> = 21; // ] moves to the = key
+  <AC11> = 34; // - moves to the [ key
+};
