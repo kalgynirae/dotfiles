@@ -65,10 +65,16 @@ fi
 _prompt_colors=(0 1 2 3 4 5 6)
 _prompt_styles=(0 1 3 4)
 _hashcolor() {
-    hash=$(echo -n "$1" | md5sum)
-    color=$(( 0x${hash:0:8} % ${#_prompt_colors[@]} ))
-    style=$(( 0x${hash:8:8} % ${#_prompt_styles[@]} ))
-    echo -E "\e[${_prompt_styles[style]};3${_prompt_colors[color]}m"
+    local hash=$(echo -n "$1" | md5sum)
+    local color_index=$(( 0x${hash:0:8} % ${#_prompt_colors[@]} ))
+    local style_index=$(( 0x${hash:8:8} % ${#_prompt_styles[@]} ))
+    local color=${_prompt_colors[color_index]}
+    local style=${_prompt_styles[style_index]}
+    if (( color == 0 && style == 0 )); then
+        color=2
+        style=4
+    fi
+    echo -E "\e[${style};3${color}m"
 }
 
 color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
