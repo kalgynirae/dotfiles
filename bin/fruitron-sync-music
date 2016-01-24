@@ -9,5 +9,7 @@ rsync \
       --progress \
       --recursive \
       --times \
+      --exclude christmas \
+      --delete-excluded \
       /home/lumpy/music/audio/ \
-      fruitron:/var/zachary/music/
+      fruitron:/var/music/music/
