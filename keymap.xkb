@@ -6,7 +6,7 @@ xkb_keymap {
         include "pc"
         include "us"
         include "inet(evdev)"
-        include "capslock(ctrl_modifier)"
+        include "capslock(ctrl_modifier)" // /usr/share/X11/xkb/symbols/capslock
         include "compose(ralt)"
         include "terminate(ctrl_alt_bksp)"
         include "scrolllock"  // dotfiles/xkb/symbols/scrolllock
