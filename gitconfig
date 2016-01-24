@@ -6,7 +6,7 @@
 	diffc = diff --cached
 	edit = commit --amend --only
 	ff = merge --ff-only
-	graph = log --all --graph --pretty=format:'%C(auto)%h %s%n%C(cyan)%an%C(blue) %cr%C(auto)%d%C(reset)'
+	graph = log --all --graph --pretty=format:'%C(auto)%h %s%n%C(cyan)%an%C(blue) %cr%C(auto)%d%C(reset)%n'
 	logg = log --graph --decorate
 	noff = merge --no-ff
 	pushu = push --set-upstream origin HEAD
