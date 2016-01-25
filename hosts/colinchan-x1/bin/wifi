@@ -2,6 +2,6 @@
 
 (( $# != 1 )) && echo "usage: wifi [on|off]" && exit 1
 case $1 in
-    (on) sudo systemctl start netctl-auto@wlan0 ;;
-    (off) sudo systemctl stop netctl-auto@wlan0 ;;
+    on) sudo systemctl start netctl-auto@wlp4s0 ;;
+    off) sudo systemctl stop netctl-auto@wlp4s0 ;;
 esac

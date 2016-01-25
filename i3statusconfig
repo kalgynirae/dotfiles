@@ -17,8 +17,9 @@ general {
     output_format = "i3bar"
 }
 
-order += "wireless wlan0"
-order += "ethernet eth1"
+order += "wireless wlp4s0"
+order += "ethernet enp0s20u1u1"
+order += "ethernet enp0s20u1u2"
 order += "disk /"
 order += "cpu_usage"
 order += "cpu_temperature 0"
@@ -49,7 +50,13 @@ disk "/" {
     format = "%free"
 }
 
-ethernet eth1 {
+ethernet enp0s20u1u1 {
+    color_bad = "#d3d7cf"
+    format_up = "E: %ip"
+    format_down = "E: down"
+}
+
+ethernet enp0s20u1u2 {
     color_bad = "#d3d7cf"
     format_up = "E: %ip"
     format_down = "E: down"
@@ -66,7 +73,7 @@ volume pulse {
     mixer_idx = 0
 }
 
-wireless wlan0 {
+wireless wlp4s0 {
     color_bad = "#d3d7cf"
     format_up = "W: (%quality at %essid) %ip"
     format_down = "W: down"
