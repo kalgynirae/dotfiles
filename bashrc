@@ -7,7 +7,7 @@ alias ls='ls --color'
 alias mplayer='mplayer -softvol'
 alias mv='mv -i'
 alias python='python2'
-alias rm='rm -I --one-file-system'
+alias rm='rm --one-file-system'
 alias tree='tree -CF --charset=utf-8'
 
 # Disallow overwriting files by redirection with > (use >| instead)
