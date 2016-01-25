@@ -1,0 +1,5 @@
+#!/bin/bash
+
+xscreensaver-command -exit
+xset s off
+xset -dpms
