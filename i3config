@@ -4,8 +4,9 @@
 
 set $mod Mod4
 floating_modifier $mod
+new_window pixel
 
-font pango:DejaVu Sans 8
+font pango:DejaVu Sans 10
 
 bindsym $mod+grave kill
 bindsym $mod+Return exec i3-sensible-terminal
@@ -141,15 +142,15 @@ bar {
     }
 }
 
-# class                 border  backgr. text    indicator
-client.focused          $blue2  $blue3  $text   $yellow2
-client.focused_inactive $line   $bg1    $text2  $bg2
-client.unfocused        $line   $bg2    $text2  $bg1
-client.urgent           $red1   $red2   $text   $yellow2
+# class                 border      backgr.     text        indicator
+client.focused          $red1       $red2       $text       $yellow2
+client.focused_inactive $line       $bg1        $text2      $bg2
+client.unfocused        $line       $bg2        $text2      $bg1
+client.urgent           $orange1    $orange2    $text       $yellow2
 
 bindsym $mod+Shift+Return exec gnome-terminal -e ~/bin/calculator
 bindsym $mod+Mod1+Return exec cool-retro-term
-bindsym $mod+Mod1+p exec cool-retro-term -e python3
+bindsym $mod+Mod1+p exec cool-retro-term -e python3 -i ~/.pythonrc
 bindsym $mod+BackSpace exec --no-startup-id xscreensaver-command --lock
 bindsym Ctrl+Mod1+f exec chromium
 bindsym XF86Display exec --no-startup-id ~/bin/refresh-peripherals

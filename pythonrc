@@ -1,8 +1,29 @@
-# Enable tab completion
-try:
-    import readline
-except ImportError:
-    print(".pythonrc: Module readline not available.")
+#!/usr/bin/env python
+
+from collections import Counter
+from collections import defaultdict
+from collections import OrderedDict
+from datetime import date
+from datetime import datetime
+from datetime import timedelta
+from itertools import chain
+from itertools import combinations
+from itertools import count
+from itertools import permutations
+from itertools import product
+from itertools import starmap
+from urllib.parse import quote as url_quote
+from urllib.parse import unquote as url_unquote
+import os.path
+import sys
+
+if sys.version_info.major > 2:
+    from pathlib import Path
 else:
-    import rlcompleter
-    readline.parse_and_bind('tab: complete')
+    try:
+        import readline
+    except ImportError:
+        print(".pythonrc: Module readline not available.")
+    else:
+        import rlcompleter
+        readline.parse_and_bind('tab: complete')

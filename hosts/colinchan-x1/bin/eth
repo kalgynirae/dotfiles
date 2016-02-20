@@ -2,20 +2,20 @@
 
 (( $# != 1 )) && echo "usage: eth [on|off]" && exit 1
 
-for path in /sys/class/net/en*; do
-    device=$(basename $path)
-    if [[ $device != enp0s25 ]]; then
-        break
-    fi
-done
-
-if [[ $device == enp0s25 ]]; then
-    echo "no ethernet device found (other than enp0s25)" >&2
-    exit 1
-fi
-
 _start_ethernet() {
-    echo "starting ethernet for device $1" >&2
+    for path in /sys/class/net/en*; do
+        device=$(basename $path)
+        if [[ $device != enp0s25 ]]; then
+            break
+        fi
+    done
+
+    if [[ $device == enp0s25 ]]; then
+        echo "no ethernet device found (other than enp0s25)" >&2
+        exit 1
+    fi
+
+    echo "starting ethernet for device $device" >&2
     sudo systemctl stop dhcpcd
     sudo systemctl start netctl-ifplugd@$device
     sleep 5
@@ -23,6 +23,6 @@ _start_ethernet() {
 }
 
 case $1 in
-    (on) _start_ethernet $device ;;
+    (on) _start_ethernet ;;
     (off) sudo systemctl stop netctl-ifplugd* ;;
 esac
