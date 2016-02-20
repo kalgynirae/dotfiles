@@ -3,7 +3,9 @@ import colorsys
 import contextlib
 import itertools
 import pathlib
+import signal
 import subprocess
+import sys
 import tempfile
 import time
 
@@ -116,7 +118,14 @@ def substitute_temp_i3config():
             yield i3config_temp
         finally:
             i3config_backup.replace(i3config_original)
-            subprocess.check_call(['i3-msg', 'reload'])
+            subprocess.check_call(['i3-msg', 'reload'], stdout=subprocess.DEVNULL)
+
+def sigterm_exit(*args):
+    raise KeyboardInterrupt
 
 if __name__ == '__main__':
-    main()
+    signal.signal(signal.SIGTERM, sigterm_exit)
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(1)
