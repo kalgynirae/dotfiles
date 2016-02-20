@@ -4,7 +4,7 @@
 
 set $mod Mod4
 floating_modifier $mod
-new_window pixel
+new_window pixel 3
 
 font pango:DejaVu Sans 10
 
@@ -180,3 +180,4 @@ for_window [class="cool-retro-term"] floating enable
 
 # Startup programs
 exec --no-startup-id ~/bin/startup
+exec --no-startup-id ~/dotfiles/colorcycle.py
