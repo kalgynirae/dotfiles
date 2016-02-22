@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Set the keyrepeat, screensaver timeout, and numlock
+xkbcomp -I$HOME/dotfiles/xkb $HOME/dotfiles/keymap.xkb $DISPLAY
+xset r rate 160 40
+xset s 285 15
+numlockx
+
+# middle-click with three-finger tap; do nothing with one or two fingers
+synclient TapButton1=0 TapButton2=0 TapButton3=2
+
+case $(hostname) in
+    colinchan-x1)
+        xrandr \
+            --output eDP1 --auto --pos 0x160 \
+            --output DP1-8 --auto --pos 2560x0 \
+            --output DP1-1-8 --auto --pos 5120x0
+        ;;
+    lumeh)
+        xrandr \
+            --output LVDS1 --auto --pos 0x300 \
+            --output HDMI1 --auto --pos 1366x0 \
+            --output VGA1 --auto --same-as LVDS1
+        ;;
+esac
+
+feh --bg-fill ~/.wallpaper
+paplay /usr/share/sounds/freedesktop/stereo/window-attention.oga

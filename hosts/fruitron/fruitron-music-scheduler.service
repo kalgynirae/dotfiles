@@ -1,7 +1,0 @@
-[Unit]
-Description=Fruitron Music Scheduler
-
-[Service]
-Type=simple
-ExecStart=/usr/local/bin/fruitron-music-scheduler
-User=colin

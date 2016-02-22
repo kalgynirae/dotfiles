@@ -1,9 +1,0 @@
-[Unit]
-Description=Run Fruitron Music Scheduler daily
-
-[Timer]
-OnCalendar=21:58
-Unit=fruitron-music-scheduler.service
-
-[Install]
-WantedBy=multi-user.target
