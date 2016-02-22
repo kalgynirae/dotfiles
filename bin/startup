@@ -2,8 +2,8 @@
 
 pgrep sxhkd || sxhkd &
 
-pgrep redshift || redshift -l 37.48:-122.15 -t 5850:2800 -b 1.0:0.8 &
-#pgrep redshift || redshift -l 27.75:-82.63 -t 5850:2800 -b 1.0:0.8 &
+pgrep redshift || redshift -l 37.48:-122.15 -t 5850:2800 &
+#pgrep redshift || redshift -l 27.75:-82.63 -t 5850:2800 &
 
 pgrep xscreensaver || xscreensaver &
 
