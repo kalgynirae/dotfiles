@@ -11,7 +11,6 @@ pgrep polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent
 
 pulseaudio --check || pulseaudio --start &
 
-pgrep -f colorcycle.py || ~/dotfiles/colorcycle.py &>/tmp/colorcycle.log &
 pgrep -f beamux-server || ~/bash/beamux/beamux-server &>/tmp/beamux-server.log &
 
 $HOME/bin/refresh-peripherals

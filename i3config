@@ -181,3 +181,4 @@ for_window [class="cool-retro-term"] floating enable
 
 # Startup programs
 exec --no-startup-id ~/bin/startup
+exec_always --no-startup-id ~/dotfiles/colorcycle.py &>>/tmp/colorcycle.log
