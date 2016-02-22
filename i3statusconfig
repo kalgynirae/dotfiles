@@ -17,9 +17,11 @@ general {
     output_format = "i3bar"
 }
 
+order += "wireless wlp3s0"
 order += "wireless wlp4s0"
-order += "ethernet enp0s20u1u1"
+order += "ethernet enp2s0"
 order += "ethernet enp0s20u1"
+order += "ethernet enp0s20u1u1"
 order += "disk /"
 order += "cpu_usage"
 order += "cpu_temperature 0"
@@ -50,13 +52,19 @@ disk "/" {
     format = "%free"
 }
 
-ethernet enp0s20u1u1 {
+ethernet enp2s0 {
     color_bad = "#d3d7cf"
     format_up = "E: %ip"
     format_down = "E: down"
 }
 
 ethernet enp0s20u1 {
+    color_bad = "#d3d7cf"
+    format_up = "E: %ip"
+    format_down = "E: down"
+}
+
+ethernet enp0s20u1u1 {
     color_bad = "#d3d7cf"
     format_up = "E: %ip"
     format_down = "E: down"
@@ -71,6 +79,12 @@ volume pulse {
     device = "pulse"
     mixer = "Master"
     mixer_idx = 0
+}
+
+wireless wlp3s0 {
+    color_bad = "#d3d7cf"
+    format_up = "W: (%quality at %essid) %ip"
+    format_down = "W: down"
 }
 
 wireless wlp4s0 {
