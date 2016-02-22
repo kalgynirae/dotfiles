@@ -153,7 +153,7 @@ bindsym $mod+Shift+Return exec gnome-terminal -e ~/bin/calculator
 bindsym $mod+Mod1+Return exec cool-retro-term
 bindsym $mod+Mod1+p exec cool-retro-term -e python3 -i ~/.pythonrc
 bindsym $mod+BackSpace exec --no-startup-id xscreensaver-command --lock
-bindsym Ctrl+Mod1+f exec ~/browser
+bindsym Ctrl+Mod1+f exec ~/bin/browser
 bindsym XF86Display exec --no-startup-id ~/bin/refresh-peripherals
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight - 10 -time 100
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight + 10 -time 100
