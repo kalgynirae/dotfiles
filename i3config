@@ -6,7 +6,7 @@ set $mod Mod4
 floating_modifier $mod
 new_window pixel 3
 
-font pango:DejaVu Sans 10
+font pango:DejaVu Sans 8
 
 bindsym $mod+grave kill
 bindsym $mod+Return exec i3-sensible-terminal
@@ -127,9 +127,9 @@ set $red3 #a40000
 bar {
     position top
     #status_command i3status
-    #status_command i3status | /home/lumpy/python/i3-weather/weather.py 2408354 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
-    #status_command i3status | /home/lumpy/python/i3-weather/weather.py 2444409 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
-    status_command i3status | /home/lumpy/python/i3-weather/weather.py 55970494 --wrap-i3-status --position 0 --unit C
+    #status_command i3status | ~/python/i3-weather/weather.py 2408354 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
+    #status_command i3status | ~/python/i3-weather/weather.py 2444409 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
+    status_command i3status | ~/python/i3-weather/weather.py 55970494 --wrap-i3-status --position 0 --unit C
     #status_command i3status | sed -u 's/CHR[^"]\+"/BAT 03.14% 00:01:59"/'
     colors {
         background $bg3
