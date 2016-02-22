@@ -11,4 +11,6 @@ pgrep polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent
 
 pulseaudio --check || pulseaudio --start &
 
+pgrep -f colorcycle.py || ~/dotfiles/colorcycle.py &
+
 $HOME/bin/refresh-peripherals
