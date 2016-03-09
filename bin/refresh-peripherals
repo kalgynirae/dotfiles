@@ -2,7 +2,7 @@
 
 # Set the keyrepeat, screensaver timeout, and numlock
 xkbcomp -I$HOME/dotfiles/xkb $HOME/dotfiles/keymap.xkb $DISPLAY
-xset r rate 160 40
+xset r rate 155 45
 xset s 285 15
 numlockx
 
