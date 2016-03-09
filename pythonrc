@@ -17,6 +17,9 @@ from itertools import permutations
 from itertools import product
 from itertools import starmap
 import json
+import random
+from random import choice, sample
+from unicodedata import name as unicode_name
 import urllib
 from urllib.parse import quote as url_quote
 from urllib.parse import unquote as url_unquote
