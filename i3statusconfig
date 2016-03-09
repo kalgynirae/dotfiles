@@ -25,7 +25,6 @@ order += "ethernet enp0s20u1u1"
 order += "disk /"
 order += "cpu_usage"
 order += "cpu_temperature 0"
-order += "cpu_temperature 1"
 order += "battery BAT0"
 order += "volume pulse"
 order += "tztime local"
@@ -35,11 +34,6 @@ battery BAT0 {
 }
 
 cpu_temperature 0 {
-    format = "%degrees°C"
-    max_threshold = 70
-}
-
-cpu_temperature 1 {
     format = "%degrees°C"
     max_threshold = 70
 }
