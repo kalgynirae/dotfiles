@@ -8,10 +8,6 @@ export PAGER=less
 export PATH=$PATH:$HOME/bin:$HOME/.gem/ruby/2.2.0/bin
 export PYTHONSTARTUP=~/.pythonrc
 
-#if [[ -n $DISPLAY ]]; then
-#    export $(gnome-keyring-daemon --start)
-#fi
-
-if [[ $- == *i* && -r ~/.bashrc ]]; then
+if [[ $- == *i* ]]; then
     source ~/.bashrc
 fi
