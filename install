@@ -2,6 +2,7 @@
 
 maybelink() {
     if [[ ! -h $2 ]]; then
+    	[[ -d $(dirname "$2") ]] || mkdir -p $(dirname "$2")
         echo ln --symbolic --relative --backup --suffix=.old "$1" "$2"
         ln --symbolic --relative --backup --suffix=.old "$1" "$2"
     else
@@ -9,13 +10,20 @@ maybelink() {
     fi
 }
 
+maybelink bin ~/bin
 maybelink bashrc ~/.bashrc
+maybelink dunstrc ~/.config/dunst/dunstrc
 maybelink gitconfig ~/.gitconfig
 maybelink gtkrc-2.0 ~/.gtkrc-2.0
+maybelink gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
+maybelink i3config ~/.config/i3/config
+maybelink i3statusconfig ~/.config/i3status/config
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
+maybelink sxhkdrc ~/.sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
 maybelink vim ~/.vim
+maybelink vimrc ~/.config/nvim/init.vim
 maybelink vimrc ~/.vimrc
 
-echo Run \'git submodule update --init\' to update the vim plugins
+echo Run \'git submodule update --init\' to get the vim plugins
