@@ -50,6 +50,15 @@ open() {
     xdg-open "$1" >/dev/null 2>&1
 }
 
+d() {
+    if (( $# )); then
+        local tmpdir=$(mktemp -d /tmp/"$1".XXX)
+    else
+        local tmpdir=$(mktemp -d /tmp/XXX)
+    fi
+    cd "$tmpdir"
+}
+
 p() {
     pygmentize -g "$@" | less
 }
