@@ -4,7 +4,7 @@ case $(hostname) in
     colinchan-x1)
         chromium "$@"
         ;;
-    lumeh)
+    *)
         env GTK_THEME=Adwaita:light firefox "$@"
         ;;
 esac
