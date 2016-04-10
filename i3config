@@ -28,10 +28,12 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
+bindsym $mod+Ctrl+space sticky toggle
 
 bindsym $mod+Shift+z move scratchpad
 bindsym $mod+z scratchpad show
 bindsym $mod+F2 exec ~/bin/rename-workspace
+bindsym F8 exec --no-startup-id bash -c "xdg-open https://docs.python.org/3/library/$(dmenu -p 'python module:' </dev/null).html"
 
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
