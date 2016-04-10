@@ -2,9 +2,9 @@
 
 case $(hostname) in
     colinchan-x1)
-        chromium
+        chromium "$@"
         ;;
     lumeh)
-        env GTK_THEME=Adwaita:light firefox
+        env GTK_THEME=Adwaita:light firefox "$@"
         ;;
 esac
