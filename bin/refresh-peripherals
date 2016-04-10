@@ -1,9 +1,15 @@
 #!/bin/bash
 
-# Set the keyrepeat, screensaver timeout, and numlock
-xkbcomp -I$HOME/dotfiles/xkb $HOME/dotfiles/keymap.xkb $DISPLAY
+# no audible bell
+xset -b
+
+# sane but speedy keyrepeat
 xset r rate 155 45
+
+# screensaver after 5 minutes
 xset s 285 15
+
+xkbcomp -I$HOME/dotfiles/xkb $HOME/dotfiles/keymap.xkb $DISPLAY
 numlockx
 
 # middle-click with three-finger tap; do nothing with one or two fingers
