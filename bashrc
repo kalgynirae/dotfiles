@@ -76,6 +76,17 @@ p() {
     pygmentize -g "$@" | less
 }
 
+_tmux_complete() {
+    if (( $COMP_KEY == 9 )); then
+        # Invoked by Tab key; do nothing
+        return
+    fi
+    local word_regex_escaped=$(sed 's/[.^$*+?()[{\|]/\\&/g' <<<"$2")
+    local regex="\<$word_regex_escaped[[:alnum:]_/.-]+\>"
+    COMPREPLY=($(tmux capture-pane -Jp | sed '/^\s*$/d' | grep -Eo "$regex"))
+}
+complete -o bashdefault -o default -D -F _tmux_complete
+
 if [[ -f ~/.git-prompt.sh ]]; then
     export GIT_PS1_SHOWDIRTYSTATE=1
     export GIT_PS1_SHOWSTASHSTATE=1
