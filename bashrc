@@ -50,13 +50,26 @@ open() {
     xdg-open "$1" >/dev/null 2>&1
 }
 
+rename-tmux-window() {
+    [[ -n $TMUX ]] && tmux rename-window "$1"
+}
+
 d() {
+    local tempdir
     if (( $# )); then
-        local tmpdir=$(mktemp -d /tmp/"$1".XXX)
+        tempdir=/tmp/$1
+        mkdir -m700 "$tempdir" 2>/dev/null || echo "warning: $tempdir already exists" >&2
     else
-        local tmpdir=$(mktemp -d /tmp/XXX)
+        while true; do
+            local name=$(shuf -n1 ~/dotfiles/bip39-english.txt)
+            # Skip names that could cause confusion
+            type $name &>/dev/null && continue
+            tempdir=/tmp/$name
+            mkdir -m700 "$tempdir" 2>/dev/null && break
+        done
     fi
-    cd "$tmpdir"
+    cd "$tempdir"
+    rename-tmux-window "$tempdir"
 }
 
 p() {
