@@ -9,6 +9,7 @@ alias mplayer='mplayer -softvol -softvol-max 300'
 alias mv='mv -i'
 alias python='python2'
 alias rm='rm --one-file-system'
+alias ssh-patient='ssh -o ConnectTimeout=60 -o ServerAliveCountMax=6 -o ServerAliveInterval=10'
 alias tree='tree -CF --charset=utf-8'
 
 # Disallow overwriting files by redirection with > (use >| instead)
