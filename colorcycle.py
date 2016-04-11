@@ -10,7 +10,7 @@ import tempfile
 import time
 
 def main():
-    lines = iter(i3config_original.read_text().splitlines())
+    lines = iter(i3config_path.read_text().splitlines())
     lines_before = []
     for line in lines:
         if line.startswith('client.focused '):
@@ -19,20 +19,17 @@ def main():
     text_before = '\n'.join(lines_before) + '\n'
     text_after = '\n'.join(lines) + '\n'
 
-    with substitute_temp_i3config() as i3config_temp:
+    with tmpfs_mounted():
         colors = colorcycle()
         colors2 = itertools.islice(colorcycle(), 10, None)
         while True:
             new_line = i3config_line_template.format(next(colors), next(colors2))
-            i3config_temp.write_text(''.join([text_before, new_line, text_after]))
+            i3config_path.write_text(''.join([text_before, new_line, text_after]))
             subprocess.check_call(['i3-msg', 'reload'], stdout=subprocess.DEVNULL)
             time.sleep(.1)
 
-i3config_dir = pathlib.Path('~/.config/i3/').expanduser()
-i3config_original = i3config_dir / 'config'
-i3config_backup = i3config_dir / 'config.backup'
 i3config_line_template = 'client.focused {0} {0} $text {1}\n'
-tmpfs_dir = '/tmp'
+i3config_path = pathlib.Path('~/.config/i3/config').expanduser()
 
 colors_hsv = '''
  0 90 99
@@ -109,16 +106,17 @@ def hsv99_to_rgb255(hsv99):
     return [int(x * 255) for x in rgb1]
 
 @contextlib.contextmanager
-def substitute_temp_i3config():
-    with tempfile.TemporaryDirectory(dir=tmpfs_dir) as tempdir:
-        i3config_temp = pathlib.Path(tempdir) / 'config'
-        i3config_original.rename(i3config_backup)
-        try:
-            i3config_original.symlink_to(i3config_temp)
-            yield i3config_temp
-        finally:
-            i3config_backup.replace(i3config_original)
-            subprocess.check_call(['i3-msg', 'reload'], stdout=subprocess.DEVNULL)
+def tmpfs_mounted():
+    subprocess.check_call(
+        ['sudo', '-n', 'mount', '-t', 'tmpfs', 'tmpfs', str(i3config_path.parent)],
+    )
+    try:
+        yield
+    finally:
+        subprocess.check_call(
+            ['sudo', '-n', 'umount', str(i3config_path.parent)],
+        )
+        subprocess.check_call(['i3-msg', 'reload'], stdout=subprocess.DEVNULL)
 
 def sigterm_exit(*args):
     raise KeyboardInterrupt
