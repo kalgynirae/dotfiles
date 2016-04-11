@@ -22,6 +22,7 @@ order += "wireless wlp4s0"
 order += "ethernet enp2s0"
 order += "ethernet enp0s20u1"
 order += "ethernet enp0s20u1u1"
+order += "ethernet eno1"
 order += "disk /"
 order += "cpu_usage"
 order += "cpu_temperature 0"
@@ -59,6 +60,12 @@ ethernet enp0s20u1 {
 }
 
 ethernet enp0s20u1u1 {
+    color_bad = "#d3d7cf"
+    format_up = "E: %ip"
+    format_down = "E: down"
+}
+
+ethernet eno1 {
     color_bad = "#d3d7cf"
     format_up = "E: %ip"
     format_down = "E: down"
