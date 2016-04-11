@@ -1,0 +1,8 @@
+[ui]
+username = Colin Chan <colinchan@lumeh.org>
+merge = internal:merge3
+ignore = ~/.hgignore
+
+[alias]
+edit = amend --edit --include "if this file exists, I'll eat my hat"
+wat = log --stat -r .
