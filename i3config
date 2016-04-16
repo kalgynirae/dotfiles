@@ -180,6 +180,8 @@ for_window [class="Minecraft"] floating enable
 for_window [class="qemu-system-x86_64"] floating enable
 for_window [class="Skype"] floating enable
 for_window [class="cool-retro-term"] floating enable
+for_window [class="GrandOrgue"] floating enable
+for_window [class="StepMania"] floating enable
 
 # Startup programs
 exec --no-startup-id ~/bin/startup
