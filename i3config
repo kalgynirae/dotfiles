@@ -33,7 +33,7 @@ bindsym $mod+Ctrl+space sticky toggle
 bindsym $mod+Shift+z move scratchpad
 bindsym $mod+z scratchpad show
 bindsym $mod+F2 exec ~/bin/rename-workspace
-bindsym F8 exec --no-startup-id bash -c "xdg-open https://docs.python.org/3/library/$(dmenu -p 'python module:' </dev/null).html"
+bindsym F8 exec --no-startup-id ~/bin/python-docs
 
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2

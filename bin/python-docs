@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if (( $# )); then
+    module=$1
+else
+    module=$(dmenu -p "python module:" </dev/null)
+fi
+[[ -n $module ]] && xdg-open https://docs.python.org/3/library/$module.html
