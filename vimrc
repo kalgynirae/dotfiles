@@ -35,14 +35,17 @@ nmap <Leader>p :setlocal invpaste paste?<CR>
 nmap <Leader>m :setlocal invnumber number?<CR>
 nmap <Leader>s :setlocal invspell spell?<CR>
 nmap <Leader>c :setlocal colorcolumn=<CR>
+nmap <Leader>f :setlocal foldmethod=indent<CR>
 cmap w!! silent w !sudo tee >/dev/null %
 " Consistent behavior for Y, D, and C
 nmap Y y$
 " Emacs shortcuts in insert mode
-imap <c-a> <c-o>^
-imap <c-e> <c-o>$
-imap <c-f> <c-o>l
-imap <c-b> <c-o>h
+imap <c-a> <Home>
+imap <c-e> <End>
+imap <c-f> <Right>
+imap <c-b> <Left>
+" Emacs shortcuts in commandline mode
+cmap <c-a> <Home>
 " Spell check
 set spelllang=en_us
 " Tab completion in commands
