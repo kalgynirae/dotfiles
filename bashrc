@@ -1,3 +1,10 @@
+[[ $- == *i* ]] || return
+export HISTCONTROL=ignoreboth
+export HISTIGNORE="history:bg*:fg*:ls:ll:la:su"
+export HISTSIZE=-1
+export HISTFILESIZE=10000
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
 alias cp='cp -i'
 alias grep='grep --color'
 alias la='ls --almost-all --classify'
@@ -15,8 +22,6 @@ alias tree='tree -CF --charset=utf-8'
 # Disallow overwriting files by redirection with > (use >| instead)
 set -o noclobber
 
-# Fix the window size periodically, so resizing while in e.g. VIM doesn't break it
-shopt -s checkwinsize
 shopt -s histappend
 
 # Disable C-s/C-q pausing and resuming output
