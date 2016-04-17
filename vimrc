@@ -23,6 +23,7 @@ set display=lastline
 set hlsearch incsearch
 set laststatus=2
 set list listchars=tab:‣\ ,extends:»,precedes:«,nbsp:‧,trail:░
+set mouse=
 set number
 set ruler
 set scrolloff=3
