@@ -61,21 +61,22 @@ rename-tmux-window() {
 }
 
 d() {
-    local tempdir
+    local name
     if (( $# )); then
-        tempdir=/tmp/$1
-        mkdir -m700 "$tempdir" 2>/dev/null || echo "warning: $tempdir already exists" >&2
+        name=$1
     else
         while true; do
-            local name=$(shuf -n1 ~/dotfiles/bip39-english.txt)
-            # Skip names that could cause confusion
-            type $name &>/dev/null && continue
-            tempdir=/tmp/$name
-            mkdir -m700 "$tempdir" 2>/dev/null && break
+            name=$(shuf -n1 ~/dotfiles/bip39-english.txt) || return
+            # Skip names that are commands to avoid any confusion
+            type "$name" &>/dev/null && continue
+            # Skip names for which /tmp/$name.* already exists
+            compgen -G "/tmp/$name.*" && continue
+            break
         done
     fi
-    cd "$tempdir"
-    rename-tmux-window "$tempdir"
+    local tempdir
+    tempdir=$(mktemp -d "/tmp/$name.XXX") || return
+    cd "$tempdir" && rename-tmux-window "$name"
 }
 
 p() {
