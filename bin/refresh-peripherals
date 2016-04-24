@@ -28,6 +28,11 @@ case $(hostname) in
             --output HDMI1 --auto --pos 1366x0 \
             --output VGA1 --auto --same-as LVDS1
         ;;
+    linkedliszt)
+        xrandr \
+            --output HDMI2 --auto \
+            --output HDMI1 --auto --right-of HDMI2
+        ;;
 esac
 
 feh --bg-fill ~/.wallpaper
