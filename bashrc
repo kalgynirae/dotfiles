@@ -5,8 +5,15 @@ export HISTSIZE=-1
 export HISTFILESIZE=10000
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
+if [[ -n $TMUX ]]; then
+    case $(tmux showenv TERM 2>/dev/null) in
+        *256color) export TERM=screen-256color ;;
+    esac
+fi
+
 alias cp='cp -i'
 alias grep='grep --color'
+alias iotop='sudo iotop --delay 2'
 alias la='ls --almost-all --classify'
 alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
 alias ll='ls -l --human-readable'
