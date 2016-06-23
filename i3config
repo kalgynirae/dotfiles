@@ -162,13 +162,13 @@ bindsym $mod+Mod1+a exec gnome-terminal -e alsamixer
 bindsym XF86Display exec --no-startup-id ~/bin/refresh-peripherals
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight - 10 -time 100
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight + 10 -time 100
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/bin/volume.sh up
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/bin/volume.sh down
-bindsym XF86AudioMute exec --no-startup-id ~/bin/volume.sh mute
-bindsym XF86AudioPlay exec --no-startup-id quodlibet --play
-bindsym XF86AudioStop exec --no-startup-id quodlibet --pause
-bindsym XF86AudioPrev exec --no-startup-id quodlibet --previous
-bindsym XF86AudioNext exec --no-startup-id quodlibet --next
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/bin/volume up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/bin/volume down
+bindsym XF86AudioMute exec --no-startup-id ~/bin/volume mute
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioStop exec --no-startup-id playerctl stop
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86Explorer exec nautilus
 bindsym XF86Calculator exec nautilus
 bindsym Print exec --no-startup-id ~/bin/screenshot

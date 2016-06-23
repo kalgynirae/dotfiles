@@ -1,0 +1,14 @@
+#!/bin/bash
+
+op=${1:-lolnope}
+case $op in
+    up) change=5%+ ;;
+    down) change=5%- ;;
+    mute) change=toggle ;;
+    set) change=$2 ;;
+    *)
+        echo "Usage: $(basename "$0") [up|down|mute|set <value>]" >&2
+        exit 1
+esac
+
+amixer -D pulse set Master "$change"
