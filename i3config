@@ -154,7 +154,7 @@ client.urgent           $orange1    $orange2    $text       $yellow2
 bindsym $mod+Shift+Return exec gnome-terminal -e ~/bin/calculator
 bindsym $mod+Mod1+Return exec cool-retro-term
 bindsym $mod+Mod1+p exec cool-retro-term -e python3
-bindsym $mod+BackSpace exec --no-startup-id xscreensaver-command --lock
+bindsym $mod+BackSpace exec --no-startup-id ~/bin/screensaver lock
 bindsym $mod+Mod1+f exec ~/bin/browser
 bindsym Ctrl+Mod1+f exec ~/bin/browser
 bindsym $mod+Mod1+v exec pavucontrol

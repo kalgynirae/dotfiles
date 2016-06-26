@@ -6,9 +6,6 @@ xset -b
 # sane but speedy keyrepeat
 xset r rate 155 45
 
-# screensaver after 5 minutes
-xset s 285 15
-
 xkbcomp -I$HOME/dotfiles/xkb $HOME/dotfiles/keymap.xkb $DISPLAY
 numlockx
 

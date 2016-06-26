@@ -1,0 +1,27 @@
+#!/bin/bash
+
+case $1 in
+    on)
+        pgrep xscreensaver || xscreensaver -no-splash &
+        case $(hostname) in
+            linkedliszt)
+                xset s 885 15 dpms 0 0 900  # 15 minutes
+                ;;
+            *)
+                xset s 285 15 dpms 0 0 300  # 5 minutes
+                ;;
+        esac
+        ;;
+    off)
+        xscreensaver-command -exit
+        xset s off -dpms
+        ;;
+    lock)
+        pgrep xscreensaver || { xscreensaver -no-splash & sleep 1 ; }
+        xscreensaver-command -lock
+        ;;
+    *)
+        echo "usage: $(basename "$0") {on|off|lock}" >&2
+        exit 1
+        ;;
+esac
