@@ -20,7 +20,7 @@ maybelink i3config ~/.config/i3/config
 maybelink i3statusconfig ~/.config/i3status/config
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
-maybelink sxhkdrc ~/.sxhkdrc
+maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
 maybelink vim ~/.vim
 maybelink vimrc ~/.config/nvim/init.vim
