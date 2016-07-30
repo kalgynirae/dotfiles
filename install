@@ -26,4 +26,8 @@ maybelink vim ~/.vim
 maybelink vimrc ~/.config/nvim/init.vim
 maybelink vimrc ~/.vimrc
 
+for app in applications/*; do
+    maybelink "$app" ~/.local/share/"$app"
+done
+
 echo Run \'git submodule update --init\' to get the vim plugins

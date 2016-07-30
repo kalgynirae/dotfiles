@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Messenger
+Exec=/usr/bin/chromium --app=http://www.messenger.com/
