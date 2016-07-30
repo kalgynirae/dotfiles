@@ -11,6 +11,7 @@ if [[ -n $TMUX ]]; then
     esac
 fi
 
+alias commas='paste -sd,'
 alias cp='cp -i'
 alias grep='grep --color'
 alias iotop='sudo iotop --delay 2'
@@ -22,6 +23,7 @@ alias mpc='mpc --host=fruitron'
 alias mplayer='mplayer -softvol -softvol-max 300'
 alias mv='mv -i'
 alias python='python2'
+alias quotes="sed \"s/^/'/; s/$/'/\""
 alias rm='rm --one-file-system'
 alias ssh-patient='ssh -o ConnectTimeout=60 -o ServerAliveCountMax=6 -o ServerAliveInterval=10'
 alias tree='tree -CF --charset=utf-8'
@@ -85,6 +87,10 @@ d() {
     local tempdir
     tempdir=$(mktemp -d "/tmp/$name.XXX") || return
     cd "$tempdir" && rename-tmux-window "$name"
+}
+
+f() {
+    awk "{print $(printf '$%s\n' "$@" | paste -sd,)}"
 }
 
 p() {
