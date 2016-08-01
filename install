@@ -16,6 +16,7 @@ maybelink dunstrc ~/.config/dunst/dunstrc
 maybelink gitconfig ~/.gitconfig
 maybelink gtkrc-2.0 ~/.gtkrc-2.0
 maybelink gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
+maybelink hyperterm.js ~/.hyperterm.js
 maybelink i3config ~/.config/i3/config
 maybelink i3statusconfig ~/.config/i3status/config
 maybelink profile ~/.profile
