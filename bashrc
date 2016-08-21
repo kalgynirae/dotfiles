@@ -4,6 +4,7 @@ export HISTIGNORE="history:bg*:fg*:ls:ll:la:su"
 export HISTSIZE=-1
 export HISTFILESIZE=10000
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+shopt -s histappend
 
 if [[ -n $TMUX ]]; then
     case $(tmux showenv TERM 2>/dev/null) in
@@ -13,6 +14,7 @@ fi
 
 alias commas='paste -sd,'
 alias cp='cp -i'
+alias diff='diff --color'
 alias grep='grep --color'
 alias iotop='sudo iotop --delay 2'
 alias la='ls --almost-all --classify'
@@ -32,30 +34,27 @@ which nvim >&/dev/null && alias vim=nvim
 # Disallow overwriting files by redirection with > (use >| instead)
 set -o noclobber
 
-shopt -s histappend
-
 # Disable C-s/C-q pausing and resuming output
 stty -ixon
 
-# Complete partially-typed commands using the up/down arrow keys
+# Complete partially-typed commands using up/down and ctrl+p/n
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 bind '"\C-p":history-search-backward'
 bind '"\C-n":history-search-forward'
 
-if ! type man | grep -q function; then
-    man() { # Display man pages with color
-        env \
-            LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-            LESS_TERMCAP_md=$(printf "\e[1;32m") \
-            LESS_TERMCAP_me=$(printf "\e[0m") \
-            LESS_TERMCAP_se=$(printf "\e[0m") \
-            LESS_TERMCAP_so=$(printf "\e[1;44;37m") \
-            LESS_TERMCAP_ue=$(printf "\e[0m") \
-            LESS_TERMCAP_us=$(printf "\e[1;33m") \
-            man "$@"
-    }
-fi
+# Display man pages with color
+man() {
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;32m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;37m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;33m") \
+        man "$@"
+}
 
 mkcd() {
     mkdir -p "$1"
@@ -130,7 +129,6 @@ _hashcolor() {
     fi
     echo -E "\e[${style};3${color}m"
 }
-
 color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
 reset='\[\e[0m\]'
 export PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1}\n[\j]\\$ "
