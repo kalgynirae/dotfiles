@@ -38,6 +38,7 @@ nmap <Leader>s :setlocal invspell spell?<CR>
 nmap <Leader>c :setlocal colorcolumn=<CR>
 nmap <Leader>f :setlocal foldmethod=indent<CR>
 cmap w!! silent w !sudo tee >/dev/null %
+noremap U <c-r>
 " Consistent behavior for Y, D, and C
 nmap Y y$
 " Emacs shortcuts in insert mode
