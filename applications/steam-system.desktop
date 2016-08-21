@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Steam (system runtime)
 Comment=Application for managing and playing games on Steam
-Exec=env STEAM_RUNTIME=0 STEAM_FRAME_FORCE_CLOSE=1 /usr/bin/steam %U
+Exec=env STEAM_RUNTIME=0 /usr/bin/steam %U
 Icon=steam
 Terminal=false
 Type=Application
