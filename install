@@ -23,9 +23,9 @@ maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
-maybelink vim ~/.vim
-maybelink vimrc ~/.config/nvim/init.vim
-maybelink vimrc ~/.vimrc
+maybelink nvim ~/.config/nvim
+maybelink nvim ~/.vim
+maybelink nvim/init.vim ~/.vimrc
 
 for app in applications/*; do
     maybelink "$app" ~/.local/share/"$app"
