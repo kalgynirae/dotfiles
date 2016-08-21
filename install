@@ -1,12 +1,16 @@
 #!/bin/bash
 
 maybelink() {
-    if [[ ! -h $2 ]]; then
-    	[[ -d $(dirname "$2") ]] || mkdir -p $(dirname "$2")
-        echo ln --symbolic --relative --backup --suffix=.old "$1" "$2"
-        ln --symbolic --relative --backup --suffix=.old "$1" "$2"
+    if [[ $2 -ef $1 ]]; then
+        echo "$2 is already correct; skipping"
     else
-        echo "$2 is already a symlink; skipping"
+        [[ -d $(dirname "$2") ]] || mkdir -p "$(dirname "$2")"
+        if [[ -e $2 || -h $2 ]]; then
+            echo mv "$2" "$2.old"
+            mv "$2" "$2.old"
+        fi
+        echo ln --symbolic --relative "$1" "$2"
+        ln --symbolic --relative "$1" "$2"
     fi
 }
 
