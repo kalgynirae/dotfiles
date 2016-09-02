@@ -3,8 +3,8 @@
 # no audible bell
 xset -b
 
-# sane but speedy keyrepeat
-xset r rate 155 45
+# slightly insane keyrepeat
+xset r rate 150 48
 
 xkbcomp -I$HOME/dotfiles/xkb $HOME/dotfiles/keymap.xkb $DISPLAY
 numlockx
