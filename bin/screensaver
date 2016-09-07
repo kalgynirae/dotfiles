@@ -7,6 +7,10 @@ case $1 in
             linkedliszt)
                 xset s 885 15 dpms 0 0 900  # 15 minutes
                 ;;
+            colinchan-x1)
+                xset s 285 15 dpms 0 0 300  # 5 minutes
+                xset -dpms  # temporary to see if it solves the freezing problem
+                ;;
             *)
                 xset s 285 15 dpms 0 0 300  # 5 minutes
                 ;;
