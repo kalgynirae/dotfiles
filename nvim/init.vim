@@ -69,6 +69,5 @@ autocmd syntax xml setlocal sts=2 sw=2
 autocmd syntax yaml setlocal sts=2 sw=2
 " Specific plugin settings
 let g:pandoc#syntax#conceal#use=0
-let python_highlight_file_headers_as_comments=1
 let python_highlight_string_format=1
 let python_highlight_string_formatting=1
