@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     // default font size in pixels for all tabs
-    fontSize: 20,
+    fontSize: 36,
 
     // font family with optional fallbacks
     fontFamily: '"Liberation Mono"',
