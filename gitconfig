@@ -21,3 +21,5 @@
 	default = simple
 [diff]
 	renames = true
+[commit]
+	verbose = true
