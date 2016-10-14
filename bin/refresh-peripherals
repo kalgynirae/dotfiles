@@ -4,7 +4,7 @@
 xset -b
 
 # slightly insane keyrepeat
-xset r rate 150 48
+xset r rate 145 55
 
 xkbcomp -I$HOME/dotfiles/xkb $HOME/dotfiles/keymap.xkb $DISPLAY
 numlockx
