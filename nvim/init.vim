@@ -27,9 +27,9 @@ set mouse=
 set number
 set ruler
 set scrolloff=3
+set shada='50,<1000,h
 set showcmd
 set splitbelow splitright
-set viminfo='20,<50,s10,h
 " Custom shortcuts
 nmap <Leader>n :noh<CR>
 nmap <Leader>p :setlocal invpaste paste?<CR>
