@@ -1,5 +1,6 @@
 set nocompatible
 set encoding=utf-8
+set runtimepath+=/usr/share/vim/vimfiles
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 if exists("g:loaded_pathogen")
     execute pathogen#infect()
