@@ -1,0 +1,27 @@
+Butter 1      #fce94f 252 233  79
+Butter 2      #edd400 237 212   0
+Butter 3      #c4a000 196 160   0
+Chameleon 1   #8ae234 138 226  52
+Chameleon 2   #73d216 115 210  22
+Chameleon 3   #4e9a06  78 154   6
+Orange 1      #fcaf3e 252 175  62
+Orange 2      #f57900 245 121   0
+Orange 3      #ce5c00 206  92   0
+Sky Blue 1    #729fcf 114 159 207
+Sky Blue 2    #3465a4  52 101 164
+Sky Blue 3    #204a87  32  74 135
+Plum 1        #ad7fa8 173 127 168
+Plum 2        #75507b 117  80 123
+Plum 3        #5c3566  92  53 102
+Chocolate 1   #e9b96e 233 185 110
+Chocolate 2   #c17d11 193 125  17
+Chocolate 3   #8f5902 143  89   2
+Scarlet Red 1 #ef2929 239  41  41
+Scarlet Red 2 #cc0000 204   0   0
+Scarlet Red 3 #a40000 164   0   0
+Aluminium 1   #eeeeec 238 238 236
+Aluminium 2   #d3d7cf 211 215 207
+Aluminium 3   #babdb6 186 189 182
+Aluminium 4   #888a85 136 138 133
+Aluminium 5   #555753  85  87  83
+Aluminium 6   #2e3436  46  52  54
