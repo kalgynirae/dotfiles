@@ -21,8 +21,8 @@ case $(hostname) in
         ;;
     lumeh)
         xrandr \
-            --output LVDS1 --auto --pos 0x300 \
-            --output HDMI1 --auto --pos 1366x0 \
+            --output LVDS1 --auto --primary --pos 1920x312 \
+            --output HDMI1 --auto --pos 0x0 \
             --output VGA1 --auto --same-as LVDS1
         ;;
     linkedliszt)
