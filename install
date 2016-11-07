@@ -32,6 +32,7 @@ maybelink tmux.conf ~/.tmux.conf
 maybelink nvim ~/.config/nvim
 maybelink nvim ~/.vim
 maybelink nvim/init.vim ~/.vimrc
+maybelink quotes.txt ~/.config/variety/pluginconfig/quotes/quotes.txt
 
 for app in applications/*; do
     maybelink "$app" ~/.local/share/"$app"
