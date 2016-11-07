@@ -4,7 +4,7 @@ case $1 in
     on)
         pgrep xscreensaver || xscreensaver -no-splash &
         case $(hostname) in
-            linkedliszt)
+            apartmanteau)
                 xset s 885 15 dpms 0 0 900  # 15 minutes
                 ;;
             colinchan-x1)

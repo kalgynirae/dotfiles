@@ -25,7 +25,7 @@ case $(hostname) in
             --output HDMI1 --auto --pos 0x0 \
             --output VGA1 --auto --same-as LVDS1
         ;;
-    linkedliszt)
+    apartmanteau)
         xrandr \
             --output HDMI2 --auto \
             --output HDMI1 --auto --right-of HDMI2
