@@ -1,0 +1,10 @@
+[Unit]
+Description=Start Jack audio server
+Before=pulseaudio.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/jack_control start
+
+[Install]
+WantedBy=default.target
