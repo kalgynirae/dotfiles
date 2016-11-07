@@ -33,6 +33,7 @@ maybelink nvim ~/.config/nvim
 maybelink nvim ~/.vim
 maybelink nvim/init.vim ~/.vimrc
 maybelink quotes.txt ~/.config/variety/pluginconfig/quotes/quotes.txt
+maybelink variety.conf ~/.config/variety/variety.conf
 
 for app in applications/*; do
     maybelink "$app" ~/.local/share/"$app"
