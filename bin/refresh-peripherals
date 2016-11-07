@@ -32,5 +32,5 @@ case $(hostname) in
         ;;
 esac
 
-feh --bg-fill ~/.wallpaper || variety
+feh --bg-fill ~/.wallpaper || { pgrep -x variety >/dev/null && variety --next || variety &>/dev/null & }
 paplay /usr/share/sounds/freedesktop/stereo/window-attention.oga
