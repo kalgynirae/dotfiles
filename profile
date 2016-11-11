@@ -1,3 +1,4 @@
+#!/bin/sh
 export EDITOR=vim
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 export LESS='--chop-long-lines --no-init --quit-if-one-screen --RAW-CONTROL-CHARS'
@@ -9,6 +10,6 @@ export TERMINAL=gnome-terminal
 
 eval $(ssh-agent)
 
-if [[ $- == *i* ]]; then
-    source ~/.bashrc
+if [ -n "$BASH_VERSION" ]; then
+    . ~/.bashrc  # This returns immediately if the shell is not interactive
 fi

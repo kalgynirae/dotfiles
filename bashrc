@@ -29,7 +29,7 @@ alias quotes="sed \"s/^/'/; s/$/'/\""
 alias rm='rm --one-file-system'
 alias ssh-patient='ssh -o ConnectTimeout=60 -o ServerAliveCountMax=6 -o ServerAliveInterval=10'
 alias tree='tree -CF --charset=utf-8'
-which nvim >&/dev/null && alias vim=nvim
+which nvim &>/dev/null && alias vim=nvim
 
 # Disallow overwriting files by redirection with > (use >| instead)
 set -o noclobber

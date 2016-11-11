@@ -14,8 +14,9 @@ maybelink() {
     fi
 }
 
-maybelink bin ~/bin
+maybelink bash_profile ~/.bash_profile
 maybelink bashrc ~/.bashrc
+maybelink bin ~/bin
 maybelink default.pa ~/.config/pulse/default.pa
 maybelink dunstrc ~/.config/dunst/dunstrc
 maybelink gitconfig ~/.gitconfig
