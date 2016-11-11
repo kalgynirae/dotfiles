@@ -1,4 +1,4 @@
 .include /etc/pulse/default.pa
 unload-module module-filter-heuristics
 unload-module module-filter-apply
-#load-module module-echo-cancel
+set-default-sink jack_out
