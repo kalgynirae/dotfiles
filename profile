@@ -7,6 +7,7 @@ export PATH=$PATH:$HOME/bin:$HOME/.gem/ruby/2.2.0/bin
 export PYTHONDONTWRITEBYTECODE=yes
 export PYTHONSTARTUP=~/.pythonrc
 export TERMINAL=gnome-terminal
+export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 
 eval $(ssh-agent)
 
