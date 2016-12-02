@@ -43,6 +43,14 @@ bind '"\e[B":history-search-forward'
 bind '"\C-p":history-search-backward'
 bind '"\C-n":history-search-forward'
 
+# Print each filename followed by its contents
+fancycat() {
+    for file in "$@"; do
+        echo "# $file"
+        cat "$file"
+    done
+}
+
 # Display man pages with color
 man() {
     env \
@@ -57,18 +65,18 @@ man() {
 }
 
 mkcd() {
-    mkdir -p "$1"
-    cd "$1"
+    mkdir -p "$1" && cd "$1"
 }
 
 open() {
-    xdg-open "$1" >/dev/null 2>&1
+    xdg-open "$1" &>/dev/null
 }
 
 rename-tmux-window() {
     [[ -n $TMUX ]] && tmux rename-window "$1"
 }
 
+# Create a temporary directory with a friendly name and cd to it
 d() {
     local name
     if (( $# )); then
@@ -88,10 +96,17 @@ d() {
     cd "$tempdir" && rename-tmux-window "$name"
 }
 
+# Extract the corresponding whitespace-separated fields
 f() {
     awk "{print $(printf '$%s\n' "$@" | paste -sd,)}"
 }
 
+# Highlight occurrences of the given strings
+hl() {
+    grep -E --color=always "$(printf '%s|' "$@")$"
+}
+
+# View a file with syntax highlighting
 p() {
     pygmentize -g "$@" | less
 }
