@@ -46,7 +46,7 @@ bind '"\C-n":history-search-forward'
 # Print each filename followed by its contents
 fancycat() {
     for file in "$@"; do
-        echo "# $file"
+        echo -e "\e[1;36m# $file\e[0m"
         cat "$file"
     done
 }
