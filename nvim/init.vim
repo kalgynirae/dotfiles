@@ -12,7 +12,7 @@ let g:molokai_original=1
 silent! colo molokai
 " Indentation
 set autoindent
-set softtabstop=4 shiftwidth=4 expandtab smarttab
+set shiftwidth=4 softtabstop=-1 expandtab smarttab
 " Wrapping
 set nowrap
 set colorcolumn=81
@@ -30,6 +30,7 @@ set ruler
 set scrolloff=3
 set shada='50,<1000,h
 set showcmd
+set spell
 set splitbelow splitright
 " Custom shortcuts
 nmap <Leader>n :noh<CR>
@@ -39,7 +40,7 @@ nmap <Leader>s :setlocal invspell spell?<CR>
 nmap <Leader>c :setlocal colorcolumn=<CR>
 nmap <Leader>f :setlocal foldmethod=indent<CR>
 cmap w!! silent w !sudo tee >/dev/null %
-noremap U <c-r>
+map Q gq
 " Consistent behavior for Y, D, and C
 nmap Y y$
 " Emacs shortcuts in insert mode
@@ -57,17 +58,19 @@ set wildmenu wildmode=longest,list
 set exrc secure
 " Count hyphen as a word character
 set iskeyword+=-
+" Load last cursor position
+autocmd BufReadPost * silent! normal! g'"
 " Specific language settings
 autocmd syntax gitcommit setlocal textwidth=72
-autocmd syntax html setlocal sts=2 sw=2
-autocmd syntax htmldjango setlocal sts=2 sw=2
-autocmd syntax lilypond setlocal sts=2 sw=2
-autocmd syntax lisp setlocal sts=2 sw=2
+autocmd syntax html setlocal shiftwidth=2
+autocmd syntax htmldjango setlocal shiftwidth=2
+autocmd syntax lilypond setlocal shiftwidth=2
+autocmd syntax lisp setlocal shiftwidth=2
 autocmd syntax markdown setlocal textwidth=80
 autocmd syntax pandoc setlocal textwidth=80
 autocmd syntax text setlocal textwidth=80
-autocmd syntax xml setlocal sts=2 sw=2
-autocmd syntax yaml setlocal sts=2 sw=2
+autocmd syntax xml setlocal shiftwidth=2
+autocmd syntax yaml setlocal shiftwidth=2
 " Specific plugin settings
 let g:pandoc#syntax#conceal#use=0
 let python_highlight_string_format=1
