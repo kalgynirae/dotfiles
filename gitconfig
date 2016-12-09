@@ -12,7 +12,6 @@
 [commit]
 	verbose = true
 [core]
-	editor = vim
 	excludesfile = ~/dotfiles/gitignore
 [diff]
 	renames = true
