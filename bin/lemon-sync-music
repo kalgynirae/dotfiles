@@ -9,5 +9,5 @@ rsync \
       --progress \
       --recursive \
       --times \
-      /home/lumpy/music/audio/ \
+      /home/colin/music/audio/ \
       lemon:/home/share/music/
