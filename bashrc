@@ -106,6 +106,11 @@ hl() {
     grep -E --color=always "$(printf '%s|' "$@")$"
 }
 
+# Extract the corresponding lines
+l() {
+    sed -n "$(printf '%sp\n' "$@" | paste -sd';')"
+}
+
 # View a file with syntax highlighting
 p() {
     pygmentize -g "$@" | less
