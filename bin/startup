@@ -5,7 +5,7 @@ pgrep sxhkd || sxhkd &
 pgrep redshift || redshift -l 37.48:-122.15 -t 5850:2800 &
 #pgrep redshift || redshift -l 27.75:-82.63 -t 5850:2800 &
 
-pgrep compton || compton -CGb --no-fading-openclose
+pgrep compton || compton -CGb --no-fading-openclose --unredir-if-possible
 
 screensaver on
 
