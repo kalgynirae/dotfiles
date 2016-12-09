@@ -1,5 +1,5 @@
 #!/bin/sh
-export EDITOR=vim
+export EDITOR=nvim
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 export LESS='--chop-long-lines --no-init --quit-if-one-screen --RAW-CONTROL-CHARS'
 export PAGER=less
