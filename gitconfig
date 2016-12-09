@@ -1,6 +1,3 @@
-[user]
-	name = Colin Chan
-	email = colinchan@lumeh.org
 [alias]
 	amend = commit --amend --no-edit
 	diffc = diff --cached
@@ -12,14 +9,17 @@
 	pushu = push --set-upstream origin HEAD
 [color]
 	ui = true
+[commit]
+	verbose = true
 [core]
 	editor = vim
 	excludesfile = ~/dotfiles/gitignore
-[merge]
-	conflictstyle = diff3
-[push]
-	default = simple
 [diff]
 	renames = true
-[commit]
-	verbose = true
+[merge]
+	conflictstyle = diff3
+[pull]
+	ff = only
+[user]
+	name = Colin Chan
+	email = colinchan@lumeh.org
