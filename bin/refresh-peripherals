@@ -27,8 +27,8 @@ case $(hostname) in
         ;;
     apartmanteau)
         xrandr \
-            --output HDMI2 --auto \
-            --output HDMI1 --auto --right-of HDMI2
+            --output HDMI-1 --auto --primary \
+            --output HDMI-2 --auto --left-of HDMI-1
         ;;
 esac
 
