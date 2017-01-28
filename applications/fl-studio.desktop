@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=FL Studio
-Exec=/usr/bin/env WINEPREFIX=/home/colin/.wine-flstudio wine start 'C:\Program Files (x86)\Image-Line\FL Studio 12\FL64.exe'
+Exec=/usr/bin/env WINEPREFIX=/home/colin/.wine-flstudio wine start 'C:\Program Files (x86)\Image-Line\FL Studio 12\FL.exe'
