@@ -20,6 +20,7 @@ maybelink bin ~/bin
 maybelink default.pa ~/.config/pulse/default.pa
 maybelink dunstrc ~/.config/dunst/dunstrc
 maybelink feh-themes ~/.config/feh/themes
+maybelink fonts.conf ~/.config/fontconfig/fonts.conf
 maybelink gitconfig ~/.gitconfig
 maybelink gtkrc-2.0 ~/.gtkrc-2.0
 maybelink gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
