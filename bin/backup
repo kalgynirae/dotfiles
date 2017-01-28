@@ -1,0 +1,10 @@
+#!/bin/bash
+
+rclone sync \
+    --bwlimit 600k \
+    --checksum \
+    --stats=5s \
+    --include-from dotfiles/backup_list \
+    --exclude '*' \
+    "$@" \
+    ~ encrypted:
