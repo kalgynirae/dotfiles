@@ -16,8 +16,6 @@ set shiftwidth=4 softtabstop=-1 expandtab smarttab
 " Wrapping
 set nowrap
 set colorcolumn=81
-" Backspace operation
-set backspace=indent,eol,start
 " General view settings
 set background=dark
 set display=lastline
@@ -58,6 +56,8 @@ set wildmenu wildmode=longest,list
 set exrc secure
 " Count hyphen as a word character
 set iskeyword+=-
+" Always save files by making a backup copy then overwriting the original
+set backupcopy=yes
 " Load last cursor position
 autocmd BufReadPost * silent! normal! g'"
 " Specific language settings
