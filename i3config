@@ -138,15 +138,15 @@ bar {
         separator $line
         statusline $text
 
-        focused_workspace $blue2 $blue3 $text
+        focused_workspace $green2 $green3 $text
         active_workspace $line $bg1 $text2
         inactive_workspace $line $bg2 $text2
-        urgent_workspace $red1 $red2 $text
+        urgent_workspace $orange2 $orange3 $text
     }
 }
 
 # class                 border      backgr.     text        indicator
-client.focused          $red1       $red2       $text       $yellow2
+client.focused          $red1       $red2       $text       $orange2
 client.focused_inactive $line       $bg1        $text2      $bg2
 client.unfocused        $line       $bg2        $text2      $bg1
 client.urgent           $orange1    $orange2    $text       $yellow2
