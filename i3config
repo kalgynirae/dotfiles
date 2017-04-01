@@ -94,6 +94,8 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
     bindsym Ctrl+bracketleft mode "default"
+    bindsym Shift+equal exec compton-trans -c -- +10
+    bindsym minus exec compton-trans -c -- -10
 }
 bindsym $mod+r mode "resize"
 
@@ -151,16 +153,15 @@ client.focused_inactive $line       $bg1        $text2      $bg2
 client.unfocused        $line       $bg2        $text2      $bg1
 client.urgent           $orange1    $orange2    $text       $yellow2
 
+bindsym $mod+BackSpace exec --no-startup-id ~/bin/screensaver lock
 bindsym $mod+Shift+Return exec gnome-terminal -e ~/bin/calculator
 bindsym $mod+Mod1+Return exec cool-retro-term
 bindsym $mod+Mod1+p exec cool-retro-term -e python3
-bindsym $mod+BackSpace exec --no-startup-id ~/bin/screensaver lock
 bindsym $mod+Mod1+f exec ~/bin/browser
-bindsym Ctrl+Mod1+f exec ~/bin/browser
 bindsym $mod+Mod1+v exec pavucontrol
 bindsym $mod+Mod1+a exec gnome-terminal -e alsamixer
-bindsym XF86Display exec --no-startup-id ~/bin/refresh-peripherals
 bindsym $mod+Mod1+r exec --no-startup-id ~/bin/refresh-peripherals
+bindsym XF86Display exec --no-startup-id ~/bin/refresh-peripherals
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight - 10 -time 100
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight + 10 -time 100
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/bin/volume up
