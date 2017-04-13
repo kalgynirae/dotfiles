@@ -15,4 +15,6 @@ pulseaudio --check || pulseaudio --start &
 
 pgrep -f beamux-server || ~/bash/beamux/beamux-server &>/tmp/beamux-server.log &
 
+[[ $(hostname) == colinchan-x1 ]] && { pgrep nm-applet || nm-applet & }
+
 $HOME/bin/refresh-peripherals
