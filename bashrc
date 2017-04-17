@@ -50,6 +50,14 @@ fancycat() {
     done
 }
 
+fancyhead() {
+    height=$(( ($(tput lines) - 2) / $# - 1 ))
+    for file in "$@"; do
+        echo -e "\e[1;36m# $file\e[0m"
+        head -n $height "$file"
+    done
+}
+
 # Display man pages with color
 man() {
     env \
