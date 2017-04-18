@@ -52,6 +52,7 @@ fancycat() {
 
 fancyhead() {
     height=$(( ($(tput lines) - 2) / $# - 1 ))
+    (( height < 1 )) && height=1
     for file in "$@"; do
         echo -e "\e[1;36m# $file\e[0m"
         head -n $height "$file"
