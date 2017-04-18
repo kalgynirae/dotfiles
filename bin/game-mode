@@ -1,0 +1,4 @@
+#!/bin/bash
+pkill redshift
+pkill compton
+screensaver off
