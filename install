@@ -38,6 +38,7 @@ maybelink nvim/init.vim ~/.vimrc
 maybelink quotes.txt ~/.config/variety/pluginconfig/quotes/quotes.txt
 maybelink variety.conf ~/.config/variety/variety.conf
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs
+maybelink Xresources ~/.Xresources
 
 for app in applications/*; do
     maybelink "$app" ~/.local/share/"$app"
