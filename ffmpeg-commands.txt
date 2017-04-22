@@ -1,0 +1,2 @@
+ffmpeg -f x11grab -s 1280,720 -i :0.0+1,1 -c:v libx264 -preset ultrafast -crf 20 -an test.mkv
+ffmpeg -loop 1 -i ~/pictures/youtube/windmills_in_space.png -i ~/music/audio/Synthmaster\ Lumpy/Synthmaster\ Lumpy\ -\ Windmills...\ in\ Space\!.flac -c:v libx264 -tune stillimage -c:a libvorbis -q:a 8 -shortest windmills_in_space.mkv
