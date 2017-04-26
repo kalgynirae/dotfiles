@@ -37,6 +37,7 @@ nmap <Leader>m :setlocal invnumber number?<CR>
 nmap <Leader>s :setlocal invspell spell?<CR>
 nmap <Leader>c :setlocal colorcolumn=<CR>
 nmap <Leader>f :setlocal foldmethod=indent<CR>
+nmap <Leader>o :colo default<CR>
 cmap w!! silent w !sudo tee >/dev/null %
 map Q gq
 " Consistent behavior for Y, D, and C
