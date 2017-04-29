@@ -1,9 +1,9 @@
 [[ $- == *i* ]] || return
-export HISTCONTROL=ignoreboth
-export HISTIGNORE="history:bg*:fg*:ls:ll:la:su"
-export HISTSIZE=-1
-export HISTFILESIZE=10000
-export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+HISTCONTROL=ignoreboth
+HISTIGNORE="history:bg*:fg*:ls:ll:la:su"
+HISTSIZE=-1
+HISTFILESIZE=10000
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 shopt -s histappend
 
 if [[ -n $TMUX ]]; then
@@ -136,9 +136,9 @@ _tmux_complete() {
 complete -o bashdefault -o default -D -F _tmux_complete
 
 if [[ -f ~/.git-prompt.sh ]]; then
-    export GIT_PS1_SHOWDIRTYSTATE=1
-    export GIT_PS1_SHOWSTASHSTATE=1
-    export GIT_PS1_SHOWUPSTREAM='verbose'
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWSTASHSTATE=1
+    GIT_PS1_SHOWUPSTREAM='verbose'
     source ~/.git-prompt.sh
     git_ps1='$(__git_ps1 " (%s)")'
 fi
@@ -159,4 +159,4 @@ _hashcolor() {
 }
 color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
 reset='\[\e[0m\]'
-export PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1}\n[\j]\\$ "
+PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1}\n[\j]\\$ "

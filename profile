@@ -10,8 +10,5 @@ export PYTHONSTARTUP=~/.pythonrc
 export TERMINAL=gnome-terminal
 export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 
-eval $(ssh-agent)
-
-if [ -n "$BASH_VERSION" ]; then
-    . ~/.bashrc  # This returns immediately if the shell is not interactive
-fi
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
