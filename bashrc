@@ -104,6 +104,10 @@ d() {
     cd "$tempdir" && rename-tmux-window "$name"
 }
 
+dls() {
+    find /tmp -maxdepth 1 -type d -name '*.???'
+}
+
 # Extract the corresponding whitespace-separated fields
 f() {
     awk "{print $(printf '$%s\n' "$@" | paste -sd,)}"
