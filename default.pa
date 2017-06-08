@@ -1,4 +1,3 @@
 .include /etc/pulse/default.pa
 unload-module module-filter-heuristics
 unload-module module-filter-apply
-set-default-sink jack_out
