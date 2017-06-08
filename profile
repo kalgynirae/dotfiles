@@ -10,5 +10,7 @@ export PYTHONSTARTUP=~/.pythonrc
 export TERMINAL=gnome-terminal
 export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 
-eval $(gnome-keyring-daemon --start)
-export SSH_AUTH_SOCK
+if [ -z "$SSH_AUTH_SOCK" ] && pgrep -f gnome-keyring-daemon ; then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+fi
