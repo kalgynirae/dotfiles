@@ -11,25 +11,30 @@ syntax enable
 let g:molokai_original=1
 silent! colo molokai
 " Indentation
-set autoindent
 set shiftwidth=4 softtabstop=-1 expandtab smarttab
 " Wrapping
-set nowrap
-set colorcolumn=81
 " General view settings
+set autoindent
 set background=dark
+set backupcopy=yes
+set colorcolumn=81
+set cursorline
 set display=lastline
+set exrc secure
 set hlsearch incsearch
 set laststatus=2
 set list listchars=tab:‣\ ,extends:»,precedes:«,nbsp:‧,trail:░
 set mouse=
+set nowrap
 set number
 set ruler
 set scrolloff=3
 set shada='50,<1000,h
 set showcmd
-set spell
+set spell spelllang=en_us
 set splitbelow splitright
+set undofile
+set wildmode=list:longest
 " Custom shortcuts
 nmap <Leader>n :noh<CR>
 nmap <Leader>p :setlocal invpaste paste?<CR>
@@ -42,23 +47,15 @@ cmap w!! silent w !sudo tee >/dev/null %
 map Q gq
 " Consistent behavior for Y, D, and C
 nmap Y y$
-" Emacs shortcuts in insert mode
+" Emacs shortcuts
+cmap <c-a> <Home>
+cmap <c-e> <End>
+cmap <c-f> <Right>
+cmap <c-b> <Left>
 imap <c-a> <Home>
 imap <c-e> <End>
 imap <c-f> <Right>
 imap <c-b> <Left>
-" Emacs shortcuts in commandline mode
-cmap <c-a> <Home>
-" Spell check
-set spelllang=en_us
-" Tab completion in commands
-set wildmenu wildmode=longest,list
-" Project-specific configuration files
-set exrc secure
-" Count hyphen as a word character
-set iskeyword+=-
-" Always save files by making a backup copy then overwriting the original
-set backupcopy=yes
 " Load last cursor position
 autocmd BufReadPost * silent! normal! g'"
 " Specific language settings
@@ -69,7 +66,8 @@ autocmd syntax lilypond setlocal shiftwidth=2
 autocmd syntax lisp setlocal shiftwidth=2
 autocmd syntax markdown setlocal textwidth=80
 autocmd syntax pandoc setlocal textwidth=80
-autocmd syntax text setlocal textwidth=80
+autocmd syntax sh setlocal iskeyword+=-
+autocmd syntax text setlocal iskeyword+=- textwidth=80
 autocmd syntax xml setlocal shiftwidth=2
 autocmd syntax yaml setlocal shiftwidth=2
 " Specific plugin settings
