@@ -12,6 +12,10 @@ numlockx
 # middle-click with three-finger tap; do nothing with one or two fingers
 synclient TapButton1=0 TapButton2=0 TapButton3=2
 
+[[ -f /tmp/display ]] && display=$(</tmp/display) || display=0
+(( display++ ))
+echo $display >/tmp/display
+
 case $(hostname) in
     colinchan-x1)
         xrandr \
@@ -26,9 +30,18 @@ case $(hostname) in
             --output VGA1 --auto --same-as LVDS1
         ;;
     apartmanteau)
-        xrandr \
-            --output HDMI-1 --auto --primary \
-            --output HDMI-2 --auto --left-of HDMI-1
+        case $(( display % 2 )) in
+            0)
+                xrandr \
+                    --output HDMI-1 --auto --primary \
+                    --output HDMI-2 --off
+                ;;
+            1)
+                xrandr \
+                    --output HDMI-1 --auto --primary \
+                    --output HDMI-2 --auto --left-of HDMI-1
+                ;;
+        esac
         ;;
 esac
 
