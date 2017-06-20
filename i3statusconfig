@@ -47,7 +47,7 @@ disk "/" {
     format = "%free"
 }
 
-ethernet enp2s0 {
+ethernet enp4s0 {
     color_bad = "#d3d7cf"
     format_up = "E: %ip"
     format_down = "E: down"
