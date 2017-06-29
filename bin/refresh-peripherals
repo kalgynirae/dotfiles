@@ -33,13 +33,13 @@ case $(hostname) in
         case $(( display % 2 )) in
             0)
                 xrandr \
-                    --output HDMI-1 --auto --primary \
-                    --output HDMI-2 --off
+                    --output HDMI-0 --auto --primary \
+                    --output DVI-I-1 --off
                 ;;
             1)
                 xrandr \
-                    --output HDMI-1 --auto --primary \
-                    --output HDMI-2 --auto --left-of HDMI-1
+                    --output HDMI-0 --auto --primary \
+                    --output DVI-I-1 --auto --left-of HDMI-0
                 ;;
         esac
         ;;
