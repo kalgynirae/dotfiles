@@ -12,8 +12,8 @@ numlockx
 # middle-click with three-finger tap; do nothing with one or two fingers
 synclient TapButton1=0 TapButton2=0 TapButton3=2
 
-[[ -f /tmp/display ]] && display=$(</tmp/display) || display=-1
-(( display++ ))
+[[ -f /tmp/display ]] && display=$(</tmp/display) || display=0
+[[ " $* " == *" --cycle "* ]] && (( display++ ))
 echo $display >/tmp/display
 
 case $(hostname) in
