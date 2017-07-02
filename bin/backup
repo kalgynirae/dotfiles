@@ -3,8 +3,8 @@
 rclone sync \
     --bwlimit 800k \
     --checksum \
-    --stats=5s \
     --include-from dotfiles/backup_list \
     --exclude '*' \
+    --verbose \
     "$@" \
     ~ encrypted:
