@@ -42,6 +42,17 @@ bind '"\e[B":history-search-forward'
 bind '"\C-p":history-search-backward'
 bind '"\C-n":history-search-forward'
 
+cal() {
+    local year=$(date +%Y)
+    if (( $# == 0 )); then
+        command cal "$year"
+    elif (( $# == 1 && 1 <= $1 && $1 < 133 )); then
+        command cal "$1" "$year"
+    else
+        command cal "$@"
+    fi
+}
+
 # Print each filename followed by its contents
 fancycat() {
     for file in "$@"; do
