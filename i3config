@@ -175,6 +175,7 @@ bindsym XF86Explorer exec nautilus
 bindsym XF86Calculator exec nautilus
 bindsym --release Print exec --no-startup-id ~/bin/screenshot
 bindsym --release Shift+Print exec --no-startup-id ~/bin/screenshot --select
+bindsym --release $mod+Print exec --no-startup-id ~/bin/screenshot --focused --border
 bindsym XF86Tools exec --no-startup-id mplayer ~/music.mp3
 
 for_window [window_role="buddy_list"] floating enable
