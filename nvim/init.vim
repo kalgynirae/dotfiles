@@ -1,5 +1,4 @@
 set nocompatible
-set encoding=utf-8
 set runtimepath+=/usr/share/vim/vimfiles
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 if exists("g:loaded_pathogen")
@@ -20,7 +19,9 @@ set backupcopy=yes
 set colorcolumn=81
 set cursorline
 set display=lastline
+set encoding=utf-8
 set exrc secure
+set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
 set hlsearch incsearch
 set laststatus=2
 set list listchars=tab:‣\ ,extends:»,precedes:«,nbsp:‧,trail:░
@@ -29,7 +30,7 @@ set nowrap
 set number
 set ruler
 set scrolloff=3
-set shada='50,<1000,h
+set shada='50,h
 set showcmd
 set spell spelllang=en_us
 set splitbelow splitright
