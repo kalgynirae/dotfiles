@@ -14,7 +14,7 @@ fi
 
 alias commas='paste -sd,'
 alias cp='cp -i'
-alias diff='diff --color'
+alias diff='diff --color --minimal --unified'
 alias grep='grep --color'
 alias iotop='sudo iotop --delay 2'
 alias la='ls --almost-all --classify'
