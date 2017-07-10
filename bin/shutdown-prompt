@@ -1,11 +1,18 @@
 #!/bin/bash
 
-ACTION=$(dmenu -p systemctl <<EOF
-poweroff
-reboot
-suspend
-EOF
-)
+ACTIONS=(poweroff reboot suspend)
+case $(hostname) in
+    apartmanteau)
+        ACTIONS+=(reboot-to-windows)
+        ;;
+esac
+
+ACTION=$(printf '%s\n' "${ACTIONS[@]}" | dmenu -p systemctl)
+
+if [[ $ACTION == reboot-to-windows ]]; then
+    sudo set-bootnext Windows
+    ACTION=reboot
+fi
 
 if [[ -n $ACTION ]]; then
     echo >&2 systemctl "$ACTION"
