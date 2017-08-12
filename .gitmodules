@@ -13,3 +13,6 @@
 [submodule "vim/bundle/ctrlp"]
 	path = nvim/bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
+[submodule "nvim/bundle/semantic-highlight.vim"]
+	path = nvim/bundle/semantic-highlight.vim
+	url = git@github.com:jaxbot/semantic-highlight.vim.git
