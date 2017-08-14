@@ -21,7 +21,7 @@ order += "wireless wlp3s0"
 order += "wireless wlp4s0"
 order += "ethernet enp2s0"
 order += "ethernet enp0s20u1"
-order += "ethernet enp0s20u1u1"
+order += "ethernet enp0s20u1u2"
 order += "ethernet eno1"
 order += "disk /"
 order += "cpu_usage"
@@ -59,7 +59,8 @@ ethernet enp0s20u1 {
     format_down = "E: down"
 }
 
-ethernet enp0s20u1u1 {
+# colinchan-x1
+ethernet enp0s20u1u2 {
     color_bad = "#d3d7cf"
     format_up = "E: %ip"
     format_down = "E: down"
