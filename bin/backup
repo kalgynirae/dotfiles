@@ -1,10 +1,31 @@
 #!/bin/bash
 
-rclone sync \
-    --bwlimit 800k \
-    --checksum \
-    --include-from dotfiles/backup_list \
-    --exclude '*' \
-    --verbose \
-    "$@" \
-    ~ encrypted:
+source ~/.config/backup-params
+
+paths=(
+    ~/blender
+    ~/documents
+    ~/flstudio
+    ~/music
+    ~/pictures
+    ~/recordings
+    ~/scores
+    ~/sheets
+    ~/videos
+)
+
+common_args=(
+    --password-file ~/.config/backup-password
+    --option b2.connections=4
+)
+
+if (($# == 0)); then
+    args=(
+        backup
+        "${paths[@]}"
+    )
+else
+    args=("$@")
+fi
+
+exec restic "${common_args[@]}" "${args[@]}"
