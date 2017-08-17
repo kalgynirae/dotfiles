@@ -1,3 +1,5 @@
 .include /etc/pulse/default.pa
 unload-module module-filter-heuristics
 unload-module module-filter-apply
+#unload-module module-stream-restore
+#load-module module-stream-restore restore_device=no
