@@ -112,12 +112,16 @@ d() {
         done
     fi
     local tempdir
-    tempdir=$(mktemp -d "/tmp/$name.XXX") || return
+    tempdir=$(mktemp -d "/tmp/$name.dXXX") || return
     cd "$tempdir" && rename-tmux-window "$name"
 }
 
 dls() {
-    find /tmp -maxdepth 1 -type d -name '*.???'
+    for dir in /tmp/*.d???; do
+        echo -n "$dir ("
+        ls -m "$dir" |& tr , ' ' | tr -d '\n' | sed -E 's/(.{50}).+/\1…/'
+        echo ')'
+    done
 }
 
 # Extract the corresponding whitespace-separated fields
