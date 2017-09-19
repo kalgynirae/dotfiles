@@ -28,4 +28,5 @@ else
     args=("$@")
 fi
 
+set -x
 exec restic "${common_args[@]}" "${args[@]}"
