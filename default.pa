@@ -22,5 +22,5 @@ unload-module module-stream-restore
 set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo
 set-default-source recording.monitor
 
-# this doesn't work yet
-set-source-output-volume 0 65536
+# This one doesn't work either when run from here, dunno why.
+#set-source-output-volume 0 65536
