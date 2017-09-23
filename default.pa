@@ -13,7 +13,11 @@ load-module module-loopback sink=recording sink_dont_move=yes sink_input_propert
 load-module module-combine-sink sink_name=output-and-recording sink_properties='device.description="Combined output and recording"' slaves=alsa_output.pci-0000_00_1f.3.analog-stereo,recording
 
 unload-module module-stream-restore
-# load-module module-stream-restore restore_device=no
+# TODO: Uncomment this and remove the drop-in override for pulseaudio.service
+# once PulseAudio supports this.  Loading this module in this file doesn't work
+# because the module can only be loaded once and the unload is not synchronous.
+# This is already fixed in PulseAudio master.
+#load-module module-stream-restore restore_device=no
 
 set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo
 set-default-source recording.monitor
