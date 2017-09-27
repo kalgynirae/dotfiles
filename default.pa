@@ -2,8 +2,13 @@
 unload-module module-filter-heuristics
 unload-module module-filter-apply
 
+# Configure sinks
+update-sink-proplist alsa_output.pci-0000_00_1f.3.analog-stereo device.description="Headphones"
+update-sink-proplist jack_out device.description="Speakers (JACK)"
+
 # Set up microphone echo-canceling
-load-module module-echo-cancel source_name=echo-cancel-mic source_master=alsa_input.usb-BLUE_MICROPHONE_Blue_Snowball_201305-00.analog-stereo source_properties=device.description=echo-cancel-mic sink_master=jack_out use_volume_sharing=no
+load-module module-echo-cancel source_name=echo-cancel-mic source_master=alsa_input.usb-BLUE_MICROPHONE_Blue_Snowball_201305-00.analog-stereo source_properties=device.description=echo-cancel-mic sink_master=jack_out use_volume_sharing=no aec_method=webrtc aec_args="analog_gain_control=0\ digital_gain_control=0"
+update-sink-proplist jack_out.echo-cancel device.intended_roles=""
 
 # Recording sink
 load-module module-null-sink sink_name=recording sink_properties=device.description=recording
