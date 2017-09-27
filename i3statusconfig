@@ -17,13 +17,11 @@ general {
     output_format = "i3bar"
 }
 
-order += "wireless wlp3s0"
 order += "wireless wlp4s0"
-order += "ethernet enp2s0"
-order += "ethernet enp0s20u1"
+order += "ethernet enp4s0"
 order += "ethernet enp0s20u1u2"
-order += "ethernet eno1"
 order += "disk /"
+order += "disk /home"
 order += "cpu_usage"
 order += "cpu_temperature 0"
 order += "battery BAT0"
@@ -44,16 +42,15 @@ cpu_usage {
 }
 
 disk "/" {
-    format = "%free"
+    format = "/ %free"
 }
 
+disk "/home" {
+    format = "/home %free"
+}
+
+# apartmanteau
 ethernet enp4s0 {
-    color_bad = "#d3d7cf"
-    format_up = "E: %ip"
-    format_down = "E: down"
-}
-
-ethernet enp0s20u1 {
     color_bad = "#d3d7cf"
     format_up = "E: %ip"
     format_down = "E: down"
@@ -66,12 +63,6 @@ ethernet enp0s20u1u2 {
     format_down = "E: down"
 }
 
-ethernet eno1 {
-    color_bad = "#d3d7cf"
-    format_up = "E: %ip"
-    format_down = "E: down"
-}
-
 tztime local {
     format = "%Y-%m-%d %H:%M"
 }
@@ -79,16 +70,9 @@ tztime local {
 volume pulse {
     format = "%volume"
     device = "pulse"
-    mixer = "Master"
-    mixer_idx = 0
 }
 
-wireless wlp3s0 {
-    color_bad = "#d3d7cf"
-    format_up = "W: (%quality at %essid) %ip"
-    format_down = "W: down"
-}
-
+# colinchan-x1
 wireless wlp4s0 {
     color_bad = "#d3d7cf"
     format_up = "W: (%quality at %essid) %ip"
