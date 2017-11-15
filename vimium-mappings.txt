@@ -1,0 +1,24 @@
+unmapAll
+map j scrollDown
+map k scrollUp
+map h scrollLeft
+map l scrollRight
+map g scrollToTop
+map G scrollToBottom
+map i enterInsertMode
+map / enterFindMode
+map <c-f> enterFindMode
+map n performFind
+map N performBackwardsFind
+map <c-o> goBack
+map <c-i> goForward
+map ' LinkHints.activateMode
+map " LinkHints.activateModeWithQueue
+map [[ goPrevious
+map ]] goNext
+map f focusInput
+map b scrollPageUp
+map <space> scrollPageDown
+map o moveTabToNewWindow
+map d duplicateTab
+map <c-C> scrollUp
