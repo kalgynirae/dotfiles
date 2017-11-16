@@ -7,7 +7,11 @@ pgrep redshift || redshift -l 37.48:-122.15 -t 5850:2800 &
 
 pgrep compton || compton -CGb --no-fading-openclose
 
-screensaver on
+if [[ $(hostname) == apartmanteau ]]; then
+    screensaver off
+else
+    screensaver on
+fi
 
 pgrep polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
