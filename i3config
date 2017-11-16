@@ -189,6 +189,8 @@ for_window [class="Skype"] floating enable
 for_window [class="cool-retro-term"] floating enable
 for_window [class="GrandOrgue"] floating enable
 for_window [class="StepMania"] floating enable
+for_window [class="Skype"] floating enable
+for_window [title="^Skype$"] kill
 
 # Startup programs
 exec --no-startup-id ~/bin/startup
