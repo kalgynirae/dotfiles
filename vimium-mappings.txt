@@ -21,4 +21,9 @@ map b scrollPageUp
 map <space> scrollPageDown
 map o moveTabToNewWindow
 map d duplicateTab
-map <c-C> scrollUp
+map << moveTabLeft
+map >> moveTabRight
+map <c-C> showHelp
+---
+Scroll step: 100
+Characters for hints: fjdkruslghwoa;vmc,
