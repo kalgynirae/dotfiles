@@ -15,8 +15,10 @@ paths=(
 )
 
 common_args=(
-    --password-file ~/.config/backup-password
+    --limit-download 1024
+    --limit-upload 400
     --option b2.connections=4
+    --password-file ~/.config/backup-password
 )
 
 if (($# == 0)); then
