@@ -35,6 +35,9 @@ case $(hostname) in
                 xrandr \
                     --output HDMI-0 --auto --primary \
                     --output DVI-I-1 --off
+                #xrandr \
+                #    --output DVI-I-1 --auto --primary \
+                #    --output HDMI-0 --off
                 ;;
             1)
                 xrandr \
