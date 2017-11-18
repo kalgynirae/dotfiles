@@ -63,6 +63,7 @@ autocmd BufReadPost * silent! normal! g'"
 autocmd syntax gitcommit setlocal textwidth=72
 autocmd syntax html setlocal shiftwidth=2
 autocmd syntax htmldjango setlocal shiftwidth=2
+autocmd syntax js setlocal shiftwidth=2
 autocmd syntax lilypond setlocal shiftwidth=2
 autocmd syntax lisp setlocal shiftwidth=2
 autocmd syntax markdown setlocal textwidth=80
