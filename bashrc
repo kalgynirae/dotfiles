@@ -125,9 +125,14 @@ dls() {
 }
 
 # Extract the corresponding whitespace-separated fields
-f() {
+field() {
     awk "{print $(printf '$%s\n' "$@" | paste -sd,)}"
 }
+alias f1='field 1'
+alias f2='field 2'
+alias f3='field 3'
+alias f4='field 4'
+alias f5='field 5'
 
 # Highlight occurrences of the given strings
 hl() {
@@ -135,7 +140,7 @@ hl() {
 }
 
 # Extract the corresponding lines
-l() {
+line() {
     sed -n "$(printf '%sp\n' "$@" | paste -sd';')"
 }
 
