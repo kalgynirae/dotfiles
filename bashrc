@@ -16,6 +16,11 @@ fi
 alias commas='paste -sd,'
 alias cp='cp -i'
 alias diff='diff --color --minimal --unified'
+alias f1='field 1'
+alias f2='field 2'
+alias f3='field 3'
+alias f4='field 4'
+alias f5='field 5'
 alias grep='grep --color'
 alias iotop='sudo iotop --delay 2'
 alias la='ls --almost-all --classify'
@@ -37,9 +42,7 @@ set -o noclobber
 # Disable C-s/C-q pausing and resuming output
 stty -ixon
 
-# Complete partially-typed commands using up/down and ctrl+p/n
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
+# Complete partially-typed commands using ctrl+p/n
 bind '"\C-p":history-search-backward'
 bind '"\C-n":history-search-forward'
 
@@ -47,11 +50,40 @@ cal() {
     local year=$(date +%Y)
     if (( $# == 0 )); then
         command cal "$year"
-    elif (( $# == 1 && 1 <= $1 && $1 < 133 )); then
+    elif (( $# == 1 && 1 <= $1 && $1 < 13 )); then
         command cal "$1" "$year"
     else
         command cal "$@"
     fi
+}
+
+# Create a temporary directory with a friendly name and cd to it
+d() {
+    local name
+    if (( $# )); then
+        name=$1
+    else
+        while true; do
+            name=$(shuf -n1 ~/dotfiles/bip39-english.txt) || return
+            # Skip names that are commands to avoid any confusion
+            type "$name" &>/dev/null && continue
+            # Skip names for which /tmp/$name.* already exists
+            compgen -G "/tmp/$name.*" && continue
+            break
+        done
+    fi
+    local tempdir
+    tempdir=$(mktemp -d "/tmp/$name.dXXX") || return
+    cd "$tempdir" && rename-tmux-window "$name"
+}
+
+# List existing temporary directories and their contents
+dls() {
+    for dir in /tmp/*.d???; do
+        echo -n "$dir ("
+        ls -m "$dir" |& tr , ' ' | tr -d '\n' | sed -E 's/(.{50}).+/\1…/'
+        echo ')'
+    done
 }
 
 # Print each filename followed by its contents
@@ -69,6 +101,25 @@ fancyhead() {
         echo -e "\e[1;36m# $file\e[0m"
         head -n $height "$file"
     done
+}
+
+# Extract the corresponding whitespace-separated fields
+field() {
+    awk "{print $(printf '$%s\n' "$@" | paste -sd,)}"
+}
+
+# Highlight occurrences of the given strings
+hl() {
+    grep -E --color=always "$(printf '%s|' "$@")$"
+}
+
+_in_git_repo() {
+    git rev-parse --is-inside-work-tree &>/dev/null
+}
+
+# Extract the corresponding lines
+line() {
+    sed -n "$(printf '%sp\n' "$@" | paste -sd';')"
 }
 
 # Display man pages with color
@@ -94,59 +145,6 @@ open() {
 
 rename-tmux-window() {
     [[ -n $TMUX ]] && tmux rename-window "$1"
-}
-
-# Create a temporary directory with a friendly name and cd to it
-d() {
-    local name
-    if (( $# )); then
-        name=$1
-    else
-        while true; do
-            name=$(shuf -n1 ~/dotfiles/bip39-english.txt) || return
-            # Skip names that are commands to avoid any confusion
-            type "$name" &>/dev/null && continue
-            # Skip names for which /tmp/$name.* already exists
-            compgen -G "/tmp/$name.*" && continue
-            break
-        done
-    fi
-    local tempdir
-    tempdir=$(mktemp -d "/tmp/$name.dXXX") || return
-    cd "$tempdir" && rename-tmux-window "$name"
-}
-
-dls() {
-    for dir in /tmp/*.d???; do
-        echo -n "$dir ("
-        ls -m "$dir" |& tr , ' ' | tr -d '\n' | sed -E 's/(.{50}).+/\1…/'
-        echo ')'
-    done
-}
-
-# Extract the corresponding whitespace-separated fields
-field() {
-    awk "{print $(printf '$%s\n' "$@" | paste -sd,)}"
-}
-alias f1='field 1'
-alias f2='field 2'
-alias f3='field 3'
-alias f4='field 4'
-alias f5='field 5'
-
-# Highlight occurrences of the given strings
-hl() {
-    grep -E --color=always "$(printf '%s|' "$@")$"
-}
-
-# Extract the corresponding lines
-line() {
-    sed -n "$(printf '%sp\n' "$@" | paste -sd';')"
-}
-
-# View a file with syntax highlighting
-p() {
-    pygmentize -g "$@" | less
 }
 
 _tmux_complete() {
