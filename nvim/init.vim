@@ -11,7 +11,6 @@ let g:molokai_original=1
 silent! colo molokai
 " Indentation
 set shiftwidth=4 softtabstop=-1 expandtab smarttab
-" Wrapping
 " General view settings
 set autoindent
 set background=dark
@@ -35,6 +34,7 @@ set showcmd
 set spell spelllang=en_us
 set splitbelow splitright
 set undofile
+set wildignore+=*/node_modules/*
 set wildmode=list:longest
 " Custom shortcuts
 nmap <Leader>n :noh<CR>
@@ -60,10 +60,11 @@ imap <c-b> <Left>
 " Load last cursor position
 autocmd BufReadPost * silent! normal! g'"
 " Specific language settings
+autocmd syntax css setlocal shiftwidth=2
 autocmd syntax gitcommit setlocal textwidth=72
 autocmd syntax html setlocal shiftwidth=2
 autocmd syntax htmldjango setlocal shiftwidth=2
-autocmd syntax js setlocal shiftwidth=2
+autocmd syntax javascript setlocal shiftwidth=2
 autocmd syntax lilypond setlocal shiftwidth=2
 autocmd syntax lisp setlocal shiftwidth=2
 autocmd syntax markdown setlocal textwidth=80
