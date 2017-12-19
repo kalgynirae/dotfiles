@@ -7,6 +7,7 @@ export PAGER=less
 export PATH=$PATH:$HOME/bin:$HOME/.gem/ruby/2.2.0/bin
 export PYTHONDONTWRITEBYTECODE=yes
 export PYTHONSTARTUP=~/.pythonrc
+export RSYNC_PROTECT_ARGS=1
 export TERMINAL=gnome-terminal
 export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 
