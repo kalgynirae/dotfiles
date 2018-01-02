@@ -75,5 +75,6 @@ autocmd syntax xml setlocal shiftwidth=2
 autocmd syntax yaml setlocal shiftwidth=2
 " Specific plugin settings
 let g:pandoc#syntax#conceal#use=0
+let html_no_rendering=1
 let python_highlight_string_format=1
 let python_highlight_string_formatting=1
