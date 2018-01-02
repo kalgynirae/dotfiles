@@ -18,10 +18,16 @@ echo $display >/tmp/display
 
 case $(hostname) in
     colinchan-x1)
+        #xrandr \
+        #    --output eDP-1 --auto --pos 1920x0 \
+        #    --output HDMI-2 --auto --pos 0x320
         xrandr \
-            --output eDP1 --auto --pos 0x160 \
-            --output DP1-8 --auto --pos 2560x0 \
-            --output DP1-1 --auto --pos 5120x0
+            --output eDP-1 --auto --pos 0x160 \
+            --output DP-1-8 --auto --pos 2560x0 \
+            --output DP-1-1 --auto --pos 5120x0
+
+        # Set minimum brightness so the screen won't go entirely black
+        light -Scr 1
         ;;
     lumeh)
         xrandr \
