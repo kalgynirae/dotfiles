@@ -114,10 +114,6 @@ hl() {
     grep -E --color=always "$(printf '%s|' "$@")$"
 }
 
-_in_git_repo() {
-    git rev-parse --is-inside-work-tree &>/dev/null
-}
-
 # Extract the corresponding lines
 line() {
     sed -n "$(printf '%sp\n' "$@" | paste -sd';')"
@@ -148,7 +144,7 @@ rename-tmux-window() {
     [[ -n $TMUX ]] && tmux rename-window "$1"
 }
 
-_tmux_complete() {
+_tmux-complete() {
     if (( $COMP_KEY == 9 )); then
         # Invoked by Tab key; do nothing
         return
@@ -157,7 +153,7 @@ _tmux_complete() {
     local regex="\<$word_regex_escaped[[:alnum:]_/.-]+\>"
     COMPREPLY=($(tmux capture-pane -Jp | sed '/^\s*$/d' | grep -Eo "$regex"))
 }
-complete -o bashdefault -o default -D -F _tmux_complete
+complete -o bashdefault -o default -D -F _tmux-complete
 
 if [[ -f ~/.git-prompt.sh ]]; then
     GIT_PS1_SHOWDIRTYSTATE=1
@@ -166,6 +162,51 @@ if [[ -f ~/.git-prompt.sh ]]; then
     source ~/.git-prompt.sh
     git_ps1='$(__git_ps1 " (%s)")'
 fi
+
+in-git-repo() {
+    git rev-parse --is-inside-work-tree &>/dev/null
+}
+
+_not-yet() {
+    echo >&2 "not implemented yet"
+    return 1
+}
+
+amend() {
+    if in-git-repo; then git commit --amend --no-edit "$@"; else _not-yet; fi
+}
+
+blame() {
+    if in-git-repo; then git blame "$@"; else _not-yet; fi
+}
+
+del() {
+    _not-yet
+}
+
+edit() {
+    if in-git-repo; then git edit "$@"; else _not-yet; fi
+}
+
+ex() {
+    if in-git-repo; then git show "$@"; else _not-yet; fi
+}
+
+lg() {
+    if in-git-repo; then git graph "$@"; else _not-yet; fi
+}
+
+start() {
+    if in-git-repo; then
+        _not-yet
+    else
+        hg pull && _not-yet
+    fi
+}
+
+up() {
+    if in-git-repo; then git checkout "$@"; else hg update "$@"; fi
+}
 
 _prompt_colors=(0 1 2 3 4 5 6)
 _prompt_styles=(0 1 3 4)
