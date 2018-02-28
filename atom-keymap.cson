@@ -1,0 +1,13 @@
+'.terminal-pane':
+  'ctrl-shift-c': 'core:copy'
+
+'atom-text-editor':
+  'ctrl-i': 'nuclide-navigation-stack:navigate-forwards'
+  'ctrl-o': 'nuclide-navigation-stack:navigate-backwards'
+  'ctrl-p': 'autocomplete-plus:activate'
+  'ctrl-n': 'autocomplete-plus:activate'
+  'ctrl-w': 'editor:delete-to-beginning-of-word'
+
+'atom-text-editor.autocomplete-active':
+  'ctrl-n': 'autocomplete-plus:move-down'
+  'ctrl-p': 'autocomplete-plus:move-up'
