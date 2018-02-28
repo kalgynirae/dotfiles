@@ -1,3 +1,4 @@
+agave
 alsa-utils
 atop
 bluez
@@ -8,6 +9,7 @@ cool-retro-term
 cups
 cups-pdf
 dmenu
+dos2unix
 dunst
 evince
 feh
@@ -15,10 +17,13 @@ ffmpeg
 firefox
 git
 gnome-disk-utility
+gnome-font-viewer
 gnome-terminal
+gucharmap
 htop
 i3status
 i3-wm
+inkscape
 ipython
 light-git
 lilypond
@@ -27,6 +32,7 @@ mpv
 nautilus
 numlockx
 openssh
+parallel
 pavucontrol
 pkgfile
 polkit-gnome
@@ -40,6 +46,9 @@ scrot
 seahorse
 sshfs
 sudo
+sxhkd
+tmux
+traceroute
 tree
 ttf-dejavu
 ttf-gentium
@@ -49,6 +58,7 @@ ttf-symbola
 ttf-ubuntu-font-family
 variety
 vlc
+xdotool
 xf86-input-synaptics
 xorg-xev
 xorg-xkbcomp
