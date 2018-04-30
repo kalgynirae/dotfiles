@@ -1,3 +1,6 @@
+'.platform-win32 atom-workspace, .platform-linux atom-workspace':
+  'ctrl-p': 'unset!'
+
 '.terminal-pane':
   'ctrl-shift-c': 'core:copy'
 
@@ -6,8 +9,10 @@
   'ctrl-o': 'nuclide-navigation-stack:navigate-backwards'
   'ctrl-p': 'autocomplete-plus:activate'
   'ctrl-n': 'autocomplete-plus:activate'
-  'ctrl-w': 'editor:delete-to-beginning-of-word'
 
 'atom-text-editor.autocomplete-active':
   'ctrl-n': 'autocomplete-plus:move-down'
   'ctrl-p': 'autocomplete-plus:move-up'
+
+'atom-text-editor:not([mini])':
+  'tab': 'editor:indent'
