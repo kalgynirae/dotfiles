@@ -4,6 +4,7 @@ atop
 bluez
 bluez-utils
 chromium
+compton
 consolas-font
 cool-retro-term
 cups
@@ -30,6 +31,8 @@ lilypond
 linux-lts
 mpv
 nautilus
+noto-fonts
+noto-fonts-emoji
 numlockx
 openssh
 parallel
@@ -64,5 +67,6 @@ xorg-xev
 xorg-xkbcomp
 xorg-xprop
 xorg-xrandr
+xorg-xwininfo
 xscreensaver
 xsel
