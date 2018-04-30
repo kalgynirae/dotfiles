@@ -19,8 +19,8 @@ echo $display >/tmp/display
 case $(hostname) in
     colinchan-x1)
         #xrandr \
-        #    --output eDP-1 --auto --pos 1920x0 \
-        #    --output HDMI-2 --auto --pos 0x320
+        #    --output eDP-1 --auto --pos 2560x0 \
+        #    --output HDMI-2 --auto --pos 0x0
         xrandr \
             --output eDP-1 --auto --pos 0x160 \
             --output DP-1-8 --auto --pos 2560x0 \
