@@ -156,7 +156,7 @@ client.urgent           $orange1    $orange2    $text       $yellow2
 bindsym $mod+BackSpace exec --no-startup-id ~/bin/screensaver lock
 bindsym $mod+Shift+Return exec gnome-terminal -e ~/bin/calculator
 bindsym $mod+Mod1+Return exec cool-retro-term
-bindsym $mod+Mod1+p exec cool-retro-term -e python3
+bindsym $mod+Mod1+p exec cool-retro-term -e ipython3
 bindsym $mod+Mod1+d exec nautilus --new-window
 bindsym $mod+Mod1+f exec ~/bin/browser
 bindsym $mod+Mod1+m exec mpv --player-operation-mode=pseudo-gui
