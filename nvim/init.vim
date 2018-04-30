@@ -46,6 +46,7 @@ nmap <Leader>f :setlocal foldmethod=indent<CR>
 nmap <Leader>o :colo default<CR>
 cmap w!! silent w !sudo tee >/dev/null %
 map Q gq
+xnoremap p pgvy
 " Consistent behavior for Y, D, and C
 nmap Y y$
 " Emacs shortcuts
