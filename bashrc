@@ -9,7 +9,7 @@ shopt -s histappend
 
 if [[ -n $TMUX ]]; then
     case $(tmux showenv TERM 2>/dev/null) in
-        *256color) export TERM=screen-256color ;;
+        *256color) export TERM=tmux-256color ;;
     esac
 fi
 
