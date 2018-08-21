@@ -2,7 +2,7 @@
 HISTCONTROL=ignoreboth
 HISTFILE=~/.bash_history_actual
 HISTFILESIZE=-1
-HISTIGNORE="history:bg*:fg*:ls:ll:la:su"
+HISTIGNORE="history:bg*:d:dls:fg*:ls:ll:la:su"
 HISTSIZE=-1
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 shopt -s histappend
