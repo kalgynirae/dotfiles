@@ -7,12 +7,6 @@ HISTSIZE=-1
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 shopt -s histappend
 
-if [[ -n $TMUX ]]; then
-    case $(tmux showenv TERM 2>/dev/null) in
-        *256color) export TERM=tmux-256color ;;
-    esac
-fi
-
 alias commas='paste -sd,'
 alias cp='cp -i'
 alias diff='diff --color --minimal --unified'
