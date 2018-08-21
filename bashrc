@@ -225,4 +225,4 @@ _hashcolor() {
 }
 color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
 reset='\[\e[0m\]'
-PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1}\n[\j]\\$ "
+PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1}\n[\j]\\\$ "
