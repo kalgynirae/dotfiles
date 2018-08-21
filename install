@@ -30,6 +30,7 @@ maybelink i3config ~/.config/i3/config
 maybelink i3statusconfig ~/.config/i3status/config
 maybelink ipython_config.py ~/.ipython/profile_default/ipython_config.py
 maybelink jackdbus.service ~/.config/systemd/user/jackdbus.service
+maybelink kitty.conf ~/.config/kitty/kitty.conf
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
