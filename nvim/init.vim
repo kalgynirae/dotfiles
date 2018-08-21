@@ -34,6 +34,7 @@ set shada='50,h
 set showcmd
 set spell spelllang=en_us
 set splitbelow splitright
+set termguicolors
 set undofile
 set wildignore+=*/node_modules/*
 set wildmode=list:longest
