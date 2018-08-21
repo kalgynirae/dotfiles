@@ -71,7 +71,7 @@ autocmd syntax lilypond setlocal shiftwidth=2
 autocmd syntax lisp setlocal shiftwidth=2
 autocmd syntax markdown setlocal textwidth=80
 autocmd syntax pandoc setlocal textwidth=80
-autocmd syntax sh setlocal iskeyword+=-
+autocmd syntax sh setlocal iskeyword+=- shiftwidth=2
 autocmd syntax text setlocal iskeyword+=- textwidth=80
 autocmd syntax xml setlocal shiftwidth=2
 autocmd syntax yaml setlocal shiftwidth=2
