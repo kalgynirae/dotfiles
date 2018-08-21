@@ -22,6 +22,7 @@ set encoding=utf-8
 set exrc secure
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
 set hlsearch incsearch
+set inccommand=nosplit
 set laststatus=2
 set list listchars=tab:‣\ ,extends:»,precedes:«,nbsp:‧,trail:░
 set mouse=
