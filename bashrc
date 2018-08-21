@@ -112,7 +112,7 @@ field() {
 
 # Highlight occurrences of the given strings
 hl() {
-    grep -E --color=always "$(printf '%s|' "$@")$"
+    grep -E --color=always "$(printf '%s|' "$@")"
 }
 
 # Extract the corresponding lines
