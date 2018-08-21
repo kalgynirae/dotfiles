@@ -1,4 +1,3 @@
-#!/bin/sh
 export EDITOR=nvim
 export FREETYPE_PROPERTIES='truetype:interpreter-version=40'
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
