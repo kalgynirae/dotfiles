@@ -35,9 +35,10 @@ maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
-maybelink nvim ~/.config/nvim
 maybelink nvim ~/.vim
 maybelink nvim/init.vim ~/.vimrc
+maybelink nvim/init.vim ~/.config/nvim/init.vim
+maybelink nvim/pack ~/.local/share/nvim/site/pack
 maybelink quotes.txt ~/.config/variety/pluginconfig/quotes/quotes.txt
 maybelink variety.conf ~/.config/variety/variety.conf
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs

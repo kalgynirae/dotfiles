@@ -1,18 +1,9 @@
-[submodule "vim/bundle/molokai"]
-	path = nvim/bundle/molokai
-	url = https://github.com/kalgynirae/molokai
-[submodule "vim/bundle/python-syntax"]
-	path = nvim/bundle/python-syntax
+[submodule "nvim/pack/plugins/start/python-syntax"]
+	path = nvim/pack/plugins/start/python-syntax
 	url = https://github.com/kalgynirae/python-syntax
-[submodule "vim/bundle/vim-pandoc-syntax"]
-	path = nvim/bundle/vim-pandoc-syntax
-	url = https://github.com/vim-pandoc/vim-pandoc-syntax
-[submodule "vim/bundle/vim-pathogen"]
-	path = nvim/bundle/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen
-[submodule "vim/bundle/ctrlp"]
-	path = nvim/bundle/ctrlp
-	url = https://github.com/kien/ctrlp.vim.git
-[submodule "nvim/bundle/semantic-highlight.vim"]
-	path = nvim/bundle/semantic-highlight.vim
-	url = git@github.com:jaxbot/semantic-highlight.vim.git
+[submodule "nvim/pack/plugins/start/molokai"]
+	path = nvim/pack/plugins/start/molokai
+	url = https://github.com/kalgynirae/molokai
+[submodule "nvim/pack/plugins/start/ctrlp.vim"]
+	path = nvim/pack/plugins/start/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim

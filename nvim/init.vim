@@ -1,17 +1,7 @@
 set nocompatible
 set runtimepath+=/usr/share/vim/vimfiles
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-if exists("g:loaded_pathogen")
-    execute pathogen#infect()
-endif
-" Syntax highlighting
-filetype plugin indent on
-syntax enable
-let g:molokai_original=1
 silent! colo molokai
-" Indentation
-set shiftwidth=4 softtabstop=-1 expandtab smarttab
-" General view settings
+
 set autoindent
 set background=dark
 set backupcopy=yes
@@ -20,7 +10,7 @@ set cursorline
 set display=lastline
 set encoding=utf-8
 set exrc secure
-set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
+set guicursor=n-v-c-sm:block,i-ci-ve:ver10,r-cr-o:hor20
 set hlsearch incsearch
 set inccommand=nosplit
 set laststatus=2
@@ -32,6 +22,7 @@ set ruler
 set scrolloff=3
 set shada='50,h
 set showcmd
+set shiftwidth=4 softtabstop=-1 expandtab smarttab
 set spell spelllang=en_us
 set splitbelow splitright
 set termguicolors
@@ -77,7 +68,6 @@ autocmd syntax text setlocal iskeyword+=- textwidth=80
 autocmd syntax xml setlocal shiftwidth=2
 autocmd syntax yaml setlocal shiftwidth=2
 " Specific plugin settings
-let g:pandoc#syntax#conceal#use=0
 let html_no_rendering=1
 let python_highlight_string_format=1
 let python_highlight_string_formatting=1
