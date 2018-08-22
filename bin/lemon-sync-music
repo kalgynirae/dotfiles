@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+
+# Fix permissions
+find /home/colin/music/audio -type d ! -perm 755 -exec chmod -v 755 {} +
+find /home/colin/music/audio -type f ! -perm 644 -exec chmod -v 644 {} +
 
 rsync \
       "$@" \
