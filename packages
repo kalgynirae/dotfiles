@@ -1,3 +1,4 @@
+adobe-source-han-sans-otc-fonts
 agave
 alsa-utils
 atop
@@ -26,15 +27,18 @@ i3status
 i3-wm
 inkscape
 ipython
+kitty
+libaacs
 light-git
 lilypond
 linux-lts
 mpv
 nautilus
-noto-fonts
 noto-fonts-emoji
 numlockx
 openssh
+otf-font-awesome
+otf-ipafont
 parallel
 pavucontrol
 pkgfile
@@ -54,7 +58,10 @@ tmux
 traceroute
 tree
 ttf-dejavu
+ttf-emojione-color
+ttf-freefont
 ttf-gentium
+ttf-indic-otf
 ttf-liberation
 ttf-linux-libertine
 ttf-symbola
