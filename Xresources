@@ -1,3 +1,4 @@
 ! You need to have xrdb installed for the cursor settings to load
 Xcursor.size: 48
+xscreensaver.newLoginCommand:
 xscreensaver.splash: False
