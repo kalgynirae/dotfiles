@@ -74,6 +74,7 @@ xorg-xev
 xorg-xkbcomp
 xorg-xprop
 xorg-xrandr
+xorg-xrdb
 xorg-xwininfo
 xscreensaver
 xsel
