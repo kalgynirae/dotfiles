@@ -2,7 +2,7 @@
 
 case $1 in
     on)
-        pgrep xscreensaver || xscreensaver -no-splash &
+        pgrep xscreensaver || xscreensaver &
         case $(hostname) in
             apartmanteau)
                 xset s 885 15 dpms 0 0 900  # 15 minutes
@@ -21,7 +21,7 @@ case $1 in
         xset s off -dpms
         ;;
     lock)
-        pgrep xscreensaver || { xscreensaver -no-splash & sleep 1 ; }
+        pgrep xscreensaver || { xscreensaver & sleep 1 ; }
         xscreensaver-command -lock
         ;;
     *)
