@@ -1,0 +1,8 @@
+font_size = 12
+scrollback_lines = 500000
+
+[colors]
+foreground = "#dddedc"
+background = "#232729"
+ansi = ["#464d4f", "#cc0000", "#4e9a06", "#c4a000", "#3465a4", "#75507b", "#06989a", "#d3d7cf"]
+brights = ["#555753", "#ef2929", "#8ae234", "#fce94f", "#729fcf", "#ad7fa8", "#34e2e2", "#eeeeec"]

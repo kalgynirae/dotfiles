@@ -42,6 +42,7 @@ maybelink nvim/pack ~/.local/share/nvim/site/pack
 maybelink quotes.txt ~/.config/variety/pluginconfig/quotes/quotes.txt
 maybelink variety.conf ~/.config/variety/variety.conf
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs
+maybelink wezterm.toml ~/.config/wezterm/wezterm.toml
 maybelink Xresources ~/.Xresources
 
 for app in applications/*; do
