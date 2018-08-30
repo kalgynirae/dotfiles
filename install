@@ -14,6 +14,7 @@ maybelink() {
     fi
 }
 
+maybelink alacritty.yml ~/.config/alacritty/alacritty.yml
 maybelink atom-keymap.cson ~/.atom/keymap.cson
 maybelink bash_profile ~/.bash_profile
 maybelink bashrc ~/.bashrc
