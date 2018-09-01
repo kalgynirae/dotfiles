@@ -53,6 +53,19 @@ cal() {
     fi
 }
 
+# Print colored text using the terminal's 16-color palette and various styles
+colortest() {
+    for color in $(seq 0 7); do
+        for intensity in 3 9; do  # normal, bright
+            for style in "" $(seq 4); do  # normal, bold, dim, italic, underline
+                escapes="[${intensity}${color}${style:+;$style}m"
+                echo -en "\e${escapes}\\\\e${escapes}\e[0m "
+            done
+        done
+        echo
+    done
+}
+
 # Create a temporary directory with a friendly name and cd to it
 d() {
     local name
