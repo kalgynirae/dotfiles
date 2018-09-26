@@ -136,6 +136,9 @@ key_bindings:
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
+scrolling:
+  multiplier: 5
+
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
