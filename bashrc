@@ -27,6 +27,7 @@ alias mv='mv -i'
 alias python='python2'
 alias quotes="sed \"s/^/'/; s/$/'/\""
 alias rm='rm --one-file-system'
+alias ssh='ssh-with-terminfo'
 alias ssh-patient='ssh -o ConnectTimeout=60 -o ServerAliveCountMax=6 -o ServerAliveInterval=10'
 alias tree='tree -CF --charset=utf-8'
 alias uncommas="tr , '\n'"

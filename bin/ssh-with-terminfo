@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Only if it's a plain 'ssh HOST' command (i.e., no flags or SSH command given)
+if (( $# == 1 )) && [[ $1 != -* ]]; then
+  terminfo=$(infocmp -x)
+  # Construct command that writes the terminfo and launches a shell
+  read -r -d "" cmd <<EOF
+tic -o ~/.terminfo -x - <<<$(printf '%q' "$terminfo")
+cat >&2 /etc/motd
+exec -l bash -i
+EOF
+  exec ssh -t "$1" "$cmd"
+else
+  exec ssh "$@"
+fi
