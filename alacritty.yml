@@ -26,6 +26,11 @@ draw_bold_text_with_bright_colors: false
 env:
   TERM: alacritty-direct
 
+font:
+  normal:
+    family: monospace
+  size: 10.0
+
 key_bindings:
   - { key: V,        mods: Control|Shift,    action: Paste               }
   - { key: C,        mods: Control|Shift,    action: Copy                }
