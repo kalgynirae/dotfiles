@@ -29,7 +29,8 @@ env:
 font:
   normal:
     family: monospace
-  size: 10.0
+  size: 12
+  scale_with_dpi: false
 
 key_bindings:
   - { key: V,        mods: Control|Shift,    action: Paste               }
