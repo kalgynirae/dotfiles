@@ -54,17 +54,44 @@ cal() {
     fi
 }
 
-# Print colored text using the terminal's 16-color palette and various styles
+# Test the terminal's text/color capabilities
 colortest() {
+    echo "NORMAL bold     dim      italic   underline BRIGHT bold     dim      italic   underline"
     for color in $(seq 0 7); do
         for intensity in 3 9; do  # normal, bright
             for style in "" $(seq 4); do  # normal, bold, dim, italic, underline
                 escapes="[${intensity}${color}${style:+;$style}m"
                 echo -en "\e${escapes}\\\\e${escapes}\e[0m "
             done
+            echo -n " "
         done
         echo
     done
+    echo -n "TRUECOLOR "
+    awk 'BEGIN{
+        columns = 78;
+        step = columns / 6;
+        for (hue = 0; hue<columns; hue++) {
+            x = (hue % step) * 255 / step;
+            if (hue < step) {
+                r = 255; g = x; b = 0;
+            } else if (hue < step*2) {
+                r = 255-x; g = 255; b = 0;
+            } else if (hue < step*3) {
+                r = 0; g = 255; b = x;
+            } else if (hue < step*4) {
+                r = 0; g = 255-x; b = 255;
+            } else if (hue < step*5) {
+                r = x; g = 0; b = 255;
+            } else {
+                r = 255; g = 0; b = 255-x;
+            }
+            printf "\033[48;2;%d;%d;%dm", r, g, b;
+            printf "\033[38;2;%d;%d;%dm", 255-r, 255-g, 255-b;
+            printf " \033[0m";
+        }
+        printf "\n";
+    }'
 }
 
 # Create a temporary directory with a friendly name and cd to it
