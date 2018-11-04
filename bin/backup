@@ -22,9 +22,7 @@ paths=(
 )
 
 common_args=(
-    --limit-download 1024
-    --limit-upload 500
-    --option b2.connections=4
+    --option b2.connections=8
     --password-file ~/.config/backup-password
 )
 
