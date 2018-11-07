@@ -27,7 +27,7 @@ case $(hostname) in
             --output DP-1-1 --auto --pos 5120x0
 
         # Set minimum brightness so the screen won't go entirely black
-        light -Scr 1
+        light -Nr 1
         ;;
     lumeh)
         xrandr \
