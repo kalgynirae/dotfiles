@@ -40,10 +40,6 @@ set -o noclobber
 # Disable C-s/C-q pausing and resuming output
 stty -ixon
 
-# Complete partially-typed commands using ctrl+p/n
-bind '"\C-p":history-search-backward'
-bind '"\C-n":history-search-forward'
-
 cal() {
     local year=$(date +%Y)
     if (( $# == 0 )); then

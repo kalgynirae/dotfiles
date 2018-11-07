@@ -29,6 +29,7 @@ maybelink gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
 maybelink hyperterm.js ~/.hyperterm.js
 maybelink i3config ~/.config/i3/config
 maybelink i3statusconfig ~/.config/i3status/config
+maybelink inputrc ~/.inputrc
 maybelink ipython_config.py ~/.ipython/profile_default/ipython_config.py
 maybelink jackdbus.service ~/.config/systemd/user/jackdbus.service
 maybelink kitty.conf ~/.config/kitty/kitty.conf
