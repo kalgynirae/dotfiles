@@ -3,10 +3,10 @@
 "\C-]":old-menu-complete
 
 set blink-matching-paren on
-set colored-completion-prefix on
 set colored-stats on
 set completion-ignore-case on
 set completion-map-case on
+set completion-prefix-display-length 3
 set enable-bracketed-paste on
 set revert-all-at-newline on
 set skip-completed-text on
