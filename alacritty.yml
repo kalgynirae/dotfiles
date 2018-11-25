@@ -25,12 +25,12 @@ draw_bold_text_with_bright_colors: false
 
 env:
   TERM: alacritty-direct
+  WINIT_HIDPI_FACTOR: 1
 
 font:
   normal:
     family: monospace
   size: 12
-  scale_with_dpi: false
 
 key_bindings:
   - { key: V,        mods: Control|Shift,    action: Paste               }
