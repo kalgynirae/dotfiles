@@ -1,9 +1,8 @@
 set nocompatible
 set runtimepath+=/usr/share/vim/vimfiles
-silent! colo molokai
+colo kalgykai
 
 set autoindent
-set background=dark
 set backupcopy=yes
 set colorcolumn=81
 set cursorline
