@@ -30,13 +30,14 @@ set undofile
 set wildignore+=*/node_modules/*
 set wildmode=list:longest
 " Custom shortcuts
-nmap <Leader>n :noh<CR>
-nmap <Leader>p :setlocal invpaste paste?<CR>
-nmap <Leader>m :setlocal invnumber number?<CR>
-nmap <Leader>s :setlocal invspell spell?<CR>
-nmap <Leader>c :setlocal colorcolumn=<CR>
-nmap <Leader>f :setlocal foldmethod=indent<CR>
-nmap <Leader>o :colo default<CR>
+nmap \c :setlocal colorcolumn=<CR>
+nmap \f :setlocal foldmethod=indent<CR>
+nmap \i :call ShowSyntaxNames()<CR>
+nmap \m :setlocal invnumber number?<CR>
+nmap \n :noh<CR>
+nmap \o :colo default<CR>:set bg=dark<CR>
+nmap \p :setlocal invpaste paste?<CR>
+nmap \s :setlocal invspell spell?<CR>
 cmap w!! silent w !sudo tee >/dev/null %
 map Q gq
 xnoremap p pgvy
@@ -71,3 +72,10 @@ autocmd syntax yaml setlocal shiftwidth=2
 let html_no_rendering=1
 let python_highlight_string_format=1
 let python_highlight_string_formatting=1
+" For debugging color scheme and syntax definitions
+function ShowSyntaxNames()
+  for id in synstack(line("."), col("."))
+    echo synIDattr(id, "name")
+  endfor
+  echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name")
+endfunction
