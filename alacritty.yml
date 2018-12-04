@@ -4,11 +4,11 @@ colors:
     foreground: '0xd1d2d0'
   normal:
     black:   '0x52595c'
-    red:     '0xcc0000'
+    red:     '0xc81f1f'
     green:   '0x4e9a06'
-    yellow:  '0xc4a000'
-    blue:    '0x3465a4'
-    magenta: '0x75507b'
+    yellow:  '0xc4a800'
+    blue:    '0x386cb0'
+    magenta: '0x80487f'
     cyan:    '0x06989a'
     white:   '0xd1d2d0'
   bright:

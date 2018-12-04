@@ -1,6 +1,6 @@
 set nocompatible
 set runtimepath+=/usr/share/vim/vimfiles
-colo kalgykai
+colorscheme kalgykai
 
 set autoindent
 set backupcopy=yes

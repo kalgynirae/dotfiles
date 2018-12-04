@@ -1,26 +1,55 @@
-" #d1d2d0 #232729
-" #52595c #6b6d68
-" #c81f1f #ef2929
-" #c8742a #f08438
-" #c4a000 #fce94f
-" #4e9a06 #8ae234
-" #06989a #34e2e2
-" #386cb0 #729fcf
-" #6050b0 #8e71e0
-" #80487f #ad7fa8
-" #d1d2d0 #f5f5f0
-
 hi clear
 let g:colors_name="kalgykai"
+set background=dark
 
-hi Boolean         guifg=#3465a4
-hi Character       guifg=#c4a000
-hi Number          guifg=#8e71e0
-hi String          guifg=#c4a000
-hi Conditional     guifg=#c81f1f               gui=bold
-hi Constant        guifg=#6050b0               gui=bold
-hi Cursor          guifg=#000000 guibg=#F8F8F0
-hi iCursor         guifg=#000000 guibg=#F8F8F0
+hi Normal           guifg=#d1d2d0 guibg=#1c2022
+
+hi Grey             guifg=#52595c
+hi Red              guifg=#c81f1f
+hi Orange           guifg=#c8742a
+hi Yellow           guifg=#c4a800
+hi Green            guifg=#4e9a06
+hi Cyan             guifg=#06989a
+hi Blue             guifg=#386cb0
+hi Violet           guifg=#6050b0
+hi Magenta          guifg=#80487f
+hi White            guifg=#d1d2d0
+
+hi BoldGrey         guifg=#52595c gui=bold
+hi BoldRed          guifg=#c81f1f gui=bold
+hi BoldOrange       guifg=#c8742a gui=bold
+hi BoldYellow       guifg=#c4a800 gui=bold
+hi BoldGreen        guifg=#4e9a06 gui=bold
+hi BoldCyan         guifg=#06989a gui=bold
+hi BoldBlue         guifg=#386cb0 gui=bold
+hi BoldViolet       guifg=#6050b0 gui=bold
+hi BoldMagenta      guifg=#80487f gui=bold
+hi BoldWhite        guifg=#d1d2d0 gui=bold
+
+hi BrightGrey       guifg=#6b6d68
+hi BrightRed        guifg=#ef2929
+hi BrightOrange     guifg=#f08438
+hi BrightYellow     guifg=#fce94f
+hi BrightGreen      guifg=#8ae234
+hi BrightCyan       guifg=#34e2e2
+hi BrightBlue       guifg=#729fcf
+hi BrightViolet     guifg=#8e71e0
+hi BrightMagenta    guifg=#ad7fa8
+hi BrightWhite      guifg=#f5f5f0
+
+hi! link Boolean Blue
+
+hi! link Character Yellow
+hi! link String Yellow
+
+hi! link Type Cyan
+
+hi! link Conditional BoldRed
+
+hi! link Constant BoldViolet
+
+hi! link Number BrightViolet
+
 hi Debug           guifg=#BCA3A3               gui=bold
 hi Define          guifg=#06989a
 hi Delimiter       guifg=#8F8F8F
@@ -81,7 +110,6 @@ hi Title           guifg=#ef5939
 hi Todo            guifg=#FFFFFF guibg=none      gui=bold
 
 hi Typedef         guifg=#06989a
-hi Type            guifg=#06989a               gui=none
 hi Underlined      guifg=#808080               gui=underline
 
 hi VertSplit       guifg=#808080 guibg=#080808 gui=bold
@@ -93,7 +121,6 @@ hi WildMenu        guifg=#06989a guibg=#000000
 hi TabLineFill     guifg=#1B1D1E guibg=#1B1D1E
 hi TabLine         guibg=#1B1D1E guifg=#808080 gui=none
 
-hi Normal          guifg=#d1d2d0 guibg=#1c2022
 hi Comment         guifg=#6b6d68
 hi CursorLine                    guibg=#232729
 hi CursorLineNr    guifg=#c8742a guibg=#232729 gui=none
@@ -102,5 +129,10 @@ hi ColorColumn                   guibg=#232729
 hi LineNr          guifg=#52595c
 hi NonText         guifg=#52595c
 hi SpecialKey      guifg=#52595c
-
-set background=dark
+hi diffAdded       guifg=#4e9a06
+hi diffRemoved     guifg=#c81f1f
+hi diffFile        guifg=#d1d2d0               gui=bold
+hi diffNewFile     guifg=#d1d2d0               gui=bold
+hi diffIndexLine   guifg=#d1d2d0               gui=bold
+hi diffLine        guifg=#06989a
+hi diffSubname     guifg=#d1d2d0
