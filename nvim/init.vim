@@ -11,6 +11,7 @@ set encoding=utf-8
 set exrc secure
 set guicursor=n-v-c-sm:block,i-ci-ve:ver10,r-cr-o:hor20
 set hlsearch incsearch
+set ignorecase
 set inccommand=nosplit
 set laststatus=2
 set list listchars=tab:‣\ ,extends:»,precedes:«,nbsp:‧,trail:░
@@ -20,8 +21,8 @@ set number
 set ruler
 set scrolloff=3
 set shada='50,h
-set showcmd
 set shiftwidth=4 softtabstop=-1 expandtab smarttab
+set showcmd
 set spell spelllang=en_us
 set splitbelow splitright
 set termguicolors
