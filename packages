@@ -1,3 +1,4 @@
+accountsservice
 adobe-source-han-sans-otc-fonts
 agave
 alsa-utils
@@ -18,6 +19,7 @@ feh
 ffmpeg
 firefox
 git
+gnome-backgrounds
 gnome-disk-utility
 gnome-font-viewer
 gnome-terminal
@@ -42,6 +44,7 @@ otf-ipafont
 parallel
 pavucontrol
 pkgfile
+plasma-workspace-wallpapers
 polkit-gnome
 pulseaudio
 pulseaudio-alsa
