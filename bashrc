@@ -1,10 +1,5 @@
 [[ $- == *i* ]] || return
 
-# Create/attach to session 0 unless something is already attached
-if [[ ! $TMUX ]] && ! tmux list-sessions -F'#{session_name}!#{session_attached}' |& grep -q '^0![1-9]'; then
-    exec tmux new-session -As 0
-fi
-
 HISTCONTROL=ignoreboth
 HISTFILE=~/.bash_history_actual
 HISTFILESIZE=-1

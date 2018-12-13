@@ -9,7 +9,8 @@ new_window pixel 4
 font pango:DejaVu Sans 8
 
 bindsym $mod+grave kill
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal -e tmux new-session -As 0
+bindsym $mod+Shift+Return exec i3-sensible-terminal
 bindsym $mod+space exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+Shift+s exec --no-startup-id shutdown-prompt
 
@@ -154,7 +155,6 @@ client.unfocused        $line       $bg2        $text2      $bg1
 client.urgent           $orange1    $orange2    $text       $yellow2
 
 bindsym $mod+BackSpace exec --no-startup-id ~/bin/screensaver lock
-bindsym $mod+Shift+Return exec gnome-terminal -e ~/bin/calculator
 bindsym $mod+Mod1+Return exec cool-retro-term
 bindsym $mod+Mod1+p exec cool-retro-term -e ipython3
 bindsym $mod+Mod1+d exec nautilus --new-window
