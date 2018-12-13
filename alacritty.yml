@@ -150,3 +150,6 @@ selection:
 
 visual_bell:
   duration: 0
+
+window:
+  dynamic_padding: true
