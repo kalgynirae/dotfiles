@@ -9,7 +9,6 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 shopt -s histappend
 
 alias commas='paste -sd,'
-alias cp='cp -bv'
 alias diff='diff --color --minimal --unified'
 alias f1='field 1'
 alias f2='field 2'
@@ -23,8 +22,6 @@ alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
 alias lines='xargs printf "%s\n"'
 alias ll='ls -l --human-readable'
 alias ls='ls --color'
-alias mplayer='mplayer -softvol -softvol-max 300'
-alias mv='mv -bv'
 alias py=ipython3
 alias python='python2'
 alias quotes="sed \"s/^/'/; s/$/'/\""
