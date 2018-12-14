@@ -7,3 +7,6 @@
 [submodule "nvim/pack/plugins/start/ctrlp.vim"]
 	path = nvim/pack/plugins/start/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim
+[submodule "nvim/pack/plugins/start/ale"]
+	path = nvim/pack/plugins/start/ale
+	url = https://github.com/w0rp/ale.git
