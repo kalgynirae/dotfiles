@@ -2,137 +2,145 @@ hi clear
 let g:colors_name="kalgykai"
 set background=dark
 
-hi Normal           guifg=#d1d2d0 guibg=#1c2022
+hi Normal               guifg=#d1d2d0 guibg=#1c2022
+hi Reverse                                          gui=reverse
 
-hi Grey             guifg=#52595c
-hi Red              guifg=#c81f1f
-hi Orange           guifg=#c8742a
-hi Yellow           guifg=#c4a800
-hi Green            guifg=#4e9a06
-hi Cyan             guifg=#06989a
-hi Blue             guifg=#386cb0
-hi Violet           guifg=#6050b0
-hi Magenta          guifg=#80487f
-hi White            guifg=#d1d2d0
+hi Grey                 guifg=#52595c
+hi Red                  guifg=#c81f1f
+hi Orange               guifg=#c8742a
+hi Yellow               guifg=#c4a800
+hi Green                guifg=#4e9a06
+hi Cyan                 guifg=#06989a
+hi Blue                 guifg=#386cb0
+hi Violet               guifg=#6050b0
+hi Magenta              guifg=#80487f
+hi White                guifg=#d1d2d0
 
-hi BoldGrey         guifg=#52595c gui=bold
-hi BoldRed          guifg=#c81f1f gui=bold
-hi BoldOrange       guifg=#c8742a gui=bold
-hi BoldYellow       guifg=#c4a800 gui=bold
-hi BoldGreen        guifg=#4e9a06 gui=bold
-hi BoldCyan         guifg=#06989a gui=bold
-hi BoldBlue         guifg=#386cb0 gui=bold
-hi BoldViolet       guifg=#6050b0 gui=bold
-hi BoldMagenta      guifg=#80487f gui=bold
-hi BoldWhite        guifg=#d1d2d0 gui=bold
+hi BoldGrey             guifg=#52595c               gui=bold
+hi BoldRed              guifg=#c81f1f               gui=bold
+hi BoldOrange           guifg=#c8742a               gui=bold
+hi BoldYellow           guifg=#c4a800               gui=bold
+hi BoldGreen            guifg=#4e9a06               gui=bold
+hi BoldCyan             guifg=#06989a               gui=bold
+hi BoldBlue             guifg=#386cb0               gui=bold
+hi BoldViolet           guifg=#6050b0               gui=bold
+hi BoldMagenta          guifg=#80487f               gui=bold
+hi BoldWhite            guifg=#d1d2d0               gui=bold
 
-hi BrightGrey       guifg=#6b6d68
-hi BrightRed        guifg=#ef2929
-hi BrightOrange     guifg=#f08438
-hi BrightYellow     guifg=#fce94f
-hi BrightGreen      guifg=#8ae234
-hi BrightCyan       guifg=#34e2e2
-hi BrightBlue       guifg=#729fcf
-hi BrightViolet     guifg=#8e71e0
-hi BrightMagenta    guifg=#ad7fa8
-hi BrightWhite      guifg=#f5f5f0
+hi ItalicGrey           guifg=#52595c               gui=italic
+hi ItalicRed            guifg=#c81f1f               gui=italic
+hi ItalicOrange         guifg=#c8742a               gui=italic
+hi ItalicYellow         guifg=#c4a800               gui=italic
+hi ItalicGreen          guifg=#4e9a06               gui=italic
+hi ItalicCyan           guifg=#06989a               gui=italic
+hi ItalicBlue           guifg=#386cb0               gui=italic
+hi ItalicViolet         guifg=#6050b0               gui=italic
+hi ItalicMagenta        guifg=#80487f               gui=italic
+hi ItalicWhite          guifg=#d1d2d0               gui=italic
 
-hi! link Boolean Blue
+hi BrightGrey           guifg=#6b6d68
+hi BrightRed            guifg=#ef2929
+hi BrightOrange         guifg=#f08438
+hi BrightYellow         guifg=#fce94f
+hi BrightGreen          guifg=#8ae234
+hi BrightCyan           guifg=#34e2e2
+hi BrightBlue           guifg=#729fcf
+hi BrightViolet         guifg=#8e71e0
+hi BrightMagenta        guifg=#ad7fa8
+hi BrightWhite          guifg=#f5f5f0
 
-hi! link Character Yellow
-hi! link String Yellow
+hi BoldBrightGrey       guifg=#6b6d68               gui=bold
+hi BoldBrightRed        guifg=#ef2929               gui=bold
+hi BoldBrightOrange     guifg=#f08438               gui=bold
+hi BoldBrightYellow     guifg=#fce94f               gui=bold
+hi BoldBrightGreen      guifg=#8ae234               gui=bold
+hi BoldBrightCyan       guifg=#34e2e2               gui=bold
+hi BoldBrightBlue       guifg=#729fcf               gui=bold
+hi BoldBrightViolet     guifg=#8e71e0               gui=bold
+hi BoldBrightMagenta    guifg=#ad7fa8               gui=bold
+hi BoldBrightWhite      guifg=#f5f5f0               gui=bold
 
-hi! link Type Cyan
+hi GreyOnYellow         guifg=#52595c guibg=#fce94f
+hi BlueOnBlack          guifg=#386cb0 guibg=#000000
+hi BlueOnGrey           guifg=#386cb0 guibg=#52595c
 
-hi! link Conditional BoldRed
-
-hi! link Constant BoldViolet
-
-hi! link Number BrightViolet
-
-hi Debug           guifg=#BCA3A3               gui=bold
-hi Define          guifg=#06989a
-hi Delimiter       guifg=#8F8F8F
-hi DiffAdd                       guibg=#13354A
-hi DiffChange      guifg=#89807D guibg=#4C4745
-hi DiffDelete      guifg=#960050 guibg=#1E0010
-hi DiffText                      guibg=#4C4745 gui=italic,bold
-
-hi Directory       guifg=#4e9a06               gui=bold
-hi Error           guifg=#E6DB74 guibg=#1E0010
-hi ErrorMsg        guifg=#c81f1f guibg=#232526 gui=bold
-hi Exception       guifg=#c81f1f               gui=bold
-hi Float           guifg=#3465a4
-hi FoldColumn      guifg=#52595c guibg=#000000
-hi Folded          guifg=#52595c guibg=#000000
-hi Function        guifg=#4e9a06
-hi Identifier      guifg=#c8742a
-hi Ignore          guifg=#808080 guibg=none
-hi Search          guifg=bg      guibg=fg
-hi IncSearch       guifg=bg      guibg=#8ae234 gui=none
-
-hi Keyword         guifg=#ef2929               gui=bold
-hi Label           guifg=#E6DB74               gui=none
-hi Macro           guifg=#C4BE89               gui=italic
-hi SpecialKey      guifg=#06989a               gui=italic
-
-hi MatchParen      guifg=#f08438 guibg=#000000 gui=bold
-hi ModeMsg         guifg=#E6DB74
-hi MoreMsg         guifg=#E6DB74
-hi Operator        guifg=#c81f1f
-
-" complete menu
-hi Pmenu           guifg=#06989a guibg=#000000
-hi PmenuSel                      guibg=#808080
-hi PmenuSbar                     guibg=#080808
-hi PmenuThumb      guifg=#06989a
-
-hi PreCondit       guifg=#4e9a06               gui=bold
-hi PreProc         guifg=#4e9a06
-hi Question        guifg=#06989a
-hi Repeat          guifg=#c81f1f               gui=bold
-" marks
-hi SignColumn      guifg=#4e9a06 guibg=#1c2022
-hi SpecialChar     guifg=#c81f1f               gui=bold
-hi SpecialComment  guifg=#7E8E91               gui=bold
-hi Special         guifg=#c8742a guibg=none      gui=italic
-hi SpellBad                      guibg=#540d0d gui=undercurl
-hi SpellCap                                    gui=undercurl
-hi SpellLocal                                  gui=undercurl
-hi SpellRare                                   gui=undercurl
-hi Statement       guifg=#c81f1f               gui=bold
-hi StatusLine      guifg=#d1d2d0 guibg=#52565c gui=bold
-hi StatusLineNC    guifg=#6b6d68 guibg=#303436 gui=none
-hi StorageClass    guifg=#FD971F               gui=italic
-hi Structure       guifg=#06989a
-hi Tag             guifg=#c81f1f               gui=italic
-hi Title           guifg=#ef5939
-hi Todo            guifg=#FFFFFF guibg=none      gui=bold
-
-hi Typedef         guifg=#06989a
-hi Underlined      guifg=#808080               gui=underline
-
-hi VertSplit       guifg=#808080 guibg=#080808 gui=bold
-hi VisualNOS       guifg=none    guibg=none    gui=reverse
-hi Visual          guifg=none    guibg=none    gui=reverse
-hi WarningMsg      guifg=#FFFFFF guibg=#333333 gui=bold
-hi WildMenu        guifg=#06989a guibg=#000000
-
-hi TabLineFill     guifg=#1B1D1E guibg=#1B1D1E
-hi TabLine         guibg=#1B1D1E guifg=#808080 gui=none
-
-hi Comment         guifg=#6b6d68
-hi CursorLine                    guibg=#232729
-hi CursorLineNr    guifg=#c8742a guibg=#232729 gui=none
-hi CursorColumn                  guibg=#232729
-hi ColorColumn                   guibg=#232729
-hi LineNr          guifg=#52595c
-hi NonText         guifg=#52595c
-hi SpecialKey      guifg=#52595c
-hi diffAdded       guifg=#4e9a06
-hi diffRemoved     guifg=#c81f1f
-hi diffFile        guifg=#d1d2d0               gui=bold
-hi diffNewFile     guifg=#d1d2d0               gui=bold
-hi diffIndexLine   guifg=#d1d2d0               gui=bold
-hi diffLine        guifg=#06989a
-hi diffSubname     guifg=#d1d2d0
+hi ColorColumn                        guibg=#232729
+hi CursorColumn                       guibg=#232729
+hi CursorLine                         guibg=#232729
+hi CursorLineNr         guifg=#c8742a guibg=#232729 gui=none
+hi SpellBad                           guibg=#540d0d gui=undercurl
+hi SpellCap                                         gui=undercurl
+hi SpellLocal                                       gui=undercurl
+hi SpellRare                                        gui=undercurl
+hi StatusLine           guifg=fg      guibg=#52565c gui=bold
+hi StatusLineNC         guifg=#6b6d68 guibg=#303436 gui=none
+hi Underlined                                       gui=underline
+hi Visual               guifg=none    guibg=none    gui=reverse
+hi VisualNOS            guifg=none    guibg=none    gui=reverse
+hi! link Boolean        Blue
+hi! link Character      Yellow
+hi! link Comment        BrightGrey
+hi! link Conditional    BoldRed
+hi! link Constant       BoldViolet
+hi! link Debug          BoldBrightMagenta
+hi! link Define         Cyan
+hi! link Delimiter      BrightGrey
+hi! link DiffAdd        Green
+hi! link DiffChange     Orange
+hi! link DiffDelete     Red
+hi! link DiffText       BoldBrightGrey
+hi! link Directory      BoldBlue
+hi! link Error          ItalicRed
+hi! link ErrorMsg       BoldRed
+hi! link Exception      BoldOrange
+hi! link Float          Blue
+hi! link FoldColumn     Grey
+hi! link Folded         Grey
+hi! link Function       Green
+hi! link Identifier     Orange
+hi! link Ignore         BrightGrey
+hi! link IncSearch      GreyOnYellow
+hi! link Keyword        BrightRed
+hi! link Label          BrightYellow
+hi! link LineNr         Grey
+hi! link Macro          ItalicMagenta
+hi! link MatchParen     BoldBrightOrange
+hi! link ModeMsg        BrightYellow
+hi! link MoreMsg        BrightYellow
+hi! link NonText        Grey
+hi! link Number         BrightViolet
+hi! link Operator       Red
+hi! link Pmenu          BlueOnBlack
+hi! link PmenuSbar      BlueOnBlack
+hi! link PmenuSel       BlueOnGrey
+hi! link PmenuThumb     Blue
+hi! link PreCondit      BoldGreen
+hi! link PreProc        Green
+hi! link Question       Cyan
+hi! link Repeat         BoldRed
+hi! link Search         GreyOnYellow
+hi! link SignColumn     Green
+hi! link Special        ItalicOrange
+hi! link SpecialChar    BoldRed
+hi! link SpecialComment BoldBrightGrey
+hi! link SpecialKey     Grey
+hi! link SpecialKey     ItalicCyan
+hi! link Statement      BoldRed
+hi! link StorageClass   ItalicBrightOrange
+hi! link String         Yellow
+hi! link Structure      Cyan
+hi! link Tag            ItalicRed
+hi! link Title          BrightOrange
+hi! link Todo           BoldBrightWhite
+hi! link Type           Cyan
+hi! link Typedef        Cyan
+hi! link VertSplit      BoldGrey
+hi! link WarningMsg     BoldBrightWhite
+hi! link WildMenu       BlueOnBlack
+hi! link diffAdded      Green
+hi! link diffFile       BoldWhite
+hi! link diffIndexLine  BoldWhite
+hi! link diffLine       Cyan
+hi! link diffNewFile    BoldWhite
+hi! link diffRemoved    Red
+hi! link diffSubname    BoldWhite
