@@ -1,9 +1,6 @@
 [submodule "nvim/pack/plugins/start/python-syntax"]
 	path = nvim/pack/plugins/start/python-syntax
 	url = https://github.com/kalgynirae/python-syntax
-[submodule "nvim/pack/plugins/start/molokai"]
-	path = nvim/pack/plugins/start/molokai
-	url = https://github.com/kalgynirae/molokai
 [submodule "nvim/pack/plugins/start/ctrlp.vim"]
 	path = nvim/pack/plugins/start/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim
