@@ -31,6 +31,7 @@ set wildignore+=*/node_modules/*
 set wildmode=list:longest
 " Custom shortcuts
 nmap \c :setlocal colorcolumn=<CR>
+nmap \C :call hexcolor#toggle()<CR>
 nmap \f :setlocal foldmethod=indent<CR>
 nmap \i :call ShowSyntaxNames()<CR>
 nmap \m :setlocal invnumber number?<CR>
