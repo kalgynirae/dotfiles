@@ -1,7 +1,9 @@
 #!/bin/bash
 
 maybelink() {
-    if [[ $2 -ef $1 ]]; then
+    if [[ ! -e $1 ]]; then
+        echo "$1 doesn't exist; skipping"
+    elif [[ $2 -ef $1 ]]; then
         echo "$2 is already correct; skipping"
     else
         [[ -d $(dirname "$2") ]] || mkdir -p "$(dirname "$2")"
@@ -19,20 +21,17 @@ maybelink atom-keymap.cson ~/.atom/keymap.cson
 maybelink bash_profile ~/.bash_profile
 maybelink bashrc ~/.bashrc
 maybelink bin ~/bin
-maybelink default.pa ~/.config/pulse/default.pa
 maybelink dunstrc ~/.config/dunst/dunstrc
 maybelink feh-themes ~/.config/feh/themes
 maybelink fonts.conf ~/.config/fontconfig/fonts.conf
 maybelink gitconfig ~/.gitconfig
 maybelink gtkrc-2.0 ~/.gtkrc-2.0
 maybelink gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
-maybelink hyperterm.js ~/.hyperterm.js
 maybelink i3config ~/.config/i3/config
 maybelink i3statusconfig ~/.config/i3status/config
 maybelink inputrc ~/.inputrc
 maybelink ipython_config.py ~/.ipython/profile_default/ipython_config.py
 maybelink jackdbus.service ~/.config/systemd/user/jackdbus.service
-maybelink kitty.conf ~/.config/kitty/kitty.conf
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
@@ -44,8 +43,11 @@ maybelink nvim/pack ~/.local/share/nvim/site/pack
 maybelink quotes.txt ~/.config/variety/pluginconfig/quotes/quotes.txt
 maybelink variety.conf ~/.config/variety/variety.conf
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs
-maybelink wezterm.toml ~/.config/wezterm/wezterm.toml
 maybelink Xresources ~/.Xresources
+
+if [[ $(hostname) != colinchan-x1 ]]; then
+    maybelink default.pa ~/.config/pulse/default.pa
+fi
 
 for app in applications/*; do
     maybelink "$app" ~/.local/share/"$app"

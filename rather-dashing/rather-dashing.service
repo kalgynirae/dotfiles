@@ -1,7 +1,0 @@
-[Unit]
-Description=Rather Dashing
-
-[Service]
-Type=simple
-ExecStart=/usr/local/bin/rather-dashing.py
-User=colin
