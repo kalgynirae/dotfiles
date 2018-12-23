@@ -56,7 +56,7 @@ colortest() {
         for intensity in 3 9; do  # normal, bright
             for style in "" $(seq 4); do  # normal, bold, dim, italic, underline
                 escapes="[${intensity}${color}${style:+;$style}m"
-                echo -en "\e${escapes}\\\\e${escapes}\e[0m "
+                printf "\e${escapes}\\\\e${escapes}\e[0m "
             done
             echo -n " "
         done
