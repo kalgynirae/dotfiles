@@ -5,6 +5,7 @@ alsa-utils
 atop
 bluez
 bluez-utils
+calf
 chromium
 compton
 consolas-font
@@ -25,10 +26,11 @@ gnome-font-viewer
 gnome-terminal
 gucharmap
 htop
-i3status
 i3-wm
+i3status
 inkscape
 ipython
+jack2-dbus
 kitty
 libaacs
 light-git
@@ -49,6 +51,7 @@ polkit-gnome
 pulseaudio
 pulseaudio-alsa
 pulseaudio-bluetooth
+realtime-privileges
 redshift
 rsync
 ruby
