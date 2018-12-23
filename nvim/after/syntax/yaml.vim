@@ -1,1 +1,1 @@
-call hexcolor#add_groups('yamlFlowString')
+call hexcolor#init('yamlFlowString')

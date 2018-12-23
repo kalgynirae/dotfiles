@@ -1,5 +1,5 @@
 function! s:create_highlight(color)
-  exe 'hi color'.a:color 'guifg=#'.a:color
+  exe 'hi color'.a:color.' guifg=#'.a:color
 endfunction
 
 function! s:create_match()
@@ -19,11 +19,10 @@ function! s:create_match()
   return ''
 endfunction
 
-function! s:parse_screen()
-  let left = winsaveview().leftcol
-  for linenumber in range(line('w0'), line('w$'))
+function! s:parse_lines(lines)
+  for line in a:lines
     " substitute() seems to be the best way to call a function on every match
-    call substitute(strcharpart(getline(linenumber), left, &columns), s:hexcolor_pattern, '\=s:create_match()', 'g')
+    call substitute(line, s:hexcolor_pattern, '\=s:create_match()', 'g')
   endfor
 endfunction
 
@@ -32,8 +31,8 @@ function! hexcolor#enable()
   if len(b:hexcolor_groups)
     exe 'syn cluster colorableGroups add='.join(b:hexcolor_groups, ',')
   endif
-  autocmd Hexcolor CursorMoved,CursorMovedI <buffer> call s:parse_screen()
-  call s:parse_screen()
+  autocmd Hexcolor TextChanged,TextChangedI <buffer> call s:parse_lines(getline("'[", "']"))
+  call s:parse_lines(getline(1, '$'))
 endfunction
 
 function! hexcolor#disable()
@@ -41,11 +40,12 @@ function! hexcolor#disable()
   if len(b:hexcolor_groups)
     exe 'syn cluster colorableGroups remove='.join(b:hexcolor_groups, ',')
   endif
-  autocmd! Hexcolor CursorMoved,CursorMovedI <buffer>
+  autocmd! Hexcolor TextChanged,TextChangedI <buffer>
 endfunction
 
 function! hexcolor#toggle()
   if ! exists('b:hexcolor_enabled')
+    echo "call hexcolor#init() with a list of colorable groups first"
     return
   endif
   if b:hexcolor_enabled
@@ -63,7 +63,7 @@ endfunction
 
 let s:hexcolor_pattern = '\%(0x\|#\)\(\x\{6}\)\>'
 
-function! hexcolor#add_groups(groups)
+function! hexcolor#init(groups)
   let b:hexcolor_groups = extend(get(b:, 'hexcolor_groups', []), split(a:groups, ','), 0)
 
   if ! exists('b:hexcolor_enabled')

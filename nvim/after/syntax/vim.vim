@@ -1,1 +1,1 @@
-call hexcolor#add_groups('vimHiGuiRgb')
+call hexcolor#init('vimHiGuiRgb')
