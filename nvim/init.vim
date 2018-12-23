@@ -19,7 +19,7 @@ set mouse=
 set nowrap
 set number
 set ruler
-set scrolloff=3
+set scrolloff=3 sidescrolloff=5
 set shada='50,h
 set shiftwidth=4 softtabstop=-1 expandtab smarttab
 set showcmd
@@ -67,6 +67,7 @@ autocmd syntax markdown setlocal textwidth=80
 autocmd syntax pandoc setlocal textwidth=80
 autocmd syntax sh setlocal iskeyword+=- shiftwidth=2
 autocmd syntax text setlocal iskeyword+=- textwidth=80
+autocmd syntax vim setlocal shiftwidth=2
 autocmd syntax xml setlocal shiftwidth=2
 autocmd syntax yaml setlocal shiftwidth=2
 " Specific plugin settings
