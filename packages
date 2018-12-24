@@ -28,6 +28,7 @@ gucharmap
 htop
 i3-wm
 i3status
+imagemagick
 inkscape
 ipython
 jack2-dbus
@@ -72,7 +73,6 @@ ttf-liberation
 ttf-linux-libertine
 ttf-symbola
 ttf-ubuntu-font-family
-variety
 vlc
 words
 xdotool
