@@ -55,21 +55,6 @@ imap <c-f> <Right>
 imap <c-b> <Left>
 " Load last cursor position
 autocmd BufReadPost * silent! normal! g'"
-" Specific language settings
-autocmd syntax css setlocal shiftwidth=2
-autocmd syntax gitcommit setlocal textwidth=72
-autocmd syntax html setlocal shiftwidth=2
-autocmd syntax htmldjango setlocal shiftwidth=2
-autocmd syntax javascript setlocal shiftwidth=2
-autocmd syntax lilypond setlocal shiftwidth=2
-autocmd syntax lisp setlocal shiftwidth=2
-autocmd syntax markdown setlocal textwidth=80
-autocmd syntax pandoc setlocal textwidth=80
-autocmd syntax sh setlocal iskeyword+=- shiftwidth=2
-autocmd syntax text setlocal iskeyword+=- textwidth=80
-autocmd syntax vim setlocal shiftwidth=2
-autocmd syntax xml setlocal shiftwidth=2
-autocmd syntax yaml setlocal shiftwidth=2
 " Specific plugin settings
 let html_no_rendering=1
 let python_highlight_string_format=1
