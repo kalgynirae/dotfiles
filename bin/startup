@@ -2,9 +2,19 @@
 
 pgrep sxhkd || sxhkd &
 
-pgrep redshift || redshift -l 37.48:-122.15 -t 5850:3000 &  # Menlo Park
-#pgrep redshift || redshift -l 27.75:-82.63 -t 5850:2800 &  # St. Pete
-#pgrep redshift || redshift -l 51.52:-0.13 -t 5850:2800 &  # London
+if ! pgrep redshift; then
+  case "$(timedatectl show -p Timezone --value)" in
+    America/Los_Angeles)
+      redshift -l 37.48:-122.15 -t 5850:3000 &  # Menlo Park
+      ;;
+    America/New_York)
+      redshift -l 27.75:-82.63 -t 5850:2800 &  # St. Pete
+      ;;
+    Europe/London)
+      redshift -l 51.52:-0.13 -t 5850:2800 &  # London
+      ;;
+  esac
+fi
 
 pgrep compton || compton -CGb --no-fading-openclose
 
