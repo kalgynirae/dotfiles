@@ -59,6 +59,7 @@ rsync
 ruby
 scrot
 seahorse
+shellcheck
 sshfs
 sudo
 sxhkd
