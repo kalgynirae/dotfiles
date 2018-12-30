@@ -1,0 +1,79 @@
+#!/bin/bash
+
+render-text() {
+  local text=$1
+  local outfilebase=$2
+  for foreground in white black; do
+    pango-view \
+      <(echo "$text") \
+      --background "transparent" \
+      --font "Gentium Bold 48" \
+      --foreground "$foreground" \
+      --hinting full \
+      --indent -24 \
+      --markup \
+      --no-display \
+      -o "$outfilebase-$foreground.png"
+  done
+  identify "$outfilebase-white.png" | grep -Po '\d+x\d+' | head -n1
+}
+
+primarysize=$(xrandr --current | grep primary | grep -Po '\d+x\d+')
+width=$(cut -dx -f1 <<<"$primarysize")
+height=$(cut -dx -f2 <<<"$primarysize")
+wallpaper=$(find ~/pictures/wallpapers -iname '*.png' -o -iname '*.jpg' | shuf -n1)
+
+lines=$(shuf -n1 ~/dotfiles/quotes.txt | sed 's# // #\n#g')
+quotelines=$(head -n-1 <<<"$lines" | awk 'NR==1 { print } NR>1 { print "<span alpha=\"1\">“</span>" $0 }')
+# shellcheck disable=SC1111
+quote="“$(sed "s/'/’/g" <<<"$quotelines")”"
+author="— $(tail -n1 <<<"$lines")"
+
+dir=$(mktemp -dt generate-wallpaper.XXXX)
+
+borderradius=20
+bottompadding=150
+quotepadding=20
+
+quotesize=$(render-text "$quote" "$dir/quote")
+quotewidth=$(cut -dx -f1 <<<"$quotesize")
+quoteheight=$(cut -dx -f2 <<<"$quotesize")
+
+authorsize=$(render-text "$author" "$dir/author")
+authorwidth=$(cut -dx -f1 <<<"$authorsize")
+authorheight=$(cut -dx -f2 <<<"$authorsize")
+
+quoteboxwidth=$(( quotewidth + (2 * quotepadding) ))
+quoteboxheight=$(( quoteheight + authorheight + (2 * quotepadding) ))
+
+quoteboxx0=$(( width - quoteboxwidth ))
+quoteboxy0=$(( height - bottompadding - quoteboxheight ))
+quoteboxx1=$(( width + borderradius ))
+quoteboxy1=$(( height - bottompadding ))
+
+quotex=$(( width - quotewidth - quotepadding ))
+quotey=$(( height - authorheight - quoteheight - quotepadding - bottompadding ))
+authorx=$(( width - authorwidth - quotepadding ))
+authory=$(( height - authorheight - quotepadding - bottompadding ))
+
+# Resize wallpaper
+magick \
+  "$wallpaper" \
+  -resize "$primarysize^" \
+  -gravity center \
+  -extent "$primarysize" \
+  -fill "#000000a0" \
+  -draw "roundRectangle $quoteboxx0,$quoteboxy0 $quoteboxx1,$quoteboxy1 $borderradius,$borderradius" \
+  "$dir/resized.png"
+
+# Layer everything together
+magick \
+  "$dir/resized.png" \
+  \( "$dir/quote-black.png" -repage "+$(( quotex + 2 ))+$(( quotey + 3 ))" \) \
+  \( "$dir/quote-white.png" -repage "+$quotex+$quotey" \) \
+  \( "$dir/author-black.png" -repage "+$(( authorx + 2 ))+$(( authory + 3 ))" \) \
+  \( "$dir/author-white.png" -repage "+$authorx+$authory" \) \
+  -layers flatten \
+  ~/.cache/wallpaper.png
+
+feh --bg-max --image-bg black ~/.cache/wallpaper.png

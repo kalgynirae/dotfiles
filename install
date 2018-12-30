@@ -40,9 +40,9 @@ maybelink nvim ~/.vim
 maybelink nvim/init.vim ~/.vimrc
 maybelink nvim/init.vim ~/.config/nvim/init.vim
 maybelink nvim/pack ~/.local/share/nvim/site/pack
-maybelink quotes.txt ~/.config/variety/pluginconfig/quotes/quotes.txt
-maybelink variety.conf ~/.config/variety/variety.conf
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs
+maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
+maybelink update-wallpaper.timer ~/.config/systemd/user/update-wallpaper.timer
 maybelink Xresources ~/.Xresources
 
 if [[ $(hostname) != colinchan-x1 ]]; then
