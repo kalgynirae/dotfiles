@@ -1,1 +1,1 @@
-call hexcolor#init('vimHiGuiRgb')
+call hexcolor#init('vimHiGuiRgb,vimString')
