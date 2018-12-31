@@ -62,7 +62,7 @@ magick \
   -resize "$primarysize^" \
   -gravity center \
   -extent "$primarysize" \
-  -fill "#000000a0" \
+  -fill "#00000080" \
   -draw "roundRectangle $quoteboxx0,$quoteboxy0 $quoteboxx1,$quoteboxy1 $borderradius,$borderradius" \
   "$dir/resized.png"
 
