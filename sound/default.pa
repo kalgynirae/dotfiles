@@ -1,14 +1,17 @@
 .include /etc/pulse/default.pa
+.nofail
+
 unload-module module-jackdbus-detect
 unload-module module-stream-restore
-
-.nofail
 
 # colinchan-x1
 update-sink-proplist alsa_output.pci-0000_00_1b.0.analog-stereo device.description="Laptop Speakers"
 update-source-proplist alsa_input.pci-0000_00_1b.0.analog-stereo device.description="Laptop Microphone"
 
-.fail
+# apartmanteau
+update-sink-proplist alsa_output.pci-0000_02_00.0.analog-stereo device.description="Stereo"
+update-source-proplist alsa_input.pci-0000_02_00.0.analog-stereo device.description="Line In"
+update-source-proplist alsa_input.usb-046d_HD_Webcam_C525_6A326EA0-00.analog-mono device.description="Webcam Microphone"
 
 load-module module-stream-restore restore_device=no
 

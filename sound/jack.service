@@ -4,11 +4,12 @@ Before=pulseaudio.service
 BindsTo=pulseaudio.service
 
 [Service]
-ExecStart=/usr/bin/jackdbus auto
-ExecStartPost=/usr/bin/jack_control start
-ExecStartPost=/usr/bin/sleep 1
+ExecStart=/usr/bin/jack_control start
+ExecStart=/usr/bin/sleep 1
 ExecStop=/usr/bin/jack_control stop
-TimeoutStopSec=1s
+ExecStop=/usr/bin/sleep 1
+Type=oneshot
+RemainAfterExit=yes
 
 [Install]
 WantedBy=sound.target

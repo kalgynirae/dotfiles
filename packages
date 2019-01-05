@@ -53,6 +53,7 @@ polkit-gnome
 pulseaudio
 pulseaudio-alsa
 pulseaudio-bluetooth
+pulseaudio-jack
 realtime-privileges
 redshift
 rsync
