@@ -1,0 +1,14 @@
+[Unit]
+Description=JACK audio server
+Before=pulseaudio.service
+BindsTo=pulseaudio.service
+
+[Service]
+ExecStart=/usr/bin/jackdbus auto
+ExecStartPost=/usr/bin/jack_control start
+ExecStartPost=/usr/bin/sleep 1
+ExecStop=/usr/bin/jack_control stop
+TimeoutStopSec=1s
+
+[Install]
+WantedBy=sound.target

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for side in left right; do
+  jack_connect background:front-$side compressor:"$side In #1"
+  jack_connect foreground:front-$side compressor:"$side In #3"
+  jack_connect compressor:"$side Out #1" output:front-$side
+done

@@ -1,0 +1,18 @@
+.include /etc/pulse/default.pa
+unload-module module-jackdbus-detect
+unload-module module-stream-restore
+
+.nofail
+
+# colinchan-x1
+update-sink-proplist alsa_output.pci-0000_00_1b.0.analog-stereo device.description="Laptop Speakers"
+update-source-proplist alsa_input.pci-0000_00_1b.0.analog-stereo device.description="Laptop Microphone"
+
+.fail
+
+load-module module-stream-restore restore_device=no
+
+load-module module-jack-sink sink_name=background sink_properties='device.description=Background' client_name="background" connect=no
+load-module module-jack-sink sink_name=foreground sink_properties='device.description=Foreground' client_name="foreground" connect=no
+load-module module-jack-source source_name=jack source_properties='device.description="JACK Output"' client_name="output" connect=no
+load-module module-loopback source=jack source_dont_move=yes sink_input_properties='media.name="JACK Output"' source_output_properties='media.name="JACK Output"'

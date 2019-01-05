@@ -32,22 +32,21 @@ maybelink i3config ~/.config/i3/config
 maybelink i3statusconfig ~/.config/i3status/config
 maybelink inputrc ~/.inputrc
 maybelink ipython_config.py ~/.ipython/profile_default/ipython_config.py
-maybelink jackdbus.service ~/.config/systemd/user/jackdbus.service
 maybelink nvim ~/.vim
 maybelink nvim/init.vim ~/.config/nvim/init.vim
 maybelink nvim/init.vim ~/.vimrc
 maybelink nvim/pack ~/.local/share/nvim/site/pack
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
+maybelink sound/default.pa ~/.config/pulse/default.pa
+maybelink sound/jack.service ~/.config/systemd/user/jack.service
+maybelink sound/compressor.service ~/.config/systemd/user/compressor.service
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
 maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
 maybelink update-wallpaper.timer ~/.config/systemd/user/update-wallpaper.timer
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs
 
-if [[ $(hostname) != colinchan-x1 ]]; then
-    maybelink default.pa ~/.config/pulse/default.pa
-fi
 
 for app in applications/*; do
     maybelink "$app" ~/.local/share/"$app"

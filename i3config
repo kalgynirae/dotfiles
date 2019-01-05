@@ -191,6 +191,7 @@ for_window [class="GrandOrgue"] floating enable
 for_window [class="StepMania"] floating enable
 for_window [class="Skype"] floating enable
 for_window [title="^Skype$"] kill
+for_window [class="[Cc]alfjackhost"] floating enable, move container to workspace 9:sound
 
 # Startup programs
 exec --no-startup-id ~/bin/startup

@@ -1,3 +1,0 @@
-.include /etc/pulse/default.pa
-unload-module module-stream-restore
-load-module module-stream-restore restore_device=no
