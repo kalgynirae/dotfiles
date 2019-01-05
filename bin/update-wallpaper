@@ -7,7 +7,7 @@ render-text() {
     pango-view \
       <(echo "$text") \
       --background "transparent" \
-      --font "Gentium Bold 48" \
+      --font "Gentium Bold 42" \
       --foreground "$foreground" \
       --hinting full \
       --indent -24 \
