@@ -16,6 +16,7 @@ maybelink() {
     fi
 }
 
+maybelink Xresources ~/.Xresources
 maybelink alacritty.yml ~/.config/alacritty/alacritty.yml
 maybelink atom-keymap.cson ~/.atom/keymap.cson
 maybelink bash_profile ~/.bash_profile
@@ -25,25 +26,24 @@ maybelink dunstrc ~/.config/dunst/dunstrc
 maybelink feh-themes ~/.config/feh/themes
 maybelink fonts.conf ~/.config/fontconfig/fonts.conf
 maybelink gitconfig ~/.gitconfig
-maybelink gtkrc-2.0 ~/.gtkrc-2.0
 maybelink gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
+maybelink gtkrc-2.0 ~/.gtkrc-2.0
 maybelink i3config ~/.config/i3/config
 maybelink i3statusconfig ~/.config/i3status/config
 maybelink inputrc ~/.inputrc
 maybelink ipython_config.py ~/.ipython/profile_default/ipython_config.py
 maybelink jackdbus.service ~/.config/systemd/user/jackdbus.service
+maybelink nvim ~/.vim
+maybelink nvim/init.vim ~/.config/nvim/init.vim
+maybelink nvim/init.vim ~/.vimrc
+maybelink nvim/pack ~/.local/share/nvim/site/pack
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
-maybelink nvim ~/.vim
-maybelink nvim/init.vim ~/.vimrc
-maybelink nvim/init.vim ~/.config/nvim/init.vim
-maybelink nvim/pack ~/.local/share/nvim/site/pack
-maybelink user-dirs.dirs ~/.config/user-dirs.dirs
 maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
 maybelink update-wallpaper.timer ~/.config/systemd/user/update-wallpaper.timer
-maybelink Xresources ~/.Xresources
+maybelink user-dirs.dirs ~/.config/user-dirs.dirs
 
 if [[ $(hostname) != colinchan-x1 ]]; then
     maybelink default.pa ~/.config/pulse/default.pa
