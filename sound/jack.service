@@ -5,11 +5,11 @@ BindsTo=pulseaudio.service
 
 [Service]
 ExecStart=/usr/bin/jack_control start
-ExecStart=/usr/bin/sleep 1
+ExecStart=/usr/bin/sleep 2
 ExecStop=/usr/bin/jack_control stop
 ExecStop=/usr/bin/sleep 1
 Type=oneshot
 RemainAfterExit=yes
 
 [Install]
-WantedBy=sound.target
+WantedBy=pulseaudio.service

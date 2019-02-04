@@ -8,6 +8,9 @@ ExecStart=/usr/bin/calfjackhost --client compressor --load %h/dotfiles/sound/com
 ExecStartPost=/usr/bin/sleep 1
 ExecStartPost=%h/dotfiles/sound/compressor-connect
 Restart=always
+RestartSec=1s
+StartLimitBurst=3
+StartLimitIntervalSec=15s
 
 [Install]
-WantedBy=sound.target
+WantedBy=pulseaudio.service
