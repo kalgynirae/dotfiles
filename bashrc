@@ -10,6 +10,7 @@ shopt -s histappend
 
 alias commas='paste -sd,'
 alias diff='diff --color --minimal --unified'
+alias e=$EDITOR
 alias f1='field 1'
 alias f2='field 2'
 alias f3='field 3'
@@ -30,7 +31,6 @@ alias ssh='ssh-with-terminfo'
 alias ssh-patient='ssh -o ConnectTimeout=60 -o ServerAliveCountMax=6 -o ServerAliveInterval=10'
 alias tree='tree -CF --charset=utf-8'
 alias uncommas="tr , '\n'"
-which nvim &>/dev/null && alias vim=nvim
 
 # Disallow overwriting files by redirection with > (use >| instead)
 set -o noclobber
