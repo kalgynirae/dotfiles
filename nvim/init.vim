@@ -40,7 +40,7 @@ nmap \o :colo default<CR>:set bg=dark<CR>
 nmap \p :setlocal invpaste paste?<CR>
 nmap \s :setlocal invspell spell?<CR>
 cmap w!! silent w !sudo tee >/dev/null %
-map Q gq
+map Q :ALEFix
 xnoremap p pgvy
 " Consistent behavior for Y, D, and C
 nmap Y y$
