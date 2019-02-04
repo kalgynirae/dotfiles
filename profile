@@ -16,6 +16,6 @@ export TERMINAL=alacritty
 export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 
 if [ -z "$SSH_AUTH_SOCK" ] && pgrep -f gnome-keyring-daemon ; then
-    eval $(gnome-keyring-daemon --start)
+    eval "$(gnome-keyring-daemon --start)"
     export SSH_AUTH_SOCK
 fi

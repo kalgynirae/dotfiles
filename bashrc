@@ -10,6 +10,7 @@ shopt -s histappend
 
 alias commas='paste -sd,'
 alias diff='diff --color --minimal --unified'
+# shellcheck disable=SC2086,SC2139
 alias e=$EDITOR
 alias f1='field 1'
 alias f2='field 2'
@@ -39,7 +40,8 @@ set -o noclobber
 stty -ixon
 
 cal() {
-    local year=$(date +%Y)
+    local year
+    year=$(date +%Y)
     if (( $# == 0 )); then
         command cal "$year"
     elif (( $# == 1 && 1 <= $1 && $1 < 13 )); then
@@ -56,6 +58,7 @@ colortest() {
         for intensity in 3 9; do  # normal, bright
             for style in "" $(seq 4); do  # normal, bold, dim, italic, underline
                 escapes="[${intensity}${color}${style:+;$style}m"
+                # shellcheck disable=SC2059
                 printf "\e${escapes}\\\\e${escapes}\e[0m "
             done
             echo -n " "
@@ -118,6 +121,7 @@ d() {
 dls() {
     for dir in /tmp/*.d???; do
         echo -n "$dir ("
+        # shellcheck disable=SC2012
         ls -m "$dir" |& tr , ' ' | tr -d '\n' | sed -E 's/(.{50}).+/\1…/'
         echo ')'
     done
@@ -147,7 +151,7 @@ field() {
 
 # Highlight occurrences of the given strings
 hl() {
-    grep -E --color=always "$(printf '%s|' "$@")"
+    grep -E --color=always -- "$(printf '%s|' "$@")"
 }
 
 # Extract the corresponding lines
@@ -158,17 +162,18 @@ line() {
 # Display man pages with color
 man() {
     env \
-        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-        LESS_TERMCAP_md=$(printf "\e[1;32m") \
-        LESS_TERMCAP_me=$(printf "\e[0m") \
-        LESS_TERMCAP_se=$(printf "\e[0m") \
-        LESS_TERMCAP_so=$(printf "\e[1;44;37m") \
-        LESS_TERMCAP_ue=$(printf "\e[0m") \
-        LESS_TERMCAP_us=$(printf "\e[1;33m") \
+        LESS_TERMCAP_mb="$(printf "\e[1;31m")" \
+        LESS_TERMCAP_md="$(printf "\e[1;32m")" \
+        LESS_TERMCAP_me="$(printf "\e[0m")" \
+        LESS_TERMCAP_se="$(printf "\e[0m")" \
+        LESS_TERMCAP_so="$(printf "\e[1;44;37m")" \
+        LESS_TERMCAP_ue="$(printf "\e[0m")" \
+        LESS_TERMCAP_us="$(printf "\e[1;33m")" \
         man "$@"
 }
 
 mkcd() {
+    # shellcheck disable=SC2164
     mkdir -p "$1" && cd "$1"
 }
 
@@ -189,21 +194,23 @@ rename-tmux-window() {
 }
 
 _tmux-complete() {
-    if (( $COMP_KEY == 9 )); then
+    if (( COMP_KEY == 9 )); then
         # Invoked by Tab key; do nothing
         return
     fi
-    local word_regex_escaped=$(sed 's/[.^$*+?()[{\|]/\\&/g' <<<"$2")
-    local regex="\<$word_regex_escaped[[:alnum:]_/.-]+\>"
-    COMPREPLY=($(tmux capture-pane -Jp | sed '/^\s*$/d' | grep -Eo "$regex"))
+    local word_regex_escaped
+    word_regex_escaped=$(sed 's/[.^$*+?()[{\|]/\\&/g' <<<"$2")
+    local regex="\<${word_regex_escaped}[[:alnum:]_/.-]+\>"
+    tmux capture-pane -Jp | sed '/^\s*$/d' | grep -Eo "$regex" | read -ra COMPREPLY
 }
 complete -o bashdefault -o default -D -F _tmux-complete
 
-if [[ -f ~/.git-prompt.sh ]]; then
+if [[ -e /usr/share/git/git-prompt.sh ]]; then
     GIT_PS1_SHOWDIRTYSTATE=1
     GIT_PS1_SHOWSTASHSTATE=1
-    GIT_PS1_SHOWUPSTREAM='verbose'
-    source ~/.git-prompt.sh
+    GIT_PS1_SHOWUPSTREAM=verbose
+    source /usr/share/git/git-prompt.sh
+    # shellcheck disable=SC2016
     git_ps1='$(__git_ps1 " (%s)")'
 fi
 
@@ -255,7 +262,8 @@ up() {
 _prompt_colors=(0 1 2 3 4 5 6)
 _prompt_styles=(0 1 3 4)
 _hashcolor() {
-    local hash=$(echo -n "$1" | md5sum)
+    local hash
+    hash=$(echo -n "$1" | md5sum)
     local color_index=$(( 0x${hash:0:8} % ${#_prompt_colors[@]} ))
     local style_index=$(( 0x${hash:8:8} % ${#_prompt_styles[@]} ))
     local color=${_prompt_colors[color_index]}
@@ -266,6 +274,7 @@ _hashcolor() {
     fi
     echo -E "\e[${style};3${color}m"
 }
+# shellcheck disable=SC2016
 color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
 reset='\[\e[0m\]'
 PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1}\n[\j]\\\$ "
