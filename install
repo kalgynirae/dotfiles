@@ -1,19 +1,19 @@
 #!/bin/bash
 
 maybelink() {
-    if [[ ! -e $1 ]]; then
-        echo "$1 doesn't exist; skipping"
-    elif [[ $2 -ef $1 ]]; then
-        echo "$2 is already correct; skipping"
-    else
-        [[ -d $(dirname "$2") ]] || mkdir -p "$(dirname "$2")"
-        if [[ -e $2 || -h $2 ]]; then
-            echo mv "$2" "$2.old"
-            mv "$2" "$2.old"
-        fi
-        echo ln --symbolic --relative "$1" "$2"
-        ln --symbolic --relative "$1" "$2"
+  if [[ ! -e $1 ]]; then
+    echo "$1 doesn't exist; skipping"
+  elif [[ $2 -ef $1 ]]; then
+    echo "$2 is already correct; skipping"
+  else
+    [[ -d $(dirname "$2") ]] || mkdir -p "$(dirname "$2")"
+    if [[ -e $2 || -h $2 ]]; then
+      echo mv "$2" "$2.old"
+      mv "$2" "$2.old"
     fi
+    echo ln --symbolic --relative "$1" "$2"
+    ln --symbolic --relative "$1" "$2"
+  fi
 }
 
 maybelink Xresources ~/.Xresources
@@ -49,7 +49,7 @@ maybelink user-dirs.dirs ~/.config/user-dirs.dirs
 
 
 for app in applications/*; do
-    maybelink "$app" ~/.local/share/"$app"
+  maybelink "$app" ~/.local/share/"$app"
 done
 
 echo Run \'git submodule update --init\' to get the vim plugins

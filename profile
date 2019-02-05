@@ -1,8 +1,8 @@
 #!/bin/sh
 if command -v nvim >/dev/null; then
-    EDITOR=nvim
+  EDITOR=nvim
 else
-    EDITOR=vim
+  EDITOR=vim
 fi
 export EDITOR
 export FREETYPE_PROPERTIES='truetype:interpreter-version=40'
@@ -17,6 +17,6 @@ export TERMINAL=alacritty
 export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 
 if [ -z "$SSH_AUTH_SOCK" ] && pgrep -f gnome-keyring-daemon ; then
-    eval "$(gnome-keyring-daemon --start)"
-    export SSH_AUTH_SOCK
+  eval "$(gnome-keyring-daemon --start)"
+  export SSH_AUTH_SOCK
 fi
