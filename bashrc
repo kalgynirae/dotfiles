@@ -1,5 +1,5 @@
 #!/bin/bash
-[[ $- == *i* ]] || return
+[[ $- != *i* ]] && return
 
 HISTCONTROL=ignoreboth
 HISTFILE=~/.bash_history_actual
