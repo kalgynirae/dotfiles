@@ -1,3 +1,4 @@
+#!/bin/bash
 [[ $- == *i* ]] || return
 
 HISTCONTROL=ignoreboth

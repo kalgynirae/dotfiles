@@ -1,3 +1,4 @@
+#!/bin/sh
 if command -v nvim >/dev/null; then
     EDITOR=nvim
 else
