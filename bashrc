@@ -24,9 +24,12 @@ alias la='ls --almost-all --classify'
 alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
 alias lines='xargs printf "%s\n"'
 alias ll='ls -l --human-readable'
+alias lolcat='lolcat -ft'
 alias ls='ls --color'
+alias now='date +%s'
+alias parallel='parallel --will-cite'
 alias py=ipython3
-alias python='python2'
+alias python=python2
 alias quotes="sed \"s/^/'/; s/$/'/\""
 alias rm='rm --one-file-system'
 alias ssh='ssh-with-terminfo'
@@ -153,6 +156,11 @@ field() {
 # Highlight occurrences of the given strings
 hl() {
   grep -E --color=always -- "$(printf '%s|' "$@")"
+}
+
+# Make info pages act more like man pages
+info() {
+  command info --subnodes -o - "$@" | less
 }
 
 # Extract the corresponding lines
