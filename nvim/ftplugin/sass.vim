@@ -1,0 +1,1 @@
+setlocal sts=2
