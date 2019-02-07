@@ -2,34 +2,24 @@
 
 import argparse
 import collections
-from collections import Counter
-from collections import defaultdict
-from collections import namedtuple
-from collections import OrderedDict
-from contextlib import contextmanager
 import datetime
-from datetime import date
-from datetime import datetime
-from datetime import timedelta
-from fractions import Fraction
-from functools import partial
 import itertools
-from itertools import chain
-from itertools import combinations
-from itertools import count
-from itertools import permutations
-from itertools import product
-from itertools import starmap
 import json
+import os
 import random
-from random import choice, sample
-from shlex import quote
+import sys
 import unicodedata
 import urllib
+from collections import Counter, OrderedDict, defaultdict, namedtuple
+from contextlib import contextmanager
+from datetime import date, datetime, timedelta
+from fractions import Fraction
+from functools import partial, reduce
+from itertools import chain, combinations, count, permutations, product, starmap
+from random import choice, sample
+from shlex import quote
 from urllib.parse import quote as url_quote
 from urllib.parse import unquote as url_unquote
-import os
-import sys
 
 if sys.version_info.major > 2:
     from pathlib import Path
@@ -40,6 +30,7 @@ else:
         print(".pythonrc: Module readline not available.")
     else:
         import rlcompleter
-        readline.parse_and_bind('tab: complete')
+
+        readline.parse_and_bind("tab: complete")
 
 parser = argparse.ArgumentParser()
