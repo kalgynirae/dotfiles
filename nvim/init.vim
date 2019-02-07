@@ -40,6 +40,7 @@ nmap \n :noh<CR>
 nmap \o :colo default<CR>:set bg=dark<CR>
 nmap \p :setlocal invpaste paste?<CR>
 nmap \s :setlocal invspell spell?<CR>
+nmap <F5> :make<CR>
 cmap w!! silent w !sudo tee >/dev/null %
 map Q :ALEFix<CR>
 xnoremap p pgvy
@@ -60,6 +61,9 @@ autocmd BufReadPost * silent! normal! g'"
 let html_no_rendering=1
 let python_highlight_string_format=1
 let python_highlight_string_formatting=1
+let g:ale_echo_msg_format="[%linter%]%[code]% %s"
+let g:ale_lint_on_text_changed="normal"
+let g:ctrlp_max_files = 2000
 " For debugging color scheme and syntax definitions
 function ShowSyntaxNames()
   for id in synstack(line("."), col("."))
