@@ -20,6 +20,7 @@ alias f4='field 4'
 alias f5='field 5'
 alias grep='grep --color'
 alias iotop='sudo iotop --delay 2'
+alias l=less
 alias la='ls --almost-all --classify'
 alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
 alias lines='xargs printf "%s\n"'
