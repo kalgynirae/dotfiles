@@ -15,7 +15,7 @@ set ignorecase
 set inccommand=nosplit
 set laststatus=2
 set list listchars=tab:‣\ ,extends:»,precedes:«,nbsp:‧,trail:░
-set mouse=
+set mouse=a
 set nowrap
 set number
 set ruler
