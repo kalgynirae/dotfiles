@@ -21,6 +21,9 @@ case $(hostname) in
         #xrandr \
         #    --output eDP-1 --auto --pos 2560x0 \
         #    --output HDMI-2 --auto --pos 0x0
+        #xrandr \
+        #    --output eDP-1 --auto \
+        #    --output DP-1 --auto --above eDP-1
         xrandr \
             --output eDP-1 --auto --pos 0x160 \
             --output DP-1-8 --auto --pos 2560x0 \
