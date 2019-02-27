@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
 [[ " $* " == *" --help "* ]] && { scrot --help; exit; }
 path=$(scrot "$@" ~/pictures/screenshots/'%Y-%m-%d-%s-$wx$h.png' -e 'echo $f')
-(( $? == 0 )) && notify-send -a screenshot -t 5000 -u low screenshot "Screenshot saved to $path"
-feh "$path" &
+(( $? == 0 )) && notify-send -a screenshot -t 5000 -u low screenshot "Screenshot saved to $path" &
+(( $# == 0 )) || feh "$path" &
