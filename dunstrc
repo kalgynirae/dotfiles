@@ -1,15 +1,13 @@
 [global]
 alignment = center
-allow_markup = yes
 browser = xdg-open
 follow = mouse
 font = Ubuntu 12
 format = "<b>%s:</b> %b %p"
 geometry = "+0+19"
-icon_folders = /usr/share/icons/gnome/16x16/actions:/usr/share/icons/gnome/16x16/apps:/usr/share/icons/gnome/16x16/devices:/usr/share/icons/gnome/16x16/places:/usr/share/icons/gnome/16x16/mimetypes:/usr/share/icons/gnome/16x16/status
 icon_position = left
+markup = full
 padding = 8
-show_indicators = yes
 
 [shortcuts]
 close = mod4+c
