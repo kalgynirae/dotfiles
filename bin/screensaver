@@ -10,7 +10,6 @@ kill-screensaver() {
 
 launch-screensaver() {
   xss-lock --transfer-sleep-lock \
-    --notifier 'notify-send --urgency low screensaver "Screen locking imminent!"' \
     -- ~/bin/lock-screen &
 }
 
