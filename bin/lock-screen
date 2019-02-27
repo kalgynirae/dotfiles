@@ -1,0 +1,22 @@
+#!/bin/bash
+# based on transfer-sleep-lock-i3lock.sh from xss-lock
+
+i3lock_options=(--image ~/.cache/wallpaper.png --tiling --show-failed-attempts)
+
+if [[ -e /dev/fd/${XSS_SLEEP_LOCK_FD:--1} ]]; then
+  trap 'pkill -xu $EUID i3lock' TERM INT
+
+  # Prevent i3lock from inheriting a copy of the lock fd
+  i3lock "${i3lock_options[@]}" {XSS_SLEEP_LOCK_FD}<&-
+
+  # Close the fd to indicate we're ready to sleep
+  exec {XSS_SLEEP_LOCK_FD}<&-
+
+  while pkill -xu $EUID -0 i3lock; do
+    sleep 0.5
+  done
+else
+  trap 'kill %%' TERM INT
+  i3lock -n "${i3lock_options[@]}" &
+  wait
+fi

@@ -1,31 +1,55 @@
 #!/bin/bash
 
+check-screensaver() {
+  pgrep -xu $EUID xss-lock >/dev/null
+}
+
+kill-screensaver() {
+  pkill -xu $EUID xss-lock
+}
+
+launch-screensaver() {
+  xss-lock --transfer-sleep-lock \
+    --notifier 'notify-send --urgency low screensaver "Screen locking imminent!"' \
+    -- ~/bin/lock-screen &
+}
+
+set-x-timeouts() {
+  local timeout_sec=$(($1 * 60))
+  local pre_lock_notify_sec=30
+  local pre_lock_blank_sec=20
+  xset \
+    s $((timeout_sec - pre_lock_notify_sec)) $((pre_lock_notify_sec)) \
+    dpms $((timeout_sec - pre_lock_blank_sec)) 0 $((timeout_sec))
+}
+
 case $1 in
-    on)
-        pgrep xscreensaver || xscreensaver &
-        case $(hostname) in
-            apartmanteau)
-                xset s 885 15 dpms 0 0 900  # 15 minutes
-                ;;
-            colinchan-x1)
-                xset s 285 15 dpms 0 0 300  # 5 minutes
-                xset -dpms  # temporary to see if it solves the freezing problem
-                ;;
-            *)
-                xset s 285 15 dpms 0 0 300  # 5 minutes
-                ;;
-        esac
+  on)
+    case $(hostname) in
+      apartmanteau)
+        set-x-timeouts 30
         ;;
-    off)
-        xscreensaver-command -exit
-        xset s off -dpms
+      *)
+        set-x-timeouts 5
         ;;
-    lock)
-        pgrep xscreensaver || { xscreensaver & sleep 1 ; }
-        xscreensaver-command -lock
-        ;;
-    *)
-        echo "usage: $(basename "$0") {on|off|lock}" >&2
-        exit 1
-        ;;
+    esac
+    if ! check-screensaver; then
+      launch-screensaver
+      sleep 0.5
+    fi
+    ;;
+  off)
+    kill-screensaver
+    xset s off -dpms
+    ;;
+  lock)
+    check-screensaver || "$0" on
+    loginctl lock-session
+    sleep 1
+    xset dpms force standby
+    ;;
+  *)
+    echo "usage: $(basename "$0") {on|off|lock}" >&2
+    exit 1
+    ;;
 esac

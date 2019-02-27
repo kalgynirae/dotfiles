@@ -18,11 +18,7 @@ fi
 
 pgrep compton || compton -CGb --no-fading-openclose
 
-if [[ $(hostname) == apartmanteau ]]; then
-    screensaver off
-else
-    screensaver on
-fi
+screensaver on
 
 pgrep polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
