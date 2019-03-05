@@ -40,6 +40,7 @@ nmap \n :noh<CR>
 nmap \o :colo default<CR>:set bg=dark<CR>
 nmap \p :setlocal invpaste paste?<CR>
 nmap \s :setlocal invspell spell?<CR>
+nmap \r :call wordhighlight#highlight_under_cursor()<CR>
 nmap <F5> :make<CR>
 cmap w!! silent w !sudo tee >/dev/null %
 map Q :ALEFix<CR>
