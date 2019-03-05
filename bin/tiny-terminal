@@ -1,0 +1,3 @@
+#!/bin/bash
+
+WINIT_HIDPI_FACTOR=0.65 exec alacritty --class tiny-terminal --dimensions 120 16
