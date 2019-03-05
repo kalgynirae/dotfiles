@@ -44,7 +44,7 @@ case $1 in
   lock)
     check-screensaver || "$0" on
     loginctl lock-session
-    sleep 1
+    sleep 2
     xset dpms force standby
     ;;
   *)
