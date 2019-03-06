@@ -77,26 +77,24 @@ authorx=$(( width - authorwidth - quotepadding ))
 authory=$(( height - authorheight - quotepadding - bottompadding ))
 
 # Resize wallpaper
-echo "resizing..."
 magick \
   "$wallpaper" \
   -resize "$primarysize^" \
   -gravity center \
   -extent "$primarysize" \
-  -fill "#00000080" \
-  -draw "roundRectangle $quoteboxx0,$quoteboxy0 $quoteboxx1,$quoteboxy1 $borderradius,$borderradius" \
-  "$dir/resized.png"
+  "$dir/resized.mpc"
 
 # Layer everything together
-echo "rendering..."
 magick \
-  "$dir/resized.png" \
+  "$dir/resized.mpc" \
+  -fill "#00000080" \
+  -draw "roundRectangle $quoteboxx0,$quoteboxy0 $quoteboxx1,$quoteboxy1 $borderradius,$borderradius" \
   \( "$dir/quote-black.png" -repage "+$(( quotex + 2 ))+$(( quotey + 3 ))" \) \
   \( "$dir/quote-white.png" -repage "+$quotex+$quotey" \) \
   \( "$dir/author-black.png" -repage "+$(( authorx + 2 ))+$(( authory + 3 ))" \) \
   \( "$dir/author-white.png" -repage "+$authorx+$authory" \) \
   -layers flatten \
-  ~/.cache/wallpaper.png
+  -quality 95 \
+  ~/.cache/wallpaper.jpg
 
-echo "done!"
-feh --bg-max --image-bg black ~/.cache/wallpaper.png
+feh --bg-max --image-bg black ~/.cache/wallpaper.jpg
