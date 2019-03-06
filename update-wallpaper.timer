@@ -1,5 +1,7 @@
 [Timer]
-OnCalendar=*:0/15
+AccuracySec=1m
+OnBootSec=30m
+OnUnitActiveSec=30m
 
 [Install]
 WantedBy=timers.target
