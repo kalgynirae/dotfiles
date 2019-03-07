@@ -44,8 +44,6 @@ case $1 in
   lock)
     check-screensaver || "$0" on
     loginctl lock-session
-    sleep 2
-    xset dpms force standby
     ;;
   *)
     echo "usage: $(basename "$0") {on|off|lock}" >&2
