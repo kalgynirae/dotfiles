@@ -97,4 +97,8 @@ magick \
   -quality 95 \
   ~/.cache/wallpaper.jpg
 
+# Launch a job to convert the JPG to a PNG (for i3lock)
+systemd-run --user --unit update-wallpaper-convert magick ~/.cache/wallpaper.jpg ~/.cache/wallpaper.png
+
+# Set the background
 feh --bg-max --image-bg black ~/.cache/wallpaper.jpg
