@@ -11,7 +11,7 @@ font pango:DejaVu Sans 8
 bindsym $mod+grave kill
 bindsym $mod+Return exec WINIT_HIDPI_FACTOR=1 i3-sensible-terminal -e tmux new-session
 bindsym $mod+Shift+Return exec WINIT_HIDPI_FACTOR=1 i3-sensible-terminal
-bindsym $mod+space exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+space exec rofi -show drun
 bindsym $mod+Shift+s exec --no-startup-id shutdown-prompt
 
 # change focus
