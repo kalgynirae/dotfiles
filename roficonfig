@@ -1,3 +1,2 @@
-configuration {
-  modi: "drun,run,window";
-}
+rofi.modi: drun,run,window
+rofi.theme: /usr/share/rofi/themes/Arc-Dark.rasi

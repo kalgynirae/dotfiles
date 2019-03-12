@@ -38,9 +38,10 @@ maybelink nvim/init.vim ~/.vimrc
 maybelink nvim/pack ~/.local/share/nvim/site/pack
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
+maybelink roficonfig ~/.config/rofi/config
+maybelink sound/compressor.service ~/.config/systemd/user/compressor.service
 maybelink sound/default.pa ~/.config/pulse/default.pa
 maybelink sound/jack.service ~/.config/systemd/user/jack.service
-maybelink sound/compressor.service ~/.config/systemd/user/compressor.service
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
 maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
