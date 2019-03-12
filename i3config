@@ -7,7 +7,7 @@ floating_modifier $mod
 new_window pixel 4
 gaps inner 25
 
-font pango:DejaVu Sans 8
+font pango:DejaVu Sans 9
 
 bindsym $mod+grave kill
 bindsym $mod+Return exec --no-startup-id WINIT_HIDPI_FACTOR=1 i3-sensible-terminal -e tmux new-session
@@ -106,7 +106,7 @@ bindsym $mod+r mode "resize"
 set $bg1 #505050
 set $bg2 #303030
 set $bg3 #181818
-set $bg3a #181818c0
+set $bgbar #000000b0
 set $text #d3d7cf
 set $text2 #a0a0a0
 set $line #555753
@@ -141,7 +141,7 @@ bar {
     #status_command i3status | ~/python/i3-weather/weather.py 55970494 --wrap-i3-status --position 0 --unit C
     #status_command i3status | sed -u 's/CHR[^"]\+"/BAT 03.14% 00:01:59"/'
     colors {
-        background $bg3a
+        background $bgbar
         separator $line
         statusline $text
 
