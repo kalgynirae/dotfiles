@@ -5,6 +5,7 @@
 set $mod Mod4
 floating_modifier $mod
 new_window pixel 4
+gaps inner 25
 
 font pango:DejaVu Sans 8
 
@@ -105,6 +106,7 @@ bindsym $mod+r mode "resize"
 set $bg1 #505050
 set $bg2 #303030
 set $bg3 #181818
+set $bg3a #181818c0
 set $text #d3d7cf
 set $text2 #a0a0a0
 set $line #555753
@@ -133,12 +135,13 @@ set $red3 #a40000
 bar {
     position top
     status_command i3status
+    i3bar_command i3bar -t
     #status_command i3status | ~/python/i3-weather/weather.py 2408354 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
     #status_command i3status | ~/python/i3-weather/weather.py 2444409 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
     #status_command i3status | ~/python/i3-weather/weather.py 55970494 --wrap-i3-status --position 0 --unit C
     #status_command i3status | sed -u 's/CHR[^"]\+"/BAT 03.14% 00:01:59"/'
     colors {
-        background $bg3
+        background $bg3a
         separator $line
         statusline $text
 
