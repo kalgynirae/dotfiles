@@ -102,4 +102,4 @@ magick \
 systemd-run --user --unit update-wallpaper-convert magick ~/.cache/wallpaper.jpg -modulate 100,20,15 ~/.cache/wallpaper-lock.png
 
 # Set the background
-feh --bg-max --image-bg black ~/.cache/wallpaper.jpg
+feh --bg-tile ~/.cache/wallpaper.jpg
