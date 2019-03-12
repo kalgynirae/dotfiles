@@ -22,6 +22,7 @@ maybelink atom-keymap.cson ~/.atom/keymap.cson
 maybelink bash_profile ~/.bash_profile
 maybelink bashrc ~/.bashrc
 maybelink bin ~/bin
+maybelink compton.conf ~/.config/compton.conf
 maybelink dunstrc ~/.config/dunst/dunstrc
 maybelink feh-themes ~/.config/feh/themes
 maybelink fonts.conf ~/.config/fontconfig/fonts.conf
