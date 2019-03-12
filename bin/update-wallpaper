@@ -42,7 +42,8 @@ render-text() {
   identify "$outfilebase-white.png" | grep -Po '\d+x\d+' | head -n1
 }
 
-dir=$(mktemp -dt generate-wallpaper.XXXX)
+dir=~/.cache/update-wallpaper
+mkdir -p "$dir"
 
 borderradius=20
 bottompadding=150
