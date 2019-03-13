@@ -1,5 +1,11 @@
 #!/bin/bash
 
+known_packages() {
+  comm -23 packages <(sudo pacman -S --needed $(<packages) |& grep "target not found" | awk '{print $5}')
+}
+
+sudo pacman -S --needed $(known_packages)
+
 maybelink() {
   if [[ ! -e $1 ]]; then
     echo "$1 doesn't exist; skipping"
@@ -49,9 +55,8 @@ maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.servi
 maybelink update-wallpaper.timer ~/.config/systemd/user/update-wallpaper.timer
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs
 
-
 for app in applications/*; do
   maybelink "$app" ~/.local/share/"$app"
 done
 
-echo Run \'git submodule update --init\' to get the vim plugins
+echo "Run 'git submodule update --init' to get the vim plugins"
