@@ -7,7 +7,7 @@ case $(hostname) in
         ;;
 esac
 
-ACTION=$(printf '%s\n' "${ACTIONS[@]}" | dmenu -p systemctl)
+ACTION=$(printf '%s\n' "${ACTIONS[@]}" | rofi -dmenu -p shutdown)
 
 if [[ $ACTION == reboot-to-windows ]]; then
     sudo set-bootnext Windows
