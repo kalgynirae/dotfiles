@@ -7,7 +7,7 @@ floating_modifier $mod
 new_window pixel 4
 gaps inner 25
 
-font pango:DejaVu Sans 9
+font pango:DejaVu Sans 10
 
 bindsym $mod+grave kill
 bindsym $mod+Return exec --no-startup-id WINIT_HIDPI_FACTOR=1 i3-sensible-terminal -e tmux new-session
