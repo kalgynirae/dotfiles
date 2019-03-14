@@ -96,10 +96,13 @@ magick \
   \( "$dir/author-white.png" -repage "+$authorx+$authory" \) \
   -layers flatten \
   -quality 95 \
-  ~/.cache/wallpaper.jpg
+  "$dir/wallpaper.jpg"
 
-# Launch a job to convert the JPG to a PNG (for i3lock)
-systemd-run --user --unit update-wallpaper-convert magick ~/.cache/wallpaper.jpg -modulate 100,20,15 ~/.cache/wallpaper-lock.png
+# Convert the JPG to a PNG (for i3lock)
+magick "$dir/wallpaper.jpg" -modulate 100,20,15 -quality 05 "$dir/wallpaper-lock.png"
+
+# Overwrite the old ones
+mv -t ~/.cache "$dir/wallpaper.jpg" "$dir/wallpaper-lock.png"
 
 # Set the background
 feh --bg-tile ~/.cache/wallpaper.jpg
