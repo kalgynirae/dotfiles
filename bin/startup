@@ -16,7 +16,7 @@ if ! pgrep redshift; then
   esac
 fi
 
-pgrep compton || compton --daemon
+[[ $(hostname) != colinchan-x1 ]] && pgrep compton || compton --daemon
 
 screensaver on
 
