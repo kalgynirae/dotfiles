@@ -1,3 +1,3 @@
-rofi.modi: drun,run,window
+rofi.modi: drun,history:~/bin/rofi-browser-history,window
 rofi.show-icons: true
 rofi.theme: /usr/share/rofi/themes/Arc-Dark.rasi

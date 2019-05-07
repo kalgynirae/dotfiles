@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+import os
+import shutil
+import sqlite3
+from pathlib import Path
+from sys import argv
+from gi.repository.GLib import markup_escape_text
+
+if len(argv) == 2:
+    os.execlp("browser", "browser", argv[1])
+
+places = next((Path.home()/ ".mozilla/firefox/").expanduser().glob("*.default")) / "places.sqlite"
+runtimedir = Path(os.environ["XDG_RUNTIME_DIR"])
+places_copy = runtimedir / "places.sqlite"
+shutil.copy(places, places_copy)
+
+conn = sqlite3.connect(places_copy)
+cur = conn.cursor()
+cur.execute(
+    """
+    select title, url
+    from moz_places
+    where url != "" and title != ""
+    order by last_visit_date desc
+    """
+)
+rows = cur.fetchall()
+
+print("\0prompt\x1fhistory")
+print("\0markup-rows\x1ftrue")
+for title, url in rows:
+    print(f"{markup_escape_text(title)} <span weight='light' size='small'><i>{markup_escape_text(url)}</i></span>")
