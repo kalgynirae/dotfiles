@@ -58,6 +58,7 @@ pulseaudio-bluetooth
 pulseaudio-jack
 realtime-privileges
 redshift
+rofi
 rsync
 ruby
 scrot

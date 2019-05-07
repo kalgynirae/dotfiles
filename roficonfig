@@ -1,4 +1,5 @@
 rofi.drun-match-fields: name,generic
-rofi.modi: drun,history:~/bin/rofi-browser-history,window
+rofi.modi: drun,window
 rofi.show-icons: true
+rofi.sidebar-mode: true
 rofi.theme: /usr/share/rofi/themes/Arc-Dark.rasi

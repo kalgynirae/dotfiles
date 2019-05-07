@@ -13,6 +13,7 @@ bindsym $mod+grave kill
 bindsym $mod+Return exec --no-startup-id WINIT_HIDPI_FACTOR=1 i3-sensible-terminal -e tmux new-session
 bindsym $mod+Shift+Return exec --no-startup-id WINIT_HIDPI_FACTOR=1 i3-sensible-terminal
 bindsym $mod+space exec rofi -show drun
+bindsym $mod+u exec ~/bin/rofi-browser-history
 bindsym $mod+Shift+s exec --no-startup-id shutdown-prompt
 
 # change focus

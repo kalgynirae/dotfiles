@@ -2,14 +2,17 @@
 import os
 import shutil
 import sqlite3
+from html import unescape
 from pathlib import Path
-from sys import argv
-from gi.repository.GLib import markup_escape_text
+import subprocess
+import sys
 
-if len(argv) == 2:
-    os.execlp("browser", "browser", argv[1])
+from gi.repository.GLib import markup_escape_text as escape
 
-places = next((Path.home()/ ".mozilla/firefox/").expanduser().glob("*.default")) / "places.sqlite"
+places = (
+    next((Path.home() / ".mozilla/firefox/").expanduser().glob("*.default"))
+    / "places.sqlite"
+)
 runtimedir = Path(os.environ["XDG_RUNTIME_DIR"])
 places_copy = runtimedir / "places.sqlite"
 shutil.copy(places, places_copy)
@@ -21,12 +24,40 @@ cur.execute(
     select title, url
     from moz_places
     where url != "" and title != ""
+    group by url
     order by last_visit_date desc
     """
 )
 rows = cur.fetchall()
 
-print("\0prompt\x1fhistory")
-print("\0markup-rows\x1ftrue")
+# fmt: off
+args = [
+    "rofi",
+    "-dmenu",
+    "-kb-custom-1", "alt-c",
+    "-format", "i",
+    "-i",
+    "-markup-rows",
+    "-mesg", "<b>Enter</b>: open   <b>Alt+c</b>: copy",
+    "-no-custom",
+    "-p", "history",
+]
+# fmt: on
+
+proc = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
 for title, url in rows:
-    print(f"{markup_escape_text(title)} <span weight='light' size='small'><i>{markup_escape_text(url)}</i></span>")
+    proc.stdin.write(
+        f"{escape(title)} <span weight='light' size='small'><i>«{escape(url)}»</i></span>\n"
+    )
+stdout, _ = proc.communicate()
+
+if proc.returncode == 1:
+    sys.exit(1)
+
+index = int(stdout.strip())
+url = rows[index][1]
+
+if proc.returncode == 0:
+    subprocess.run(["browser", url])
+elif proc.returncode == 10:
+    subprocess.run(["xsel", "--clipboard"], input=url, text=True)
