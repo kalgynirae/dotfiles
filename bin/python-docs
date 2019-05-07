@@ -1,6 +1,7 @@
 #!/bin/bash
 
 modules=(
+  2to3
   __future__
   __main__
   _dummy_thread
@@ -33,10 +34,13 @@ modules=(
   codecs
   codeop
   collections
+  collections.abc
   colorsys
   compileall
   concurrent
+  concurrent.futures
   configparser
+  constants
   contextlib
   contextvars
   copy
@@ -45,6 +49,9 @@ modules=(
   csv
   ctypes
   curses
+  curses.ascii
+  curses.panel
+  curses.textpad
   dataclasses
   datetime
   dbm
@@ -59,6 +66,7 @@ modules=(
   ensurepip
   enum
   errno
+  exceptions
   faulthandler
   fcntl
   filecmp
@@ -67,6 +75,7 @@ modules=(
   formatter
   fractions
   ftplib
+  functions
   functools
   gc
   getopt
@@ -79,7 +88,13 @@ modules=(
   heapq
   hmac
   html
+  html.entities
+  html.parser
   http
+  http.client
+  http.cookiejar
+  http.cookies
+  http.server
   imaplib
   imghdr
   imp
@@ -94,6 +109,8 @@ modules=(
   linecache
   locale
   logging
+  logging.config
+  logging.handlers
   lzma
   mailbox
   mailcap
@@ -112,6 +129,7 @@ modules=(
   operator
   optparse
   os
+  os.path
   ossaudiodev
   parser
   pathlib
@@ -132,6 +150,7 @@ modules=(
   py_compile
   pyclbr
   pydoc
+  pyexpat
   queue
   quopri
   random
@@ -160,6 +179,7 @@ modules=(
   ssl
   stat
   statistics
+  stdtypes
   string
   stringprep
   struct
@@ -181,6 +201,9 @@ modules=(
   time
   timeit
   tkinter
+  tkinter.scrolledtext
+  tkinter.tix
+  tkinter.ttk
   token
   tokenize
   trace
@@ -193,7 +216,13 @@ modules=(
   typing
   unicodedata
   unittest
+  unittest.mock
   urllib
+  urllib.error
+  urllib.parse
+  urllib.request
+  urllib.response
+  urllib.robotparser
   uu
   uuid
   venv
@@ -206,7 +235,17 @@ modules=(
   wsgiref
   xdrlib
   xml
+  xml.dom
+  xml.dom.minidom
+  xml.dom.pulldom
+  xml.etree.elementtree
+  xml.sax
+  xml.sax.handler
+  xml.sax.saxutils
+  xml.sax.xmlreader
   xmlrpc
+  xmlrpc.client
+  xmlrpc.server
   zipapp
   zipfile
   zipimport
