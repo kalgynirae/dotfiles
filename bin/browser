@@ -1,10 +1,10 @@
 #!/bin/bash
 
 case $(hostname) in
-    colinchan-x1)
-        chromium "$@"
-        ;;
-    *)
-        env GTK_THEME=Adwaita:light firefox "$@"
-        ;;
+  colinchan-x1)
+    firefox "$@"
+    ;;
+  *)
+    env GTK_THEME=Adwaita:light firefox "$@"
+    ;;
 esac
