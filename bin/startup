@@ -16,7 +16,7 @@ if ! pgrep redshift; then
   esac
 fi
 
-[[ $(hostname) != colinchan-x1 ]] && pgrep compton || compton --daemon
+[[ $(hostname) != colinchan-x1 ]] && { pgrep compton || compton --daemon; }
 
 screensaver on
 
@@ -26,4 +26,4 @@ pgrep -f beamux-server || ~/bash/beamux/beamux-server &>/tmp/beamux-server.log &
 
 [[ $(hostname) == colinchan-x1 ]] && { pgrep nm-applet || nm-applet & }
 
-$HOME/bin/refresh-peripherals
+~/bin/refresh-peripherals
