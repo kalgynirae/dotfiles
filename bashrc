@@ -200,7 +200,20 @@ quote() {
 }
 
 rename-tmux-window() {
-  [[ -n $TMUX ]] && tmux rename-window "$1"
+  [[ $TMUX ]] && tmux rename-window "$1"
+}
+
+# Replay the output of a previous command to stdout
+that() {
+  local n=${1:--1}
+  if (( n < 0 )); then
+    (( n += _command_count ))
+  fi
+  tmux capture-pane -eJp -S - -E - | awk '
+    /^▶▶▶.*\['$n'\] *$/ {p=1; next}
+    /^▶▶▶/ {if (p == 1) {exit}}
+    p
+  '
 }
 
 _tmux-complete() {
@@ -287,7 +300,8 @@ _hashcolor() {
 # shellcheck disable=SC2016
 color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
 reset='\[\e[0m\]'
-PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1}\n[\j]\\\$ "
+PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1} [\$((++_command_count))]\n[\j]\\\$ "
+: "${_command_count:=-1}"
 
 lilyloop() {
   while true; do
