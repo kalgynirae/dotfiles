@@ -18,6 +18,7 @@ from functools import partial, reduce
 from itertools import chain, combinations, count, permutations, product, starmap
 from random import choice, sample
 from shlex import quote
+from typing import NamedTuple
 from urllib.parse import quote as url_quote
 from urllib.parse import unquote as url_unquote
 
