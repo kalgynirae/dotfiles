@@ -210,7 +210,7 @@ that() {
     (( n += _command_count ))
   fi
   tmux capture-pane -eJp -S - -E - | awk '
-    /^▶▶▶.*\['$n'\] *$/ {p=1; next}
+    /^▶▶▶.*\['$n'\]/ {p=1; next}
     /^▶▶▶/ {if (p == 1) {exit}}
     p
   '
@@ -299,8 +299,9 @@ _hashcolor() {
 }
 # shellcheck disable=SC2016
 color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
+black='\[\e[30m\]'
 reset='\[\e[0m\]'
-PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1} [\$((++_command_count))]\n[\j]\\\$ "
+PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1} ${black}[\$((++_command_count))]${reset}\n[\j]\\\$ "
 : "${_command_count:=-1}"
 
 lilyloop() {
