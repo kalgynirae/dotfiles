@@ -191,6 +191,13 @@ open() {
   xdg-open "$1" &>/dev/null
 }
 
+pedit() {
+  local file
+  file="$(mktemp -d)/pedit" || return
+  $EDITOR >/dev/tty - +"file $file"
+  [[ -f "$file" ]] && cat "$file" || return 1
+}
+
 # Return a string which, when evaluated by a shell, yields the original arguments
 quote() {
   local quoted
