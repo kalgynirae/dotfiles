@@ -4,12 +4,12 @@ from pygments.token import Token
 
 class AnsiStyle(Style):
     styles = {
-        Token.Comment: "#ansidarkgray",
-        Token.Keyword: "#ansidarkred bold",
-        Token.Literal: "#ansifuchsia",
-        Token.Literal.String: "#ansibrown",
-        Token.Literal.String.Escape: "#ansiteal italic",
-        Token.Name.Decorator: "#ansidarkgreen",
+        Token.Comment: "ansibrightblack",
+        Token.Keyword: "ansired bold",
+        Token.Literal: "ansibrightmagenta",
+        Token.Literal.String: "ansiyellow",
+        Token.Literal.String.Escape: "ansicyan italic",
+        Token.Name.Decorator: "ansigreen",
     }
 
 c.TerminalInteractiveShell.confirm_exit = False
