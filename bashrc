@@ -191,6 +191,7 @@ open() {
   xdg-open "$1" &>/dev/null
 }
 
+# Open stdin for manual editing, then write it to stdout when saved
 pedit() {
   local file
   file="$(mktemp -d)/pedit" || return
