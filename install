@@ -22,6 +22,7 @@ maybelink() {
   fi
 }
 
+maybelink XCompose ~/.XCompose
 maybelink Xresources ~/.Xresources
 maybelink alacritty.yml ~/.config/alacritty/alacritty.yml
 maybelink atom-keymap.cson ~/.atom/keymap.cson
