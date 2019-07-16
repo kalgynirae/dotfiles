@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pgrep sxhkd || sxhkd &
+# pgrep sxhkd || sxhkd &
 
 if ! pgrep redshift; then
   case "$(timedatectl show -p Timezone --value)" in
