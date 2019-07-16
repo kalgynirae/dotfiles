@@ -10,6 +10,7 @@ set revert-all-at-newline on
 set skip-completed-text on
 set show-all-if-unmodified on
 set show-mode-in-prompt on
+set emacs-mode-string "\1\e[2 q\2"
 set vi-cmd-mode-string "\1\e[2 q\2"
 set vi-ins-mode-string "\1\e[6 q\2"
 
@@ -27,6 +28,8 @@ set keymap vi-insert
 "\C-p":history-search-backward
 "\C-w":unix-word-rubout
 "\C-]":old-menu-complete
+"\e.":yank-last-arg
+"\e\C-h":backward-kill-word
 
 set keymap vi-move
 "o":edit-and-execute-command
