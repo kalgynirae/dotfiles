@@ -309,7 +309,8 @@ _hashcolor() {
 color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
 black='\[\e[30m\]'
 reset='\[\e[0m\]'
-PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1} ${black}[\$((++_command_count))]${reset}\n[\j]\\\$ "
+maybe_newline="\$(IFS=';' read -s -d R -p $'\\E[6n' ROW COL; (( COL == 1 )) || printf '\\e[41;1m%%\\e[m\\n' >&2)"
+PS1="${maybe_newline}▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1} ${black}[\$((++_command_count))]${reset}\n[\j]\\\$ "
 : "${_command_count:=-1}"
 
 lilyloop() {
