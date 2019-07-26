@@ -14,11 +14,6 @@ set emacs-mode-string "\1\e[6 q\2"
 set vi-cmd-mode-string "\1\e[2 q\2"
 set vi-ins-mode-string "\1\e[6 q\2"
 
-set keymap emacs
-"\C-n":history-search-forward
-"\C-p":history-search-backward
-"\C-]":old-menu-complete
-
 set keymap vi-insert
 "\C-a":beginning-of-line
 "\C-b":backward-char
@@ -34,3 +29,8 @@ set keymap vi-insert
 
 set keymap vi-move
 "o":edit-and-execute-command
+
+set keymap emacs
+"\C-n":history-search-forward
+"\C-p":history-search-backward
+"\C-]":old-menu-complete
