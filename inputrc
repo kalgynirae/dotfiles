@@ -3,7 +3,6 @@ set colored-completion-prefix on
 set colored-stats on
 set completion-ignore-case on
 set completion-map-case on
-set editing-mode emacs
 set enable-bracketed-paste on
 set keyseq-timeout 100
 set revert-all-at-newline on
@@ -13,6 +12,11 @@ set show-mode-in-prompt on
 set emacs-mode-string "\1\e[6 q\2"
 set vi-cmd-mode-string "\1\e[2 q\2"
 set vi-ins-mode-string "\1\e[6 q\2"
+
+set keymap emacs
+"\C-n":history-search-forward
+"\C-p":history-search-backward
+"\C-]":old-menu-complete
 
 set keymap vi-insert
 "\C-a":beginning-of-line
@@ -30,7 +34,4 @@ set keymap vi-insert
 set keymap vi-move
 "o":edit-and-execute-command
 
-set keymap emacs
-"\C-n":history-search-forward
-"\C-p":history-search-backward
-"\C-]":old-menu-complete
+set editing-mode emacs
