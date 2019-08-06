@@ -156,7 +156,8 @@ field() {
 
 # Highlight occurrences of the given strings
 hl() {
-  grep -E --color=always -- "$(printf '%s|' "$@")"
+  regex="($(IFS="|"; echo "${*//\//\\\/}"))"
+  perl -pe "s/$regex/"$'\e\[7m$1\e\[27m/g'
 }
 
 # Make info pages act more like man pages
