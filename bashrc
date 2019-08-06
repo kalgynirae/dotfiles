@@ -218,10 +218,10 @@ that() {
   if (( n < 0 )); then
     (( n += _command_count ))
   fi
-  tmux capture-pane -eJp -S - -E - | awk '
-    /^▶▶▶.*\['$n'\]/ {p=1; next}
-    /^▶▶▶/ {if (p == 1) {exit}}
-    p
+  tmux capture-pane -eJp -S - -E - | perl -ne '
+    if (/▶▶▶.*\['$n'\]/) {$p = 1; next}
+    if (/(.*)▶▶▶.*\['$((n+1))'\]/ && $p == 1) {print $1; exit}
+    print if $p
   '
 }
 
@@ -310,8 +310,7 @@ _hashcolor() {
 color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
 black='\[\e[30m\]'
 reset='\[\e[0m\]'
-maybe_newline="\$(IFS=';' read -s -d R -p $'\\E[6n' ROW COL; (( COL == 1 )) || printf '\\e[41;1m%%\\e[m\\n' >&2)"
-PS1="${maybe_newline}▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1} ${black}[\$((++_command_count))]${reset}\n[\j]\\\$ "
+PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1} ${black}[\$((++_command_count))]${reset}\n[\j]\\\$ "
 : "${_command_count:=-1}"
 
 lilyloop() {
