@@ -4,6 +4,8 @@ if command -v nvim >/dev/null; then
 else
   EDITOR=vim
 fi
+
+export DIFFPROG="$EDITOR -d"
 export EDITOR
 export FREETYPE_PROPERTIES='truetype:interpreter-version=40'
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
