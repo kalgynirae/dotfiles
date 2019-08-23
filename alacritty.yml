@@ -48,7 +48,9 @@ selection:
   save_to_clipboard: true
 
 visual_bell:
-  duration: 0
+  animation: EaseOutQuad
+  duration: 800
+  color: '0x124355'
 
 window:
   dynamic_padding: true
