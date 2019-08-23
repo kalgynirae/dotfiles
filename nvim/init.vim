@@ -1,5 +1,4 @@
 set nocompatible
-set runtimepath+=/usr/share/vim/vimfiles
 colorscheme kalgykai
 
 set autoindent
@@ -30,24 +29,26 @@ set termguicolors
 set undofile
 set wildignore+=*/node_modules/*
 set wildmode=list:longest
+
 " Custom shortcuts
-nmap \c :setlocal colorcolumn=<CR>
-nmap \C :call hexcolor#toggle()<CR>
-nmap \f :setlocal foldmethod=indent<CR>
-nmap \i :call ShowSyntaxNames()<CR>
-nmap \m :setlocal invnumber number?<CR>
-nmap \n :noh<CR>
-nmap \o :colo default<CR>:set bg=dark<CR>
-nmap \p :setlocal invpaste paste?<CR>
-nmap \s :setlocal invspell spell?<CR>
-nmap \r :call wordhighlight#highlight_under_cursor()<CR>
+nmap <Leader>c :setlocal colorcolumn=<CR>
+nmap <Leader>C :call hexcolor#toggle()<CR>
+nmap <Leader>f :setlocal foldmethod=indent<CR>
+nmap <Leader>i :call ShowSyntaxNames()<CR>
+nmap <Leader>m :setlocal invnumber number?<CR>
+nmap <Leader>n :noh<CR>
+nmap <Leader>o :colorscheme default<CR>
+nmap <Leader>p :setlocal invpaste paste?<CR>
+nmap <Leader>r :call wordhighlight#highlight_under_cursor()<CR>
+nmap <Leader>s :setlocal invspell spell?<CR>
 nmap <F5> :make<CR>
 cmap w!! silent w !sudo tee >/dev/null %
 map Q :ALEFix<CR>
+" Automatically re-yank pasted stuff after pasting
 xnoremap p pgvy
 " Consistent behavior for Y, D, and C
 nmap Y y$
-" Emacs shortcuts
+" Emacs editing shortcuts
 cmap <c-a> <Home>
 cmap <c-e> <End>
 cmap <c-f> <Right>
@@ -56,15 +57,18 @@ imap <c-a> <Home>
 imap <c-e> <End>
 imap <c-f> <Right>
 imap <c-b> <Left>
+
 " Load last cursor position
 autocmd BufReadPost * silent! normal! g'"
-" Specific plugin settings
+
+" Plugins
+let g:ale_echo_msg_format="[%linter%]%[ code]% %s"
+let g:ale_lint_on_text_changed="normal"
+let g:ctrlp_max_files = 2000
 let html_no_rendering=1
 let python_highlight_string_format=1
 let python_highlight_string_formatting=1
-let g:ale_echo_msg_format="[%linter%]%[code]% %s"
-let g:ale_lint_on_text_changed="normal"
-let g:ctrlp_max_files = 2000
+
 " For debugging color scheme and syntax definitions
 function ShowSyntaxNames()
   for id in synstack(line("."), col("."))
