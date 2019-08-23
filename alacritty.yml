@@ -35,6 +35,9 @@ key_bindings:
   - { key: Add, mods: Control|Shift, action: IncreaseFontSize }
   - { key: Equals, mods: Control, action: None }
 
+mouse:
+  hide_when_typing: true
+
 mouse_bindings:
   - { mouse: Middle, action: Paste }
 
