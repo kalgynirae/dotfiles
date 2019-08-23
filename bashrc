@@ -38,9 +38,6 @@ alias ssh-patient='ssh -o ConnectTimeout=60 -o ServerAliveCountMax=6 -o ServerAl
 alias tree='tree -CF --charset=utf-8'
 alias uncommas="tr , '\n'"
 
-# Disallow overwriting files by redirection with > (use >| instead)
-set -o noclobber
-
 # Disable C-s/C-q pausing and resuming output
 stty -ixon
 
@@ -210,6 +207,16 @@ quote() {
 
 rename-tmux-window() {
   [[ $TMUX ]] && tmux rename-window "$1"
+}
+
+# Sort a file in-place (kinda)
+sorti() {
+  local file="$1"
+  shift
+  local tmp
+  if tmp=$(mktemp); then
+    sort "$@" -- "$file" >"$tmp" && mv -fT -- "$tmp" "$file"
+  fi
 }
 
 # Replay the output of a previous command to stdout
