@@ -25,6 +25,7 @@ gnome-backgrounds
 gnome-disk-utility
 gnome-font-viewer
 gnome-terminal
+gnu-free-fonts
 gucharmap
 htop
 i3-gaps
@@ -73,7 +74,6 @@ traceroute
 tree
 ttf-dejavu
 ttf-emojione-color
-ttf-freefont
 ttf-gentium
 ttf-indic-otf
 ttf-liberation
