@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=mpv GIF Viewer
+Comment=Play GIF animations in a loop
+Icon=mpv
+TryExec=mpv
+Exec=mpv --loop --player-operation-mode=pseudo-gui -- %U
+Terminal=false
+MimeType=image/gif
