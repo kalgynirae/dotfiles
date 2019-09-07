@@ -1,3 +1,5 @@
+background_opacity: 0.95
+
 colors:
   primary:
     background: '0x232729'
