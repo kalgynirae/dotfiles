@@ -13,6 +13,8 @@ if ! pgrep redshift; then
     Europe/London)
       redshift -l 51.52:-0.13 -t 5850:2800 &  # London
       ;;
+    Europe/Berlin)
+      redshift -l 52.52:13.41 -t 5850:2800 &  # Berlin
   esac
 fi
 
