@@ -1,10 +1,12 @@
 #!/bin/bash
 
-known_packages() {
-  comm -23 packages <(sudo pacman -S --needed $(<packages) |& grep "target not found" | awk '{print $5}')
-}
-
-sudo pacman -S --needed $(known_packages)
+read -rp "Install packages? [y/N] "
+if [[ $REPLY == y ]]; then
+  known_packages() {
+    comm -23 packages <(sudo pacman -S --needed $(<packages) |& grep "target not found" | awk '{print $5}')
+  }
+  sudo pacman -S --needed $(known_packages)
+fi
 
 maybelink() {
   if [[ ! -e $1 ]]; then
@@ -58,5 +60,7 @@ maybelink user-dirs.dirs ~/.config/user-dirs.dirs
 for app in applications/*; do
   maybelink "$app" ~/.local/share/"$app"
 done
+
+tic -o ~/.terminfo -x tmux-fixed.terminfo
 
 echo "Run 'git submodule update --init' to get the vim plugins"
