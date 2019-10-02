@@ -13,4 +13,4 @@ Restart=always
 RestartSec=1s
 
 [Install]
-WantedBy=pulseaudio.service
+WantedBy=default.target
