@@ -20,6 +20,7 @@ feh
 ffmpeg
 firefox
 font-manager
+gimp
 git
 gnome-backgrounds
 gnome-disk-utility
@@ -67,6 +68,7 @@ scrot
 seahorse
 shellcheck
 sshfs
+strace
 sudo
 sxhkd
 tmux

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# pgrep sxhkd || sxhkd &
-
 if ! pgrep redshift; then
   case "$(timedatectl show -p Timezone --value)" in
     America/Los_Angeles)
@@ -18,14 +16,18 @@ if ! pgrep redshift; then
   esac
 fi
 
-[[ $(hostname) != colinchan-x1 ]] && { pgrep compton || compton --daemon --experimental-backends; }
+if [[ $(hostname) == colinchan-fedora-PC166WVV ]]; then
+  pgrep nm-applet || nm-applet &
+else
+  pgrep compton || compton --daemon --experimental-backends
+fi
 
-screensaver on
-
-pgrep polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+if grep -q ^NAME=Fedora$ /etc/os-release; then
+  pgrep polkit-gnome-au || /usr/libexec/polkit-gnome-authentication-agent-1 &
+else
+  pgrep polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+fi
 
 pgrep -f beamux-server || ~/bash/beamux/beamux-server &>/tmp/beamux-server.log &
-
-[[ $(hostname) == colinchan-x1 ]] && { pgrep nm-applet || nm-applet & }
-
+screensaver on
 ~/bin/refresh-peripherals

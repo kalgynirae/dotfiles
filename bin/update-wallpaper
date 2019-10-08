@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 while (( $# )); do
   if [[ -f ~/pictures/wallpapers/$1 ]]; then
@@ -31,7 +32,7 @@ render-text() {
     pango-view \
       <(echo "$text") \
       --background "transparent" \
-      --font "Gentium Bold 42" \
+      --font "Gentium Bold 36" \
       --foreground "$foreground" \
       --hinting full \
       --indent -24 \
@@ -78,7 +79,7 @@ authorx=$(( width - authorwidth - quotepadding ))
 authory=$(( height - authorheight - quotepadding - bottompadding ))
 
 # Resize wallpaper
-magick \
+convert \
   "$wallpaper" \
   -resize "$primarysize^" \
   -gravity center \
@@ -86,7 +87,7 @@ magick \
   "$dir/resized.mpc"
 
 # Layer everything together
-magick \
+convert \
   "$dir/resized.mpc" \
   -fill "#00000080" \
   -draw "roundRectangle $quoteboxx0,$quoteboxy0 $quoteboxx1,$quoteboxy1 $borderradius,$borderradius" \
@@ -99,7 +100,7 @@ magick \
   "$dir/wallpaper.jpg"
 
 # Convert the JPG to a PNG (for i3lock)
-magick "$dir/wallpaper.jpg" -modulate 100,20,15 -quality 05 "$dir/wallpaper-lock.png"
+convert "$dir/wallpaper.jpg" -modulate 100,20,15 -quality 05 "$dir/wallpaper-lock.png"
 
 # Overwrite the old ones
 mv -t ~/.cache "$dir/wallpaper.jpg" "$dir/wallpaper-lock.png"

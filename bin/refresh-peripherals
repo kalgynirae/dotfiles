@@ -17,7 +17,7 @@ synclient TapButton1=0 TapButton2=0 TapButton3=2
 echo $display >/tmp/display
 
 case $(hostname) in
-    colinchan-x1)
+    colinchan-fedora-PC166WVV)
         #xrandr \
         #    --output eDP-1 --auto \
         #    --output HDMI-2 --auto --above eDP-1 --primary
@@ -26,8 +26,8 @@ case $(hostname) in
         #    --output DP-1 --auto --above eDP-1 --primary
         xrandr \
             --output eDP-1 --auto --pos 0x0 --primary \
-            --output DP-1-8 --auto --pos 2560x0 \
-            --output DP-1-1 --auto --pos 5120x0
+            --output DP-1-8 --auto --pos 1920x0 \
+            --output DP-1-1 --auto --pos 4480x0
 
         # Set minimum brightness so the screen won't go entirely black
         light -Nr 1

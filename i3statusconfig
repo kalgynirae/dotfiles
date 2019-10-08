@@ -17,9 +17,9 @@ general {
     output_format = "i3bar"
 }
 
-order += "wireless wlp4s0"
+order += "wireless wlp61s0"
 order += "ethernet enp5s0"
-order += "ethernet enp0s20u1u2"
+order += "ethernet enp0s20f0u1u2"
 order += "disk /"
 order += "disk /home"
 order += "cpu_usage"
@@ -56,8 +56,8 @@ ethernet enp5s0 {
     format_down = "E: down"
 }
 
-# colinchan-x1
-ethernet enp0s20u1u2 {
+# colinchan-fedora-PC166WVV
+ethernet enp0s20f0u1u2 {
     color_bad = "#d3d7cf"
     format_up = "E: %ip"
     format_down = "E: down"
@@ -72,8 +72,8 @@ volume pulse {
     device = "pulse"
 }
 
-# colinchan-x1
-wireless wlp4s0 {
+# colinchan-fedora-PC166WVV
+wireless wlp61s0 {
     color_bad = "#d3d7cf"
     format_up = "W: (%quality at %essid) %ip"
     format_down = "W: down"
