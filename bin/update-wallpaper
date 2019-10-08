@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 while (( $# )); do
   if [[ -f ~/pictures/wallpapers/$1 ]]; then
