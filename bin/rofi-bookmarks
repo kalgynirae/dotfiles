@@ -10,7 +10,7 @@ import sys
 from gi.repository.GLib import markup_escape_text as escape
 
 places = (
-    next((Path.home() / ".mozilla/firefox/").expanduser().glob("*.default"))
+    next((Path.home() / ".mozilla/firefox/").expanduser().glob("*.default*"))
     / "places.sqlite"
 )
 runtimedir = Path(os.environ["XDG_RUNTIME_DIR"])
@@ -21,10 +21,9 @@ conn = sqlite3.connect(places_copy)
 cur = conn.cursor()
 cur.execute(
     """
-    select title, url
-    from moz_places
-    where url != "" and title != ""
-    group by url
+    select moz_bookmarks.title, moz_places.url
+    from moz_bookmarks left join moz_places on moz_bookmarks.fk = moz_places.id
+    where type=1 and moz_bookmarks.title != "" and moz_places.url != ""
     order by last_visit_date desc
     """
 )
