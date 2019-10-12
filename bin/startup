@@ -16,7 +16,7 @@ if ! pgrep redshift; then
   esac
 fi
 
-if [[ $(hostname) == colinchan-fedora-PC166WVV ]]; then
+if [[ $HOSTNAME == colinchan-fedora-PC166WVV ]]; then
   pgrep nm-applet || nm-applet &
 else
   pgrep compton || compton --daemon --experimental-backends
@@ -27,6 +27,8 @@ if grep -q ^NAME=Fedora$ /etc/os-release; then
 else
   pgrep polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 fi
+
+[[ $HOSTNAME == apartmanteau ]] && { pgrep transmission || transmission-gtk -m & }
 
 pgrep -f beamux-server || ~/bash/beamux/beamux-server &>/tmp/beamux-server.log &
 screensaver on
