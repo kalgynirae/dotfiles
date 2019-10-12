@@ -1,0 +1,29 @@
+#!/bin/bash
+set -o pipefail
+
+set-button-map() {
+  for id in $(<"$XDG_RUNTIME_DIR/mice"); do
+    xinput set-button-map "$id" "$@"
+  done
+}
+
+i3-msg -t subscribe -m '["window"]' \
+  | jq --unbuffered -r 'select(.change == "focus").container.window_properties.class' \
+  | {
+    mode=normal
+    while read window_class; do
+      case $window_class in
+        Alacritty|Firefox)
+          if [[ $mode == normal ]]; then
+            set-button-map 1 3 2 && mode=swapped
+          fi
+          ;;
+        *)
+          if [[ $mode == swapped ]]; then
+            set-button-map 1 2 3 && mode=normal
+          fi
+          ;;
+      esac
+      echo >&2 "Set $mode button map"
+    done
+  }
