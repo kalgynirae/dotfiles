@@ -12,9 +12,9 @@ numlockx
 # middle-click with three-finger tap; do nothing with one or two fingers
 synclient TapButton1=0 TapButton2=0 TapButton3=2
 
-[[ -f /tmp/display ]] && display=$(</tmp/display) || display=0
+[[ -f "$XDG_RUNTIME_DIR/display" ]] && display=$(<"$XDG_RUNTIME_DIR/display") || display=0
 [[ " $* " == *" --cycle "* ]] && (( display++ ))
-echo $display >/tmp/display
+echo $display >"$XDG_RUNTIME_DIR/display"
 
 case $(hostname) in
     colinchan-fedora-PC166WVV)
