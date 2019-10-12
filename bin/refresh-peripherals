@@ -67,7 +67,7 @@ esac
 list=$(xinput list)
 >"$XDG_RUNTIME_DIR/mice"
 for regex in "${MOUSE_REGEXES[@]}"; do
-  id=$(<<<"$list" sed -n "/$regex/"'s/.*id=\([[:digit:]]\+\).*/\1/p')
+  id=$(<<<"$list" sed -n "/$regex/"'s/.*id=\([[:digit:]]\+\).*pointer.*/\1/p')
   if [[ $id ]]; then
     echo "$id" >>"$XDG_RUNTIME_DIR/mice"
   else
