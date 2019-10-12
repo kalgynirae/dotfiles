@@ -1,13 +1,13 @@
 [Unit]
 Description=Calf Sidechain Compressor
 After=pulseaudio.service jack.service
-BindsTo=pulseaudio.service
+BindsTo=jack.service
 StartLimitBurst=3
 StartLimitIntervalSec=15s
 
 [Service]
-ExecStart=/usr/bin/calfjackhost --client compressor --load %h/dotfiles/sound/compressor.xml
-ExecStartPost=/usr/bin/sleep 1
+ExecStart=/usr/bin/calfjackhost --client compressor --load %h/dotfiles/sound/compressor.xml --no-tray
+ExecStartPost=/usr/bin/sleep 6
 ExecStartPost=%h/dotfiles/sound/compressor-connect
 Restart=always
 RestartSec=1s

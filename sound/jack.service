@@ -1,13 +1,14 @@
 [Unit]
 Description=JACK audio server
 Before=pulseaudio.service
-BindsTo=pulseaudio.service
 
 [Service]
 ExecStart=/usr/bin/jack_control start
 ExecStart=/usr/bin/sleep 2
+ExecStart=/bin/bash -c "pacmd <%h/dotfiles/sound/jack-connect.pa"
 ExecStop=/usr/bin/jack_control stop
 ExecStop=/usr/bin/sleep 1
+ExecStop=/bin/bash -c "pacmd <%h/dotfiles/sound/jack-disconnect.pa"
 Type=oneshot
 RemainAfterExit=yes
 

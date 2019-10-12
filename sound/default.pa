@@ -1,20 +1,40 @@
-.include /etc/pulse/default.pa
+.fail
+
+load-module module-device-restore
+load-module module-card-restore
+
+.ifexists /etc/this-is-apartmanteau
+  load-module module-stream-restore restore_device=no
+.else
+  load-module module-stream-restore
+.endif
+
+load-module module-augment-properties
+load-module module-switch-on-port-available
+load-module module-udev-detect
+load-module module-bluetooth-policy
+load-module module-bluetooth-discover
+load-module module-esound-protocol-unix
+load-module module-native-protocol-unix
+load-module module-default-device-restore
+load-module module-rescue-streams
+load-module module-always-sink
+load-module module-intended-roles
+load-module module-suspend-on-idle
+load-module module-position-event-sounds
+load-module module-role-cork
+load-module module-filter-heuristics
+load-module module-filter-apply
+
 .nofail
 
-unload-module module-jackdbus-detect
+.ifexists /etc/this-is-colinchan-fedora-PC166WVV
+  update-sink-proplist alsa_output.pci-0000_00_1f.3.analog-stereo device.description="Laptop Speakers"
+  update-source-proplist alsa_input.pci-0000_00_1f.3.analog-stereo device.description="Laptop Microphone"
+.endif
 
-# colinchan-x1
-update-sink-proplist alsa_output.pci-0000_00_1b.0.analog-stereo device.description="Laptop Speakers"
-update-source-proplist alsa_input.pci-0000_00_1b.0.analog-stereo device.description="Laptop Microphone"
-
-# apartmanteau
-update-sink-proplist alsa_output.pci-0000_02_00.0.analog-stereo device.description="Stereo"
-update-source-proplist alsa_input.pci-0000_02_00.0.analog-stereo device.description="Line In"
-update-source-proplist alsa_input.usb-046d_HD_Webcam_C525_6A326EA0-00.analog-mono device.description="Webcam Microphone"
-
-load-module module-stream-restore restore_device=no
-
-load-module module-jack-sink sink_name=background sink_properties='device.description=Background' client_name="background" connect=no
-load-module module-jack-sink sink_name=foreground sink_properties='device.description=Foreground' client_name="foreground" connect=no
-load-module module-jack-source source_name=jack source_properties='device.description="JACK Output"' client_name="output" connect=no
-load-module module-loopback source=jack source_dont_move=yes sink_input_properties='media.name="JACK Output"' source_output_properties='media.name="JACK Output"'
+.ifexists /etc/this-is-apartmanteau
+  update-sink-proplist alsa_output.pci-0000_02_00.0.analog-stereo device.description="Stereo"
+  update-source-proplist alsa_input.pci-0000_02_00.0.analog-stereo device.description="Line In"
+  update-source-proplist alsa_input.usb-046d_HD_Webcam_C525_6A326EA0-00.analog-mono device.description="Webcam Microphone"
+.endif

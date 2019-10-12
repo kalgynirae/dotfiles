@@ -1,0 +1,5 @@
+.nofail
+unload-module module-jack-sink
+unload-module module-jack-sink
+unload-module module-jack-source
+unload-module module-loopback
