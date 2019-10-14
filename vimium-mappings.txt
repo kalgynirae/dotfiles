@@ -6,12 +6,6 @@ map l scrollRight
 map g scrollToTop
 map G scrollToBottom
 map i enterInsertMode
-map / enterFindMode
-map <c-f> enterFindMode
-map n performFind
-map N performBackwardsFind
-map <c-o> goBack
-map <c-i> goForward
 map ' LinkHints.activateMode
 map " LinkHints.activateModeWithQueue
 map [[ goPrevious
@@ -23,7 +17,7 @@ map o moveTabToNewWindow
 map d duplicateTab
 map << moveTabLeft
 map >> moveTabRight
-map <c-C> showHelp
+map <c-C> showHelp  # to remind me that c-C isn't copy
 ---
 Scroll step: 100
 Characters for hints: fjdkruslghwoa;vmc,
