@@ -1,0 +1,4 @@
+[Service]
+ExecStart=%h/bin/i3-wait
+TimeoutStartSec=10s
+Type=oneshot

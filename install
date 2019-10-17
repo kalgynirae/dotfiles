@@ -38,6 +38,7 @@ maybelink fonts.conf ~/.config/fontconfig/fonts.conf
 maybelink gitconfig ~/.gitconfig
 maybelink gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
 maybelink gtkrc-2.0 ~/.gtkrc-2.0
+maybelink i3-wait.service ~/.config/systemd/user/i3-wait.service
 maybelink i3config ~/.config/i3/config
 maybelink i3statusconfig ~/.config/i3status/config
 maybelink inputrc ~/.inputrc
@@ -64,4 +65,5 @@ done
 
 tic -o ~/.terminfo -x tmux-fixed.terminfo
 
+systemctl --user daemon-reload
 echo "Run 'git submodule update --init' to get the vim plugins"
