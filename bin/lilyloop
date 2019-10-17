@@ -1,0 +1,5 @@
+#!/bin/bash
+
+while true; do
+  inotifywait -e close_write "$1" && lilypond "$1"
+done

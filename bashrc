@@ -319,9 +319,3 @@ black='\[\e[30m\]'
 reset='\[\e[0m\]'
 PS1="▶▶▶ ${color}\u@\h:\W${reset}${git_ps1} ${black}[\$((++_command_count))]${reset}\n[\j]\\\$ "
 : "${_command_count:=-1}"
-
-lilyloop() {
-  while true; do
-    inotifywait -e close_write "$1" && lilypond "$1"
-  done
-}
