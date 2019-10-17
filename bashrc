@@ -311,13 +311,13 @@ _hashcolor() {
     color=2
     style=4
   fi
-  echo -E "\e[${style};3${color}m"
+  printf '\e[%s;3%sm' "$style" "$color"
 }
 # shellcheck disable=SC2016
-color='$(echo -e $(_hashcolor "$(whoami)@$(hostname):$(pwd -P)"))'
+color='\[$(_hashcolor "$USER@$HOSTNAME:$(pwd -P)")\]'
 black='\[\e[30m\]'
 reset='\[\e[0m\]'
-PS1="▶▶▶ ${color}\u@\h${reset}:${color}\W${reset}${git_ps1} ${black}[\$((++_command_count))]${reset}\n[\j]\\\$ "
+PS1="▶▶▶ ${color}\u@\h:\W${reset}${git_ps1} ${black}[\$((++_command_count))]${reset}\n[\j]\\\$ "
 : "${_command_count:=-1}"
 
 lilyloop() {
