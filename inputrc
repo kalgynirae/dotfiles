@@ -1,7 +1,6 @@
 set bell-style none
 set blink-matching-paren on
 set colored-completion-prefix on
-set colored-stats on
 set completion-ignore-case on
 set completion-map-case on
 set enable-bracketed-paste on
