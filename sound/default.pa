@@ -14,7 +14,7 @@ load-module module-switch-on-port-available
 load-module module-udev-detect
 load-module module-bluetooth-policy
 load-module module-bluetooth-discover
-load-module module-esound-protocol-unix
+load-module module-dbus-protocol
 load-module module-native-protocol-unix
 load-module module-default-device-restore
 load-module module-rescue-streams
