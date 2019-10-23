@@ -1,3 +1,4 @@
+.mypy_cache
 bin/facebook
 bin/vpn
 nvim/.netrwhist
