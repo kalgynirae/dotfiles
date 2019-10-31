@@ -36,12 +36,12 @@ args = [
     "-dmenu",
     "-kb-custom-1", "alt-c",
     "-kb-custom-2", "alt-v",
-    "-kb-custom-3", "alt-n",
-    "-kb-custom-4", "alt-m",
+    "-kb-custom-3", "alt-m",
+    "-kb-custom-4", "alt-n",
     "-format", "i",
     "-i",
     "-markup-rows",
-    "-mesg", "<b>Enter</b>: open   <b>Alt+c</b>: copy   <b>Alt+v</b>: copy(path)   <b>Alt+n</b>: copy Markdown   <b>Alt+m</b>: copy(path) Markdown",
+    "-mesg", "<b>Enter</b>:open  <b>Alt+c</b>:copy  <b>Alt+v</b>:copy-path  <b>Alt+m</b>:copy-markdown  <b>Alt+n</b>:copy-markdown-path",
     "-no-custom",
     "-p", "history",
 ]
@@ -69,8 +69,11 @@ def path(url):
 def copy(text):
     subprocess.run(["xsel", "--input", "--clipboard"], input=text, text=True)
 
-if proc.returncode == 0:
+def open(url):
     subprocess.run(["browser", url])
+
+if proc.returncode == 0:
+    open(url)
 elif proc.returncode == 10:
     copy(url)
 elif proc.returncode == 11:
