@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+"""usage: colorize [PATTERN]
+
+Give each group of output lines a different color. Consecutive lines form a
+group if PATTERN matches the same text.  PATTERN defaults to ^[\w.-/]+ if not
+specified.
+"""
 import re
 import sys
 from itertools import cycle, groupby
@@ -19,7 +25,7 @@ if len(sys.argv) == 1:
 elif len(sys.argv) == 2:
     matcher = re.compile(sys.argv[1]).search
 else:
-    print("usage: colorinate [PATTERN]", file=sys.stderr)
+    print(__doc__, file=sys.stderr)
     sys.exit(1)
 
 
