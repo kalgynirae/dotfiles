@@ -317,5 +317,5 @@ _hashcolor() {
 color='\[$(_hashcolor "$USER@$HOSTNAME:$(pwd -P)")\]'
 black='\[\e[30m\]'
 reset='\[\e[0m\]'
-PS1="▶▶▶ ${color}\u@\h:\W${reset}${git_ps1} ${black}[\$((++_command_count))]${reset}\n[\j]\\\$ "
+PS1="${reset}▶▶▶ ${color}\u@\h:\W${reset}${git_ps1} ${black}[\$((++_command_count))]${reset}\n[\j]\\\$ "
 : "${_command_count:=-1}"
