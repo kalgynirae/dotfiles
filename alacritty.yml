@@ -49,10 +49,5 @@ scrolling:
 selection:
   save_to_clipboard: true
 
-visual_bell:
-  animation: EaseOutQuad
-  duration: 800
-  color: '0x124355'
-
 window:
   dynamic_padding: true
