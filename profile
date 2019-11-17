@@ -5,6 +5,7 @@ else
   EDITOR=vim
 fi
 
+export COLORTERM=truecolor
 export DIFFPROG="$EDITOR -d"
 export EDITOR
 export FREETYPE_PROPERTIES='truetype:interpreter-version=40'
