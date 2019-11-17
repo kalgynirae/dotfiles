@@ -1,7 +1,0 @@
-#!/bin/sh
-set -e
-if (($# > 0)); then
-    youtube-dl --format bestaudio "$1" -o /tmp/youtube-audio-new && \
-        mv /tmp/youtube-audio-new /tmp/youtube-audio
-fi
-mplayer -softvol -softvol-max 200 /tmp/youtube-audio
