@@ -23,7 +23,7 @@ set shiftwidth=4 softtabstop=-1 expandtab smarttab
 set showcmd
 set signcolumn=yes
 set smartcase
-set spell spelllang=en_us
+set spelllang=en_us
 set splitbelow splitright
 set termguicolors
 set undofile
