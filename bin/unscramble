@@ -6,30 +6,22 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-lowercase = re.compile("\w+")
+reasonable_word_regex = re.compile("\w+")
 
-letter_counts = {
+word_counts = {
     word: Counter(word.lower())
     for word in Path("/usr/share/dict/words").read_text().splitlines()
-    if lowercase.fullmatch(word)
+    if reasonable_word_regex.fullmatch(word)
 }
 
 target_count = Counter(sys.argv[1])
 
 
-def score(letter_count):
-    score = 0
-    for letter in string.ascii_lowercase:
-        if letter_count[letter] > target_count[letter]:
-            return 0
-        else:
-            score += 1
-    return score
+def possible(word_count):
+    return all(count <= target_count[letter] for letter, count in word_count.items())
 
 
-scores = [(score(count), word) for word, count in letter_counts.items()]
+matches = [word for word, count in word_counts.items() if possible(count)]
 
-nonzero = [(score, word) for score, word in scores if score > 0]
-
-for score, word in sorted(nonzero, key=lambda item: len(item[1])):
+for word in sorted(matches, key=len):
     print(word)
