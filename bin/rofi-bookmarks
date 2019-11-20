@@ -2,18 +2,15 @@
 import os
 import shutil
 import sqlite3
-from html import unescape
-from pathlib import Path
 import subprocess
 import sys
+from html import unescape
+from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit
 
 from gi.repository.GLib import markup_escape_text as escape
 
-places = (
-    next((Path.home() / ".mozilla/firefox/").expanduser().glob("*.default*"))
-    / "places.sqlite"
-)
+places = next((Path.home() / ".mozilla/firefox/").glob("*.default*")) / "places.sqlite"
 runtimedir = Path(os.environ["XDG_RUNTIME_DIR"])
 places_copy = runtimedir / "places.sqlite"
 shutil.copy(places, places_copy)
@@ -60,17 +57,22 @@ if proc.returncode == 1:
 index = int(stdout.strip())
 title, url = rows[index]
 
+
 def markdown(title, url):
     return f"[{title}]({url})"
 
+
 def path(url):
-    return urlunsplit(('', '', *urlsplit(url)[2:]))
+    return urlunsplit(("", "", *urlsplit(url)[2:]))
+
 
 def copy(text):
     subprocess.run(["xsel", "--input", "--clipboard"], input=text, text=True)
 
+
 def open(url):
     subprocess.run(["browser", url])
+
 
 if proc.returncode == 0:
     open(url)
