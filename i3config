@@ -163,8 +163,8 @@ bindsym $mod+Mod1+d exec nautilus --new-window
 bindsym $mod+Mod1+f exec ~/bin/browser
 bindsym $mod+Mod1+m exec mpv --player-operation-mode=pseudo-gui
 bindsym $mod+Mod1+v exec pavucontrol
-bindsym $mod+Mod1+r exec --no-startup-id ~/bin/refresh-peripherals --cycle
-bindsym XF86Display exec --no-startup-id ~/bin/refresh-peripherals --cycle
+bindsym --release $mod+Mod1+r exec --no-startup-id ~/bin/refresh-peripherals --cycle
+bindsym --release XF86Display exec --no-startup-id ~/bin/refresh-peripherals --cycle
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/bin/volume up
