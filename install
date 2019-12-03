@@ -74,7 +74,10 @@ else
   echo "$count Firefox profiles found; skipping"
 fi
 
+echo "Compiling tmux-fixed terminfo"
 tic -o ~/.terminfo -x tmux-fixed.terminfo
 
+echo "Reloading systemd --user"
 systemctl --user daemon-reload
+
 echo "Run 'git submodule update --init' to get the vim plugins"
