@@ -47,7 +47,7 @@ call s:hi("SpellLocal",     s:none,           s:darkyellow,     s:none)
 call s:hi("SpellRare",      s:none,           s:darkyellow,     s:none)
 call s:hi("StatusLine",     s:none,           s:grey,           "bold")
 call s:hi("StatusLineNC",   s:brightgrey,     s:darkgrey,       s:none)
-call s:hi("Visual",         s:none,           s:none,           "reverse")
+call s:hi("Visual",         s:normalfg,       s:normalbg,       "reverse")
 call s:hi("VisualNOS",      s:none,           s:none,           "reverse")
 
 call s:hi("Boolean",        s:blue,           s:none,           s:none)
