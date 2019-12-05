@@ -244,15 +244,6 @@ _tmux-complete() {
 }
 complete -o bashdefault -o default -D -F _tmux-complete
 
-if [[ -e /usr/share/git/git-prompt.sh ]]; then
-  GIT_PS1_SHOWDIRTYSTATE=1
-  GIT_PS1_SHOWSTASHSTATE=1
-  GIT_PS1_SHOWUPSTREAM=verbose
-  source /usr/share/git/git-prompt.sh
-  # shellcheck disable=SC2016
-  git_ps1='$(__git_ps1 " (%s)")'
-fi
-
 in-git-repo() {
   git rev-parse --is-inside-work-tree &>/dev/null
 }
@@ -298,6 +289,15 @@ up() {
   if in-git-repo; then git checkout "$@"; else hg update "$@"; fi
 }
 
+if [[ -e /usr/share/git/git-prompt.sh ]]; then
+  GIT_PS1_SHOWDIRTYSTATE=1
+  GIT_PS1_SHOWSTASHSTATE=1
+  GIT_PS1_SHOWUPSTREAM=verbose
+  source /usr/share/git/git-prompt.sh
+  # shellcheck disable=SC2016
+  gitstatus='$(__git_ps1 " (%s)")'
+fi
+
 _prompt_colors=(0 1 2 3 4 5 6)
 _prompt_styles=(0 1 3 4)
 _hashcolor() {
@@ -317,5 +317,5 @@ _hashcolor() {
 color='\[$(_hashcolor "$USER@$HOSTNAME:$(pwd -P)")\]'
 black='\[\e[30m\]'
 reset='\[\e[0m\]'
-PS1=$reset'▶▶▶ '$color'\u@\h:\W'$reset'$(__git_ps1 " (%s)") '$black'[$((++_command_count))]'$reset'\n[\j]\$ '
+PS1=$reset'▶▶▶ '$color'\u@\h:\W'$reset$gitstatus' '$black'[$((++_command_count))]'$reset'\n[\j]\$ '
 : "${_command_count:=-1}"
