@@ -74,8 +74,8 @@ else
   echo "$count Firefox profiles found; skipping"
 fi
 
-echo "Compiling tmux-fixed terminfo"
-tic -o ~/.terminfo -x tmux-fixed.terminfo
+echo "Compiling terminfos.ti"
+TERMINFO=/usr/share/terminfo tic -x -o ~/.terminfo terminfos.ti
 
 echo "Reloading systemd --user"
 systemctl --user daemon-reload
