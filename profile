@@ -1,4 +1,6 @@
 #!/bin/sh
+export PATH=$PATH:$HOME/bin:$HOME/.gem/ruby/2.6.0/bin
+
 if command -v nvim >/dev/null; then
   EDITOR=nvim
 else
@@ -13,7 +15,6 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswi
 export LESS='--chop-long-lines --no-init --quit-if-one-screen --RAW-CONTROL-CHARS'
 export MOZ_USE_XINPUT2=1  # Smooth touchpad scrolling in Firefox
 export PAGER=less
-export PATH=$PATH:$HOME/bin:$HOME/.gem/ruby/2.6.0/bin
 export PYTHONDONTWRITEBYTECODE=yes
 export PYTHONSTARTUP=~/.pythonrc
 export RSYNC_PROTECT_ARGS=1
