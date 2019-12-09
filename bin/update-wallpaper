@@ -85,21 +85,26 @@ convert \
   -extent "$primarysize" \
   "$dir/resized.mpc"
 
-# Layer everything together
-convert \
-  "$dir/resized.mpc" \
-  -fill "#00000080" \
-  -draw "roundRectangle $quoteboxx0,$quoteboxy0 $quoteboxx1,$quoteboxy1 $borderradius,$borderradius" \
-  \( "$dir/quote-black.png" -repage "+$(( quotex + 2 ))+$(( quotey + 3 ))" \) \
-  \( "$dir/quote-white.png" -repage "+$quotex+$quotey" \) \
-  \( "$dir/author-black.png" -repage "+$(( authorx + 2 ))+$(( authory + 3 ))" \) \
-  \( "$dir/author-white.png" -repage "+$authorx+$authory" \) \
-  -layers flatten \
-  -quality 95 \
-  "$dir/wallpaper.jpg"
+# Render a modified version for the lock screen
+convert "$dir/resized.mpc" -modulate 100,20,15 "$dir/resized-lock.mpc"
 
-# Convert the JPG to a PNG (for i3lock)
-convert "$dir/wallpaper.jpg" -modulate 100,20,15 -quality 05 "$dir/wallpaper-lock.png"
+# Layer everything together
+render-quote() {
+  src=$1; shift
+  convert \
+    "$src" \
+    -fill "#00000080" \
+    -draw "roundRectangle $quoteboxx0,$quoteboxy0 $quoteboxx1,$quoteboxy1 $borderradius,$borderradius" \
+    \( "$dir/quote-black.png" -repage "+$(( quotex + 2 ))+$(( quotey + 3 ))" \) \
+    \( "$dir/quote-white.png" -repage "+$quotex+$quotey" \) \
+    \( "$dir/author-black.png" -repage "+$(( authorx + 2 ))+$(( authory + 3 ))" \) \
+    \( "$dir/author-white.png" -repage "+$authorx+$authory" \) \
+    -layers flatten \
+    -quality 95 \
+    "$@"
+}
+render-quote "$dir/resized.mpc" "$dir/wallpaper.jpg"
+render-quote "$dir/resized-lock.mpc" -quality 05 "$dir/wallpaper-lock.png"  # i3lock needs PNG
 
 # Overwrite the old ones
 mv -t ~/.cache "$dir/wallpaper.jpg" "$dir/wallpaper-lock.png"
