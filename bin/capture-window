@@ -9,7 +9,7 @@ if (( $# != 1 )); then
     exit 1
 fi
 
-OUTFILE="$1.ogv"
+OUTFILE="$1"
 if [[ -e $OUTFILE ]]; then
     echo "File already exists: $OUTFILE" >&2
     exit 3
@@ -37,7 +37,8 @@ if (( $height % 2 != 0 )); then
     height=$(( $height + 1 ))
 fi
 
-ffmpeg -n \
-    -f alsa -i default \
-    -f x11grab -s $width,$height -i :0.0+$location \
-    -codec:v libtheora -qscale:v 6 -codec:a libvorbis -qscale:a 5 "$OUTFILE"
+#ffmpeg -n \
+#    -f alsa -i default \
+#    -f x11grab -s $width,$height -i :0.0+$location \
+#    -codec:v libtheora -qscale:v 6 -codec:a libvorbis -qscale:a 5 "$OUTFILE"
+ffmpeg -n -f x11grab -s $width,$height -i :0.0+$location -c:v libvpx-vp9 -b:v 0 -crf 30 "$OUTFILE"
