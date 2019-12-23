@@ -1,4 +1,6 @@
 #!/bin/bash
 
-# TODO: fix this
-sleep 5
+while true; do
+  i3-msg 2>/dev/null && break
+  sleep 0.5
+done
