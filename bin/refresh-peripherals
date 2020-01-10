@@ -19,44 +19,44 @@ echo $display >"$XDG_RUNTIME_DIR/display"
 MOUSE_REGEXES=(G502)
 
 case $(hostname) in
-    colinchan-fedora-PC166WVV)
-        xrandr --setmonitor DP-1-1-top 1600/401x1600/401+0+0 DP-1-1
-        xrandr --setmonitor DP-1-1-bottom 1600/401x960/240+0+1600 none
-        xrandr \
-            --output DP-1-1 --auto --pos 0x0 --rotate right --primary \
-            --output DP-1-8 --auto --pos 1600x0 \
-            --output eDP-1 --auto --pos 4160x520
+  colinchan-fedora-PC166WVV)
+    xrandr --setmonitor DP-1-1-top 1600/401x1600/401+0+0 DP-1-1
+    xrandr --setmonitor DP-1-1-bottom 1600/401x960/240+0+1600 none
+    xrandr \
+      --output DP-1-1 --auto --pos 0x0 --rotate right --primary \
+      --output DP-1-8 --auto --pos 1600x0 \
+      --output eDP-1 --auto --pos 4160x520
 
-        # Set minimum brightness so the screen won't go entirely black
-        light -Nr 1
+    # Set minimum brightness so the screen won't go entirely black
+    light -Nr 1
 
-        MOUSE_REGEXES+=(Touchpad TrackPoint)
-        ;;
-    lumeh)
+    MOUSE_REGEXES+=(Touchpad TrackPoint)
+    ;;
+  lumeh)
+    xrandr \
+      --output LVDS1 --auto --primary --pos 1920x312 \
+      --output HDMI1 --auto --pos 0x0 \
+      --output VGA1 --auto --same-as LVDS1
+    ;;
+  apartmanteau)
+    case $(( display % 3 )) in
+      0)
         xrandr \
-            --output LVDS1 --auto --primary --pos 1920x312 \
-            --output HDMI1 --auto --pos 0x0 \
-            --output VGA1 --auto --same-as LVDS1
+          --output HDMI-0 --auto --primary \
+          --output DP-1 --off
         ;;
-    apartmanteau)
-        case $(( display % 3 )) in
-            0)
-                xrandr \
-                    --output HDMI-0 --auto --primary \
-                    --output DP-1 --off
-                ;;
-            1)
-                xrandr \
-                    --output HDMI-0 --off \
-                    --output DP-1 --auto --primary
-                ;;
-            2)
-                xrandr \
-                    --output HDMI-0 --auto --primary \
-                    --output DP-1 --auto --right-of HDMI-0
-                ;;
-        esac
+      1)
+        xrandr \
+          --output HDMI-0 --off \
+          --output DP-1 --auto --primary
         ;;
+      2)
+        xrandr \
+          --output HDMI-0 --auto --primary \
+          --output DP-1 --auto --right-of HDMI-0
+        ;;
+    esac
+    ;;
 esac
 
 # Figure out the xinput device IDs for mice
