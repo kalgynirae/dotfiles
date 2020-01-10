@@ -74,6 +74,7 @@ for regex in "${MOUSE_REGEXES[@]}"; do
     echo >&2 "No device matched regex ${regex@Q}"
   fi
 done
+~/bin/mouse-set-button-map
 
 ~/.fehbg
 paplay /usr/share/sounds/freedesktop/stereo/window-attention.oga
