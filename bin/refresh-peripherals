@@ -20,16 +20,12 @@ MOUSE_REGEXES=(G502)
 
 case $(hostname) in
     colinchan-fedora-PC166WVV)
-        #xrandr \
-        #    --output eDP-1 --auto \
-        #    --output HDMI-2 --auto --above eDP-1 --primary
-        #xrandr \
-        #    --output eDP-1 --auto \
-        #    --output DP-1 --auto --above eDP-1 --primary
+        xrandr --setmonitor DP-1-1-top 1600/401x1600/401+0+0 DP-1-1
+        xrandr --setmonitor DP-1-1-bottom 1600/401x960/240+0+1600 none
         xrandr \
-            --output eDP-1 --auto --pos 0x0 --primary \
-            --output DP-1-8 --auto --pos 1920x0 \
-            --output DP-1-1 --auto --pos 4480x0
+            --output DP-1-1 --auto --pos 0x0 --rotate right --primary \
+            --output DP-1-8 --auto --pos 1600x0 \
+            --output eDP-1 --auto --pos 4160x520
 
         # Set minimum brightness so the screen won't go entirely black
         light -Nr 1
