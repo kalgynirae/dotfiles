@@ -18,46 +18,67 @@ echo $display >"$XDG_RUNTIME_DIR/display"
 
 MOUSE_REGEXES=(G502)
 
+xrandr_args=()
 case $(hostname) in
   colinchan-fedora-PC166WVV)
-    xrandr --setmonitor DP-1-1-top 1600/401x1600/401+0+0 DP-1-1
-    xrandr --setmonitor DP-1-1-bottom 1600/401x960/240+0+1600 none
-    xrandr \
-      --output DP-1-1 --auto --pos 0x0 --rotate right --primary \
-      --output DP-1-8 --auto --pos 1600x0 \
-      --output eDP-1 --auto --pos 4160x520
+    monitors=$(xrandr --current | grep connected)
+    if grep "DP-1-1 connected" <<<"$monitors" ; then
+      xrandr --setmonitor DP-1-1-upper 1600/401x1600/401+0+0 DP-1-1
+      xrandr --setmonitor DP-1-1-lower 1600/401x960/240+0+1600 none
+      xrandr_args=(
+        --output DP-1-1 --auto --pos 0x0 --rotate right --primary
+        --output DP-1-8 --auto --pos 1600x0
+        --output eDP-1 --auto --pos 4160x520
+      )
+    else
+      xrandr --delmonitor DP-1-1-lower
+      xrandr --delmonitor DP-1-1-upper
+      xrandr_args=(
+        --output DP-1-1 --off
+        --output DP-1-8 --off
+        --output eDP-1 --auto --primary
+      )
+    fi
 
     # Set minimum brightness so the screen won't go entirely black
     light -Nr 1
 
-    MOUSE_REGEXES+=(Touchpad TrackPoint)
+    # Disable right/middle click on the touchpad
+    xinput set-button-map 1 1 1
+
+    MOUSE_REGEXES+=(TrackPoint)
     ;;
   lumeh)
-    xrandr \
-      --output LVDS1 --auto --primary --pos 1920x312 \
-      --output HDMI1 --auto --pos 0x0 \
+    xrandr_args=(
+      --output LVDS1 --auto --primary --pos 1920x312
+      --output HDMI1 --auto --pos 0x0
       --output VGA1 --auto --same-as LVDS1
+    )
     ;;
   apartmanteau)
     case $(( display % 3 )) in
       0)
-        xrandr \
-          --output HDMI-0 --auto --primary \
+        xrandr_args=(
+          --output HDMI-0 --auto --primary
           --output DP-1 --off
+        )
         ;;
       1)
-        xrandr \
-          --output HDMI-0 --off \
+        xrandr_args=(
+          --output HDMI-0 --off
           --output DP-1 --auto --primary
+        )
         ;;
       2)
-        xrandr \
-          --output HDMI-0 --auto --primary \
+        xrandr_args=(
+          --output HDMI-0 --auto --primary
           --output DP-1 --auto --right-of HDMI-0
+        )
         ;;
     esac
     ;;
 esac
+xrandr "${xrandr_args[@]}"
 
 # Figure out the xinput device IDs for mice
 list=$(xinput list)
