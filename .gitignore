@@ -1,5 +1,8 @@
+.data.yml
 .mypy_cache
 bin/facebook
+bin/mustache
 bin/vpn
+gen/
 nvim/.netrwhist
 nvim/spell/en.utf-8.add*

@@ -25,6 +25,27 @@ maybelink() {
   fi
 }
 
+render() {
+  local source=$1.mustache
+  local gen=gen/$1
+  if [[ ! -e .data.yml ]]; then
+    echo ".data.yml doesn't exist; skipping all rendering"
+    return
+  elif [[ ! -e $source ]]; then
+    echo "$source doesn't exist; skipping"
+    return
+  fi
+  if [[ $source -ot $gen ]]; then
+    echo "$gen was updated more recently than $source; skipping"
+  else
+    mkdir -vp gen
+    echo mustache "$source" \>"$gen"
+    mustache .data.yml "$source" >"$gen"
+    touch -mr "$source" "$gen"
+  fi
+  maybelink "$gen" "$2"
+}
+
 maybelink XCompose ~/.XCompose
 maybelink Xresources ~/.Xresources
 maybelink alacritty.yml ~/.config/alacritty/alacritty.yml
