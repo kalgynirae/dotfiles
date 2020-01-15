@@ -13,6 +13,7 @@ alias commas='paste -sd,'
 alias diff='diff --color --minimal --unified'
 # shellcheck disable=SC2086,SC2139
 alias e=$EDITOR
+[[ $HOSTNAME == colinchan-fedora-* ]] && alias et='et -p 8080'
 alias f1='field 1'
 alias f2='field 2'
 alias f3='field 3'
@@ -289,14 +290,19 @@ up() {
   if in-git-repo; then git checkout "$@"; else hg update "$@"; fi
 }
 
-if [[ -e /usr/share/git/git-prompt.sh ]]; then
+git_prompt_path=/usr/share/git/git-prompt.sh
+if [[ $HOSTNAME == colinchan-fedora-* ]]; then
+  git_prompt_path=/usr/share/git-core/contrib/completion/git-prompt.sh
+fi
+if [[ -e "$git_prompt_path" ]]; then
   GIT_PS1_SHOWDIRTYSTATE=1
   GIT_PS1_SHOWSTASHSTATE=1
   GIT_PS1_SHOWUPSTREAM=verbose
-  source /usr/share/git/git-prompt.sh
+  source "$git_prompt_path"
   # shellcheck disable=SC2016
   gitstatus='$(__git_ps1 " (%s)")'
 fi
+unset git_prompt_path
 
 _prompt_colors=(0 1 2 3 4 5 6)
 _prompt_styles=(0 1 3 4)
