@@ -1,11 +1,17 @@
-set $mod Mod4
-
-floating_modifier $mod
 font pango:DejaVu Sans 10
 force_display_urgency_hint 500 ms
 gaps inner 25
 new_window pixel 4
+set $mod Mod4
 
+{{#laptop}}
+workspace 1 output DP-1-1-lower
+workspace 4 output DP-1-1-upper
+workspace 5 output DP-1-8
+workspace 6 output eDP-1
+{{/laptop}}
+
+floating_modifier $mod
 bindsym $mod+grave kill
 bindsym $mod+Return exec --no-startup-id WINIT_HIDPI_FACTOR=1 i3-sensible-terminal -e tmux new-session
 bindsym $mod+Shift+Return exec --no-startup-id WINIT_HIDPI_FACTOR=1 i3-sensible-terminal

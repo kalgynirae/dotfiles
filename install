@@ -61,8 +61,6 @@ maybelink gitconfig ~/.gitconfig
 maybelink gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
 maybelink gtkrc-2.0 ~/.gtkrc-2.0
 maybelink i3-wait.service ~/.config/systemd/user/i3-wait.service
-maybelink i3config ~/.config/i3/config
-maybelink i3statusconfig ~/.config/i3status/config
 maybelink inputrc ~/.inputrc
 maybelink ipython_config.py ~/.ipython/profile_default/ipython_config.py
 maybelink mouse-monitor.service ~/.config/systemd/user/mouse-monitor.service
@@ -80,6 +78,8 @@ maybelink tmux.conf ~/.tmux.conf
 maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
 maybelink update-wallpaper.timer ~/.config/systemd/user/update-wallpaper.timer
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs
+render i3config ~/.config/i3/config
+render i3statusconfig ~/.config/i3status/config
 
 for app in applications/*; do
   maybelink "$app" ~/.local/share/"$app"

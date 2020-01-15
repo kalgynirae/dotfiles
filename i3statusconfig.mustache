@@ -1,12 +1,3 @@
-# i3status configuration file.
-# see "man i3status" for documentation.
-
-# It is important that this file is edited as UTF-8.
-# The following line should contain a sharp s:
-# ß
-# If the above line is not correctly displayed, fix your editor first!
-
-# Default text color:
 general {
     colors = true
     color_bad = "#cc0000"
@@ -14,19 +5,9 @@ general {
     color_good = "#4e9a06"
     color_separator = "#c4a000"
     interval = 2
+    markup = "pango"
     output_format = "i3bar"
 }
-
-order += "wireless wlp61s0"
-order += "ethernet enp5s0"
-order += "ethernet enp0s20f0u1u2"
-order += "disk /"
-order += "disk /home"
-order += "cpu_usage"
-order += "cpu_temperature 0"
-order += "battery BAT0"
-order += "volume pulse"
-order += "tztime local"
 
 battery BAT0 {
     format = "%status %percentage %remaining"
@@ -49,19 +30,13 @@ disk "/home" {
     format = "/home %free"
 }
 
-# apartmanteau
+{{#apartmanteau}}
 ethernet enp5s0 {
     color_bad = "#d3d7cf"
     format_up = "E: %ip"
     format_down = "E: down"
 }
-
-# colinchan-fedora-PC166WVV
-ethernet enp0s20f0u1u2 {
-    color_bad = "#d3d7cf"
-    format_up = "E: %ip"
-    format_down = "E: down"
-}
+{{/apartmanteau}}
 
 tztime local {
     format = "%Y-%m-%d %H:%M"
@@ -72,9 +47,30 @@ volume pulse {
     device = "pulse"
 }
 
-# colinchan-fedora-PC166WVV
+{{#laptop}}
 wireless wlp61s0 {
     color_bad = "#d3d7cf"
     format_up = "W: (%quality at %essid) %ip"
     format_down = "W: down"
 }
+ethernet enp0s31f6 {
+    color_bad = "#d3d7cf"
+    format_up = "E: %ip"
+    format_down = "E: down"
+}
+{{/laptop}}
+
+{{#apartmanteau}}
+order += "ethernet enp5s0"
+{{/apartmanteau}}
+{{#laptop}}
+order += "wireless wlp61s0"
+order += "ethernet enp0s31f6"
+{{/laptop}}
+order += "disk /"
+order += "disk /home"
+order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "battery BAT0"
+order += "volume pulse"
+order += "tztime local"
