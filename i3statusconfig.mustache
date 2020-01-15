@@ -48,6 +48,10 @@ volume pulse {
 }
 
 {{#laptop}}
+read_file meeting {
+    color_good = "#d1d2d0"
+    path = "{{homedir}}/.next-meeting"
+}
 wireless wlp61s0 {
     color_bad = "#d3d7cf"
     format_up = "W: (%quality at %essid) %ip"
@@ -64,6 +68,7 @@ ethernet enp0s31f6 {
 order += "ethernet enp5s0"
 {{/apartmanteau}}
 {{#laptop}}
+order += "read_file meeting"
 order += "wireless wlp61s0"
 order += "ethernet enp0s31f6"
 {{/laptop}}

@@ -1,5 +1,6 @@
 .data.yml
 .mypy_cache
+bin/calendar-notifier
 bin/facebook
 bin/mustache
 bin/vpn
