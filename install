@@ -53,6 +53,7 @@ maybelink atom-keymap.cson ~/.atom/keymap.cson
 maybelink bash_profile ~/.bash_profile
 maybelink bashrc ~/.bashrc
 maybelink bin ~/bin
+maybelink calendar-notifier.service ~/.config/systemd/user/calendar-notifier.service
 maybelink compton.conf ~/.config/compton.conf
 maybelink dunstrc ~/.config/dunst/dunstrc
 maybelink feh-themes ~/.config/feh/themes
