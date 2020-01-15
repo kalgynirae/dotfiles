@@ -1,6 +1,5 @@
 alacritty|upstream alacritty plus Tc,
 	Tc,
-	Ms=\E]52;c;%p2%s\007,
 	use=alacritty,
 
 tmux-256color|upstream tmux-256color plus bce,
