@@ -44,7 +44,8 @@ case $(hostname) in
     light -Nr 1
 
     # Disable right/middle click on the touchpad
-    xinput set-button-map 1 1 1
+    touchpad=$(xinput list | grep Touchpad | grep -o 'id=[[:digit:]]\+' | cut -d= -f2)
+    xinput set-button-map $touchpad 1 1 1
 
     MOUSE_REGEXES+=(TrackPoint)
     ;;
