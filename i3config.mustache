@@ -1,6 +1,8 @@
 font pango:DejaVu Sans 10
 force_display_urgency_hint 500 ms
+{{#apartmanteau}}
 gaps inner 25
+{{/apartmanteau}}
 new_window pixel 4
 set $mod Mod4
 
@@ -139,7 +141,12 @@ set $red3 #a40000
 bar {
     position top
     status_command i3status
+    {{#apartmanteau}}
     i3bar_command i3bar -t
+    {{/apartmanteau}}
+    {{^apartmanteau}}
+    i3bar_command i3bar
+    {{/apartmanteau}}
     #status_command i3status | ~/python/i3-weather/weather.py 2408354 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
     #status_command i3status | ~/python/i3-weather/weather.py 2444409 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
     #status_command i3status | ~/python/i3-weather/weather.py 55970494 --wrap-i3-status --position 0 --unit C
