@@ -37,6 +37,7 @@ render() {
   fi
   if [[ $source -ot $gen ]]; then
     echo "$gen was updated more recently than $source; skipping"
+    diff --color -u <(mustache .data.yml "$source") $gen
   else
     mkdir -vp gen
     echo mustache "$source" \>"$gen"
