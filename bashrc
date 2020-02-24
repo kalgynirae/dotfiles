@@ -220,17 +220,25 @@ sorti() {
   fi
 }
 
-# Replay the output of a previous command to stdout
+# Replay the output of previous commands to stdout
 that() {
-  local n=${1:--1}
-  if (( n < 0 )); then
-    (( n += _command_count ))
+  local arg=${1:--1}
+  local start end
+  if [[ $arg =~ ^-?[[:digit:]]+$ ]]; then
+    start=$arg
+    if (( start < 0 )); then
+      (( start += _command_count ))
+    fi
+    end=$(( start + 1 ))
+  elif [[ $arg =~ ^[[:digit:]]+-[[:digit:]]+$ ]]; then
+    start=${arg/-*/}
+    end=${arg/*-/}
   fi
   tmux capture-pane -eJp -S - -E - | perl -ne '
-    if (/▶▶▶.*\['$n'\]/) {$p = 1; next}
-    if (/(.*)▶▶▶.*\['$((n+1))'\]/ && $p == 1) {print $1; exit}
+    if (/▶▶▶.*\['"$start"'\]/) {$p = 1}
+    if (/(.*)▶▶▶.*\['"$end"'\]/ && $p == 1) {print $1; exit}
     print if $p
-  '
+  ' | sed '/▶▶▶.*\[/ s/\[[[:digit:]]\+\]//'
 }
 
 _tmux-complete() {
