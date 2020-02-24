@@ -1,5 +1,5 @@
 #!/bin/sh
-export PATH=$PATH:$HOME/bin:$HOME/.gem/ruby/2.6.0/bin
+export PATH=$PATH:$HOME/bin:$HOME/.gem/ruby/2.7.0/bin
 
 if command -v nvim >/dev/null; then
   EDITOR=nvim
