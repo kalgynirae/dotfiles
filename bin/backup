@@ -3,15 +3,17 @@
 source ~/.config/backup-params
 
 paths=(
+    ~/audio
     ~/blender
     ~/code
     ~/documents
-    ~/flstudio
+    ~/dotfiles
     ~/games
     ~/lumeh.org-files-backup
     ~/misc
     ~/music
     ~/pictures
+    ~/playlists
     ~/recordings
     ~/school
     ~/scores
@@ -19,6 +21,7 @@ paths=(
     ~/sounds
     ~/stepmania
     ~/videos
+    /mnt/windows/Users/colin/flstudio
 )
 
 common_args=(
