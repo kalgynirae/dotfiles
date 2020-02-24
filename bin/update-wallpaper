@@ -1,5 +1,10 @@
 #!/bin/bash
 
+primarysize=$(xrandr --current | grep primary | grep -Po '\d+x\d+')
+width=$(cut -dx -f1 <<<"$primarysize")
+height=$(cut -dx -f2 <<<"$primarysize")
+echo "size: ${width}x${height}"
+
 while (( $# )); do
   if [[ -f ~/pictures/wallpapers/$1 ]]; then
     wallpaper=~/pictures/wallpapers/$1
@@ -13,7 +18,18 @@ while (( $# )); do
 done
 
 if [[ ! $wallpaper ]]; then
-  wallpaper=$(find ~/pictures/wallpapers -iname '*.png' -o -iname '*.jpg' | shuf -n1)
+  horizontal=$(( width >= height ))
+  while true; do
+    wallpaper=$(find ~/pictures/wallpapers -iname '*.png' -o -iname '*.jpg' | shuf -n1)
+    wpsize=$(identify "$wallpaper" | grep -Po '\d+x\d+' | head -n1)
+    wpwidth=$(cut -dx -f1 <<<"$wpsize")
+    wpheight=$(cut -dx -f2 <<<"$wpsize")
+    if (( $(( wpwidth >= wpheight )) == $horizontal )); then
+      break
+    else
+      echo "skipping: $wallpaper (wrong orientation)"
+    fi
+  done
 fi
 echo "image: $wallpaper"
 
@@ -48,10 +64,6 @@ mkdir -p "$dir"
 borderradius=20
 bottompadding=150
 quotepadding=20
-
-primarysize=$(xrandr --current | grep primary | grep -Po '\d+x\d+')
-width=$(cut -dx -f1 <<<"$primarysize")
-height=$(cut -dx -f2 <<<"$primarysize")
 
 # shellcheck disable=SC1111
 quote="“$(<<<"$quoteline" sed 's# // #\n#g' | head -n-1 | awk 'NR==1 { print } NR>1 { print "<span alpha=\"1\">“</span>" $0 }' | sed "s/'/’/g")”"
