@@ -21,24 +21,25 @@ MOUSE_REGEXES=(G502)
 xrandr_args=()
 case $(hostname) in
   colinchan-fedora-PC166WVV)
-    monitors=$(xrandr --current | grep connected)
-    if grep "DP-1-1 connected" <<<"$monitors" ; then
-      xrandr --setmonitor DP-1-1-upper 1600/401x1600/401+0+0 DP-1-1
-      xrandr --setmonitor DP-1-1-lower 1600/401x960/240+0+1600 none
-      xrandr_args=(
-        --output DP-1-1 --auto --pos 0x0 --rotate right --primary
-        --output DP-1-8 --auto --pos 1600x0
-        --output eDP-1 --auto --pos 4160x520
-      )
-    else
-      xrandr --delmonitor DP-1-1-lower
-      xrandr --delmonitor DP-1-1-upper
-      xrandr_args=(
-        --output DP-1-1 --off
-        --output DP-1-8 --off
-        --output eDP-1 --auto --primary
-      )
-    fi
+    #monitors=$(xrandr --current | grep connected)
+    #if grep "DP-1-1 connected" <<<"$monitors" ; then
+    #  xrandr --setmonitor DP-1-1-upper 1600/401x1600/401+0+0 DP-1-1
+    #  xrandr --setmonitor DP-1-1-lower 1600/401x960/240+0+1600 none
+    #  xrandr_args=(
+    #    --output DP-1-1 --auto --pos 0x0 --rotate right --primary
+    #    --output DP-1-8 --auto --pos 1600x0
+    #    --output eDP-1 --auto --pos 4160x520
+    #  )
+    #else
+    #  xrandr --delmonitor DP-1-1-lower
+    #  xrandr --delmonitor DP-1-1-upper
+    #  xrandr_args=(
+    #    --output DP-1-1 --off
+    #    --output DP-1-8 --off
+    #    --output eDP-1 --auto --primary
+    #  )
+    #fi
+    xrandr --output DP-1 --auto --primary --above eDP-1
 
     # Set minimum brightness so the screen won't go entirely black
     light -Nr 1
