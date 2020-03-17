@@ -85,6 +85,9 @@ render i3config ~/.config/i3/config
 render i3statusconfig ~/.config/i3status/config
 
 for app in applications/*; do
+  if [[ $app == minecraft.desktop && $HOSTNAME != colinchan-fedora* ]]; then
+    continue
+  fi
   maybelink "$app" ~/.local/share/"$app"
 done
 
