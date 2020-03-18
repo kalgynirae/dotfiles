@@ -15,7 +15,7 @@ maybelink() {
   elif [[ $2 -ef $1 ]]; then
     echo "$2 is already correct; skipping"
   else
-    [[ -d $(dirname "$2") ]] || mkdir -p "$(dirname "$2")"
+    mkdir -vp "$(dirname "$2")"
     if [[ -e $2 || -h $2 ]]; then
       echo mv "$2" "$2.old"
       mv "$2" "$2.old"
@@ -27,7 +27,7 @@ maybelink() {
 
 render() {
   local source=$1.mustache
-  local gen=gen/$1
+  local dest=$2
   if [[ ! -e .data.yml ]]; then
     echo ".data.yml doesn't exist; skipping all rendering"
     return
@@ -35,16 +35,19 @@ render() {
     echo "$source doesn't exist; skipping"
     return
   fi
-  if [[ $source -ot $gen ]]; then
-    echo "$gen was updated more recently than $source; skipping"
-    diff --color -u <(mustache .data.yml "$source") $gen
+  if [[ $source -ot $dest ]]; then
+    echo "$dest was updated more recently than $source; skipping"
+    diff --color -u <(mustache .data.yml "$source") "$dest"
   else
-    mkdir -vp gen
-    echo mustache "$source" \>"$gen"
-    mustache .data.yml "$source" >"$gen"
-    touch -mr "$source" "$gen"
+    mkdir -vp "$(dirname "$dest")"
+    if [[ -e $dest && ! -f $dest || -h $dest ]]; then
+      echo mv "$dest" "$dest.old"
+      mv "$dest" "$dest.old"
+    fi
+    echo mustache .data.yml "$source" \>"$dest"
+    mustache .data.yml "$source" >"$dest"
+    touch -mr "$source" "$dest"
   fi
-  maybelink "$gen" "$2"
 }
 
 maybelink XCompose ~/.XCompose
@@ -93,7 +96,7 @@ done
 
 firefox_default_profiles=(~/.mozilla/firefox/*.default*)
 count=${#firefox_default_profiles[@]}
-if (( $count == 1 )); then
+if (( count == 1 )); then
   profile=${firefox_default_profiles[0]}
   [[ ! -d "$profile"/chrome ]] && mkdir -v "$profile"/chrome
   maybelink userChrome.css "$profile"/chrome/userChrome.css
