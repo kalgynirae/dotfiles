@@ -64,7 +64,7 @@ imap <c-b> <Left>
 autocmd BufReadPost * silent! normal! g'"
 
 " Plugins
-let g:ale_echo_msg_format="[%linter%]%[ code]% %s"
+let g:ale_echo_msg_format="[%linter%]%[code]% %s"
 let g:ale_lint_on_text_changed="normal"
 let g:ale_python_auto_pipenv=1
 let g:ctrlp_max_files=2000
