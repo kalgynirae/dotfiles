@@ -11,6 +11,7 @@ shopt -s histappend
 
 alias commas='paste -sd,'
 alias diff='diff --color --minimal --unified'
+alias dnf='dnf --cacheonly'
 # shellcheck disable=SC2086,SC2139
 alias e=$EDITOR
 [[ $HOSTNAME == colinchan-fedora-* ]] && alias et='et -p 8080'
