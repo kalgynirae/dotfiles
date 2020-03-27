@@ -7,10 +7,13 @@ new_window pixel 4
 set $mod Mod4
 
 {{#laptop}}
-workspace 1 output DP-1-1-lower
-workspace 4 output DP-1-1-upper
-workspace 5 output DP-1-8
-workspace 6 output eDP-1
+#workspace 1 output DP-1-1-lower
+#workspace 4 output DP-1-1-upper
+#workspace 5 output DP-1-8
+#workspace 6 output eDP-1
+workspace 1 output eDP-1
+workspace 4 output DP-1-8
+workspace 5 output DP-1-1-8
 {{/laptop}}
 
 floating_modifier $mod
@@ -140,6 +143,7 @@ set $red3 #a40000
 
 bar {
     position top
+    tray_output primary
     status_command i3status
     {{#apartmanteau}}
     i3bar_command i3bar -t
@@ -147,10 +151,6 @@ bar {
     {{^apartmanteau}}
     i3bar_command i3bar
     {{/apartmanteau}}
-    #status_command i3status | ~/python/i3-weather/weather.py 2408354 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
-    #status_command i3status | ~/python/i3-weather/weather.py 2444409 --wrap-i3-status --position 0 --unit C --update-interval 300 --format '{city}: {text}, {temp}°{unit_temperature}'
-    #status_command i3status | ~/python/i3-weather/weather.py 55970494 --wrap-i3-status --position 0 --unit C
-    #status_command i3status | sed -u 's/CHR[^"]\+"/BAT 03.14% 00:01:59"/'
     colors {
         background $bgbar
         separator $line
