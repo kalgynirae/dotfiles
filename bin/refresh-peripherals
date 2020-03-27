@@ -48,6 +48,10 @@ case $(hostname) in
     touchpad=$(xinput list | grep Touchpad | grep -o 'id=[[:digit:]]\+' | cut -d= -f2)
     xinput set-button-map $touchpad 1 1 1
 
+    # Disable trackpoint
+    trackpoint=$(xinput list | grep TrackPoint | grep -o 'id=[[:digit:]]\+' | cut -d= -f2)
+    xinput disable $trackpoint
+
     MOUSE_REGEXES+=(TrackPoint)
     ;;
   lumeh)
