@@ -1,25 +1,29 @@
 #!/bin/bash
 set -o pipefail
 
-i3-msg -t subscribe -m '["window"]' \
-  | jq --unbuffered -r 'select(.change == "focus").container.window_properties.class' \
-  | {
-    ~/bin/mouse-set-button-map normal
-    while read window_class; do
-      mode=$(<"$XDG_RUNTIME_DIR/mouse-current-mode")
-      case $window_class in
-        [Aa]lacritty|[Ff]irefox)
-          if [[ $mode != swapped ]]; then
-            echo >&2 "Setting swapped button map"
-            ~/bin/mouse-set-button-map swapped
-          fi
-          ;;
-        *)
-          if [[ $mode != normal ]]; then
-            echo >&2 "Setting normal button map"
-            ~/bin/mouse-set-button-map normal
-          fi
-          ;;
-      esac
-    done
-  }
+while true; do
+  i3-msg -t subscribe -m '["window"]' \
+    | jq --unbuffered -r 'select(.change == "focus").container.window_properties.class' \
+    | {
+      ~/bin/mouse-set-button-map normal
+      while read -r window_class; do
+        mode=$(<"$XDG_RUNTIME_DIR/mouse-current-mode")
+        case $window_class in
+          [Aa]lacritty|[Ff]irefox)
+            if [[ $mode != swapped ]]; then
+              echo >&2 "Setting swapped button map"
+              ~/bin/mouse-set-button-map swapped
+            fi
+            ;;
+          *)
+            if [[ $mode != normal ]]; then
+              echo >&2 "Setting normal button map"
+              ~/bin/mouse-set-button-map normal
+            fi
+            ;;
+        esac
+      done
+    }
+  echo >&2 "i3-msg exited, sleeping for 2 seconds..."
+  sleep 2
+done
