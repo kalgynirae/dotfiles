@@ -100,7 +100,7 @@ count=${#firefox_default_profiles[@]}
 if (( count == 1 )); then
   profile=${firefox_default_profiles[0]}
   [[ ! -d "$profile"/chrome ]] && mkdir -v "$profile"/chrome
-  maybelink userChrome.css "$profile"/chrome/userChrome.css
+  render userChrome.css "$profile"/chrome/userChrome.css
   render userContent.css "$profile"/chrome/userContent.css
 else
   echo "$count Firefox profiles found; skipping"
