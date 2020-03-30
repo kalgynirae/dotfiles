@@ -70,27 +70,30 @@ case $(hostname) in
     )
     ;;
   apartmanteau)
-    case $(( display % 3 )) in
-      0)
-        xrandr_args=(
-          --output HDMI-0 --auto --primary
-          --output DP-1 --off
-        )
-        ;;
-      1)
-        xrandr_args=(
-          --output HDMI-0 --off
-          --output DP-1 --auto --primary
-        )
-        ;;
-      2)
-        xrandr_args=(
-          --output HDMI-0 --auto --primary
-          --output DP-1 --auto --right-of HDMI-0
-        )
-        ;;
-    esac
-    ;;
+    xrandr_args=(
+      --output DP-1 --auto --primary --dpi 144
+    )
+    #case $(( display % 3 )) in
+    #  0)
+    #    xrandr_args=(
+    #      --output HDMI-0 --auto --primary
+    #      --output DP-1 --off
+    #    )
+    #    ;;
+    #  1)
+    #    xrandr_args=(
+    #      --output HDMI-0 --off
+    #      --output DP-1 --auto --primary
+    #    )
+    #    ;;
+    #  2)
+    #    xrandr_args=(
+    #      --output HDMI-0 --auto --primary
+    #      --output DP-1 --auto --right-of HDMI-0
+    #    )
+    #    ;;
+    #esac
+    #;;
 esac
 xrandr "${xrandr_args[@]}"
 
