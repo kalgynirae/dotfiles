@@ -1,12 +1,12 @@
 /* Hide Notifications button while on chat pages */
-@-moz-document url-prefix("https://fb.workplace.com/chat/") {
+@-moz-document url-prefix("https://fb.workplace.com/chat") {
   div[aria-label="Workplace"] > div:first-child > div:first-child > ul:first-child > li:nth-child(2) {
     display: none !important;
   }
 }
 
 /* Hide Chat button while on non-chat pages */
-@-moz-document url-prefix("https://fb.workplace.com/groups/"), url("https://fb.workplace.com") {
+@-moz-document url-prefix("https://fb.workplace.com/groups"), url("https://fb.workplace.com") {
   div[aria-label="Workplace"] > div:first-child > div:first-child > ul:first-child > li:nth-child(3) {
     display: none !important;
   }
