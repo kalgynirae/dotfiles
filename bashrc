@@ -171,15 +171,13 @@ line() {
 
 # Display man pages with color
 man() {
-  env \
-    LESS_TERMCAP_mb="$(printf "\e[1;31m")" \
-    LESS_TERMCAP_md="$(printf "\e[1;32m")" \
-    LESS_TERMCAP_me="$(printf "\e[0m")" \
-    LESS_TERMCAP_se="$(printf "\e[0m")" \
-    LESS_TERMCAP_so="$(printf "\e[1;44;37m")" \
-    LESS_TERMCAP_ue="$(printf "\e[0m")" \
-    LESS_TERMCAP_us="$(printf "\e[1;33m")" \
-    man "$@"
+  LESS_TERMCAP_md=$'\e[1;32m' \
+    LESS_TERMCAP_me=$'\e[22;39m' \
+    LESS_TERMCAP_so=$'\e[1;37;44m' \
+    LESS_TERMCAP_se=$'\e[22;39;49m' \
+    LESS_TERMCAP_us=$'\e[3;33m' \
+    LESS_TERMCAP_ue=$'\e[23;39m' \
+    command man "$@"
 }
 
 mkcd() {
