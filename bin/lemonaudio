@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sshfs lemon:/srv/audio ~/mnt/audio && find ~/mnt/audio -type f -print0 | shuf -z | xargs -0 mpv --no-video --volume-max=250; fusermount -u ~/mnt/audio
