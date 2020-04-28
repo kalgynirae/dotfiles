@@ -171,7 +171,8 @@ line() {
 
 # Display man pages with color
 man() {
-  LESS_TERMCAP_md=$'\e[1;32m' \
+  GROFF_NO_SGR=1 \
+    LESS_TERMCAP_md=$'\e[1;32m' \
     LESS_TERMCAP_me=$'\e[22;39m' \
     LESS_TERMCAP_so=$'\e[1;37;44m' \
     LESS_TERMCAP_se=$'\e[22;39;49m' \
