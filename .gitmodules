@@ -7,3 +7,6 @@
 [submodule "nvim/pack/plugins/start/ale"]
 	path = nvim/pack/plugins/start/ale
 	url = https://github.com/w0rp/ale.git
+[submodule "submodules/autotiling"]
+	path = submodules/autotiling
+	url = https://github.com/nwg-piotr/autotiling.git

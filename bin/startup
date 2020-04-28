@@ -30,6 +30,7 @@ fi
 
 [[ $HOSTNAME == apartmanteau ]] && { pgrep transmission || transmission-gtk -m & }
 
+pgrep -f autotiling || ~/bin/autotiling &
 pgrep -f beamux-server || ~/bash/beamux/beamux-server &>/tmp/beamux-server.log &
 screensaver on
 ~/bin/refresh-peripherals
