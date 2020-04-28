@@ -79,7 +79,7 @@ maybelink pythonrc ~/.pythonrc
 maybelink roficonfig ~/.config/rofi/config
 maybelink sound/compressor.service ~/.config/systemd/user/compressor.service
 maybelink sound/default.pa ~/.config/pulse/default.pa
-maybelink sound/jack.service ~/.config/systemd/user/jack.service
+maybelink sound/jackd.service ~/.config/systemd/user/jackd.service
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
 maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
