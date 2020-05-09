@@ -212,6 +212,17 @@ rename-tmux-window() {
   [[ $TMUX ]] && tmux rename-window "$1"
 }
 
+repeat-prefix() {
+  local matcher=${1:-'^[\w.-/]+'}
+  local prefix new_prefix
+  while IFS= read -r line; do
+    if new_prefix=$(grep -Po "$matcher" <<<"$line"); then
+      prefix=$new_prefix
+    fi
+    printf '%s\n' "$prefix${line:${#prefix}}"
+  done
+}
+
 # Sort a file in-place (kinda)
 sorti() {
   local file="$1"
@@ -220,6 +231,10 @@ sorti() {
   if tmp=$(mktemp); then
     sort "$@" -- "$file" >"$tmp" && mv -fT -- "$tmp" "$file"
   fi
+}
+
+stripcolors() {
+  perl -pe 's/\e\[\d+(?>(;\d+)*)m//g'
 }
 
 # Replay the output of previous commands to stdout
