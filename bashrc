@@ -251,7 +251,7 @@ _tmux-complete() {
   local word_regex_escaped
   word_regex_escaped=$(sed 's/[.^$*+?()[{\|]/\\&/g' <<<"$2")
   local regex="\<${word_regex_escaped}[[:alnum:]_/.-]+\>"
-  tmux capture-pane -Jp | sed '/^\s*$/d' | grep -Eo "$regex" | read -ra COMPREPLY
+  read -ra COMPREPLY < <(tmux capture-pane -Jp | sed '/^\s*$/d' | grep -Eo "$regex")
 }
 complete -o bashdefault -o default -D -F _tmux-complete
 
