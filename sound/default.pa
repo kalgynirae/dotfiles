@@ -12,8 +12,7 @@ load-module module-card-restore
 load-module module-augment-properties
 load-module module-switch-on-port-available
 load-module module-udev-detect
-load-module module-bluetooth-policy
-load-module module-bluetooth-discover
+load-module module-bluetooth-discover a2dp_config="ldac_eqmid=sq"
 load-module module-dbus-protocol
 load-module module-native-protocol-unix
 load-module module-default-device-restore
