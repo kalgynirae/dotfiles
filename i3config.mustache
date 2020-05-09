@@ -11,9 +11,10 @@ set $mod Mod4
 #workspace 4 output DP-1-1-upper
 #workspace 5 output DP-1-8
 #workspace 6 output eDP-1
-workspace 1 output eDP-1
-workspace 4 output DP-1-8
-workspace 5 output DP-1-1-8
+workspace 1 output Dp-1-1-8-lower
+workspace 2 output eDP-1
+workspace 4 output DP-1-1-8-upper
+workspace 5 output DP-1-8
 {{/laptop}}
 
 floating_modifier $mod
@@ -143,7 +144,12 @@ set $red3 #a40000
 
 bar {
     position top
+    {{#laptop}}
+    tray_output eDP-1
+    {{/laptop}}
+    {{^laptop}}
     tray_output primary
+    {{/laptop}}
     status_command i3status
     {{#apartmanteau}}
     i3bar_command i3bar -t

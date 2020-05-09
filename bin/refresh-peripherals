@@ -39,14 +39,28 @@ case $(hostname) in
     #    --output eDP-1 --auto --primary
     #  )
     #fi
-    xrandr_args=(
-      --output DP-1-8 --auto --primary
-      --output DP-1-1-8 --auto --right-of DP-1-8
-    )
+    case $(( display % 2 )) in
+      0)
+        xrandr --setmonitor DP-1-1-8-upper 1440/311x1440/311+0+0 DP-1-1-8
+        xrandr --setmonitor DP-1-1-8-lower 1440/311x1120/242+0+1440 none
+        xrandr_args=(
+          --output DP-1-1-8 --auto --pos 0x0 --rotate right --primary
+          --output DP-1-8 --auto --pos 1440x0
+        )
+        ;;
+      1)
+        xrandr --delmonitor DP-1-1-8-upper
+        xrandr --delmonitor DP-1-1-8-lower
+        xrandr_args=(
+          --output DP-1-1-8 --off
+          --output DP-1-8 --off
+        )
+        ;;
+    esac
     if grep -q closed /proc/acpi/button/lid/LID/state; then
       xrandr_args+=(--output eDP-1 --off)
     else
-      xrandr_args+=(--output eDP-1 --auto --pos 1400x1440)
+      xrandr_args+=(--output eDP-1 --auto --pos 1440x1440)
     fi
 
     # Set minimum brightness so the screen won't go entirely black
