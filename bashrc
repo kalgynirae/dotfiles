@@ -10,7 +10,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 shopt -s histappend
 
 alias commas='paste -sd,'
-alias diff='diff --color --minimal --unified'
+alias diff='diff --color=always --minimal --unified'
 alias dnf='dnf --cacheonly'
 # shellcheck disable=SC2086,SC2139
 alias e=$EDITOR
