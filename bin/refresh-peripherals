@@ -84,37 +84,31 @@ case $(hostname) in
     )
     ;;
   apartmanteau)
-    xrandr_args=(
-      --output DP-1 --auto --primary --dpi 144
-      --output HDMI-0 --auto --right-of DP-1
-    )
-    #case $(( display % 3 )) in
-    #  0)
-    #    xrandr_args=(
-    #      --output HDMI-0 --auto --primary
-    #      --output DP-1 --off
-    #    )
-    #    ;;
-    #  1)
-    #    xrandr_args=(
-    #      --output HDMI-0 --off
-    #      --output DP-1 --auto --primary
-    #    )
-    #    ;;
-    #  2)
-    #    xrandr_args=(
-    #      --output HDMI-0 --auto --primary
-    #      --output DP-1 --auto --right-of HDMI-0
-    #    )
-    #    ;;
-    #esac
-    #;;
+    xrandr --setmonitor DP-0.1.8-upper 1440/311x1440/311+0+0 DP-0.1.8
+    xrandr --setmonitor DP-0.1.8-lower 1440/311x1120/242+0+1440 none
+    case $(( display % 2 )) in
+      0)
+        xrandr_args=(
+          --output DP-0.1.8 --auto --pos 0x0 --rotate right --dpi 96
+          --output DP-0.8 --auto --pos 1440x0 --primary
+          --output HDMI-0 --off
+        )
+        ;;
+      1)
+        xrandr_args=(
+          --output DP-0.1.8 --auto --pos 0x0 --rotate right
+          --output DP-0.8 --auto --pos 1440x0 --primary
+          --output HDMI-0 --auto --pos 4000x360
+        )
+        ;;
+    esac
+    ;;
 esac
 xrandr "${xrandr_args[@]}"
 
 # Figure out the xinput device IDs for mice
 list=$(xinput list)
->"$XDG_RUNTIME_DIR/mice"
+: >"$XDG_RUNTIME_DIR/mice"
 for regex in "${MOUSE_REGEXES[@]}"; do
   id=$(<<<"$list" sed -n "/$regex/"'s/.*id=\([[:digit:]]\+\).*pointer.*/\1/p')
   if [[ $id ]]; then
