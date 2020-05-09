@@ -57,13 +57,15 @@ cal() {
 
 # Test the terminal's text/color capabilities
 colortest() {
-  echo "NORMAL bold     dim      italic   underline BRIGHT bold     dim      italic   underline"
+  local color escapes intensity style
+  echo "NORMAL bold  dim   itali under rever strik  BRIGHT bold  dim   itali under rever strik"
   for color in $(seq 0 7); do
     for intensity in 3 9; do  # normal, bright
-      for style in "" $(seq 4); do  # normal, bold, dim, italic, underline
-        escapes="[${intensity}${color}${style:+;$style}m"
-        # shellcheck disable=SC2059
-        printf "\e${escapes}\\\\e${escapes}\e[0m "
+      escapes="${intensity}${color}"
+      printf '\e[%sm\\e[%sm\e[0m ' "$escapes" "$escapes" # normal
+      for style in 1 2 3 4 7 9; do  # bold, dim, italic, underline, reverse, strikethrough
+        escapes="${intensity}${color};${style}"
+        printf '\e[%sm\\e[%sm\e[0m ' "$escapes" "$style"
       done
       echo -n " "
     done
