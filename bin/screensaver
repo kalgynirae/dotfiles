@@ -26,10 +26,10 @@ case $1 in
   on)
     case $(hostname) in
       apartmanteau)
-        set-x-timeouts 30
+        set-x-timeouts 20
         ;;
       *)
-        set-x-timeouts 5
+        set-x-timeouts 10
         ;;
     esac
     if ! check-screensaver; then
