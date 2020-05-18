@@ -31,7 +31,7 @@ disk "/home" {
 }
 
 {{#apartmanteau}}
-ethernet enp5s0 {
+ethernet enp111s0 {
     color_bad = "#d3d7cf"
     format_up = "E: %ip"
     format_down = "E: down"
@@ -65,7 +65,7 @@ ethernet enp0s31f6 {
 {{/laptop}}
 
 {{#apartmanteau}}
-order += "ethernet enp5s0"
+order += "ethernet enp111s0"
 {{/apartmanteau}}
 {{#laptop}}
 order += "read_file meeting"

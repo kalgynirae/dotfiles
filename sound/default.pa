@@ -10,8 +10,12 @@ load-module module-card-restore
 .endif
 
 load-module module-augment-properties
-load-module module-switch-on-port-available
+.ifexists /etc/this-is-apartmanteau
+.else
+  load-module module-switch-on-port-available
+.endif
 load-module module-udev-detect
+load-module module-bluetooth-policy
 load-module module-bluetooth-discover a2dp_config="ldac_eqmid=sq"
 load-module module-dbus-protocol
 load-module module-native-protocol-unix
@@ -33,7 +37,7 @@ load-module module-filter-apply
 .endif
 
 .ifexists /etc/this-is-apartmanteau
-  update-sink-proplist alsa_output.pci-0000_02_00.0.analog-stereo device.description="Stereo"
+  update-sink-proplist alsa_output.pci-0000_02_00.0.analog-stereo device.description="Speakers"
   update-source-proplist alsa_input.pci-0000_02_00.0.analog-stereo device.description="Line In"
   update-source-proplist alsa_input.usb-046d_HD_Webcam_C525_6A326EA0-00.analog-mono device.description="Webcam Microphone"
 .endif
