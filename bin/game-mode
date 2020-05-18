@@ -1,4 +1,4 @@
 #!/bin/bash
 pkill redshift
-pkill compton
+pkill picom
 screensaver off

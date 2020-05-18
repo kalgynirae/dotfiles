@@ -59,7 +59,6 @@ maybelink bash_profile ~/.bash_profile
 maybelink bashrc ~/.bashrc
 maybelink bin ~/bin
 maybelink calendar-notifier.service ~/.config/systemd/user/calendar-notifier.service
-maybelink compton.conf ~/.config/compton.conf
 maybelink dunstrc ~/.config/dunst/dunstrc
 maybelink feh-themes ~/.config/feh/themes
 maybelink fonts.conf ~/.config/fontconfig/fonts.conf
@@ -74,6 +73,7 @@ maybelink mouse-monitor.service ~/.config/systemd/user/mouse-monitor.service
 maybelink nvim ~/.config/nvim
 maybelink nvim/init.vim ~/.vimrc
 maybelink nvim/pack ~/.local/share/nvim/site/pack
+maybelink picom.conf ~/.config/picom.conf
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
 maybelink roficonfig ~/.config/rofi/config

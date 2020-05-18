@@ -19,7 +19,7 @@ fi
 if [[ $HOSTNAME == colinchan-fedora-PC166WVV ]]; then
   pgrep nm-applet || nm-applet &
 else
-  pgrep compton || compton --daemon --experimental-backends
+  pgrep picom || picom -b --experimental-backends
 fi
 
 if grep -q ^NAME=Fedora$ /etc/os-release; then

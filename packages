@@ -7,7 +7,6 @@ bluez
 bluez-utils
 calf
 chromium
-compton-git
 consolas-font
 cool-retro-term
 cups
@@ -51,6 +50,7 @@ otf-font-awesome
 otf-ipafont
 parallel
 pavucontrol
+picom
 pkgfile
 plasma-workspace-wallpapers
 polkit-gnome
