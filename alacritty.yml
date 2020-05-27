@@ -28,7 +28,7 @@ draw_bold_text_with_bright_colors: false
 font:
   normal:
     family: monospace
-  size: 12
+  size: 11
 
 key_bindings:
   - { key: Add, mods: Control|Shift, action: IncreaseFontSize }
