@@ -1,0 +1,16 @@
+#!/bin/bash
+
+(($# == 2)) || { echo >&2 "usage: $0 WIDTH HEIGHT"; exit 1; }
+
+WINDOW_BORDER_WIDTH=4
+
+echo "Click on the window to be resized."
+wininfo=$(xwininfo -int)
+id_regex='Window id:\s+([0-9]+)'
+[[ $wininfo =~ $id_regex ]]
+window_id=${BASH_REMATCH[1]}
+
+echo "window_id=$window_id"
+
+set -x
+i3-msg "[id=$window_id]" resize set "$(( $1 + WINDOW_BORDER_WIDTH * 2 ))" "$(( $2 + WINDOW_BORDER_WIDTH * 2 ))"
