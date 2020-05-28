@@ -80,6 +80,7 @@ maybelink roficonfig ~/.config/rofi/config
 maybelink sound/compressor.service ~/.config/systemd/user/compressor.service
 maybelink sound/default.pa ~/.config/pulse/default.pa
 maybelink sound/jackd.service ~/.config/systemd/user/jackd.service
+maybelink sway ~/.config/sway/config
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
 maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
