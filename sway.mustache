@@ -1,67 +1,24 @@
 default_border pixel 4
-font DejaVu Sans 10
+font pango:DejaVu Sans 10
 gaps inner 25
 set $mod Mod4
 set $term alacritty
-set $menu dmenu_path | wofi -d | xargs swaymsg exec --
+titlebar_border_thickness 0
+titlebar_padding 4 2
 
-output * {
-    bg /usr/share/backgrounds/f31/default/normalish/f31.png fill
-    subpixel rgb
-}
-
-output eDP-1 {
-    mode 1920x1080
-    pos 1440 1440
-}
-
-output "Dell Inc. DELL U2515HX GMDK46CL06SL" {
-    mode 2560x1440
-    pos 0 0
-    transform 90
-    subpixel vbgr
-}
-
-output "Dell Inc. DELL U2520D GYCNGZ2" {
-    mode 2560x1440
-    pos 1440 0
-}
-
+output * subpixel rgb
+{{#apartmanteau}}
+output * bg "/home/colin/pictures/wallpapers/JohnS1212_ - Drift.jpg" fill
+output "Dell Inc. DELL U2515HX GMDK46CL06SL" mode 2560x1440 pos 0 0 transform 90 subpixel vbgr
+output "Dell Inc. DELL U2520D GYCNGZ2" mode 2560x1440 pos 1440 0
+{{/apartmanteau}}
+{{#laptop}}
 input 2:14:ETPS/2_Elantech_TrackPoint events disabled
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' \
-#               resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+output * bg "/home/colinchan/pictures/wallpapers/JohnS1212_ - Drift.jpg" fill
+output eDP-1 mode 1920x1080 pos 1440 1440
+output "Dell Inc. DELL U2515HX GMDK46CL06SL" mode 2560x1440 pos 0 0 transform 90 subpixel vbgr
+output "Dell Inc. DELL U2520D GYCNGZ2" mode 2560x1440 pos 1440 0
+{{/laptop}}
 
 input type:keyboard {
     repeat_delay 145
@@ -71,9 +28,9 @@ input type:keyboard {
 # Sway
 bindsym $mod+Shift+r reload
 bindsym $mod+Shift+q exit
+floating_modifier $mod normal
 
 # Window management
-floating_modifier $mod normal
 bindsym $mod+grave kill
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -94,8 +51,8 @@ bindsym $mod+v split v
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
-bindsym $mod+Shift+z move scratchpad
 bindsym $mod+z scratchpad show
+bindsym $mod+Shift+z move scratchpad
 
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -140,27 +97,59 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Launching stuff
-bindsym $mod+Return exec $term -e tmux new-session
-bindsym $mod+Shift+Return exec $term
-bindsym $mod+space exec $menu
+set $normalbg #1c2022c0
+set $normalfg #d1d2d0
+set $darkgrey #303436
+set $grey #52595c
+set $red #c81f1f
+set $orange #c8742a
+set $yellow #c4a800
+set $green #4e9a06
+set $cyan #069e98
+set $blue #3c74c0
+set $violet #6050b0
+set $magenta #80487f
+set $white #d1d2d0
+set $brightgrey #6f6f6b
+set $brightred #ef4529
+set $brightorange #f08438
+set $brightyellow #f6db4a
+set $brightgreen #8ad834
+set $brightcyan #34e2c2
+set $brightblue #6492f4
+set $brightviolet #8a71e8
+set $brightmagenta #ad70a4
+set $brightwhite #f8f8f4
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
+# class                 border      backgr.     text        indicator
+client.focused          $red        $red        $normalfg   $orange
+client.focused_inactive $grey       $grey       $normalfg   $brightgrey
+client.unfocused        $darkgrey   $darkgrey   $normalfg   $grey
+client.urgent           $orange     $orange     $normalfg   $yellow
+
 bar {
-    position top
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command i3status
-
     colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        active_workspace $grey $grey $normalfg
+        background $normalbg
+        focused_workspace $green $green $normalfg
+        inactive_workspace $darkgrey $darkgrey $normalfg
+        separator $grey
+        statusline $normalfg
+        urgent_workspace $orange $orange $normalfg
     }
-    font pango:DejaVu Sans 10
+    font pango:DejaVu Sans 11
+    position top
+    status_command i3status
 }
 
 include /etc/sway/config.d/*
+
+# Launch stuff
+bindsym $mod+Return exec $term -e tmux new-session
+bindsym $mod+Shift+Return exec $term
+bindsym $mod+space exec dmenu_path | wofi -d | xargs swaymsg exec --
+bindsym $mod+Mod1+f exec ~/bin/browser
+
+# Startup programs
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec transmission-gtk -m

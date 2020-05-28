@@ -73,6 +73,7 @@ maybelink mouse-monitor.service ~/.config/systemd/user/mouse-monitor.service
 maybelink nvim ~/.config/nvim
 maybelink nvim/init.vim ~/.vimrc
 maybelink nvim/pack ~/.local/share/nvim/site/pack
+maybelink pam_environment ~/.pam_environment
 maybelink picom.conf ~/.config/picom.conf
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
@@ -80,7 +81,6 @@ maybelink roficonfig ~/.config/rofi/config
 maybelink sound/compressor.service ~/.config/systemd/user/compressor.service
 maybelink sound/default.pa ~/.config/pulse/default.pa
 maybelink sound/jackd.service ~/.config/systemd/user/jackd.service
-maybelink sway ~/.config/sway/config
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
 maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
@@ -88,6 +88,7 @@ maybelink update-wallpaper.timer ~/.config/systemd/user/update-wallpaper.timer
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs
 render i3config ~/.config/i3/config
 render i3statusconfig ~/.config/i3status/config
+render sway ~/.config/sway/config
 
 for app in applications/*; do
   if [[ $app == minecraft.desktop && $HOSTNAME != colinchan-fedora* ]]; then
