@@ -258,6 +258,24 @@ that() {
   ' | sed '/▶▶▶.*\[/ s/\[[[:digit:]]\+\]//'
 }
 
+# Execute a command whenever a file is written
+watchfile() {
+  declare -a args
+  while (( $# > 0 )) && [[ $1 != -- ]]; do
+    args+=("$1")
+    shift
+  done
+  shift
+  if (( $# == 0 )); then
+    echo >&2 "usage: watfhfile FILE... -- CMD..."
+    return 1
+  fi
+  while inotifywait -e modify -e attrib -e close_write --exclude '\.git' -rq "${args[@]}"; do
+    echo >&2 ">> Executing $*"
+    "$@"
+  done
+}
+
 _tmux-complete() {
   if (( COMP_KEY == 9 )); then
     # Invoked by Tab key; do nothing
