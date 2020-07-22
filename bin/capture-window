@@ -1,21 +1,21 @@
 #!/bin/bash
 
 if [ ! -t 1 ]; then
-    zenity --info --no-wrap --text='capture-window needs a terminal (so you can exit ffmpeg)'
-    exit 2
+  zenity --info --no-wrap --text='capture-window needs a terminal (so you can exit ffmpeg)'
+  exit 2
 fi
 if (( $# != 1 )); then
-    echo "Usage: capture-window FILENAME"
-    exit 1
+  echo >&2 "Usage: capture-window FILENAME"
+  exit 1
 fi
 
 OUTFILE="$1"
 if [[ -e $OUTFILE ]]; then
-    echo "File already exists: $OUTFILE" >&2
-    exit 3
+  echo >&2 "File already exists: $OUTFILE"
+  exit 3
 fi
 
-echo "Click on the window to be captured."
+echo >&2 "Click on the window to be captured."
 wininfo=$(xwininfo)
 
 width_regex='Width:\s+([0-9]+)'
@@ -30,15 +30,32 @@ height=${BASH_REMATCH[1]}
 location=${BASH_REMATCH[1]},${BASH_REMATCH[2]}
 
 # ffmpeg needs width and height divisible by 2
-if (( $width % 2 != 0 )); then
-    width=$(( $width + 1 ))
+if (( width % 2 != 0 )); then
+  echo >&2 "warning: adjusting width by 1 to make an even number"
+  width=$(( width + 1 ))
 fi
-if (( $height % 2 != 0 )); then
-    height=$(( $height + 1 ))
+if (( height % 2 != 0 )); then
+  echo >&2 "warning: adjusting height by 1 to make an even number"
+  height=$(( height + 1 ))
 fi
 
-#ffmpeg -n \
-#    -f alsa -i default \
-#    -f x11grab -s $width,$height -i :0.0+$location \
-#    -codec:v libtheora -qscale:v 6 -codec:a libvorbis -qscale:a 5 "$OUTFILE"
-ffmpeg -n -f x11grab -s $width,$height -i :0.0+$location -c:v libvpx-vp9 -b:v 0 -crf 30 "$OUTFILE"
+if ! tmpfile=$(mktemp "capture-window.XXXX.mkv"); then
+  echo >&2 "error: mktemp failed"
+  exit 1
+fi
+
+# See tips at https://trac.ffmpeg.org/wiki/Capture/Desktop
+ffmpeg_args=(
+  -f x11grab -framerate 30 -show_region 1 -video_size "${width}x${height}" -i "$DISPLAY.0+$location"
+  -f pulse -i default
+  -c:v libx264rgb -crf 0 -preset ultrafast
+  -c:a flac
+  -y
+  "$tmpfile"
+)
+ffmpeg "${ffmpeg_args[@]}"
+
+# two-pass constant-quality VP9 encoding from https://trac.ffmpeg.org/wiki/Encode/VP9
+echo >&2 "Encoding final video..."
+ffmpeg -i "$tmpfile" -c:v libvpx-vp9 -b:v 0 -crf 30 -pass 1 -an -f webm -y /dev/null
+ffmpeg -i "$tmpfile" -c:v libvpx-vp9 -b:v 0 -crf 30 -pass 2 -c:a libopus -y "$OUTFILE"
