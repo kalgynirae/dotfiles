@@ -1,33 +1,26 @@
 default_border pixel 4
+focus_on_window_activation urgent
 font pango:DejaVu Sans 10
 gaps inner 25
 set $mod Mod4
-set $term alacritty
+tiling_drag enable
 titlebar_border_thickness 0
 titlebar_padding 4 2
 
 output * subpixel rgb
-{{#apartmanteau}}
-output * bg "/home/colin/pictures/wallpapers/JohnS1212_ - Drift.jpg" fill
-output "Dell Inc. DELL U2515HX GMDK46CL06SL" mode 2560x1440 pos 0 0 transform 90 subpixel vbgr
-output "Dell Inc. DELL U2520D GYCNGZ2" mode 2560x1440 pos 1440 0
-{{/apartmanteau}}
-{{#laptop}}
-input 2:14:ETPS/2_Elantech_TrackPoint events disabled
-output * bg "/home/colinchan/pictures/wallpapers/JohnS1212_ - Drift.jpg" fill
-output eDP-1 mode 1920x1080 pos 1440 1440
-output "Dell Inc. DELL U2515HX GMDK46CL06SL" mode 2560x1440 pos 0 0 transform 90 subpixel vbgr
-output "Dell Inc. DELL U2520D GYCNGZ2" mode 2560x1440 pos 1440 0
-{{/laptop}}
+output * bg ~/.cache/wallpaper.jpg fill
 
 input type:keyboard {
     repeat_delay 145
     repeat_rate 55
 }
 
+seat * xcursor_theme Vanilla-DMZ 32
+
 # Sway
 bindsym $mod+Shift+r reload
-bindsym $mod+Shift+q exit
+bindsym $mod+Shift+s exec shutdown-prompt
+bindsym $mod+Shift+q exec "systemctl --user stop graphical-session.target; swaymsg exit"
 floating_modifier $mod normal
 
 # Window management
@@ -46,11 +39,10 @@ bindsym $mod+Tab focus mode_toggle
 bindsym $mod+f fullscreen
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+Ctrl+space sticky toggle
-bindsym $mod+g split h
-bindsym $mod+v split v
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
+bindsym $mod+Shift+e split toggle
 bindsym $mod+z scratchpad show
 bindsym $mod+Shift+z move scratchpad
 
@@ -127,29 +119,20 @@ client.focused_inactive $grey       $grey       $normalfg   $brightgrey
 client.unfocused        $darkgrey   $darkgrey   $normalfg   $grey
 client.urgent           $orange     $orange     $normalfg   $yellow
 
-bar {
-    colors {
-        active_workspace $grey $grey $normalfg
-        background $normalbg
-        focused_workspace $green $green $normalfg
-        inactive_workspace $darkgrey $darkgrey $normalfg
-        separator $grey
-        statusline $normalfg
-        urgent_workspace $orange $orange $normalfg
-    }
-    font pango:DejaVu Sans 11
-    position top
-    status_command i3status
-}
-
 include /etc/sway/config.d/*
 
 # Launch stuff
-bindsym $mod+Return exec $term -e tmux new-session
-bindsym $mod+Shift+Return exec $term
-bindsym $mod+space exec dmenu_path | wofi -d | xargs swaymsg exec --
-bindsym $mod+Mod1+f exec ~/bin/browser
+bindsym $mod+Return exec alacritty -e tmux new-session
+bindsym $mod+Shift+Return exec alacritty
+bindsym $mod+Space exec applauncher
+bindsym $mod+b exec gtk-launch firefox.desktop
+bindsym $mod+t exec gtk-launch thunar.desktop
+bindsym $mod+v exec gtk-launch pavucontrol.desktop
+bindsym $mod+Backspace exec systemctl --user kill --signal USR1 swayidle
+
+# Window stuff
+for_window [title=".*"] inhibit_idle fullscreen
+for_window [app_id="thunar" title="File Operation Progress"] floating enable
 
 # Startup programs
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec transmission-gtk -m
+exec_always "systemctl --user import-environment; systemctl --user start sway-session.target"
