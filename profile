@@ -11,18 +11,22 @@ fi
 export COLORTERM=truecolor
 export DIFFPROG="$EDITOR -d"
 export EDITOR
-export FREETYPE_PROPERTIES='truetype:interpreter-version=40'
+export FREETYPE_PROPERTIES=truetype:interpreter-version=40
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 export LESS='--chop-long-lines --ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS'
+export MOZ_ENABLE_WAYLAND=1
 export MOZ_USE_XINPUT2=1  # Smooth touchpad scrolling in Firefox
 export PAGER=less
 export PYTHONDONTWRITEBYTECODE=yes
 export PYTHONSTARTUP=~/.pythonrc
 export RSYNC_PROTECT_ARGS=1
 export TERMINAL=alacritty
-export WINEDLLOVERRIDES='winemenubuilder.exe=d'
+export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
-if [ -z "$SSH_AUTH_SOCK" ] && pgrep -f gnome-keyring-daemon ; then
-  eval "$(gnome-keyring-daemon --start)"
-  export SSH_AUTH_SOCK
-fi
+#export CLUTTER_BACKEND=wayland
+#export GDK_BACKEND=wayland
+#export QT_QPA_PLATFORM=wayland
+#export SDL_VIDEODRIVER=wayland
+
+systemctl --user import-environment
+sway
