@@ -1,6 +1,6 @@
 #!/bin/bash
 
-primarysize=$(xrandr --current | grep primary | grep -Po '\d+x\d+')
+primarysize=$(swaymsg -t get_outputs | jq -r '.[]|.current_mode|"\(.width)x\(.height)"')
 width=$(cut -dx -f1 <<<"$primarysize")
 height=$(cut -dx -f2 <<<"$primarysize")
 echo "size: ${width}x${height}"
@@ -116,10 +116,10 @@ render-quote() {
     "$@"
 }
 render-quote "$dir/resized.mpc" "$dir/wallpaper.jpg"
-render-quote "$dir/resized-lock.mpc" -quality 05 "$dir/wallpaper-lock.png"  # i3lock needs PNG
+render-quote "$dir/resized-lock.mpc" "$dir/wallpaper-lock.jpg"
 
 # Overwrite the old ones
-mv -t ~/.cache "$dir/wallpaper.jpg" "$dir/wallpaper-lock.png"
+mv -t ~/.cache "$dir/wallpaper.jpg" "$dir/wallpaper-lock.jpg"
 
 # Set the background
-feh --bg-tile ~/.cache/wallpaper.jpg
+swaymsg 'output * bg ~/.cache/wallpaper.jpg fit'
