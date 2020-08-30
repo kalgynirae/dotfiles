@@ -55,7 +55,6 @@ render() {
 }
 
 maybelink XCompose ~/.XCompose
-maybelink Xresources ~/.Xresources
 maybelink alacritty.yml ~/.config/alacritty/alacritty.yml
 maybelink alsoftrc ~/.alsoftrc
 maybelink atom-keymap.cson ~/.atom/keymap.cson
