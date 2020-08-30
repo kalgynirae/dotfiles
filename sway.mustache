@@ -1,19 +1,37 @@
 default_border pixel 4
 focus_on_window_activation urgent
-font pango:DejaVu Sans 10
 gaps inner 25
-set $mod Mod4
 tiling_drag enable
 titlebar_border_thickness 0
 titlebar_padding 4 2
 
-output * subpixel rgb
-output * bg ~/.cache/wallpaper.jpg fill
+{{^fruitron}}
+font pango:DejaVu Sans 10
+set $mod Mod4
+set $term alacritty
 
 input type:keyboard {
     repeat_delay 145
     repeat_rate 55
 }
+{{/fruitron}}
+{{#fruitron}}
+font pango:DejaVu Sans 12
+set $mod Mod1
+set $term termite
+
+input type:keyboard {
+    repeat_delay 300
+    repeat_rate 30
+}
+input type:touchpad {
+    accel_profile adaptive
+    pointer_accel 1
+}
+{{/fruitron}}
+
+output * subpixel rgb
+output * bg ~/.cache/wallpaper.jpg fill
 
 seat * xcursor_theme Vanilla-DMZ 32
 
@@ -122,8 +140,8 @@ client.urgent           $orange     $orange     $normalfg   $yellow
 include /etc/sway/config.d/*
 
 # Launch stuff
-bindsym $mod+Return exec alacritty -e tmux new-session
-bindsym $mod+Shift+Return exec alacritty
+bindsym $mod+Return exec $term -e tmux new-session
+bindsym $mod+Shift+Return exec $term
 bindsym $mod+Space exec applauncher
 bindsym $mod+b exec gtk-launch firefox.desktop
 bindsym $mod+t exec gtk-launch thunar.desktop
