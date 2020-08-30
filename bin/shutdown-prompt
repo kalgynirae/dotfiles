@@ -1,18 +1,7 @@
 #!/bin/bash
 
 ACTIONS=(poweroff reboot suspend)
-case $(hostname) in
-    apartmanteau)
-        ACTIONS+=(reboot-to-windows)
-        ;;
-esac
-
-ACTION=$(printf '%s\n' "${ACTIONS[@]}" | rofi -dmenu -p shutdown)
-
-if [[ $ACTION == reboot-to-windows ]]; then
-    sudo set-bootnext Windows
-    ACTION=reboot
-fi
+ACTION=$(printf '%s\n' "${ACTIONS[@]}" | wofi --dmenu)
 
 if [[ -n $ACTION ]]; then
     echo >&2 systemctl "$ACTION"
