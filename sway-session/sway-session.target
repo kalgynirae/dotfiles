@@ -1,0 +1,9 @@
+[Unit]
+After=graphical-session-pre.target
+BindsTo=graphical-session.target
+Wants=graphical-session-pre.target
+Wants=mako.service
+Wants=polkit-gnome.service
+Wants=redshift.service
+Wants=swayidle.service
+Wants=waybar.service

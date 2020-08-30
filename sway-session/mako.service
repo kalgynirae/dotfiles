@@ -1,0 +1,5 @@
+[Unit]
+PartOf=graphical-session.service
+
+[Service]
+ExecStart=/usr/bin/mako

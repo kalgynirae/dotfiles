@@ -1,0 +1,5 @@
+[Unit]
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
