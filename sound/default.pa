@@ -2,21 +2,14 @@
 
 load-module module-device-restore
 load-module module-card-restore
-
-.ifexists /etc/this-is-apartmanteau
-  load-module module-stream-restore restore_device=no
-.else
-  load-module module-stream-restore
-.endif
-
+load-module module-stream-restore
 load-module module-augment-properties
-.ifexists /etc/this-is-apartmanteau
-.else
-  load-module module-switch-on-port-available
-.endif
+load-module module-switch-on-port-available
 load-module module-udev-detect
-load-module module-bluetooth-policy
-load-module module-bluetooth-discover a2dp_config="ldac_eqmid=sq"
+.ifexists /etc/this-is-colinchan-fedora-PC166WVV
+  load-module module-bluetooth-policy
+  load-module module-bluetooth-discover
+.endif
 load-module module-dbus-protocol
 load-module module-native-protocol-unix
 load-module module-default-device-restore
@@ -36,8 +29,19 @@ load-module module-filter-apply
   update-source-proplist alsa_input.pci-0000_00_1f.3.analog-stereo device.description="Laptop Microphone"
 .endif
 
-.ifexists /etc/this-is-apartmanteau
+.ifexists /etc/this-is-apartmantwo
+  # Starship/Matisse HD Audio Controller
+  set-card-profile alsa_card.pci-0000_0f_00.4 output:analog-stereo
   update-sink-proplist alsa_output.pci-0000_02_00.0.analog-stereo device.description="Speakers"
-  update-source-proplist alsa_input.pci-0000_02_00.0.analog-stereo device.description="Line In"
-  update-source-proplist alsa_input.usb-046d_HD_Webcam_C525_6A326EA0-00.analog-mono device.description="Webcam Microphone"
+
+  # Blue Snowball
+  set-card-profile alsa_card.usb-BLUE_MICROPHONE_Blue_Snowball_201305-00 input:analog-stereo
+  update-source-proplist alsa_input.usb-046d_HD_Webcam_C525_6A326EA0-00.analog-stereo device.description="Webcam Mic"
+  set-source-volume alsa_input.usb-BLUE_MICROPHONE_Blue_Snowball_201305-00.analog-stereo 55705
+
+  # HD Webcam C525
+  set-card-profile alsa_card.usb-046d_HD_Webcam_C525_6A326EA0-00 off
+
+  # Navi 10 HDMI Audio
+  set-card-profile alsa_card.pci-0000_0d_00.1 off
 .endif
