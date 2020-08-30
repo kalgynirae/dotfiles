@@ -3,10 +3,14 @@ shopt -s nullglob
 
 read -rp "Install packages? [y/N] "
 if [[ $REPLY == y ]]; then
+  unknown_packages() {
+    sudo pacman -S --needed $(<packages) |& grep "target not found" | awk '{print $5}'
+  }
   known_packages() {
-    comm -23 packages <(sudo pacman -S --needed $(<packages) |& grep "target not found" | awk '{print $5}')
+    comm -23 packages <(unknown_packages)
   }
   sudo pacman -S --needed $(known_packages)
+  #pacaur -Sa --needed $(unknown_packages)
 fi
 
 maybelink() {
