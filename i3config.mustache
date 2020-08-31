@@ -1,58 +1,36 @@
 font pango:DejaVu Sans 10
 force_display_urgency_hint 500 ms
-{{#apartmanteau}}
-gaps inner 25
-{{/apartmanteau}}
 new_window pixel 4
 set $mod Mod4
 
-{{#laptop}}
-#workspace 1 output DP-1-1-lower
-#workspace 4 output DP-1-1-upper
-#workspace 5 output DP-1-8
-#workspace 6 output eDP-1
-workspace 1 output Dp-1-1-8-lower
-workspace 2 output eDP-1
-workspace 4 output DP-1-1-8-upper
-workspace 5 output DP-1-8
-{{/laptop}}
-{{#apartmanteau}}
-workspace 1 output DP-0.1.8-lower
-workspace 4 output DP-0.1.8-upper
-workspace 5 output DP-0.8
-workspace 9 output HDMI-0
-{{/apartmanteau}}
-
-floating_modifier $mod
-bindsym $mod+grave kill
-bindsym $mod+Return exec --no-startup-id WINIT_HIDPI_FACTOR=1 i3-sensible-terminal -e tmux new-session
-bindsym $mod+Shift+Return exec --no-startup-id WINIT_HIDPI_FACTOR=1 i3-sensible-terminal
-bindsym $mod+space exec rofi -show drun
-bindsym $mod+u exec ~/bin/rofi-bookmarks
+# i3
+bindsym $mod+Shift+r reload
 bindsym $mod+Shift+s exec --no-startup-id shutdown-prompt
+bindsym $mod+Shift+q exit
+floating_modifier $mod
 
-# change focus
+# Window management
+bindsym $mod+grave kill
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 bindsym $mod+a focus parent
 bindsym $mod+d focus child
 bindsym $mod+Tab focus mode_toggle
 bindsym $mod+f fullscreen
-bindsym $mod+g split h
-bindsym $mod+v split v
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Ctrl+space sticky toggle
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+Ctrl+space sticky toggle
-
-bindsym $mod+Shift+z move scratchpad
+bindsym $mod+Shift+e split toggle
 bindsym $mod+z scratchpad show
-bindsym $mod+F2 exec --no-startup-id ~/bin/rename-workspace
-bindsym $mod+F5 exec --no-startup-id systemctl --user start update-wallpaper
-bindsym $mod+F8 exec --no-startup-id ~/bin/python-docs
+bindsym $mod+Shift+z move scratchpad
 
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -74,21 +52,6 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
-
-bindsym $mod+Shift+r reload
-bindsym $mod+Shift+e restart
-bindsym $mod+Shift+q exit
-
-mode "move container" {
-    bindsym h move left
-    bindsym j move down
-    bindsym k move up
-    bindsym l move right
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-    bindsym Ctrl+bracketleft mode "default"
-}
-bindsym $mod+m mode "move container"
 
 mode "move workspace" {
     bindsym h move workspace to output left
@@ -150,19 +113,9 @@ set $red3 #a40000
 
 bar {
     position top
-    {{#laptop}}
     tray_output eDP-1
-    {{/laptop}}
-    {{#apartmanteau}}
-    tray_output DP-0.8
-    {{/apartmanteau}}
     status_command i3status
-    {{#apartmanteau}}
-    i3bar_command i3bar -t
-    {{/apartmanteau}}
-    {{^apartmanteau}}
     i3bar_command i3bar
-    {{/apartmanteau}}
     colors {
         background $bgbar
         separator $line
@@ -181,13 +134,17 @@ client.focused_inactive $line       $bg1        $text2      $bg2
 client.unfocused        $line       $bg2        $text2      $bg1
 client.urgent           $orange1    $orange2    $text       $yellow2
 
+bindsym $mod+Return exec alacritty -e tmux new-session
+bindsym $mod+Shift+Return exec alacritty
+bindsym $mod+space exec rofi -show drun
+bindsym $mod+b exec ~/bin/browser
+bindsym $mod+m exec mpv --player-operation-mode=pseudo-gui
+bindsym $mod+t exec nautilus --new-window
+bindsym $mod+u exec ~/bin/rofi-bookmarks
+bindsym $mod+v exec pavucontrol
 bindsym $mod+BackSpace exec --no-startup-id ~/bin/screensaver lock
 bindsym $mod+Mod1+Return exec cool-retro-term
 bindsym $mod+Mod1+p exec cool-retro-term -e ipython3
-bindsym $mod+Mod1+d exec nautilus --new-window
-bindsym $mod+Mod1+f exec ~/bin/browser
-bindsym $mod+Mod1+m exec mpv --player-operation-mode=pseudo-gui
-bindsym $mod+Mod1+v exec pavucontrol
 bindsym --release $mod+Mod1+r exec --no-startup-id ~/bin/refresh-peripherals --cycle
 bindsym --release XF86Display exec --no-startup-id ~/bin/refresh-peripherals --cycle
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
@@ -204,7 +161,8 @@ bindsym XF86Calculator exec nautilus
 bindsym --release Print exec --no-startup-id ~/bin/screenshot
 bindsym --release Shift+Print exec --no-startup-id ~/bin/screenshot --select
 bindsym --release $mod+Print exec --no-startup-id ~/bin/screenshot --focused --border
-bindsym XF86Tools exec --no-startup-id mplayer ~/music.mp3
+bindsym $mod+F5 exec --no-startup-id systemctl --user start update-wallpaper
+bindsym $mod+F8 exec --no-startup-id ~/bin/python-docs
 
 for_window [class="Firefox" title="^\[1\] myNoise.net Minified Player - Mozilla Firefox$"] floating enable
 for_window [class="GrandOrgue"] floating enable
