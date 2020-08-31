@@ -16,51 +16,25 @@ synclient TapButton1=0 TapButton2=0 TapButton3=2
 [[ " $* " == *" --cycle "* ]] && (( display++ ))
 echo $display >"$XDG_RUNTIME_DIR/display"
 
-MOUSE_REGEXES=(G502)
-
 xrandr_args=()
 case $(hostname) in
   colinchan-fedora-PC166WVV)
-    #monitors=$(xrandr --current | grep connected)
-    #if grep "DP-1-1 connected" <<<"$monitors" ; then
-    #  xrandr --setmonitor DP-1-1-upper 1600/401x1600/401+0+0 DP-1-1
-    #  xrandr --setmonitor DP-1-1-lower 1600/401x960/240+0+1600 none
-    #  xrandr_args=(
-    #    --output DP-1-1 --auto --pos 0x0 --rotate right --primary
-    #    --output DP-1-8 --auto --pos 1600x0
-    #    --output eDP-1 --auto --pos 4160x520
-    #  )
-    #else
-    #  xrandr --delmonitor DP-1-1-lower
-    #  xrandr --delmonitor DP-1-1-upper
-    #  xrandr_args=(
-    #    --output DP-1-1 --off
-    #    --output DP-1-8 --off
-    #    --output eDP-1 --auto --primary
-    #  )
-    #fi
     case $(( display % 2 )) in
       0)
-        xrandr --setmonitor DP-1-1-8-upper 1440/311x1440/311+0+0 DP-1-1-8
-        xrandr --setmonitor DP-1-1-8-lower 1440/311x1120/242+0+1440 none
         xrandr_args=(
-          --output DP-1-1-8 --auto --pos 0x0 --rotate right --primary
-          --output DP-1-8 --auto --pos 1440x0
+          --output DP-1 --auto
         )
         ;;
       1)
-        xrandr --delmonitor DP-1-1-8-upper
-        xrandr --delmonitor DP-1-1-8-lower
         xrandr_args=(
-          --output DP-1-1-8 --off
-          --output DP-1-8 --off
+          --output DP-1 --off
         )
         ;;
     esac
     if grep -q closed /proc/acpi/button/lid/LID/state; then
-      xrandr_args+=(--output eDP-1 --off)
+      xrandr_args+=(--primary --output eDP-1 --off)
     else
-      xrandr_args+=(--output eDP-1 --auto --pos 1440x1440)
+      xrandr_args+=(--output eDP-1 --auto --below DP-1 --primary)
     fi
 
     # Set minimum brightness so the screen won't go entirely black
@@ -68,56 +42,14 @@ case $(hostname) in
 
     # Disable right/middle click on the touchpad
     touchpad=$(xinput list | grep Touchpad | grep -o 'id=[[:digit:]]\+' | cut -d= -f2)
-    xinput set-button-map $touchpad 1 1 1
+    xinput set-button-map $touchpad 1 1 3
 
     # Disable trackpoint
     trackpoint=$(xinput list | grep TrackPoint | grep -o 'id=[[:digit:]]\+' | cut -d= -f2)
     xinput disable $trackpoint
-
-    MOUSE_REGEXES+=(TrackPoint)
-    ;;
-  lumeh)
-    xrandr_args=(
-      --output LVDS1 --auto --primary --pos 1920x312
-      --output HDMI1 --auto --pos 0x0
-      --output VGA1 --auto --same-as LVDS1
-    )
-    ;;
-  apartmanteau)
-    xrandr --setmonitor DP-0.1.8-upper 1440/311x1440/311+0+0 DP-0.1.8
-    xrandr --setmonitor DP-0.1.8-lower 1440/311x1120/242+0+1440 none
-    case $(( display % 2 )) in
-      0)
-        xrandr_args=(
-          --output DP-0.1.8 --auto --pos 0x0 --rotate right --dpi 96
-          --output DP-0.8 --auto --pos 1440x0 --primary
-          --output HDMI-0 --off
-        )
-        ;;
-      1)
-        xrandr_args=(
-          --output DP-0.1.8 --auto --pos 0x0 --rotate right
-          --output DP-0.8 --auto --pos 1440x0 --primary
-          --output HDMI-0 --auto --pos 4000x360
-        )
-        ;;
-    esac
     ;;
 esac
 xrandr "${xrandr_args[@]}"
-
-# Figure out the xinput device IDs for mice
-list=$(xinput list)
-: >"$XDG_RUNTIME_DIR/mice"
-for regex in "${MOUSE_REGEXES[@]}"; do
-  id=$(<<<"$list" sed -n "/$regex/"'s/.*id=\([[:digit:]]\+\).*pointer.*/\1/p')
-  if [[ $id ]]; then
-    echo "$id" >>"$XDG_RUNTIME_DIR/mice"
-  else
-    echo >&2 "No device matched regex ${regex@Q}"
-  fi
-done
-~/bin/mouse-set-button-map
 
 ~/.fehbg
 paplay /usr/share/sounds/freedesktop/stereo/window-attention.oga
