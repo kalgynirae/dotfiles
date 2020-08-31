@@ -106,6 +106,10 @@ for app in applications/*; do
   maybelink "$app" ~/.local/share/"$app"
 done
 
+for unit in sway-session/*; do
+  maybelink "$unit" ~/.config/systemd/user/"${unit#sway-session/}"
+done
+
 firefox_default_profiles=(~/.mozilla/firefox/*.default*)
 count=${#firefox_default_profiles[@]}
 if (( count == 1 )); then
