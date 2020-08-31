@@ -130,6 +130,11 @@ bindsym $mod+t exec gtk-launch thunar.desktop
 bindsym $mod+v exec gtk-launch pavucontrol.desktop
 bindsym $mod+Backspace exec systemctl --user kill --signal USR1 swayidle
 
+# Media stuff
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
 # Window stuff
 for_window [title=".*"] inhibit_idle fullscreen
 for_window [app_id="thunar" title="File Operation Progress"] floating enable
