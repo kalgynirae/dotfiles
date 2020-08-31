@@ -28,5 +28,7 @@ export WINEDLLOVERRIDES=winemenubuilder.exe=d
 #export QT_QPA_PLATFORM=wayland
 #export SDL_VIDEODRIVER=wayland
 
-systemctl --user import-environment
-sway
+if [ "$(tty)" = /dev/tty1 ]; then
+  systemctl --user import-environment
+  sway
+fi
