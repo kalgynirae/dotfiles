@@ -8,6 +8,7 @@ HISTIGNORE="history:bg*:d:dls:e:fg*:ls:ll:la:su"
 HISTSIZE=-1
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 shopt -s histappend
+set +H
 
 alias commas='paste -sd,'
 alias diff='diff --color=always --minimal --unified'
