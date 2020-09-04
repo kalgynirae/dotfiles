@@ -12,6 +12,9 @@ load-module module-udev-detect
 .endif
 load-module module-dbus-protocol
 load-module module-native-protocol-unix
+.ifexists /etc/this-is-fruitron
+  load-module module-native-protocol-tcp auth-anonymous=yes
+.endif
 load-module module-default-device-restore
 load-module module-rescue-streams
 load-module module-always-sink
