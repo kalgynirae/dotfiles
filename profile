@@ -28,6 +28,11 @@ export WINEDLLOVERRIDES=winemenubuilder.exe=d
 #export QT_QPA_PLATFORM=wayland
 #export SDL_VIDEODRIVER=wayland
 
+if [ -z "$SSH_AUTH_SOCK" ] && pgrep -f gnome-keyring-daemon; then
+  eval "$(gnome-keyring-daemon --start)"
+  export SSH_AUTH_SOCK
+fi
+
 if [ "$(tty)" = /dev/tty1 ]; then
   systemctl --user import-environment
   sway
