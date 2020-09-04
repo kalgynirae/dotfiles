@@ -10,10 +10,12 @@ load-module module-udev-detect
   load-module module-bluetooth-policy
   load-module module-bluetooth-discover
 .endif
+load-module module-zeroconf-discover
 load-module module-dbus-protocol
 load-module module-native-protocol-unix
 .ifexists /etc/this-is-fruitron
-  load-module module-native-protocol-tcp auth-anonymous=yes
+  load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1;10.0.0.0/16
+  load-module module-zeroconf-publish
 .endif
 load-module module-default-device-restore
 load-module module-rescue-streams

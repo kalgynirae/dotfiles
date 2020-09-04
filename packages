@@ -36,6 +36,7 @@ pavucontrol
 polkit-gnome
 pulseaudio
 pulseaudio-alsa
+pulseaudio-zeroconf
 python-pip
 rsync
 rubygems
