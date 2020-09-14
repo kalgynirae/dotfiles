@@ -74,6 +74,7 @@ maybelink calendar-notifier.service ~/.config/systemd/user/calendar-notifier.ser
 maybelink dunstrc ~/.config/dunst/dunstrc
 maybelink feh-themes ~/.config/feh/themes
 maybelink fonts.conf ~/.config/fontconfig/fonts.conf
+maybelink gammastep.ini ~/.config/gammastep/config.ini
 maybelink gemrc ~/.gemrc
 maybelink gitconfig ~/.gitconfig
 maybelink gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
