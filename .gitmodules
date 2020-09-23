@@ -1,12 +1,15 @@
 [submodule "nvim/pack/plugins/start/python-syntax"]
-	path = nvim/pack/plugins/start/python-syntax
+	path = nvim/plugins/python-syntax
 	url = https://github.com/kalgynirae/python-syntax
 [submodule "nvim/pack/plugins/start/ctrlp.vim"]
-	path = nvim/pack/plugins/start/ctrlp.vim
+	path = nvim/plugins/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim
 [submodule "nvim/pack/plugins/start/ale"]
-	path = nvim/pack/plugins/start/ale
+	path = nvim/plugins/ale
 	url = https://github.com/w0rp/ale.git
 [submodule "submodules/autotiling"]
 	path = submodules/autotiling
 	url = https://github.com/nwg-piotr/autotiling.git
+[submodule "nvim/plugins/vim-javascript"]
+	path = nvim/plugins/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git

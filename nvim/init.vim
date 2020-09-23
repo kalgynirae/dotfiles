@@ -1,4 +1,3 @@
-set nocompatible
 colorscheme kalgykai
 
 set autoindent
