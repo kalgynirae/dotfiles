@@ -1,6 +1,6 @@
 #!/bin/bash
 
-primarysize=$(swaymsg -t get_outputs | jq -r '.[]|.current_mode|"\(.width)x\(.height)"')
+primarysize=$(swaymsg -t get_outputs | jq -r '.[]|.current_mode|"\(.width)x\(.height)"' | head -n1)
 width=$(cut -dx -f1 <<<"$primarysize")
 height=$(cut -dx -f2 <<<"$primarysize")
 echo "size: ${width}x${height}"

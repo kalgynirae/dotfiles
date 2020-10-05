@@ -1,6 +1,43 @@
 #!/bin/bash
 
-[[ " $* " == *" --help "* ]] && { scrot --help; exit; }
-path=$(scrot "$@" ~/pictures/screenshots/'%Y-%m-%d-%s-$wx$h.png' -e 'echo $f')
-(( $? == 0 )) && notify-send -a screenshot -t 5000 -u low screenshot "Screenshot saved to $path" &
-(( $# == 0 )) || feh "$path" &
+usage() {
+  echo "usage: $0 [--select-region]"
+}
+
+if [[ " $* " == *" --help "* ]] || (( $# > 1 )); then
+  usage
+  exit 1
+fi
+
+if [[ " $* " == *" --region "* ]]; then
+  region=$(slurp)
+  dimensions=$(cut -d' ' -f2 <<<"$region")
+elif [[ " $* " == *" --window "* ]]; then
+  region=$(swaymsg -t get_tree | jq -r 'recurse(.nodes[]?, .floating_nodes[]?) | select(.focused) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')
+  dimensions=$(cut -d' ' -f2 <<<"$region")
+else
+  outputs=$(swaymsg -t get_outputs)
+  output=$(<<<"$outputs" jq -r '.[] | select(.focused) | .name')
+  dimensions=$(<<<"$outputs" jq -r '.[] | select(.focused) | .current_mode | "\(.width)x\(.height)"')
+fi
+
+output_path=$HOME/pictures/screenshots/$(date '+%Y-%m-%d-%s')-$dimensions.png
+while [[ -e $output_path ]]; do
+  if [[ $output_path =~ -([0-9]+).png$ ]]; then
+    new_suffix=-$(( BASH_REMATCH[1] + 1 )).png
+    output_path=${output_path/${BASH_REMATCH[0]}/$new_suffix}
+  else
+    output_path=${output_path/.png/-1.png}
+  fi
+done
+
+if [[ -v region ]]; then
+  args=(-g "$region")
+else
+  args=(-o "$output")
+fi
+
+if grim "${args[@]}" "$output_path"; then
+  notify-send -a screenshot -t 5000 -u low screenshot "Screenshot saved to $output_path" &
+  feh "$output_path" &
+fi

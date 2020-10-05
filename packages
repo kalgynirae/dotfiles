@@ -21,6 +21,7 @@ gucharmap
 gvfs
 htop
 imagemagick
+inotify-tools
 ipython
 jq
 libaacs

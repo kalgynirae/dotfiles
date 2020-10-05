@@ -13,6 +13,8 @@ set $term alacritty
 input type:keyboard {
     repeat_delay 145
     repeat_rate 55
+    xkb_layout "us"
+    xkb_options "caps:ctrl_modifier,compose:ralt"
 }
 {{/fruitron}}
 {{#fruitron}}
@@ -144,9 +146,12 @@ bindsym $mod+Return exec $term -e tmux new-session
 bindsym $mod+Shift+Return exec $term
 bindsym $mod+Space exec applauncher
 bindsym $mod+b exec gtk-launch firefox.desktop
-bindsym $mod+t exec gtk-launch thunar.desktop
+bindsym $mod+t exec gtk-launch org.gnome.Nautilus.desktop
 bindsym $mod+v exec gtk-launch pavucontrol.desktop
 bindsym $mod+Backspace exec systemctl --user kill --signal USR1 swayidle
+bindsym Print exec ~/bin/screenshot
+bindsym Shift+Print exec ~/bin/screenshot --region
+bindsym $mod+Print exec ~/bin/screenshot --window
 
 # Media stuff
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -155,7 +160,11 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Window stuff
 for_window [title=".*"] inhibit_idle fullscreen
-for_window [app_id="thunar" title="File Operation Progress"] floating enable
+for_window [app_id="mpv"] floating enable
+for_window [app_id="pavucontrol"] floating enable
+for_window [class="Steam"] floating enable
+for_window [class="discord"] floating enable
+for_window [class="feh"] floating enable
 
 # Startup programs
 exec_always "systemctl --user import-environment; systemctl --user start sway-session.target"
