@@ -21,6 +21,8 @@ export PYTHONSTARTUP=~/.pythonrc
 export RSYNC_PROTECT_ARGS=1
 export TERMINAL=alacritty
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_TYPE=wayland
 
 #export CLUTTER_BACKEND=wayland
 #export GDK_BACKEND=wayland
@@ -35,5 +37,5 @@ fi
 
 if [ "$(tty)" = /dev/tty1 ]; then
   systemctl --user import-environment
-  sway
+  systemd-run --user --unit=sway.service --collect -- sway
 fi
