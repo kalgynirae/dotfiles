@@ -1,0 +1,18 @@
+#!/bin/bash
+
+dev=$1
+
+params=(
+  --set-ctrl=exposure_auto=0
+  --set-ctrl=exposure_auto_priority=0
+  --set-ctrl=exposure_absolute=250
+  --set-ctrl=focus_auto=0
+  --set-ctrl=focus_absolute=15
+  --set-ctrl=white_balance_temperature_auto=0
+  --set-ctrl=white_balance_temperature=3400
+  --set-ctrl=zoom_absolute=133
+)
+
+for param in "${params[@]}"; do
+  v4l2-ctl -d "$dev" "$param"
+done
