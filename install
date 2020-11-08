@@ -80,6 +80,7 @@ maybelink gitconfig ~/.gitconfig
 maybelink gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
 maybelink gtkrc-2.0 ~/.gtkrc-2.0
 maybelink i3-wait.service ~/.config/systemd/user/i3-wait.service
+maybelink index.theme ~/.local/share/icons/default/index.theme
 maybelink inputrc ~/.inputrc
 maybelink ipython_config.py ~/.ipython/profile_default/ipython_config.py
 maybelink mouse-monitor.service ~/.config/systemd/user/mouse-monitor.service
@@ -100,6 +101,12 @@ maybelink user-dirs.dirs ~/.config/user-dirs.dirs
 render i3config ~/.config/i3/config
 render i3statusconfig ~/.config/i3status/config
 render sway ~/.config/sway/config
+
+# Set cursor theme in gsettings (waybar seems to use this)
+cursortheme=$(grep 'gtk-cursor-theme-name' gtk-3.0-settings.ini | cut -d= -f2)
+cursorsize=$(grep 'gtk-cursor-theme-size' gtk-3.0-settings.ini | cut -d= -f2)
+gsettings set org.gnome.desktop.interface cursor-theme "$cursortheme"
+gsettings set org.gnome.desktop.interface cursor-size "$cursorsize"
 
 for app in applications/*; do
   if [[ $app == minecraft.desktop && $HOSTNAME != colinchan-fedora* ]]; then
