@@ -21,7 +21,6 @@ paths=(
     ~/sounds
     ~/stepmania
     ~/videos
-    /mnt/windows/Users/colin/flstudio
 )
 
 common_args=(
