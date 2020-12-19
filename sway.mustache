@@ -147,12 +147,12 @@ client.urgent           $orange     $orange     $normalfg   $yellow
 include /etc/sway/config.d/*
 
 # Launch stuff
-bindsym $mod+Return exec $term -e tmux new-session
-bindsym $mod+Shift+Return exec $term
+bindsym $mod+Return exec systemd-run-launch-app $term $term -e tmux new-session
+bindsym $mod+Shift+Return exec systemd-run-launch-app $term $term
 bindsym $mod+Space exec applauncher
-bindsym $mod+b exec gtk-launch firefox.desktop
-bindsym $mod+t exec gtk-launch org.gnome.Nautilus.desktop
-bindsym $mod+v exec gtk-launch pavucontrol.desktop
+bindsym $mod+b exec systemd-run-launch-app firefox gtk-launch firefox.desktop
+bindsym $mod+t exec systemd-run-launch-app nautilus gtk-launch org.gnome.Nautilus.desktop
+bindsym $mod+v exec systemd-run-launch-app pavucontrol gtk-launch pavucontrol.desktop
 bindsym $mod+Backspace exec systemctl --user kill --signal USR1 swayidle
 bindsym Print exec ~/bin/screenshot
 bindsym Shift+Print exec ~/bin/screenshot --region

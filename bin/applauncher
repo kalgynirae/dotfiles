@@ -2,5 +2,6 @@
 
 if ! name=$(find ~/.local/share/applications /usr/share/applications -name '*.desktop' -printf '%P\n' | sed 's/.desktop$//' | sort -u | wofi --dmenu -i); then
   echo >&2 "canceled"
+  exit 1
 fi
-swaymsg exec -- gtk-launch "$name.desktop"
+swaymsg exec -- systemd-run-launch-app "$name" gtk-launch "$name.desktop"
