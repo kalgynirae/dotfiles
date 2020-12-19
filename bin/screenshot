@@ -1,11 +1,19 @@
 #!/bin/bash
+# usage: screenshot [--region|--window]
+#
+# Take a screenshot in Sway and save it to ~/pictures/screenshots/.
+#
+# Area selection:
+#   (default)     Select the focused output
+#   --region      Select a region with the mouse
+#   --window      Select the focused window
 
 usage() {
-  echo "usage: $0 [--select-region]"
+  awk <"$0" '/$^/{exit};NR==2,0{print substr($0, 3)}'
 }
 
 if [[ " $* " == *" --help "* ]] || (( $# > 1 )); then
-  usage
+  usage >&2
   exit 1
 fi
 
@@ -13,7 +21,7 @@ if [[ " $* " == *" --region "* ]]; then
   region=$(slurp)
   dimensions=$(cut -d' ' -f2 <<<"$region")
 elif [[ " $* " == *" --window "* ]]; then
-  region=$(swaymsg -t get_tree | jq -r 'recurse(.nodes[]?, .floating_nodes[]?) | select(.focused) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')
+  region=$(sway-window --focused --rect)
   dimensions=$(cut -d' ' -f2 <<<"$region")
 else
   outputs=$(swaymsg -t get_outputs)
@@ -39,5 +47,6 @@ fi
 
 if grim "${args[@]}" "$output_path"; then
   notify-send -a screenshot -t 5000 -u low screenshot "Screenshot saved to $output_path" &
-  feh "$output_path" &
+  imv "$output_path" &
+  wl-copy <"$output_path" &
 fi

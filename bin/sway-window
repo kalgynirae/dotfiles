@@ -1,0 +1,138 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+from argparse import ArgumentParser
+from dataclasses import dataclass
+from inspect import getmembers
+from itertools import chain
+from string import Template
+from subprocess import run, PIPE
+import json
+import sys
+
+
+@dataclass
+class Window:
+    data: dict[str, Any]
+
+    def format(self, template):
+        return template.format(**dict(getmembers(self)))
+
+    @property
+    def is_xwayland(self):
+        return self.data["app_id"] is None
+
+    @property
+    def id(self):
+        return self.data["id"]
+
+    @property
+    def name(self):
+        return self.data["name"]
+
+    @property
+    def focused(self):
+        return self.data["focused"]
+
+    @property
+    def x(self):
+        return self.data["rect"]["x"]
+
+    @property
+    def y(self):
+        return self.data["rect"]["y"]
+
+    @property
+    def width(self):
+        return self.data["rect"]["width"]
+
+    @property
+    def height(self):
+        return self.data["rect"]["height"]
+
+    @property
+    def json(self):
+        return json.dumps(self.data, indent=2)
+
+
+def get_windows():
+    data = run(["swaymsg", "-t", "get_tree"], check=True, stdout=PIPE).stdout
+    tree = json.loads(data)
+    return [
+        Window(window)
+        for output in tree["nodes"]
+        for workspace in output["nodes"]
+        for window in chain(workspace["nodes"], workspace["floating_nodes"])
+    ]
+
+
+def selector_choose(windows):
+    slurp_input = "".join(
+        f"{window.format('{x},{y} {width}x{height}')} {n}\n"
+        for n, window in enumerate(windows)
+    ).encode("utf-8")
+    result = run(["slurp", "-r", "-f", "%l"], input=slurp_input, stdout=PIPE)
+    if result.returncode:
+        return None
+    chosen = int(result.stdout)
+    return windows[chosen]
+
+
+def selector_focused(windows):
+    return next((w for w in windows if w.focused), None)
+
+
+def main() -> int:
+    parser = ArgumentParser()
+
+    selectors = parser.add_mutually_exclusive_group(required=True)
+    selectors.add_argument(
+        "--choose",
+        action="store_const",
+        const=selector_choose,
+        dest="selector",
+        help="Wait for mouse click; select the clicked window",
+    )
+    selectors.add_argument(
+        "--focused",
+        action="store_const",
+        const=selector_focused,
+        dest="selector",
+        help="Select the currently-focused window",
+    )
+
+    parser.set_defaults(format="{json}")
+    outputs = parser.add_mutually_exclusive_group(required=False)
+    outputs.add_argument(
+        "--format",
+        metavar="FORMAT",
+        action="store",
+        dest="format",
+        help="Print information in a custom format",
+    )
+    outputs.add_argument(
+        "--id",
+        action="store_const",
+        const="{id}",
+        dest="format",
+        help="Print the window's id",
+    )
+    outputs.add_argument(
+        "--rect",
+        action="store_const",
+        const="{x},{y} {width}x{height}",
+        dest="format",
+        help="Print the window's coordinates and dimensions",
+    )
+
+    args = parser.parse_args()
+
+    window = args.selector(get_windows())
+    if window is None:
+        return 1
+
+    print(window.format(args.format))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
