@@ -67,6 +67,7 @@ let g:ale_echo_msg_format="[%linter%]%[code]% %s"
 let g:ale_lint_on_text_changed="normal"
 let g:ale_python_auto_pipenv=1
 let g:ctrlp_max_files=2000
+let g:ctrlp_root_markers = ['BUCK', 'TARGETS']
 let html_no_rendering=1
 let python_highlight_string_format=1
 let python_highlight_string_formatting=1
