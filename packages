@@ -30,6 +30,7 @@ libaacs
 libu2f-host
 light
 lolcat
+mako
 mpv
 noto-fonts
 noto-fonts-emoji
@@ -51,6 +52,8 @@ slurp
 sshfs
 stapler
 strace
+sway
+swayidle
 thunar
 tmux
 traceroute
