@@ -346,49 +346,62 @@ _tmux-complete() {
 }
 complete -o bashdefault -o default -D -F _tmux-complete
 
-in-git-repo() {
-  git rev-parse --is-inside-work-tree &>/dev/null
-}
-
+#
+# Source control shortcuts
+#
 _not-yet() {
   echo >&2 "not implemented yet"
   return 1
 }
 
+in-git-repo() {
+  git rev-parse --is-inside-work-tree &>/dev/null
+}
+
 amend() {
-  if in-git-repo; then git commit --amend --no-edit "$@"; else _not-yet; fi
+  if in-git-repo; then git commit --amend --no-edit "$@"; else hg amend "$@"; fi
+}
+
+amendr() {
+  if in-git-repo; then git commit --amend --no-edit "$@"; else hg amend --rebase "$@"; fi
 }
 
 blame() {
-  if in-git-repo; then git blame "$@"; else _not-yet; fi
+  if in-git-repo; then git blame "$@"; else hg annotate --user --date -q --changeset --phabdiff "$@"; fi
 }
 
 del() {
-  _not-yet
+  if in-git-repo; then _not-yet; else hg hide "$@"; fi
 }
 
 edit() {
-  if in-git-repo; then git edit "$@"; else _not-yet; fi
+  if in-git-repo; then git edit "$@"; else hg metaedit "$@"; fi
 }
 
 ex() {
-  if in-git-repo; then git show "$@"; else _not-yet; fi
+  if in-git-repo; then git show "$@"; else hg ex "$@"; fi
 }
 
 lg() {
-  if in-git-repo; then git graph "$@"; else _not-yet; fi
+  if in-git-repo; then git graph "$@"; else hg sl "$@"; fi
 }
 
 start() {
   if in-git-repo; then
     _not-yet
   else
-    hg pull && _not-yet
+    local dest=master
+    [[ $PWD == *fbcode* ]] && dest=fbcode/stable
+    hg pull && hg update "$dest"
   fi
 }
 
 up() {
-  if in-git-repo; then git checkout "$@"; else hg update "$@"; fi
+  if in-git-repo; then
+    git checkout "$@"
+  else
+    hg update "${1:-remote/master}"
+  fi
 }
 
 git_prompt_path=/usr/share/git/git-prompt.sh
