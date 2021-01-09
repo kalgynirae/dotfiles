@@ -42,7 +42,7 @@ load-module module-filter-apply
   # Blue Snowball
   set-card-profile alsa_card.usb-BLUE_MICROPHONE_Blue_Snowball_201305-00 input:analog-stereo
   update-source-proplist alsa_input.usb-046d_HD_Webcam_C525_6A326EA0-00.analog-stereo device.description="Webcam Mic"
-  set-source-volume alsa_input.usb-BLUE_MICROPHONE_Blue_Snowball_201305-00.analog-stereo 55705
+  set-source-volume alsa_input.usb-BLUE_MICROPHONE_Blue_Snowball_201305-00.analog-stereo 57670
 
   # HD Webcam C525
   set-card-profile alsa_card.usb-046d_HD_Webcam_C525_6A326EA0-00 off
