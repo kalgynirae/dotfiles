@@ -1,7 +1,8 @@
 #!/bin/bash
 
-if ! (( $# < 2 )); then
-  echo "usage: $0 NAME COMMAND..."
+if (( $# < 2 )); then
+  echo >&2 "usage: $0 NAME COMMAND..."
+  exit 1
 fi
 
 name=$1
