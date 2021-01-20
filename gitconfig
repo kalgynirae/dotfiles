@@ -23,3 +23,5 @@
 [user]
 	name = Colin Chan
 	email = colinchan@lumeh.org
+[init]
+	defaultBranch = main
