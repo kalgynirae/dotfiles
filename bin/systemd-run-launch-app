@@ -6,4 +6,4 @@ fi
 
 name=$1
 shift
-exec systemd-run --user --same-dir --scope --slice-inherit --slice="$(systemd-escape --suffix=slice "$name")" --collect --quiet -- "$@"
+exec systemd-run --user --same-dir --scope --slice="app-$(systemd-escape --suffix=slice "$name")" --collect --quiet -- "$@"

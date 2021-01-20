@@ -4,3 +4,4 @@ StartLimitIntervalSec=0
 [Service]
 ExecStart=%h/bin/update-wallpaper
 Type=oneshot
+Slice=background.slice
