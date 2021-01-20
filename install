@@ -102,6 +102,7 @@ maybelink user-dirs.dirs ~/.config/user-dirs.dirs
 render i3config ~/.config/i3/config
 render i3statusconfig ~/.config/i3status/config
 render sway ~/.config/sway/config
+render waybar ~/.config/waybar/config
 
 # Set cursor theme in gsettings (waybar seems to use this)
 cursortheme=$(grep 'gtk-cursor-theme-name' gtk-3.0-settings.ini | cut -d= -f2)

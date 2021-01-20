@@ -1,6 +1,8 @@
 default_border pixel 4
 focus_on_window_activation urgent
+{{^colinchan-fedora}}
 gaps inner 25
+{{/colinchan-fedora}}
 tiling_drag enable
 titlebar_border_thickness 0
 titlebar_padding 4 2
@@ -32,8 +34,22 @@ input type:touchpad {
 }
 {{/fruitron}}
 
+{{#colinchan-fedora}}
+input "2:14:ETPS/2_Elantech_TrackPoint" events disabled
+{{/colinchan-fedora}}
+
 output * subpixel rgb
 output * bg ~/.cache/wallpaper.jpg fill
+
+{{#colinchan-fedora}}
+output DP-4 position 0 0
+output DP-6 position 0 0
+output DP-8 position 0 0
+output DP-3 position 2560 0
+output DP-5 position 2560 0
+output DP-7 position 2560 0
+output eDP-1 position 1860 1440
+{{/colinchan-fedora}}
 
 {{#apartmantwo}}
 workspace 4 output DP-5
@@ -149,6 +165,7 @@ include /etc/sway/config.d/*
 # Launch stuff
 bindsym $mod+Return exec systemd-run-launch-app $term $term -e tmux new-session
 bindsym $mod+Shift+Return exec systemd-run-launch-app $term $term
+bindsym $mod+Shift+Mod1+Return exec $term
 bindsym $mod+Space exec applauncher
 bindsym $mod+b exec systemd-run-launch-app firefox gtk-launch firefox.desktop
 bindsym $mod+t exec systemd-run-launch-app nautilus gtk-launch org.gnome.Nautilus.desktop
@@ -167,6 +184,7 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 for_window [title=".*"] inhibit_idle fullscreen
 for_window [app_id="imv"] floating enable
 for_window [app_id="mpv"] floating enable
+for_window [app_id="nm-*"] floating enable
 for_window [app_id="pavucontrol"] floating enable
 for_window [class="Steam"] floating enable
 for_window [class="feh"] floating enable
