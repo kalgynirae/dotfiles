@@ -13,6 +13,7 @@ Wants=waybar.service
 
 [Service]
 Type=notify
+Environment=WLR_DRM_NO_MODIFIERS=1
 ExecStart=sway
 ExecStopPost=systemctl --user unset-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XCURSOR_SIZE XCURSOR_THEME
 OOMPolicy=continue
