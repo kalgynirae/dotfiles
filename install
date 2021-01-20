@@ -90,9 +90,8 @@ maybelink picom.conf ~/.config/picom.conf
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
 maybelink roficonfig ~/.config/rofi/config
-maybelink sound/compressor.service ~/.config/systemd/user/compressor.service
-maybelink sound/default.pa ~/.config/pulse/default.pa
-maybelink sound/jackd.service ~/.config/systemd/user/jackd.service
+maybelink sound/connect-sound.service ~/.config/systemd/user/connect-sound.service
+maybelink sound/jalv@.service ~/.config/systemd/user/jalv@.service
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
 maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
