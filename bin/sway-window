@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
+"""Get information about a single window in Sway.
+"""
 from __future__ import annotations
-from argparse import ArgumentParser
+from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from dataclasses import dataclass
 from inspect import getmembers
 from itertools import chain
@@ -82,15 +84,16 @@ def selector_focused(windows):
 
 
 def main() -> int:
-    parser = ArgumentParser()
+    parser = ArgumentParser(description=__doc__, formatter_class=RawDescriptionHelpFormatter)
 
-    selectors = parser.add_mutually_exclusive_group(required=True)
+    selector_group = parser.add_argument_group("window selection")
+    selectors = selector_group.add_mutually_exclusive_group(required=False)
     selectors.add_argument(
         "--choose",
         action="store_const",
         const=selector_choose,
         dest="selector",
-        help="Wait for mouse click; select the clicked window",
+        help="Wait for mouse click; select the clicked window (default)",
     )
     selectors.add_argument(
         "--focused",
@@ -99,30 +102,39 @@ def main() -> int:
         dest="selector",
         help="Select the currently-focused window",
     )
+    parser.set_defaults(selector=selector_choose)
 
-    parser.set_defaults(format="{json}")
-    outputs = parser.add_mutually_exclusive_group(required=False)
+    output_group = parser.add_argument_group("output format")
+    outputs = output_group.add_mutually_exclusive_group(required=False)
     outputs.add_argument(
         "--format",
         metavar="FORMAT",
         action="store",
-        dest="format",
-        help="Print information in a custom format",
+        dest="output_format",
+        help="print information in a custom format",
     )
     outputs.add_argument(
         "--id",
         action="store_const",
         const="{id}",
-        dest="format",
-        help="Print the window's id",
+        dest="output_format",
+        help="print the window's id",
+    )
+    outputs.add_argument(
+        "--json",
+        action="store_const",
+        const="{json}",
+        dest="output_format",
+        help="print the window's full object as JSON (default)",
     )
     outputs.add_argument(
         "--rect",
         action="store_const",
         const="{x},{y} {width}x{height}",
-        dest="format",
-        help="Print the window's coordinates and dimensions",
+        dest="output_format",
+        help="print the window's coordinates and dimensions",
     )
+    parser.set_defaults(output_format="{json}")
 
     args = parser.parse_args()
 
@@ -130,7 +142,7 @@ def main() -> int:
     if window is None:
         return 1
 
-    print(window.format(args.format))
+    print(window.format(args.output_format))
     return 0
 
 
