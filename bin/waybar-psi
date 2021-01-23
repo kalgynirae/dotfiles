@@ -1,0 +1,14 @@
+#!/bin/sh
+filename=$1
+case "$filename" in
+  cpu)
+    icon=
+    ;;
+  memory)
+    icon=
+    ;;
+  io)
+    icon=
+    ;;
+esac
+awk </proc/pressure/"$filename" '/^some/{print $2}' | cut -d= -f2 | jq -Rc '{"text": "'"$icon"'  \(.)", "percentage": .|split(".")[0]}'
