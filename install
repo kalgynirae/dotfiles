@@ -99,6 +99,7 @@ maybelink tmux.conf ~/.tmux.conf
 maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
 maybelink update-wallpaper.timer ~/.config/systemd/user/update-wallpaper.timer
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs
+maybelink waybar.css ~/.config/waybar/style.css
 render i3config ~/.config/i3/config
 render i3statusconfig ~/.config/i3status/config
 render sway ~/.config/sway/config

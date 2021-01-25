@@ -11,4 +11,10 @@ case "$filename" in
     icon=
     ;;
 esac
-awk </proc/pressure/"$filename" '/^some/{print $2}' | cut -d= -f2 | jq -Rc '{"text": "'"$icon"'  \(.)", "percentage": .|split(".")[0]}'
+awk </proc/pressure/"$filename" '/^some/{print $2}' \
+  | cut -d= -f2 \
+  | jq -Rc '{
+      "text": "'"$icon"'  \(.)",
+      "percentage": .|split(".")[0],
+      "class": .|tonumber|(if .<0.5 then "normal" elif .<5.0 then "warning" else "critical" end)
+    }'

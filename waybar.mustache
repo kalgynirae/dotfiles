@@ -27,6 +27,17 @@
     "clock"
   ],
 
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": "  {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip": false
+  },
+
   "clock": {
     "interval": 1,
     "format": "  {:%Y-%m-%d  %H:%M}",
@@ -64,6 +75,7 @@
     "format-ethernet": "  {ipaddr}/{cidr} ",
     "format-linked": "  (No IP) ",
     "format-disconnected": "  Disconnected ",
+    "tooltip": false
   },
 
   "pulseaudio": {
@@ -80,7 +92,7 @@
 
   "temperature": {
     "format": "  {temperatureC}°C",
-    "critical-threshold": 60,
+    "critical-threshold": 80,
     "thermal-zone": 0
   },
 
