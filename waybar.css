@@ -6,7 +6,7 @@
 #waybar {
   background: rgba(0, 0, 0, 0.7);
   color: #d1d2d0;
-  font-family: Source Sans Pro;
+  font-family: "Source Sans Pro", "Font Awesome 5 Pro Solid";
   font-size: 15px;
   font-weight: 600;
   text-shadow: 0.5px 0.5px 0 black;
