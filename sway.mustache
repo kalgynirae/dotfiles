@@ -165,10 +165,10 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Window stuff
 for_window [title=".*"] inhibit_idle fullscreen
+for_window [app_id="imv"] floating enable
 for_window [app_id="mpv"] floating enable
 for_window [app_id="pavucontrol"] floating enable
 for_window [class="Steam"] floating enable
-for_window [class="discord"] floating enable
 for_window [class="feh"] floating enable
 
 # Startup programs
