@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Get information about a single window in Sway.
-"""
+"""Get information about a single window in Sway."""
 from __future__ import annotations
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from dataclasses import dataclass
@@ -21,7 +20,7 @@ class Window:
 
     @property
     def is_xwayland(self):
-        return self.data["app_id"] is None
+        return self.data.get("app_id") is None
 
     @property
     def id(self):
