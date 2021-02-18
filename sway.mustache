@@ -162,7 +162,7 @@ client.urgent           $orange     $orange     $normalfg   $yellow
 
 include /etc/sway/config.d/*
 
-# Launch stuff
+# Applications
 bindsym $mod+Return exec systemd-run-launch-app $term $term -e tmux new-session
 bindsym $mod+Shift+Return exec systemd-run-launch-app $term $term
 bindsym $mod+Shift+Mod1+Return exec $term
@@ -175,10 +175,14 @@ bindsym Print exec ~/bin/screenshot
 bindsym Shift+Print exec ~/bin/screenshot --region
 bindsym $mod+Print exec ~/bin/screenshot --window
 
-# Media stuff
+# Volume/media
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Notifications
+bindsym $mod+c exec makoctl dismiss
+bindsym $mod+x exec makoctl menu wofi -d -p 'Choose Action: '
 
 # Window stuff
 for_window [title=".*"] inhibit_idle fullscreen
