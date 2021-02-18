@@ -23,7 +23,7 @@ maybe-create-node() {
       ;;
   esac
   if ! pw-cli dump short Node | grep -q "$name"; then
-    pactl load-module module-null-sink sink_name="$name" media.class="$class" channel_map=stereo object.linger=1
+    pactl load-module module-null-sink sink_name="$name" media.class="$class" channel_map=stereo object.linger=1 device.description="$name"
   fi
 }
 
