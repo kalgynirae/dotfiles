@@ -1,3 +1,9 @@
 #!/bin/bash
 
-sshfs lemon:/srv/audio ~/mnt/audio && find ~/mnt/audio -type f ${1:+-iname} ${1:+"*$1*"} -print0 | shuf -z | xargs -0 mpv --no-video --volume-max=250; fusermount -u ~/mnt/audio
+read -p 'search: ' search
+sshfs lemon:/srv/audio ~/mnt/audio && \
+  find ~/mnt/audio -type f ${search:+-iname} ${search:+"*$search*"} -print0 \
+    | shuf -z \
+    | tr '\0' '\n' \
+    | mpv --no-video --volume-max=250 --playlist=-
+fusermount -u ~/mnt/audio
