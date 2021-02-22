@@ -1,0 +1,9 @@
+[Unit]
+After=pipewire-pulse.service
+
+[Service]
+CacheDirectory=spotifyd
+ExecStart=/usr/bin/spotifyd --no-daemon --backend=pulseaudio --bitrate=320 --cache-path=${CACHE_DIRECTORY} --device-type=computer --initial-volume=75 --volume-normalisation --normalisation-pregain=-10
+
+[Install]
+WantedBy=default.target

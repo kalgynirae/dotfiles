@@ -94,6 +94,7 @@ maybelink pythonrc ~/.pythonrc
 maybelink roficonfig ~/.config/rofi/config
 maybelink sound/connect-sound.service ~/.config/systemd/user/connect-sound.service
 maybelink sound/jalv@.service ~/.config/systemd/user/jalv@.service
+maybelink spotifyd.service ~/.config/systemd/user/spotifyd.service
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
 maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
