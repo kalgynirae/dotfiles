@@ -1,9 +1,6 @@
 #!/bin/bash
 
-read -p 'search: ' search
-sshfs lemon:/srv/audio ~/mnt/audio && \
-  find ~/mnt/audio -type f ${search:+-iname} ${search:+"*$search*"} -print0 \
-    | shuf -z \
-    | tr '\0' '\n' \
-    | mpv --no-video --volume-max=250 --playlist=-
-fusermount -u ~/mnt/audio
+if sshfs lemon.lumeh.org:/srv/audio ~/mnt/audio; then
+  mpv-shuffler ~/mnt/audio
+  fusermount -u ~/mnt/audio
+fi

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+read -p 'search: ' search
+find "${1:-.}" -type f ${search:+-iname} ${search:+"*$search*"} -print0 \
+  | shuf -z \
+  | tr '\0' '\n' \
+  | mpv --no-video --playlist=-
