@@ -1,0 +1,14 @@
+#!/bin/bash
+
+case "$1" in
+  toggle)
+    arg=toggle
+    ;;
+  mute)
+    arg=1
+    ;;
+  unmute)
+    arg=0
+    ;;
+esac
+pactl set-source-mute @DEFAULT_SOURCE@ "$arg"

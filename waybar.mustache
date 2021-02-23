@@ -10,7 +10,7 @@
   ],
 
   "modules-center": [
-    "sway/window"
+    "pulseaudio#mic"
   ],
 
   "modules-right": [
@@ -82,6 +82,15 @@
     "format": "  {volume}%",
     "format-muted": "  {volume}%",
     "scroll-step": 5,
+    "tooltip": false
+  },
+
+  "pulseaudio#mic": {
+    "format": "{format_source}",
+    "format-source": "<span foreground=\"#069e98\">ON         AIR</span>",
+    "format-source-muted": "<span foreground=\"#6f6f6b\">OFF    AIR</span>",
+    "scroll-step": 0,
+    "on-click": "microphone toggle",
     "tooltip": false
   },
 
