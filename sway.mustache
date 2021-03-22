@@ -185,6 +185,7 @@ bindsym $mod+x exec makoctl menu wofi -d -p 'Choose Action: '
 
 # Window stuff
 for_window [title=".*"] inhibit_idle fullscreen
+for_window [app_id=".*-float"] floating enable
 for_window [app_id="imv"] floating enable
 for_window [app_id="mpv"] floating enable
 for_window [app_id="nm-*"] floating enable
