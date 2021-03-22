@@ -37,5 +37,5 @@ fi
 
 if [ "$(tty)" = /dev/tty1 ]; then
   systemctl --user import-environment
-  systemd-run --user --unit=sway.service --property=OOMPolicy=continue --slice session.slice --collect -- sway
+  systemd-run --user --unit=sway.service --property=OOMPolicy=continue --slice session.slice -- sway
 fi
