@@ -55,14 +55,21 @@ class Window:
         return json.dumps(self.data, indent=2)
 
 
+def leaves(nodes):
+    for node in nodes:
+        if not (node.get("nodes") or node.get("floating_nodes")):
+            yield node
+        else:
+            yield from leaves(node["nodes"])
+            yield from leaves(node["floating_nodes"])
+
+
 def get_windows():
     data = run(["swaymsg", "-t", "get_tree"], check=True, stdout=PIPE).stdout
     tree = json.loads(data)
     return [
         Window(window)
-        for output in tree["nodes"]
-        for workspace in output["nodes"]
-        for window in chain(workspace["nodes"], workspace["floating_nodes"])
+        for window in leaves(tree["nodes"])
     ]
 
 
