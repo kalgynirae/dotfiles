@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Tiny Terminal
+Icon=alacritty
+TryExec=alacritty
+Exec=alacritty --class Alacritty-float -o window.dimensions.columns=120 -o window.dimensions.lines=8 -o font.size=8
