@@ -25,3 +25,5 @@
 	email = colinchan@lumeh.org
 [init]
 	defaultBranch = main
+[advice]
+	detachedHead = false
