@@ -7,3 +7,4 @@ Wants=mako.service
 Wants=polkit-gnome.service
 Wants=swayidle.service
 Wants=waybar.service
+Wants=xdg-desktop-autostart.target
