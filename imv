@@ -3,3 +3,6 @@ overlay = true
 overlay_font = sans:14
 overlay_position_bottom = true
 scaling_mode = shrink
+
+[binds]
+<Escape> = quit
