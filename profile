@@ -35,7 +35,38 @@ if [ -z "$SSH_AUTH_SOCK" ] && pgrep -f gnome-keyring-daemon; then
   export SSH_AUTH_SOCK
 fi
 
+vars_to_import="
+  CLUTTER_BACKEND
+  COLORTERM
+  DIFFPROG
+  EDITOR
+  FREETYPE_PROPERTIES
+  GDK_BACKEND
+  _JAVA_OPTIONS
+  LESS
+  MANPAGER
+  MOZ_ENABLE_WAYLAND
+  MOZ_USE_XINPUT2
+  PAGER
+  PATH
+  PYTHONDONTWRITEBYTECODE
+  PYTHONSTARTUP
+  QT_QPA_PLATFORM
+  RSYNC_PROTECT_ARGS
+  SDL_VIDEODRIVER
+  SSH_AUTH_SOCK
+  TERMINAL
+  WINEDLLOVERRIDES
+  XDG_CURRENT_DESKTOP
+  XDG_SEAT
+  XDG_SESSION_CLASS
+  XDG_SESSION_ID
+  XDG_SESSION_TYPE
+  XDG_VTNR
+"
+
 if [ "$(tty)" = /dev/tty1 ]; then
-  systemctl --user import-environment
+  # shellcheck disable=SC2086
+  systemctl --user import-environment $vars_to_import
   systemd-run --user --unit=sway.service --property=OOMPolicy=continue --slice session.slice -- sway
 fi
