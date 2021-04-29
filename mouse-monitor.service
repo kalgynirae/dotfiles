@@ -1,9 +1,0 @@
-[Unit]
-After=i3-wait.service
-Wants=i3-wait.service
-
-[Service]
-ExecStart=%h/bin/mouse-monitor
-
-[Install]
-WantedBy=default.target
