@@ -59,9 +59,6 @@ imap <c-e> <End>
 imap <c-f> <Right>
 imap <c-b> <Left>
 
-" Load last cursor position
-autocmd BufReadPost * silent! normal! g'"
-
 " Plugins
 let g:ale_echo_msg_format="[%linter%]%[code]% %s"
 let g:ale_lint_on_text_changed="normal"

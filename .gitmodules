@@ -13,3 +13,6 @@
 [submodule "nvim/plugins/vim-javascript"]
 	path = nvim/plugins/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
+[submodule "nvim/plugins/vim-lastplace"]
+	path = nvim/plugins/vim-lastplace
+	url = https://github.com/farmergreg/vim-lastplace.git
