@@ -59,16 +59,6 @@ imap <c-e> <End>
 imap <c-f> <Right>
 imap <c-b> <Left>
 
-" Plugins
-let g:ale_echo_msg_format="[%linter%]%[code]% %s"
-let g:ale_lint_on_text_changed="normal"
-let g:ale_python_auto_pipenv=1
-let g:ctrlp_max_files=2000
-let g:ctrlp_root_markers = ['BUCK', 'TARGETS']
-let html_no_rendering=1
-let python_highlight_string_format=1
-let python_highlight_string_formatting=1
-
 " For debugging color scheme and syntax definitions
 function ShowSyntaxNames()
   for id in synstack(line("."), col("."))
@@ -76,3 +66,22 @@ function ShowSyntaxNames()
   endfor
   echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name")
 endfunction
+
+" Plugins
+call plug#begin(stdpath('data') . '/plugged')
+Plug 'farmergreg/vim-lastplace'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+call plug#end()
+
+let g:ctrlp_max_files=2000
+let g:ctrlp_root_markers = ['BUCK', 'TARGETS']
+let html_no_rendering=1
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = { enable = true },
+  indent = { enable = true },
+}
+EOF

@@ -1,0 +1,1 @@
+nvim/autoload/plug.vim -diff -merge linguist-vendored
