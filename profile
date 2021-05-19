@@ -1,5 +1,5 @@
 #!/bin/sh
-export PATH=$PATH:$HOME/bin:$HOME/.gem/bin:$HOME/.local/bin
+export PATH=$HOME/.local/bin:$PATH:$HOME/bin:$HOME/.gem/bin
 
 if command -v nvim >/dev/null; then
   EDITOR=nvim
