@@ -85,3 +85,7 @@ require'nvim-treesitter.configs'.setup {
   indent = { enable = true },
 }
 EOF
+
+if has('persistent_undo') && !has('nvim-0.5')
+  let &undodir = '$XGD_DATA_HOME/nvim/undo-pre0.5'
+endif
