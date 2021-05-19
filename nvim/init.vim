@@ -69,15 +69,25 @@ endfunction
 
 " Plugins
 call plug#begin(stdpath('data') . '/plugged')
-Plug 'farmergreg/vim-lastplace'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'farmergreg/vim-lastplace'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 let g:ctrlp_max_files=2000
 let g:ctrlp_root_markers = ['BUCK', 'TARGETS']
+let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_no_mappings = 1
 let html_no_rendering=1
+
+if !empty($TMUX)
+  nnoremap <silent> <c-w>h :TmuxNavigateLeft<cr>
+  nnoremap <silent> <c-w>j :TmuxNavigateDown<cr>
+  nnoremap <silent> <c-w>k :TmuxNavigateUp<cr>
+  nnoremap <silent> <c-w>l :TmuxNavigateRight<cr>
+endif
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
