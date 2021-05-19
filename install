@@ -138,5 +138,3 @@ TERMINFO=/usr/share/terminfo tic -x -o ~/.terminfo terminfos.ti
 
 echo "Reloading systemd --user"
 systemctl --user daemon-reload
-
-echo "Run 'git submodule update --init' to get the vim plugins"
