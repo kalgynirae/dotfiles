@@ -50,6 +50,8 @@ output * bg ~/.cache/wallpaper.jpg fill
 {{#colinchan-fedora}}
 output "Dell Inc. DELL U2520DR 9JKMGZ2" position 0 0
 output eDP-1 position 0 1440
+bindswitch --reload --locked lid:on output eDP-1 disable
+bindswitch --reload --locked lid:off output eDP-1 enable
 {{/colinchan-fedora}}
 
 {{#apartmantwo}}
