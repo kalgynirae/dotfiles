@@ -87,6 +87,8 @@ maybelink mpv.conf ~/.config/mpv/mpv.conf
 maybelink nvim ~/.config/nvim
 maybelink nvim/plugins ~/.local/share/nvim/site/pack/plugins/start
 maybelink picom.conf ~/.config/picom.conf
+maybelink pipewire/alsa-monitor.conf ~/.config/pipewire/media-session.d/alsa-monitor.conf
+maybelink pipewire/pipewire-filter@.service ~/.config/systemd/user/pipewire-filter@.service
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
 maybelink roficonfig ~/.config/rofi/config
