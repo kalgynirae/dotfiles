@@ -92,8 +92,6 @@ maybelink pipewire/pipewire-filter@.service ~/.config/systemd/user/pipewire-filt
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
 maybelink roficonfig ~/.config/rofi/config
-maybelink sound/connect-sound.service ~/.config/systemd/user/connect-sound.service
-maybelink sound/jalv@.service ~/.config/systemd/user/jalv@.service
 maybelink sound/mic.json ~/.config/PulseEffects/input/mic.json
 maybelink spotifyd.service ~/.config/systemd/user/spotifyd.service
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc

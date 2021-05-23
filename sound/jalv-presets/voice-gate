@@ -1,3 +1,0 @@
-PLUGIN=http://calf.sourceforge.net/plugins/Gate
-CONTROLS=attack=0.02,knee=1.0,range=0.0,ratio=20.0,release=2000.0,stereo_link=1.0,threshold=0.10
-PIPEWIRE_PROPS=media.class=Audio/Source

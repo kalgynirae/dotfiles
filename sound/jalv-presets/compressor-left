@@ -1,2 +1,0 @@
-PLUGIN=http://calf.sourceforge.net/plugins/SidechainCompressor
-CONTROLS=threshold=0.1,ratio=4.0,attack=0.5,release=100.0,knee=4.0,sc_route=1

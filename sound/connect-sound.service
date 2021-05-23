@@ -1,4 +1,0 @@
-[Service]
-Type=oneshot
-Slice=session.slice
-ExecStart=%h/dotfiles/sound/connect-sound
