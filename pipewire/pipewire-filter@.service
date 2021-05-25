@@ -3,7 +3,6 @@ After=pipewire.service
 BindsTo=pipewire.service
 
 [Service]
-Environment=LADSPA_PATH=/usr/lib/ladspa
 Environment=PIPEWIRE_DEBUG=2
 ExecStart=/usr/bin/pipewire -c %h/dotfiles/pipewire/filters/%i.conf
 Slice=session.slice
