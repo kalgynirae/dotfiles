@@ -32,7 +32,6 @@ set wildmode=list:longest
 " Custom shortcuts
 nmap <Leader>c :setlocal colorcolumn=<CR>
 nmap <Leader>C :call hexcolor#toggle()<CR>
-nmap <Leader>f :setlocal foldmethod=indent<CR>
 nmap <Leader>i :call ShowSyntaxNames()<CR>
 nmap <Leader>m :setlocal invnumber number?<CR>
 nmap <Leader>n :noh<CR>
@@ -74,6 +73,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'farmergreg/vim-lastplace'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
 call plug#end()
 
 let g:ctrlp_max_files=2000
@@ -89,12 +89,18 @@ if !empty($TMUX)
   nnoremap <silent> <c-w>l :TmuxNavigateRight<cr>
 endif
 
+" nvim-treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",
   highlight = { enable = true },
+  incremental_selection = { enable = true },
   indent = { enable = true },
 }
 EOF
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevelstart=99
 
 if has('persistent_undo') && !has('nvim-0.5')
   let &undodir = '$XGD_DATA_HOME/nvim/undo-pre0.5'
