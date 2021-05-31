@@ -83,10 +83,10 @@ let g:tmux_navigator_no_mappings = 1
 let html_no_rendering=1
 
 if !empty($TMUX)
-  nnoremap <silent> <c-w>h :TmuxNavigateLeft<cr>
-  nnoremap <silent> <c-w>j :TmuxNavigateDown<cr>
-  nnoremap <silent> <c-w>k :TmuxNavigateUp<cr>
-  nnoremap <silent> <c-w>l :TmuxNavigateRight<cr>
+  noremap <silent> <c-_>h <cmd>TmuxNavigateLeft<cr>
+  noremap <silent> <c-_>j <cmd>TmuxNavigateDown<cr>
+  noremap <silent> <c-_>k <cmd>TmuxNavigateUp<cr>
+  noremap <silent> <c-_>l <cmd>TmuxNavigateRight<cr>
 endif
 
 " nvim-treesitter
