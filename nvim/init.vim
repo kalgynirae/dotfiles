@@ -30,15 +30,16 @@ set wildignore+=*/node_modules/*
 set wildmode=list:longest
 
 " Custom shortcuts
-nmap <Leader>c :setlocal colorcolumn=<CR>
-nmap <Leader>C :call hexcolor#toggle()<CR>
-nmap <Leader>i :call ShowSyntaxNames()<CR>
-nmap <Leader>m :setlocal invnumber number?<CR>
-nmap <Leader>n :noh<CR>
-nmap <Leader>o :colorscheme default<CR>
-nmap <Leader>p :setlocal invpaste paste?<CR>
-nmap <Leader>r :call wordhighlight#highlight_under_cursor()<CR>
-nmap <Leader>s :setlocal invspell spell?<CR>
+let mapleader = ' '
+let maplocalleader = '\'
+nmap <LocalLeader>c :setlocal colorcolumn=<CR>
+nmap <LocalLeader>C :call hexcolor#toggle()<CR>
+nmap <LocalLeader>i :call ShowSyntaxNames()<CR>
+nmap <LocalLeader>m :setlocal invnumber number?<CR>
+nmap <LocalLeader>n :noh<CR>
+nmap <LocalLeader>p :setlocal invpaste paste?<CR>
+nmap <LocalLeader>r :call wordhighlight#highlight_under_cursor()<CR>
+nmap <LocalLeader>s :setlocal invspell spell?<CR>
 nmap <F5> :make<CR>
 cmap w!! silent w !sudo tee >/dev/null %
 " Automatically re-yank pasted stuff after pasting
@@ -69,8 +70,16 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'farmergreg/vim-lastplace'
 Plug 'neovim/nvim-lspconfig'
+
+" nvim-treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
+
+" telescope.nvim
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()
 
 let g:ctrlp_max_files=2000
@@ -79,6 +88,7 @@ let g:tmux_navigator_disable_when_zoomed = 1
 let g:tmux_navigator_no_mappings = 1
 let html_no_rendering=1
 
+" vim-tmux-navigator
 if !empty($TMUX)
   noremap <silent> <c-_>h <cmd>TmuxNavigateLeft<cr>
   noremap <silent> <c-_>j <cmd>TmuxNavigateDown<cr>
@@ -88,7 +98,7 @@ endif
 
 " nvim-treesitter
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   ensure_installed = "all",
   highlight = { enable = true },
   incremental_selection = { enable = true },
@@ -99,6 +109,24 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set foldlevelstart=99
 
-if has('persistent_undo') && !has('nvim-0.5')
-  let &undodir = '$XGD_DATA_HOME/nvim/undo-pre0.5'
-endif
+" telescope.nvim
+lua <<EOF
+local actions = require('telescope.actions')
+require('telescope').setup {
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+      },
+    },
+  },
+}
+EOF
+nnoremap <Leader>f <cmd>Telescope find_files theme=get_ivy<cr>
+nnoremap <Leader>g <cmd>Telescope live_grep theme=get_ivy<cr>
+function LaunchTelescopeIfNoFilename()
+  if @% == ""
+    Telescope find_files theme=get_ivy
+  endif
+endfunction
+au VimEnter * call LaunchTelescopeIfNoFilename()
