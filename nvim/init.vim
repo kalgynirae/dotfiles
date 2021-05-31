@@ -40,9 +40,6 @@ nmap <Leader>p :setlocal invpaste paste?<CR>
 nmap <Leader>r :call wordhighlight#highlight_under_cursor()<CR>
 nmap <Leader>s :setlocal invspell spell?<CR>
 nmap <F5> :make<CR>
-nmap Q :ALEFix<CR>
-nmap gh :ALEPreviousWrap<CR>
-nmap gl :ALENextWrap<CR>
 cmap w!! silent w !sudo tee >/dev/null %
 " Automatically re-yank pasted stuff after pasting
 xnoremap p pgvy
