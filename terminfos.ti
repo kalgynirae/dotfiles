@@ -1,5 +1,6 @@
 alacritty|upstream alacritty plus Tc,
 	Tc,
+	Dsbp=\E[?2004l, Enbp=\E[?2004h,
 	use=alacritty,
 
 tmux-256color|upstream tmux-256color plus bce,
