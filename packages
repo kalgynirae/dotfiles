@@ -44,6 +44,7 @@ pulseaudio
 pulseaudio-alsa
 pulseaudio-zeroconf
 python-pip
+ripgrep
 rsync
 rubygems
 seahorse
