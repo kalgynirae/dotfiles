@@ -36,7 +36,9 @@ mouse:
   hide_when_typing: true
 
 mouse_bindings:
-  - { mouse: Middle, action: Paste }
+  - { mouse: 275, chars: "\x1b[A" }
+  - { mouse: 276, chars: "\x1b[B" }
+  - { mouse: 277, action: Paste }
 
 scrolling:
   multiplier: 5
