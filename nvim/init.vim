@@ -3,6 +3,7 @@ colorscheme kalgykai
 set autoindent
 set backupcopy=yes
 set colorcolumn=81
+set completeopt=menu
 set cursorline
 set display=lastline
 set encoding=utf-8
@@ -11,6 +12,7 @@ set guicursor=n-v-c-sm:block,i-ci-ve:ver10,r-cr-o:hor20
 set hlsearch incsearch
 set inccommand=nosplit
 set laststatus=2
+set linebreak
 set list listchars=tab:‣\ ,extends:»,precedes:«,nbsp:‧,trail:░
 set mouse=a
 set nowrap
@@ -40,6 +42,7 @@ nmap <LocalLeader>n :noh<CR>
 nmap <LocalLeader>p :setlocal invpaste paste?<CR>
 nmap <LocalLeader>r :call wordhighlight#highlight_under_cursor()<CR>
 nmap <LocalLeader>s :setlocal invspell spell?<CR>
+nmap <LocalLeader>v :setlocal virtualedit=all<CR>
 nmap <F5> :make<CR>
 cmap w!! silent w !sudo tee >/dev/null %
 " Automatically re-yank pasted stuff after pasting
@@ -67,9 +70,8 @@ endfunction
 " Plugins
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'farmergreg/vim-lastplace'
-Plug 'neovim/nvim-lspconfig'
+Plug 'mhartington/formatter.nvim'
 
 " nvim-treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -95,6 +97,31 @@ if !empty($TMUX)
   noremap <silent> <c-_>k <cmd>TmuxNavigateUp<cr>
   noremap <silent> <c-_>l <cmd>TmuxNavigateRight<cr>
 endif
+
+" formatter.nvim
+lua <<EOF
+require('formatter').setup {
+  filetype = {
+    python = {
+      function()
+        return {
+          exe = "isort",
+          args = {"--profile=black", '-'},
+          stdin = true,
+        }
+      end,
+      function()
+        return {
+          exe = "black",
+          args = {"--quiet", "-"},
+          stdin = true,
+        }
+      end
+    },
+  },
+}
+EOF
+nnoremap Q :Format<CR>
 
 " nvim-treesitter
 lua <<EOF
