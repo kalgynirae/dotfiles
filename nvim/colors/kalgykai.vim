@@ -37,6 +37,7 @@ let s:brightmagenta = "#ad70a4"
 let s:brightwhite = "#f8f8f4"
 
 call s:hi("Normal",         s:normalfg,       s:normalbg,       s:none)
+call s:hi("NormalFg",       s:normalfg,       s:none,           s:none)
 call s:hi("ColorColumn",    s:none,           s:slightbg,       s:none)
 call s:hi("CursorColumn",   s:none,           s:slightbg,       s:none)
 call s:hi("CursorLine",     s:none,           s:slightbg,       s:none)
@@ -107,6 +108,7 @@ call s:hi("Title",          s:brightorange,   s:none,           s:none)
 call s:hi("Todo",           s:brightwhite,    s:none,           "bold")
 call s:hi("Type",           s:cyan,           s:none,           s:none)
 call s:hi("Typedef",        s:cyan,           s:none,           s:none)
+call s:hi("Underlined",     s:none,           s:none,           "underline")
 call s:hi("VertSplit",      s:grey,           s:none,           "bold")
 call s:hi("WarningMsg",     s:brightwhite,    s:none,           "bold")
 call s:hi("WildMenu",       s:blue,           s:black,          s:none)
