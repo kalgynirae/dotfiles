@@ -368,4 +368,5 @@ color='\[$(_hashcolor "$USER@$HOSTNAME:$(pwd -P)")\]'
 black='\[\e[30m\]'
 reset='\[\e[0m\]'
 PS1=$reset'▶▶▶ '$color'\u@\h:\W'$reset$gitstatus' '$black'[$((++_command_count))]'$reset'\n[\j]\$ '
+SHORTPS1=$reset$color'[\u@\h]\$'$reset' '
 : "${_command_count:=-1}"
