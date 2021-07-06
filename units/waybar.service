@@ -4,3 +4,6 @@ PartOf=graphical-session.target
 [Service]
 ExecStart=/usr/bin/waybar
 Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

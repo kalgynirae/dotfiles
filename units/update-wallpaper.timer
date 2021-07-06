@@ -4,4 +4,4 @@ OnBootSec=30m
 OnUnitActiveSec=30m
 
 [Install]
-WantedBy=timers.target
+WantedBy=graphical-session.target

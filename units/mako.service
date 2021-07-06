@@ -1,0 +1,8 @@
+[Unit]
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/mako
+
+[Install]
+WantedBy=graphical-session.target

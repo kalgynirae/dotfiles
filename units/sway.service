@@ -1,0 +1,14 @@
+[Unit]
+Wants=graphical-session-pre.target graphical-session.target
+After=graphical-session-pre.target
+Before=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=notify
+ExecStartPre=systemctl --user set-environment XDG_CURRENT_DESKTOP=sway XDG_SESSION_TYPE=wayland
+ExecStart=sway
+ExecStopPost=systemctl --user unset-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XCURSOR_SIZE XCURSOR_THEME XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+OOMPolicy=continue
+NotifyAccess=all
+Slice=session.slice

@@ -1,4 +1,5 @@
 [Unit]
+Wants=pipewire-pulse.service
 After=pipewire-pulse.service
 
 [Service]
@@ -8,4 +9,4 @@ Restart=always
 RestartSec=1s
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target

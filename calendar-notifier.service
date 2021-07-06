@@ -1,7 +1,0 @@
-[Service]
-ExecStart=%h/bin/calendar-notifier
-ExecReload=/bin/kill -USR1 $MAINPID
-Restart=on-failure
-
-[Install]
-WantedBy=default.target

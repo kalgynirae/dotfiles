@@ -70,8 +70,8 @@ maybelink atom-keymap.cson ~/.atom/keymap.cson
 maybelink bash_profile ~/.bash_profile
 maybelink bashrc ~/.bashrc
 maybelink bin ~/bin
-maybelink calendar-notifier.service ~/.config/systemd/user/calendar-notifier.service
 maybelink dunstrc ~/.config/dunst/dunstrc
+maybelink environment.conf ~/.config/environment.d/environment.conf
 maybelink feh-themes ~/.config/feh/themes
 maybelink fonts.conf ~/.config/fontconfig/fonts.conf
 maybelink gammastep.ini ~/.config/gammastep/config.ini
@@ -88,16 +88,12 @@ maybelink nvim ~/.config/nvim
 maybelink nvim/plugins ~/.local/share/nvim/site/pack/plugins/start
 maybelink picom.conf ~/.config/picom.conf
 maybelink pipewire/alsa-monitor.conf ~/.config/pipewire/media-session.d/alsa-monitor.conf
-maybelink pipewire/pipewire-filter@.service ~/.config/systemd/user/pipewire-filter@.service
 maybelink profile ~/.profile
 maybelink pythonrc ~/.pythonrc
 maybelink roficonfig ~/.config/rofi/config
 maybelink sound/mic.json ~/.config/PulseEffects/input/mic.json
-maybelink spotifyd.service ~/.config/systemd/user/spotifyd.service
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
-maybelink update-wallpaper.service ~/.config/systemd/user/update-wallpaper.service
-maybelink update-wallpaper.timer ~/.config/systemd/user/update-wallpaper.timer
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs
 maybelink waybar.css ~/.config/waybar/style.css
 maybelink wezterm.lua ~/.config/wezterm/wezterm.lua
@@ -119,8 +115,8 @@ for app in applications/*; do
   maybelink "$app" ~/.local/share/"$app"
 done
 
-for unit in sway-session/*; do
-  maybelink "$unit" ~/.config/systemd/user/"${unit#sway-session/}"
+for unit in units/*; do
+  maybelink "$unit" ~/.config/systemd/user/"${unit#units/}"
 done
 
 firefox_default_profiles=(~/.mozilla/firefox/*.default*)

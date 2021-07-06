@@ -10,6 +10,12 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 shopt -s histappend
 set +H
 
+export COLORTERM=truecolor
+export LESS='--chop-long-lines --ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS'
+export PYTHONDONTWRITEBYTECODE=yes
+export PYTHONSTARTUP=$HOME/.pythonrc
+export RSYNC_PROTECT_ARGS=1
+
 alias commas='paste -sd,'
 alias diff='diff --color=always --minimal --unified'
 alias dnf='dnf --cacheonly'
@@ -36,6 +42,7 @@ alias py=ipython3
 alias python=python2
 alias quotes="sed \"s/^/'/; s/$/'/\""
 alias rm='rm --one-file-system'
+alias scu='systemctl --user'
 alias ssh='ssh-with-terminfo'
 alias ssh-patient='ssh -o ConnectTimeout=60 -o ServerAliveCountMax=6 -o ServerAliveInterval=10'
 alias tree='tree -CF --charset=utf-8'
