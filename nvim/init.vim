@@ -1,8 +1,9 @@
 colorscheme kalgykai
 
 set autoindent
+set autoread
 set backupcopy=yes
-set colorcolumn=81
+set colorcolumn=89
 set completeopt=menu
 set cursorline
 set display=lastline
@@ -84,8 +85,6 @@ Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
-let g:ctrlp_max_files=2000
-let g:ctrlp_root_markers = ['BUCK', 'TARGETS']
 let g:tmux_navigator_disable_when_zoomed = 1
 let g:tmux_navigator_no_mappings = 1
 let html_no_rendering=1
@@ -126,7 +125,6 @@ nnoremap Q :Format<CR>
 " nvim-treesitter
 lua <<EOF
 require('nvim-treesitter.configs').setup {
-  ensure_installed = "all",
   highlight = { enable = true },
   incremental_selection = { enable = true },
   indent = { enable = true },
