@@ -223,7 +223,7 @@ require('formatter').setup {
     python = {
       function()
         return {
-          exe = "isort",
+          exe = "isort-3",
           args = {"--profile=black", '-'},
           stdin = true,
         }
