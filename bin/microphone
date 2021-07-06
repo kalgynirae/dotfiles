@@ -11,4 +11,4 @@ case "$1" in
     arg=0
     ;;
 esac
-pactl set-source-mute @DEFAULT_SOURCE@ "$arg"
+#pactl set-source-mute @DEFAULT_SOURCE@ "$arg"
