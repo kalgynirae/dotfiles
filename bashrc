@@ -365,8 +365,9 @@ _hashcolor() {
 }
 # shellcheck disable=SC2016
 color='\[$(_hashcolor "$USER@$HOSTNAME:$(pwd -P)")\]'
+green='\[\e[32m\]'
 black='\[\e[30m\]'
 reset='\[\e[0m\]'
-PS1=$reset'▶▶▶ '$color'\u@\h:\W'$reset$gitstatus' '$black'[$((++_command_count))]'$reset'\n[\j]\$ '
-SHORTPS1=$reset$color'[\u@\h]\$'$reset' '
+PS1=$reset'▶▶▶ '$color'\u@\h:\W'$reset' '$black'[$((++_command_count))]'$reset'\n[\j]\$ '
+SHORTPS1=$reset$green'[:\W]\$'$reset' '
 : "${_command_count:=-1}"
