@@ -16,6 +16,7 @@ let s:darkgrey = "#303436"
 let s:darkred = "#500c09"
 let s:darkyellow = "#4a4800"
 let s:grey = "#52595c"
+let s:dimgreen = "#4a5e34"
 let s:red = "#c81f1f"
 let s:orange = "#c8742a"
 let s:yellow = "#c4a800"
@@ -71,7 +72,7 @@ call s:hi("Float",          s:blue,           s:none,           s:none)
 call s:hi("FoldColumn",     s:grey,           s:none,           s:none)
 call s:hi("Folded",         s:grey,           s:none,           s:none)
 call s:hi("Function",       s:green,          s:none,           s:none)
-call s:hi("Identifier",     s:orange,         s:none,           s:none)
+call s:hi("Identifier",     s:none,           s:none,           s:none)
 call s:hi("Ignore",         s:brightgrey,     s:none,           s:none)
 call s:hi("Include",        s:brightgrey,     s:none,           "bold")
 call s:hi("IncSearch",      s:grey,           s:brightyellow,   s:none)
@@ -105,7 +106,7 @@ call s:hi("String",         s:yellow,         s:none,           s:none)
 call s:hi("Structure",      s:cyan,           s:none,           s:none)
 call s:hi("Tag",            s:red,            s:none,           "italic")
 call s:hi("Title",          s:brightorange,   s:none,           s:none)
-call s:hi("Todo",           s:brightwhite,    s:none,           "bold")
+call s:hi("Todo",           s:red,            s:none,           s:none)
 call s:hi("Type",           s:cyan,           s:none,           s:none)
 call s:hi("Typedef",        s:cyan,           s:none,           s:none)
 call s:hi("Underlined",     s:none,           s:none,           "underline")
@@ -121,5 +122,5 @@ call s:hi("diffRemoved",    s:red,            s:none,           s:none)
 call s:hi("diffSubname",    s:white,          s:none,           "bold")
 
 call s:hi("TSConstBuiltin", s:blue,           s:none,           s:none)
-call s:hi("TSFuncBuiltin",  s:blue,           s:none,           s:none)
+call s:hi("TSFuncBuiltin",  s:green,          s:none,           s:none)
 call s:hi("TSParameter",    s:brightgrey,     s:none,           s:none)

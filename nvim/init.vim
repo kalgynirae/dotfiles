@@ -10,7 +10,7 @@ set display=lastline
 set encoding=utf-8
 set exrc secure
 set guicursor=n-v-c-sm:block,i-ci-ve:ver10,r-cr-o:hor20
-set guifont=monospace:h18
+set guifont=Hack:h20
 set hlsearch incsearch
 set inccommand=nosplit
 set laststatus=2
@@ -148,11 +148,11 @@ require('telescope').setup {
   },
 }
 EOF
-nnoremap <Leader>f <cmd>Telescope find_files theme=get_ivy<cr>
-nnoremap <Leader>g <cmd>Telescope live_grep theme=get_ivy<cr>
+nnoremap <Leader>f <cmd>Telescope find_files theme=get_dropdown<cr>
+nnoremap <Leader>g <cmd>Telescope live_grep theme=get_dropdown<cr>
 function LaunchTelescopeIfNoFilename()
   if @% == ""
-    Telescope find_files theme=get_ivy
+    Telescope find_files theme=get_dropdown
   endif
 endfunction
 au VimEnter * call LaunchTelescopeIfNoFilename()
