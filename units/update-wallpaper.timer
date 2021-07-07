@@ -1,3 +1,7 @@
+[Unit]
+BindsTo=graphical-session.target
+After=graphical-session.target
+
 [Timer]
 AccuracySec=1m
 OnBootSec=30m

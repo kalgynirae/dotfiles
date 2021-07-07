@@ -1,8 +1,7 @@
 [Unit]
-Wants=graphical-session-pre.target graphical-session.target
 After=graphical-session-pre.target
+BindsTo=graphical-session.target
 Before=graphical-session.target
-PartOf=graphical-session.target
 
 [Service]
 Type=notify

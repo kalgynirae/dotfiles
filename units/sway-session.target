@@ -1,0 +1,4 @@
+[Unit]
+Requires=graphical-session-pre.target sway.service
+After=graphical-session-pre.target sway.service
+BindsTo=graphical-session.target

@@ -19,5 +19,5 @@ vars_to_import="
 if [ "$(tty)" = /dev/tty1 ]; then
   # shellcheck disable=SC2086
   systemctl --user import-environment $vars_to_import
-  systemctl --user start --wait sway.service
+  systemctl --user start --wait sway-session.target
 fi
