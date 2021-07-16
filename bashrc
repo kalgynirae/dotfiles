@@ -29,6 +29,8 @@ alias f4='field 4'
 alias f5='field 5'
 alias grep='grep --color'
 alias iotop='sudo iotop --delay 2'
+alias jc=journalctl
+alias jcu='journalctl --user'
 alias l=less
 alias la='ls --almost-all --classify'
 alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
@@ -42,6 +44,7 @@ alias py=ipython3
 alias python=python2
 alias quotes="sed \"s/^/'/; s/$/'/\""
 alias rm='rm --one-file-system'
+alias sc=systemctl
 alias scu='systemctl --user'
 alias ssh='ssh-with-terminfo'
 alias ssh-patient='ssh -o ConnectTimeout=60 -o ServerAliveCountMax=6 -o ServerAliveInterval=10'
