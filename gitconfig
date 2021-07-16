@@ -22,7 +22,7 @@
 	ff = only
 [user]
 	name = Colin Chan
-	email = colinchan@lumeh.org
+	email = colin+git@lumeh.org
 [init]
 	defaultBranch = main
 [advice]
