@@ -1,0 +1,7 @@
+[Unit]
+BindsTo=graphical-session.target
+
+[Service]
+Type=exec
+ExecStart=%h/bin/neovide-remote %I
+Slice=app.slice

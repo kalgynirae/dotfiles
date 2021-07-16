@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ -n $SSH_TTY ]]; then
+  name=$HOSTNAME
+else
+  name="localhost"
+fi
+
+nvim_sock="$XDG_RUNTIME_DIR/nvim/$name.sock"
+
+if ! systemctl --user is-active -q "nvim@$name"; then
+  if ! systemctl --user start "nvim@$name"; then
+    echo >&2 "Failed to start nvim@$name"
+    exit 1
+  fi
+  nvr --nostart --servername "$nvim_sock" --remote-send ":cd $(pwd)<CR>"
+fi
+ncat -U "$XDG_RUNTIME_DIR/neovide-launcher.sock" <<<"$name"
+nvr --nostart --servername "$nvim_sock" "$@"

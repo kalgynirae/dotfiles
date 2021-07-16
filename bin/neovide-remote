@@ -1,0 +1,7 @@
+#!/bin/bash
+
+name=$1
+# neovide doesn't support connecting to a UNIX socket, so we use an extra
+# service running socat to forward a local port to the UNIX socket.
+port=$(( $(echo "$name" | cksum - | awk '{print $1}') % 1000 + 3000 ))
+exec neovide --remote-tcp localhost:"$port" --multiGrid

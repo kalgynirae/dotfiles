@@ -1,0 +1,6 @@
+[Socket]
+ListenStream=%t/neovide-launcher.sock
+Accept=yes
+
+[Install]
+WantedBy=graphical-session.target

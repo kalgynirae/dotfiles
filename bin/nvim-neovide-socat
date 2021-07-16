@@ -1,0 +1,6 @@
+#!/bin/bash
+
+name=$1
+port=$(( $(echo "$name" | cksum - | awk '{print $1}') % 1000 + 3000 ))
+nvim_sock="$XDG_RUNTIME_DIR/nvim/$name.sock"
+exec socat TCP-LISTEN:"$port",fork UNIX-CONNECT:"$nvim_sock"

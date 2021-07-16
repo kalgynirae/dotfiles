@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ $EDITOR = nvim* ]]; then
+  remote-nvim "$@"
+else
+  "$EDITOR" "$@"
+fi

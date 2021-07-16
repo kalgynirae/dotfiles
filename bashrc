@@ -19,8 +19,6 @@ export RSYNC_PROTECT_ARGS=1
 alias commas='paste -sd,'
 alias diff='diff --color=always --minimal --unified'
 alias dnf='dnf --cacheonly'
-# shellcheck disable=SC2086,SC2139
-alias e=$EDITOR
 [[ $HOSTNAME == colinchan-fedora-* ]] && alias et='et -p 8080'
 alias f1='field 1'
 alias f2='field 2'

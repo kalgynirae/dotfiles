@@ -10,7 +10,7 @@ set display=lastline
 set encoding=utf-8
 set exrc secure
 set guicursor=n-v-c-sm:block,i-ci-ve:ver10,r-cr-o:hor20
-set guifont=Hack:h20
+set guifont=Fira\ Code:h18
 set hlsearch incsearch
 set inccommand=nosplit
 set laststatus=2
@@ -36,6 +36,7 @@ set wildmode=list:longest
 " Custom shortcuts
 let mapleader = ' '
 let maplocalleader = '\'
+nnoremap <Leader>l <c-l>
 nmap <LocalLeader>c :setlocal colorcolumn=<CR>
 nmap <LocalLeader>C :call hexcolor#toggle()<CR>
 nmap <LocalLeader>i :call ShowSyntaxNames()<CR>
@@ -96,6 +97,11 @@ if !empty($TMUX)
   noremap <silent> <c-_>j <cmd>TmuxNavigateDown<cr>
   noremap <silent> <c-_>k <cmd>TmuxNavigateUp<cr>
   noremap <silent> <c-_>l <cmd>TmuxNavigateRight<cr>
+else
+  nmap <c-h> <c-w>h
+  nmap <c-j> <c-w>j
+  nmap <c-k> <c-w>k
+  nmap <c-l> <c-w>l
 endif
 
 " formatter.nvim
@@ -150,12 +156,6 @@ require('telescope').setup {
 EOF
 nnoremap <Leader>f <cmd>Telescope find_files theme=get_dropdown<cr>
 nnoremap <Leader>g <cmd>Telescope live_grep theme=get_dropdown<cr>
-function LaunchTelescopeIfNoFilename()
-  if @% == ""
-    Telescope find_files theme=get_dropdown
-  endif
-endfunction
-au VimEnter * call LaunchTelescopeIfNoFilename()
 
 " Neovide
 let g:neovide_cursor_vfx_mode = "pixiedust"
