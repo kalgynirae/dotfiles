@@ -1,5 +1,7 @@
 [Unit]
 BindsTo=graphical-session.target
+Requires=nvim-neovide-socat@.service
+After=nvim-neovide-socat@.service
 
 [Service]
 Type=exec
