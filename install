@@ -115,6 +115,10 @@ for app in applications/*; do
   maybelink "$app" ~/.local/share/"$app"
 done
 
+for tmpfiles_conf in tmpfiles.d/*; do
+  maybelink "$tmpfiles_conf" ~/.config/user-tmpfiles.d/"${tmpfiles_conf#tmpfiles.d/}"
+done
+
 for unit in units/*; do
   maybelink "$unit" ~/.config/systemd/user/"${unit#units/}"
 done

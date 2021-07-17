@@ -5,7 +5,6 @@ After=nvim-neovide-socat@.service
 [Service]
 Type=notify
 ExecStart=%h/.local/bin/nvim --headless --listen ${XDG_RUNTIME_DIR}/nvim/%I.sock -c 'silent !systemd-notify --ready'
-RuntimeDirectory=nvim
 NotifyAccess=all
 Slice=app.slice
 SuccessExitStatus=1
