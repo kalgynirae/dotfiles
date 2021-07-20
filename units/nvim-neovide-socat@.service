@@ -1,3 +1,6 @@
+[Unit]
+AssertPathIsDirectory=%t/nvim
+
 [Service]
 Type=exec
 ExecStart=%h/bin/nvim-neovide-socat %I
