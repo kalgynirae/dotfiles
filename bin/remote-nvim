@@ -15,5 +15,5 @@ if ! systemctl --user is-active -q "nvim@$name"; then
   fi
   nvr --nostart --servername "$nvim_sock" --remote-send ":cd $(pwd)<CR>"
 fi
-ncat -U "$XDG_RUNTIME_DIR/neovide-launcher.sock" <<<"$name"
+socat - UNIX-CONNECT:"$XDG_RUNTIME_DIR/neovide-launcher.sock" <<<"$name"
 nvr --nostart --servername "$nvim_sock" "$@"

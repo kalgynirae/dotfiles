@@ -50,6 +50,7 @@ rubygems
 seahorse
 shellcheck
 slurp
+socat
 sshfs
 stapler
 strace
