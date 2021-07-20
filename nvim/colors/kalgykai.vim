@@ -8,41 +8,45 @@ function! s:hi(group, guifg, guibg, gui)
 endfunction
 
 let s:none = "NONE"
-let s:normalfg = "#d1d2d0"
+let s:normalfg = "#a7a7a7"
 let s:normalbg = "#1c2022"
 let s:slightbg = "#232729"
 let s:black = "#000000"
 let s:darkgrey = "#303436"
 let s:darkred = "#500c09"
 let s:darkyellow = "#4a4800"
-let s:grey = "#52595c"
-let s:dimgreen = "#4a5e34"
-let s:red = "#c81f1f"
-let s:orange = "#c8742a"
-let s:yellow = "#c4a800"
-let s:green = "#4e9a06"
-let s:cyan = "#069e98"
-let s:blue = "#3c74c0"
-let s:violet = "#6050b0"
-let s:magenta = "#80487f"
-let s:white = "#d1d2d0"
-let s:brightgrey = "#6f6f6b"
-let s:brightred = "#ef4529"
-let s:brightorange = "#f08438"
-let s:brightyellow = "#f6db4a"
-let s:brightgreen = "#8ad834"
-let s:brightcyan = "#34e2c2"
-let s:brightblue = "#6492f4"
-let s:brightviolet = "#8a71e8"
-let s:brightmagenta = "#ad70a4"
-let s:brightwhite = "#f8f8f4"
+let s:grey = "#505050"
+let s:red = "#b44738"
+let s:orange = "#b16326"
+let s:yellow = "#a79026"
+let s:green = "#4f8621"
+let s:cyan = "#008f89"
+let s:blue = "#2a7dcb"
+let s:violet = "#806acc"
+let s:magenta = "#ae4fa3"
+let s:white = "#c0c0c0"
+let s:brightgrey = "#606060"
+let s:brightred = "#d2614f"
+let s:brightorange = "#cf7d3e"
+let s:brightyellow = "#c3ab42"
+let s:brightgreen = "#69a03b"
+let s:brightcyan = "#00b8b1"
+let s:brightblue = "#4f97e7"
+let s:brightviolet = "#9b84e9"
+let s:brightmagenta = "#cb69be"
+let s:brightwhite = "#e0e0e0"
 
 call s:hi("Normal",         s:normalfg,       s:normalbg,       s:none)
 call s:hi("NormalFg",       s:normalfg,       s:none,           s:none)
 call s:hi("ColorColumn",    s:none,           s:slightbg,       s:none)
 call s:hi("CursorColumn",   s:none,           s:slightbg,       s:none)
 call s:hi("CursorLine",     s:none,           s:slightbg,       s:none)
-call s:hi("CursorLineNr",   s:orange,         s:slightbg,       s:none)
+call s:hi("CursorLineNr",   s:grey,           s:slightbg,       "bold")
+call s:hi("GitGutterAddLineNr", s:green,      s:none,           s:none)
+call s:hi("GitGutterChangeLineNr", s:yellow,  s:none,           s:none)
+call s:hi("GitGutterChangeDeleteLineNr", s:orange, s:none,      s:none)
+call s:hi("GitGutterDeleteLineNr", s:red,     s:none,           s:none)
+call s:hi("LineNr",         s:grey,           s:none,           s:none)
 call s:hi("SpellBad",       s:none,           s:darkred,        s:none)
 call s:hi("SpellCap",       s:none,           s:darkyellow,     s:none)
 call s:hi("SpellLocal",     s:none,           s:darkyellow,     s:none)
@@ -56,7 +60,7 @@ call s:hi("Boolean",        s:blue,           s:none,           s:none)
 call s:hi("Character",      s:yellow,         s:none,           s:none)
 call s:hi("Comment",        s:grey,           s:none,           "italic")
 call s:hi("Conditional",    s:brightgrey,     s:none,           "bold")
-call s:hi("Constant",       s:violet,         s:none,           "bold")
+call s:hi("Constant",       s:violet,         s:none,           s:none)
 call s:hi("Debug",          s:brightmagenta,  s:none,           "bold")
 call s:hi("Define",         s:cyan,           s:none,           s:none)
 call s:hi("Delimiter",      s:brightgrey,     s:none,           s:none)
@@ -78,13 +82,12 @@ call s:hi("Include",        s:brightgrey,     s:none,           "bold")
 call s:hi("IncSearch",      s:grey,           s:brightyellow,   s:none)
 call s:hi("Keyword",        s:brightgrey,     s:none,           "bold")
 call s:hi("Label",          s:brightyellow,   s:none,           s:none)
-call s:hi("LineNr",         s:grey,           s:none,           s:none)
 call s:hi("Macro",          s:magenta,        s:none,           "italic")
 call s:hi("MatchParen",     s:brightorange,   s:none,           s:none)
 call s:hi("ModeMsg",        s:brightyellow,   s:none,           s:none)
 call s:hi("MoreMsg",        s:brightyellow,   s:none,           s:none)
 call s:hi("NonText",        s:grey,           s:none,           s:none)
-call s:hi("Number",         s:brightviolet,   s:none,           s:none)
+call s:hi("Number",         s:blue,           s:none,           s:none)
 call s:hi("Operator",       s:brightgrey,     s:none,           s:none)
 call s:hi("Pmenu",          s:blue,           s:black,          s:none)
 call s:hi("PmenuSbar",      s:blue,           s:black,          s:none)
@@ -100,7 +103,7 @@ call s:hi("Special",        s:orange,         s:none,           "italic")
 call s:hi("SpecialChar",    s:orange,         s:none,           "italic")
 call s:hi("SpecialComment", s:brightgrey,     s:none,           s:none)
 call s:hi("SpecialKey",     s:cyan,           s:none,           "italic")
-call s:hi("Statement",      s:red,            s:none,           "bold")
+call s:hi("Statement",      s:brightgrey,     s:none,           "bold")
 call s:hi("StorageClass",   s:brightorange,   s:none,           "italic")
 call s:hi("String",         s:yellow,         s:none,           s:none)
 call s:hi("Structure",      s:cyan,           s:none,           s:none)

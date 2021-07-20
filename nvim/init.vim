@@ -24,11 +24,12 @@ set scrolloff=3 sidescrolloff=5
 set shada='50,h
 set shiftwidth=4 softtabstop=-1 expandtab smarttab
 set showcmd
-set signcolumn=yes
+set signcolumn=yes:1
 set smartcase
 set spelllang=en_us
 set splitbelow splitright
 set termguicolors
+set updatetime=1000
 set undofile
 set wildignore+=*/node_modules/*
 set wildmode=list:longest
@@ -72,6 +73,7 @@ endfunction
 
 " Plugins
 call plug#begin(stdpath('data') . '/plugged')
+Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'farmergreg/vim-lastplace'
 Plug 'mhartington/formatter.nvim'
@@ -87,11 +89,13 @@ Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
-let g:tmux_navigator_disable_when_zoomed = 1
-let g:tmux_navigator_no_mappings = 1
-let html_no_rendering=1
+" vim-gitgutter
+let g:gitgutter_signs = 0
+let g:gitgutter_highlight_linenrs = 1
 
 " vim-tmux-navigator
+let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_no_mappings = 1
 if !empty($TMUX)
   noremap <silent> <c-_>h <cmd>TmuxNavigateLeft<cr>
   noremap <silent> <c-_>j <cmd>TmuxNavigateDown<cr>
