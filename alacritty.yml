@@ -1,32 +1,32 @@
 colors:
   primary:
-    background: '0x232729'
-    foreground: '0xd1d2d0'
+    background: '0x1c2022'
+    foreground: '0xc0c0c0'
   normal:
-    black:   '0x52595c'
-    red:     '0xc81f1f'
-    green:   '0x4e9a06'
-    yellow:  '0xc4a800'
-    blue:    '0x3c74c0'
-    magenta: '0x80487f'
-    cyan:    '0x069e98'
-    white:   '0xd1d2d0'
+    black:   '0x505050'
+    red:     '0xb44738'
+    green:   '0x518921'
+    yellow:  '0xa79026'
+    blue:    '0x3982ce'
+    magenta: '0xae4fa3'
+    cyan:    '0x008f89'
+    white:   '0xc0c0c0'
   bright:
-    black:   '0x6f6f6b'
-    red:     '0xef4529'
-    green:   '0x8ad834'
-    yellow:  '0xf6db4a'
-    blue:    '0x6492f4'
-    magenta: '0xad70a4'
-    cyan:    '0x34e2c2'
-    white:   '0xf8f8f4'
+    black:   '0x707070'
+    red:     '0xd2614f'
+    green:   '0x6ea63f'
+    yellow:  '0xc9b047'
+    blue:    '0x5799e7'
+    magenta: '0xc866bb'
+    cyan:    '0x00b2ab'
+    white:   '0xe0e0e0'
 
 draw_bold_text_with_bright_colors: false
 
 font:
   normal:
     family: monospace
-  size: 12
+  size: 14
 
 key_bindings:
   - { key: Plus, mods: Control|Shift, action: IncreaseFontSize }
