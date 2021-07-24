@@ -29,7 +29,7 @@ set smartcase
 set spelllang=en_us
 set splitbelow splitright
 set termguicolors
-set updatetime=1000
+set updatetime=100
 set undofile
 set wildignore+=*/node_modules/*
 set wildmode=list:longest
