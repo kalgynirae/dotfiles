@@ -71,6 +71,7 @@ maybelink bash_profile ~/.bash_profile
 maybelink bashrc ~/.bashrc
 maybelink bin ~/bin
 maybelink dunstrc ~/.config/dunst/dunstrc
+maybelink electron-flags.conf ~/.config/electron-flags.conf
 maybelink environment.conf ~/.config/environment.d/environment.conf
 maybelink feh-themes ~/.config/feh/themes
 maybelink fonts.conf ~/.config/fontconfig/fonts.conf
