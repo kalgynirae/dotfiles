@@ -13,6 +13,9 @@ function! s:hi(group, guifg, guibg, gui)
   if a:gui != ""
     let args = args." gui=".a:gui
   endif
+  if args == ""
+    let args = "NONE"
+  endif
   execute "hi" a:group args
 endfunction
 
@@ -26,7 +29,7 @@ let s:darkred = "#4c1713"
 let s:darkyellow = "#3a3200"
 let s:grey = "#505050"
 let s:brightgrey = "#707070"
-let s:normalfg = "#a7a7a7"
+let s:normalfg = "#a0a0a0"
 let s:red = "#b44738"
 let s:brightred = "#d2614f"
 let s:orange = "#af6423"
@@ -51,6 +54,7 @@ let s:brightwhite = "#e0e0e0"
 call s:hi("Normal",         s:normalfg,       s:normalbg,       s:none)
 call s:hi("NormalFg",       s:normalfg,       s:reset,          s:none)
 call s:hi("ColorColumn",    s:reset,          s:slightbg,       s:none)
+call s:hi("Cursor",         "bg",             "fg",             s:none)
 call s:hi("CursorColumn",   s:reset,          s:slightbg,       s:none)
 call s:hi("CursorLine",     s:reset,          s:slightbg,       s:none)
 call s:hi("CursorLineNr",   s:grey,           s:reset,          "bold")
@@ -73,7 +77,7 @@ call s:hi("VisualNOS",      s:reset,          s:reset,          "reverse")
 
 call s:hi("Boolean",        s:blue,           s:reset,          s:none)
 call s:hi("Character",      s:yellow,         s:reset,          s:none)
-call s:hi("Comment",        s:brightgrey,     s:reset,          "italic")
+call s:hi("Comment",        s:brightgrey,     s:reset,          s:none)
 call s:hi("Conditional",    s:brightgrey,     s:reset,          "bold")
 call s:hi("Constant",       s:violet,         s:reset,          s:none)
 call s:hi("Debug",          s:brightmagenta,  s:reset,          "bold")
@@ -112,11 +116,11 @@ call s:hi("PreCondit",      s:green,          s:reset,          "bold")
 call s:hi("PreProc",        s:violet,         s:reset,          "italic")
 call s:hi("Question",       s:cyan,           s:reset,          s:none)
 call s:hi("Repeat",         s:brightgrey,     s:reset,          "bold")
-call s:hi("Search",         s:grey,           s:yellow,         s:none)
+call s:hi("Search",         s:darkgrey,       s:yellow,         s:none)
 call s:hi("SignColumn",     s:blue,           s:reset,          s:none)
 call s:hi("Special",        s:orange,         s:reset,          "italic")
 call s:hi("SpecialChar",    s:orange,         s:reset,          "italic")
-call s:hi("SpecialComment", s:green,          s:reset,          "italic")
+call s:hi("SpecialComment", s:green,          s:reset,          s:none)
 call s:hi("SpecialKey",     s:cyan,           s:reset,          "italic")
 call s:hi("Statement",      s:brightgrey,     s:reset,          "bold")
 call s:hi("StorageClass",   s:brightorange,   s:reset,          "italic")
@@ -124,8 +128,8 @@ call s:hi("String",         s:yellow,         s:reset,          s:none)
 call s:hi("Structure",      s:cyan,           s:reset,          s:none)
 call s:hi("Tag",            s:blue,           s:reset,          "italic")
 call s:hi("Title",          s:brightorange,   s:reset,          s:none)
-call s:hi("Todo",           s:red,            s:reset,          "italic")
-call s:hi("Type",           s:cyan,           s:reset,          s:none)
+call s:hi("Todo",           s:red,            s:reset,          s:none)
+call s:hi("Type",           s:cyan,           s:reset,          s:reset)
 call s:hi("Typedef",        s:cyan,           s:reset,          s:none)
 call s:hi("Underlined",     s:reset,          s:reset,          "underline")
 call s:hi("VertSplit",      s:grey,           s:reset,          "bold")
@@ -139,6 +143,34 @@ call s:hi("diffNewFile",    s:white,          s:reset,          "bold")
 call s:hi("diffRemoved",    s:red,            s:reset,          s:none)
 call s:hi("diffSubname",    s:white,          s:reset,          "bold")
 
-call s:hi("TSConstBuiltin", s:blue,           s:reset,          s:none)
-call s:hi("TSFuncBuiltin",  s:green,          s:reset,          s:none)
-call s:hi("TSParameter",    s:brightgrey,     s:reset,          s:none)
+call s:hi("TSConstBuiltin", s:blue,           s:none,           s:none)
+call s:hi("TSFuncBuiltin",  s:green,          s:none,           s:none)
+call s:hi("TSFuncMacro",    s:violet,         s:none,           s:none)
+call s:hi("TSFunction",     s:green,          s:none,           s:none)
+call s:hi("TSMethod",       s:green,          s:none,           s:none)
+call s:hi("TSParameter",    s:brightgrey,     s:none,           s:none)
+call s:hi("TSType",         s:cyan,           s:none,           s:none)
+call s:hi("TSVariable",     s:normalfg,       s:reset,          s:none)
+
+hi link commentTSConstant TSStrong
+
+hi link docstring Comment
+hi link pythonTSNone TSParameter
+hi link pythonTSVariableBuiltin TSParameter
+
+hi link rustTSField TSParameter
+
+hi link helpNote SpecialComment
+hi link vimCommentTitle SpecialComment
+
+" Note: TS highlight groups get linked to standard nvim groups by default, but
+" this seems to happen at some point after the colorscheme is loaded.
+" Sometimes I want to remove one of those links (so that highlighting can be
+" determined by *other* groups that the item may be in simultaneously). This
+" is the only way I've found that successfully gets rid of the link.
+augroup kalgykai
+  autocmd!
+  au BufEnter * hi link TSConstructor NONE
+  au BufEnter * hi link TSLiteral NONE
+  au BufEnter * hi link TSNamespace NONE
+augroup END
