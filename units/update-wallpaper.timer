@@ -3,9 +3,10 @@ BindsTo=graphical-session.target
 After=graphical-session.target
 
 [Timer]
-AccuracySec=1m
-OnBootSec=30m
-OnUnitActiveSec=30m
+AccuracySec=5m
+OnBootSec=90m
+OnUnitActiveSec=2h
+RandomizedDelaySec=30m
 
 [Install]
 WantedBy=graphical-session.target
