@@ -129,6 +129,15 @@ require('formatter').setup {
         }
       end
     },
+    rust = {
+      function()
+        return {
+          exe = "rustfmt",
+          args = {"-q"},
+          stdin = true,
+        }
+      end
+    },
   },
 }
 EOF
