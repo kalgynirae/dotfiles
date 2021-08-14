@@ -95,12 +95,12 @@ maybelink sound/mic.json ~/.config/PulseEffects/input/mic.json
 maybelink sxhkdrc ~/.config/sxhkd/sxhkdrc
 maybelink tmux.conf ~/.tmux.conf
 maybelink user-dirs.dirs ~/.config/user-dirs.dirs
-maybelink waybar.css ~/.config/waybar/style.css
 maybelink wezterm.lua ~/.config/wezterm/wezterm.lua
 render i3config ~/.config/i3/config
 render i3statusconfig ~/.config/i3status/config
 render sway ~/.config/sway/config
 render waybar ~/.config/waybar/config
+render waybar.css ~/.config/waybar/style.css
 
 # Set cursor theme in gsettings (waybar seems to use this)
 cursortheme=$(grep 'gtk-cursor-theme-name' gtk-3.0-settings.ini | cut -d= -f2)
