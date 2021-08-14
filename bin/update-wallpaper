@@ -123,4 +123,4 @@ render-quote "$dir/resized-lock.mpc" "$dir/wallpaper-lock.jpg"
 mv -t ~/.cache "$dir/wallpaper.jpg" "$dir/wallpaper-lock.jpg"
 
 # Set the background
-swaymsg 'output * bg ~/.cache/wallpaper.jpg fit'
+swaymsg 'output * bg ~/.cache/wallpaper.jpg fill #202020'
