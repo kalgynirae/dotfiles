@@ -10,7 +10,7 @@ set display=lastline
 set encoding=utf-8
 set exrc secure
 set guicursor=n-v-c-sm:block,i-ci-ve:ver10,r-cr-o:hor20
-set guifont=Fira\ Code:h18
+set guifont=Fira\ Code:h14
 set hlsearch incsearch
 set inccommand=nosplit
 set laststatus=2
