@@ -80,7 +80,7 @@ Plug 'farmergreg/vim-lastplace'
 Plug 'mhartington/formatter.nvim'
 
 " nvim-treesitter
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 
 " telescope.nvim
@@ -137,9 +137,29 @@ nnoremap Q :Format<CR>
 " nvim-treesitter
 lua <<EOF
 require('nvim-treesitter.configs').setup {
+  ensure_installed ={
+    "bash",
+    "c",
+    "cpp",
+    "css",
+    "html",
+    "javascript",
+    "json",
+    "lua",
+    "php",
+    "python",
+    "regex",
+    "rst",
+    "ruby",
+    "rust",
+    "scss",
+    "toml",
+    "tsx",
+    "typescript",
+    "yaml",
+  },
   highlight = { enable = true },
   incremental_selection = { enable = true },
-  indent = { enable = true },
 }
 EOF
 set foldmethod=expr
