@@ -32,6 +32,7 @@ set termguicolors
 set updatetime=100
 set undofile
 set wildignore+=*/node_modules/*
+set wildignorecase
 set wildmode=list:longest
 
 " Custom shortcuts
