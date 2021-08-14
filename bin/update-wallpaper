@@ -1,7 +1,11 @@
 #!/bin/bash
 
 #primarysize=$(swaymsg -t get_outputs | jq -r '.[]|.current_mode|"\(.width)x\(.height)"' | head -n1)
-primarysize=2560x1440
+if [[ $HOSTNAME == colinchan-fedora-PC166WVV ]]; then
+  primarysize=1600x2560
+else
+  primarysize=2560x1440
+fi
 width=$(cut -dx -f1 <<<"$primarysize")
 height=$(cut -dx -f2 <<<"$primarysize")
 echo "size: ${width}x${height}"
