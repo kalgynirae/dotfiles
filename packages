@@ -51,12 +51,14 @@ seahorse
 shellcheck
 slurp
 socat
+soundfont-fluid
 sshfs
 stapler
 strace
 sway
 swayidle
 thunar
+timidity++
 tmux
 traceroute
 tree
