@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $(hostname) == colinchan-fedora-* ]]; then
-  exec chromium-browser "$@"
+  exec chromium-freeworld "$@"
 else
   exec firefox "$@"
 fi
