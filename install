@@ -104,11 +104,10 @@ render sway ~/.config/sway/config
 render waybar ~/.config/waybar/config
 render waybar.css ~/.config/waybar/style.css
 
-# Set cursor theme in gsettings (waybar seems to use this)
-cursortheme=$(grep 'gtk-cursor-theme-name' gtk-3.0-settings.ini | cut -d= -f2)
-cursorsize=$(grep 'gtk-cursor-theme-size' gtk-3.0-settings.ini | cut -d= -f2)
-gsettings set org.gnome.desktop.interface cursor-theme "$cursortheme"
-gsettings set org.gnome.desktop.interface cursor-size "$cursorsize"
+# Mirror various GTK settings in gsettings (waybar and Firefox seem to use these)
+gsettings set org.gnome.desktop.interface cursor-blink "$(grep 'gtk-cursor-blink' gtk-3.0-settings.ini | cut -d= -f2)"
+gsettings set org.gnome.desktop.interface cursor-theme "$(grep 'gtk-cursor-theme-name' gtk-3.0-settings.ini | cut -d= -f2)"
+gsettings set org.gnome.desktop.interface cursor-size "$(grep 'gtk-cursor-theme-size' gtk-3.0-settings.ini | cut -d= -f2)"
 
 for app in applications/*; do
   if [[ $app == minecraft.desktop && $HOSTNAME != colinchan-fedora* ]]; then
