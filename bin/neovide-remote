@@ -5,4 +5,4 @@ name=$1
 # service running socat to forward a local port to the UNIX socket.
 port=$(( $(echo "$name" | cksum - | awk '{print $1}') % 1000 + 3000 ))
 set -x
-exec neovide --nofork --remote-tcp localhost:"$port" --multiGrid
+exec neovide --nofork --remote-tcp localhost:"$port" --multigrid
