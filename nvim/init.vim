@@ -10,7 +10,7 @@ set display=lastline
 set encoding=utf-8
 set exrc secure
 set guicursor=n-v-c-sm:block,i-ci-ve:ver10,r-cr-o:hor20
-set guifont=Iosevka\ Term:h20
+set guifont=Iosevka\ Term:h16
 set hlsearch incsearch
 set inccommand=nosplit
 set laststatus=2
