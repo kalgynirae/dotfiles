@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Web Browser
+Exec=web-browser %U
+StartupNotify=true
+Terminal=false
+Icon=web-browser
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=text/html;x-scheme-handler/http;x-scheme-handler/https;
