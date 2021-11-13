@@ -46,7 +46,6 @@ input "2:14:ETPS/2_Elantech_TrackPoint" events disabled
 {{/colinchan-fedora}}
 
 output * subpixel rgb
-output * bg ~/.cache/wallpaper.jpg fill
 
 {{#colinchan-fedora}}
 # home
@@ -221,4 +220,5 @@ for_window [title="Picture-in-Picture"] floating enable
 for_window [app_id="zoom" title="zoom"] floating enable, border none
 
 # Startup programs
+output * bg ~/.cache/wallpaper.jpg fill
 exec_always "systemctl --user import-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XCURSOR_SIZE XCURSOR_THEME; systemd-notify --ready"
