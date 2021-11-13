@@ -1,9 +1,0 @@
-[Unit]
-BindsTo=graphical-session.target
-Requires=nvim-neovide-socat@.service
-After=nvim-neovide-socat@.service
-
-[Service]
-Type=exec
-ExecStart=%h/bin/neovide-remote %I
-Slice=app.slice

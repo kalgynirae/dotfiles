@@ -1,9 +1,0 @@
-[Unit]
-AssertPathIsDirectory=%t/nvim
-
-[Service]
-Type=notify
-ExecStart=%h/.local/bin/nvim --headless --listen %t/nvim/%I.sock -c 'silent !systemd-notify --ready'
-NotifyAccess=all
-Slice=app.slice
-SuccessExitStatus=1

@@ -1,4 +1,0 @@
-[Service]
-Type=oneshot
-StandardInput=socket
-ExecStart=bash -c 'read -r name && systemctl --user start neovide-remote@"$name"'
