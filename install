@@ -1,25 +1,18 @@
 #!/bin/bash
 shopt -s nullglob
 
-read -rp "Install packages? [y/N] "
-if [[ $REPLY == y ]]; then
-  packages() {
-    {
-      cat packages
-      [[ -e packages.$HOSTNAME ]] && cat "packages.$HOSTNAME"
-    } | sort
-  }
-  unknown_packages() {
+if grep -q "Arch Linux" /etc/os-release; then
+  read -rp "Install packages? [y/N] "
+  if [[ $REPLY == y ]]; then
+    packages() {
+      {
+        cat packages
+        [[ -e packages.$HOSTNAME ]] && cat "packages.$HOSTNAME"
+      } | sort
+    }
     # shellcheck disable=SC2046
-    sudo pacman -S --needed $(packages) |& grep "target not found" | awk '{print $5}'
-  }
-  known_packages() {
-    comm -23 <(packages) <(unknown_packages)
-  }
-  # shellcheck disable=SC2046
-  sudo pacman -S --needed $(known_packages)
-  # shellcheck disable=SC2046
-  pacaur -Sa --needed $(unknown_packages)
+    paru -S --needed $(packages)
+  fi
 fi
 
 maybelink() {
