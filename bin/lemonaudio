@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if sshfs lemon.lumeh.org:/srv/audio ~/mnt/audio; then
+if sshfs lemon.lumeh.org:/srv/music ~/mnt/audio; then
   mpv-shuffler ~/mnt/audio
   fusermount -u ~/mnt/audio
 fi
