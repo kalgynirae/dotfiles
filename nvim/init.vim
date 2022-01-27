@@ -78,6 +78,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'farmergreg/vim-lastplace'
 Plug 'mhartington/formatter.nvim'
+Plug 'neovim/nvim-lspconfig'
 
 " nvim-treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdate'}
@@ -89,6 +90,21 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
+
+" nvim-lspconfig
+lua <<EOF
+local lsp_attach = function(client)
+  vim.api.nvim_buf_set_keymap(0, "n", "gD", "<cmd>lua vim.lsp.buf.definition()<cr>", {})
+  vim.api.nvim_buf_set_keymap(0, "n", "gd", "<cmd>lua vim.lsp.buf.implementation()<cr>", {})
+  vim.api.nvim_buf_set_keymap(0, "n", "dn", "<cmd>lua vim.lsp.diagnostic.goto_next({float = false})<cr>", {})
+  vim.api.nvim_buf_set_keymap(0, "n", "dp", "<cmd>lua vim.lsp.diagnostic.goto_prev({float = false})<cr>", {})
+  vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+  vim.api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
+end
+require('lspconfig').rust_analyzer.setup{
+  on_attach = lsp_attach,
+}
+EOF
 
 " vim-gitgutter
 let g:gitgutter_signs = 0
@@ -197,8 +213,11 @@ require('telescope').setup {
   },
 }
 EOF
+nnoremap <Leader>d <cmd>Telescope diagnostics<cr>
 nnoremap <Leader>f <cmd>Telescope find_files theme=get_dropdown<cr>
 nnoremap <Leader>g <cmd>Telescope live_grep theme=get_dropdown<cr>
+nnoremap <Leader>r <cmd>Telescope lsp_references<cr>
+nnoremap <Leader>s <cmd>Telescope lsp_document_symbols<cr>
 
 " Neovide
 let g:neovide_cursor_vfx_mode = "pixiedust"
