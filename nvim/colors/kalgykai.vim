@@ -183,3 +183,20 @@ augroup kalgykai
   au BufEnter * hi link TSLiteral NONE
   au BufEnter * hi link TSNamespace NONE
 augroup END
+
+let g:terminal_color_0 = s:grey
+let g:terminal_color_1 = s:red
+let g:terminal_color_2 = s:green
+let g:terminal_color_3 = s:yellow
+let g:terminal_color_4 = s:blue
+let g:terminal_color_5 = s:magenta
+let g:terminal_color_6 = s:cyan
+let g:terminal_color_7 = s:white
+let g:terminal_color_8 = s:brightgrey
+let g:terminal_color_9 = s:brightred
+let g:terminal_color_10 = s:brightgreen
+let g:terminal_color_11 = s:brightyellow
+let g:terminal_color_12 = s:brightblue
+let g:terminal_color_13 = s:brightmagenta
+let g:terminal_color_14 = s:brightcyan
+let g:terminal_color_15 = s:brightwhite
