@@ -28,8 +28,11 @@ let s:normalbg = "#1c2022"
 let s:slightbg = "#232729"
 let s:black = "#000000"
 let s:darkgrey = "#303436"
-let s:darkred = "#4c1713"
-let s:darkyellow = "#3a3200"
+let s:darkred = "#390c00"
+let s:darkorange = "#351b00"
+let s:darkyellow = "#2e2600"
+let s:darkcyan = "#002b29"
+let s:darkblue = "#002444"
 let s:grey = "#505050"
 let s:brightgrey = "#707070"
 let s:normalfg = "#a0a0a0"
@@ -61,10 +64,6 @@ call s:hi("Cursor",         "bg",             "fg",             s:none,         
 call s:hi("CursorColumn",   s:reset,          s:slightbg,       s:none,           s:none)
 call s:hi("CursorLine",     s:reset,          s:slightbg,       s:none,           s:none)
 call s:hi("CursorLineNr",   s:grey,           s:reset,          s:none,           "bold")
-call s:hi("DiagnosticError", s:brightred,     s:reset,          s:none,           "italic")
-call s:hi("DiagnosticWarn", s:brightorange,   s:reset,          s:none,           "italic")
-call s:hi("DiagnosticInfo", s:brightblue,     s:reset,          s:none,           "italic")
-call s:hi("DiagnosticHint", s:brightcyan,     s:reset,          s:none,           "italic")
 call s:hi("GitGutterAddLineNr", s:green,      s:reset,          s:none,           s:none)
 call s:hi("GitGutterChangeLineNr", s:yellow,  s:reset,          s:none,           s:none)
 call s:hi("GitGutterChangeDeleteLineNr", s:orange, s:reset,     s:none,           s:none)
@@ -81,6 +80,15 @@ call s:hi("TabLineFill",    s:reset,          s:darkgrey,       s:none,         
 call s:hi("TabLineSel",     s:reset,          s:grey,           s:none,           "bold")
 call s:hi("Visual",         s:white,          s:normalbg,       s:none,           "reverse")
 call s:hi("VisualNOS",      s:reset,          s:reset,          s:none,           "reverse")
+
+call s:hi("DiagnosticError", s:brightred,     s:reset,          s:none,           "italic")
+call s:hi("DiagnosticWarn",  s:brightorange,  s:reset,          s:none,           "italic")
+call s:hi("DiagnosticInfo", s:brightblue,     s:reset,          s:none,           "italic")
+call s:hi("DiagnosticHint", s:brightcyan,     s:reset,          s:none,           "italic")
+call s:hi("DiagnosticUnderlineError", s:none, s:darkred,        s:none,           s:reset)
+call s:hi("DiagnosticUnderlineWarn", s:none,  s:darkorange,     s:none,           s:reset)
+call s:hi("DiagnosticUnderlineInfo", s:none,  s:darkblue,       s:none,           s:reset)
+call s:hi("DiagnosticUnderlineHint", s:none,  s:darkcyan,       s:none,           s:reset)
 
 call s:hi("Boolean",        s:blue,           s:reset,          s:none,           s:none)
 call s:hi("Character",      s:yellow,         s:reset,          s:none,           s:none)
