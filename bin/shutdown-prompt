@@ -3,21 +3,9 @@
 ACTIONS=(poweroff reboot reboot-to-windows suspend)
 ACTION=$(printf '%s\n' "${ACTIONS[@]}" | wofi --dmenu)
 
-set-next-boot() {
-  local output
-  if output=$(efibootmgr | grep "$1") && [[ $output =~ Boot([[:xdigit:]]{4}) ]]; then
-    local number=${BASH_REMATCH[1]}
-    echo >&2 "efibootmgr --bootnext ${number@Q}"
-    sudo efibootmgr --bootnext "$number"
-  fi
-}
-
 if [[ $ACTION == reboot-to-windows ]]; then
-  if ! set-next-boot Windows; then
-    echo >&2 "Failed to set next boot; aborting"
-    exit 1
-  fi
-  ACTION=reboot
+  reboot-to-windows
+  exit
 fi
 
 if [[ -n $ACTION ]]; then
