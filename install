@@ -63,6 +63,7 @@ maybelink bash_profile ~/.bash_profile
 maybelink bashrc ~/.bashrc
 maybelink bin ~/bin
 maybelink electron-flags.conf ~/.config/electron-flags.conf
+maybelink electron15-flags.conf ~/.config/electron15-flags.conf
 maybelink environment.conf ~/.config/environment.d/environment.conf
 maybelink fonts.conf ~/.config/fontconfig/fonts.conf
 maybelink gammastep.ini ~/.config/gammastep/config.ini
