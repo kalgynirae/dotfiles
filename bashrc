@@ -64,6 +64,14 @@ cal() {
   fi
 }
 
+# If inside of neovide-terminal
+cd() {
+  if [[ $NEOVIDE_MAIN_TERMINAL ]] && (( $# <= 1 )); then
+    nvr -c "cd $1"
+  fi
+  command cd "$@"
+}
+
 # Test the terminal's text/color capabilities
 colortest() {
   local color escapes intensity style

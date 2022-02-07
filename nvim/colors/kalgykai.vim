@@ -73,8 +73,6 @@ call s:hi("SpellBad",       s:reset,          s:darkred,        s:red,          
 call s:hi("SpellCap",       s:reset,          s:darkyellow,     s:yellow,         s:none)
 call s:hi("SpellLocal",     s:reset,          s:darkyellow,     s:yellow,         s:none)
 call s:hi("SpellRare",      s:reset,          s:darkyellow,     s:yellow,         s:none)
-call s:hi("StatusLine",     s:reset,          s:grey,           s:none,           "bold")
-call s:hi("StatusLineNC",   s:brightgrey,     s:darkgrey,       s:none,           s:reset)
 call s:hi("TabLine",        s:brightgrey,     s:darkgrey,       s:none,           s:none)
 call s:hi("TabLineFill",    s:reset,          s:darkgrey,       s:none,           s:reset)
 call s:hi("TabLineSel",     s:reset,          s:grey,           s:none,           "bold")
@@ -89,6 +87,18 @@ call s:hi("DiagnosticUnderlineError", s:none, s:darkred,        s:none,         
 call s:hi("DiagnosticUnderlineWarn", s:none,  s:darkorange,     s:none,           s:reset)
 call s:hi("DiagnosticUnderlineInfo", s:none,  s:darkblue,       s:none,           s:reset)
 call s:hi("DiagnosticUnderlineHint", s:none,  s:darkcyan,       s:none,           s:reset)
+
+call s:hi("StatusLine",     s:reset,          s:grey,           s:none,           "bold")
+call s:hi("StatusLineNC",   s:brightgrey,     s:darkgrey,       s:none,           s:reset)
+call s:hi("User1",          s:normalbg,       s:yellow,         s:none,           "bold")   " replace mode
+call s:hi("User2",          s:normalbg,       s:green,          s:none,           "bold")   " insert mode
+call s:hi("User3",          s:normalbg,       s:cyan,           s:none,           "bold")   " visual mode
+call s:hi("User4",          s:normalbg,       s:blue,           s:none,           "bold")   " (unused)
+call s:hi("User5",          s:normalbg,       s:violet,         s:none,           "bold")   " terminal mode
+call s:hi("User6",          s:brightred,      s:grey,           s:none,           "bold")   " error count
+call s:hi("User7",          s:brightorange,   s:grey,           s:none,           "bold")   " warning count
+call s:hi("User8",          s:brightcyan,     s:grey,           s:none,           "bold")   " (unused)
+call s:hi("User9",          s:brightblue,     s:grey,           s:none,           "bold")   " (unused)
 
 call s:hi("Boolean",        s:blue,           s:reset,          s:none,           s:none)
 call s:hi("Character",      s:yellow,         s:reset,          s:none,           s:none)

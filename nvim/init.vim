@@ -10,7 +10,6 @@ set display=lastline
 set encoding=utf-8
 set exrc secure
 set guicursor=n-v-c-sm:block,i-ci-ve:ver10,r-cr-o:hor20
-set guifont=Iosevka\ Term:h16
 set hlsearch incsearch
 set inccommand=nosplit
 set laststatus=2
@@ -39,16 +38,23 @@ set wildmode=list:longest
 let mapleader = ' '
 let maplocalleader = '\'
 nnoremap <Leader>l <c-l>
-nmap <LocalLeader>c :setlocal colorcolumn=<CR>
-nmap <LocalLeader>C :call hexcolor#toggle()<CR>
-nmap <LocalLeader>i :call ShowSyntaxNames()<CR>
-nmap <LocalLeader>m :setlocal invnumber number?<CR>
-nmap <LocalLeader>n :noh<CR>
-nmap <LocalLeader>p :setlocal invpaste paste?<CR>
-nmap <LocalLeader>r :call wordhighlight#highlight_under_cursor()<CR>
-nmap <LocalLeader>s :setlocal invspell spell?<CR>
-nmap <LocalLeader>v :setlocal virtualedit=all<CR>
-nmap <F5> :make<CR>
+nmap <LocalLeader>c <Cmd>setlocal colorcolumn=<CR>
+nmap <LocalLeader>C <Cmd>call hexcolor#toggle()<CR>
+nmap <LocalLeader>i <Cmd>call ShowSyntaxNames()<CR>
+nmap <LocalLeader>m <Cmd>setlocal invnumber number?<CR>
+nmap <LocalLeader>n <Cmd>noh<CR>
+nmap <LocalLeader>p <Cmd>setlocal invpaste paste?<CR>
+nmap <LocalLeader>r <Cmd>call wordhighlight#highlight_under_cursor()<CR>
+nmap <LocalLeader>s <Cmd>setlocal invspell spell?<CR>
+nmap <LocalLeader>v <Cmd>setlocal virtualedit=all<CR>
+nmap <F5> <Cmd>make<CR>
+
+" Tabs
+nmap <c-n> <Cmd>tabnext<CR>
+nmap <c-p> <Cmd>tabprevious<CR>
+nmap <c-s-n> <Cmd>tabmove +<CR>
+nmap <c-s-p> <Cmd>tabmove -<CR>
+
 cmap w!! silent w !sudo tee >/dev/null %
 " Automatically re-yank pasted stuff after pasting
 xnoremap p pgvy
@@ -59,10 +65,34 @@ cmap <c-a> <Home>
 cmap <c-e> <End>
 cmap <c-f> <Right>
 cmap <c-b> <Left>
+cnoremap <c-p> <Up>
+cnoremap <c-n> <Down>
 imap <c-a> <Home>
 imap <c-e> <End>
 imap <c-f> <Right>
 imap <c-b> <Left>
+
+" Status line
+lua require("kalgystatus")
+set statusline=%!v:lua.kalgystatus()
+set noshowmode
+
+" Diagnostic
+lua <<EOF
+vim.diagnostic.config({
+  severity_sort = true,
+  signs = false,
+})
+EOF
+nmap dn <Cmd>lua vim.diagnostic.goto_next()<CR>
+nmap dp <Cmd>lua vim.diagnostic.goto_prev()<CR>
+
+" Terminal
+nnoremap <Leader>t <Cmd>terminal<CR>
+nnoremap <Leader>" <Cmd>split +terminal<CR>i
+nnoremap <Leader>% <Cmd>vsplit +terminal<CR>i
+autocmd TermOpen * setlocal nonumber signcolumn=no
+autocmd TermClose * if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
 
 " For debugging color scheme and syntax definitions
 function ShowSyntaxNames()
@@ -94,14 +124,17 @@ call plug#end()
 " nvim-lspconfig
 lua <<EOF
 local lsp_attach = function(client)
-  vim.api.nvim_buf_set_keymap(0, "n", "gD", "<cmd>lua vim.lsp.buf.definition()<cr>", {})
-  vim.api.nvim_buf_set_keymap(0, "n", "gd", "<cmd>lua vim.lsp.buf.implementation()<cr>", {})
-  vim.api.nvim_buf_set_keymap(0, "n", "dn", "<cmd>lua vim.lsp.diagnostic.goto_next({float = false})<cr>", {})
-  vim.api.nvim_buf_set_keymap(0, "n", "dp", "<cmd>lua vim.lsp.diagnostic.goto_prev({float = false})<cr>", {})
+  vim.api.nvim_buf_set_keymap(0, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {})
+  vim.api.nvim_buf_set_keymap(0, "n", "gD", "<Cmd>lua vim.lsp.buf.implementation()<CR>", {})
+  vim.api.nvim_buf_set_keymap(0, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", {})
   vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
   vim.api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 require('lspconfig').rust_analyzer.setup{
+  on_attach = lsp_attach,
+}
+require('lspconfig').pylsp.setup{
+  cmd = { "pipenv", "run", "pylsp" },
   on_attach = lsp_attach,
 }
 EOF
@@ -114,10 +147,10 @@ let g:gitgutter_highlight_linenrs = 1
 let g:tmux_navigator_disable_when_zoomed = 1
 let g:tmux_navigator_no_mappings = 1
 if !empty($TMUX)
-  noremap <silent> <c-_>h <cmd>TmuxNavigateLeft<cr>
-  noremap <silent> <c-_>j <cmd>TmuxNavigateDown<cr>
-  noremap <silent> <c-_>k <cmd>TmuxNavigateUp<cr>
-  noremap <silent> <c-_>l <cmd>TmuxNavigateRight<cr>
+  noremap <silent> <c-_>h <Cmd>TmuxNavigateLeft<CR>
+  noremap <silent> <c-_>j <Cmd>TmuxNavigateDown<CR>
+  noremap <silent> <c-_>k <Cmd>TmuxNavigateUp<CR>
+  noremap <silent> <c-_>l <Cmd>TmuxNavigateRight<CR>
 else
   nmap <c-h> <c-w>h
   nmap <c-j> <c-w>j
@@ -213,12 +246,19 @@ require('telescope').setup {
   },
 }
 EOF
-nnoremap <Leader>d <cmd>Telescope diagnostics<cr>
-nnoremap <Leader>f <cmd>Telescope find_files theme=get_dropdown<cr>
-nnoremap <Leader>g <cmd>Telescope live_grep theme=get_dropdown<cr>
-nnoremap <Leader>r <cmd>Telescope lsp_references<cr>
-nnoremap <Leader>s <cmd>Telescope lsp_document_symbols<cr>
+nnoremap <Leader>d <Cmd>Telescope diagnostics<CR>
+nnoremap <Leader>f <Cmd>Telescope find_files theme=get_dropdown<CR>
+nnoremap <Leader>g <Cmd>Telescope live_grep theme=get_dropdown<CR>
+nnoremap <Leader>r <Cmd>Telescope lsp_references<CR>
+nnoremap <Leader>s <Cmd>Telescope lsp_document_symbols<CR>
 
 " Neovide
+set guifont=Iosevka\ Term:h14
 let g:neovide_cursor_vfx_mode = "pixiedust"
 let g:neovide_cursor_animation_length = 0.03
+let g:neovide_cursor_vfx_particle_density = 30.0
+let g:neovide_cursor_vfx_particle_lifetime = 2.0
+let g:neovide_cursor_vfx_particle_speed = 5.0
+lua require("kalgyutil")
+nmap <C-+> <Cmd>call v:lua.change_guifont_size(1)<CR>
+nmap <C--> <Cmd>call v:lua.change_guifont_size(-1)<CR>
