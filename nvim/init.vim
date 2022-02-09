@@ -111,7 +111,7 @@ Plug 'mhartington/formatter.nvim'
 Plug 'neovim/nvim-lspconfig'
 
 " nvim-treesitter
-Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdateSync'}
 Plug 'nvim-treesitter/playground'
 
 " telescope.nvim
