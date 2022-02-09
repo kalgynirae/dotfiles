@@ -35,5 +35,4 @@ return {
     "DejaVu Sans Mono",
     "Font Awesome 5 Pro Solid",
   }),
-  window_background_opacity = 0.98,
 }
