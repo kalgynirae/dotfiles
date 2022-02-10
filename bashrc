@@ -213,7 +213,7 @@ open() {
 pedit() {
   local file
   file="$(mktemp -d)/pedit" || return
-  $EDITOR >/dev/tty - +"file $file"
+  $EDITOR >/dev/tty - +"file $file" +"set noreadonly"
   [[ -f "$file" ]] && cat "$file" || return 1
 }
 
@@ -277,15 +277,26 @@ that() {
 
 # Execute a command whenever a file is written
 watchfile() {
+  local immediate
   declare -a args
   while (( $# > 0 )) && [[ $1 != -- ]]; do
-    args+=("$1")
+    case "$1" in
+      -i)
+        immediate=yes
+        ;;
+      *)
+        args+=("$1")
+        ;;
+    esac
     shift
   done
   shift
   if (( $# == 0 )); then
-    echo >&2 "usage: watfhfile FILE... -- CMD..."
+    echo >&2 "usage: watchfile [-i] FILE... -- CMD..."
     return 1
+  fi
+  if [[ $immediate ]]; then
+    "$@"
   fi
   while inotifywait -e modify -e attrib -e close_write --exclude '\.git' -rq "${args[@]}"; do
     echo >&2 ">> Executing $*"
