@@ -9,7 +9,7 @@ set cursorline
 set display=lastline
 set encoding=utf-8
 set exrc secure
-set guicursor=n-v-c-sm:block,i-ci-ve:ver10,r-cr-o:hor20
+set guicursor=n-v-sm:block-Cursor,i-c-ci-ve:ver20-CursorInsert,o-r-cr:hor20-CursorReplace
 set hlsearch incsearch
 set inccommand=nosplit
 set laststatus=2
@@ -48,13 +48,6 @@ nmap <LocalLeader>r <Cmd>call wordhighlight#highlight_under_cursor()<CR>
 nmap <LocalLeader>s <Cmd>setlocal invspell spell?<CR>
 nmap <LocalLeader>v <Cmd>setlocal virtualedit=all<CR>
 nmap <F5> <Cmd>make<CR>
-
-" Tabs
-nmap <c-n> <Cmd>tabnext<CR>
-nmap <c-p> <Cmd>tabprevious<CR>
-nmap <c-s-n> <Cmd>tabmove +<CR>
-nmap <c-s-p> <Cmd>tabmove -<CR>
-
 cmap w!! silent w !sudo tee >/dev/null %
 " Automatically re-yank pasted stuff after pasting
 xnoremap p pgvy
@@ -71,6 +64,22 @@ imap <c-a> <Home>
 imap <c-e> <End>
 imap <c-f> <Right>
 imap <c-b> <Left>
+
+" Splits
+noremap <c-h> <c-w>h
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+tnoremap <c-h> <c-\><c-n><c-w>h
+tnoremap <c-j> <c-\><c-n><c-w>j
+tnoremap <c-k> <c-\><c-n><c-w>k
+tnoremap <c-l> <c-\><c-n><c-w>l
+
+" Tabs
+nmap <c-n> <Cmd>tabnext<CR>
+nmap <c-p> <Cmd>tabprevious<CR>
+nmap <c-s-n> <Cmd>tabmove +<CR>
+nmap <c-s-p> <Cmd>tabmove -<CR>
 
 " Status line
 lua require("kalgystatus")
@@ -91,8 +100,12 @@ nmap dp <Cmd>lua vim.diagnostic.goto_prev()<CR>
 nnoremap <Leader>t <Cmd>terminal<CR>
 nnoremap <Leader>" <Cmd>split +terminal<CR>i
 nnoremap <Leader>% <Cmd>vsplit +terminal<CR>i
-autocmd TermOpen * setlocal nonumber signcolumn=no
-autocmd TermClose * if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
+tnoremap <c-\><c-h> <c-h>
+tnoremap <c-\><c-j> <c-j>
+tnoremap <c-\><c-k> <c-k>
+tnoremap <c-\><c-l> <c-l>
+autocmd TermOpen * setlocal signcolumn=no
+autocmd TermClose * exe bufwinnr(str2nr(expand('<abuf>')))..'q'
 
 " For debugging color scheme and syntax definitions
 function ShowSyntaxNames()
@@ -105,7 +118,6 @@ endfunction
 " Plugins
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'farmergreg/vim-lastplace'
 Plug 'mhartington/formatter.nvim'
 Plug 'neovim/nvim-lspconfig'
@@ -142,21 +154,6 @@ EOF
 " vim-gitgutter
 let g:gitgutter_signs = 0
 let g:gitgutter_highlight_linenrs = 1
-
-" vim-tmux-navigator
-let g:tmux_navigator_disable_when_zoomed = 1
-let g:tmux_navigator_no_mappings = 1
-if !empty($TMUX)
-  noremap <silent> <c-_>h <Cmd>TmuxNavigateLeft<CR>
-  noremap <silent> <c-_>j <Cmd>TmuxNavigateDown<CR>
-  noremap <silent> <c-_>k <Cmd>TmuxNavigateUp<CR>
-  noremap <silent> <c-_>l <Cmd>TmuxNavigateRight<CR>
-else
-  nmap <c-h> <c-w>h
-  nmap <c-j> <c-w>j
-  nmap <c-k> <c-w>k
-  nmap <c-l> <c-w>l
-endif
 
 " formatter.nvim
 lua <<EOF
@@ -253,7 +250,7 @@ nnoremap <Leader>r <Cmd>Telescope lsp_references<CR>
 nnoremap <Leader>s <Cmd>Telescope lsp_document_symbols<CR>
 
 " Neovide
-set guifont=Iosevka\ Term:h14
+set guifont=Iosevka\ Term:h18
 let g:neovide_cursor_vfx_mode = "pixiedust"
 let g:neovide_cursor_animation_length = 0.03
 let g:neovide_cursor_vfx_particle_density = 30.0

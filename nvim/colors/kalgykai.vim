@@ -60,7 +60,9 @@ let s:brightwhite = "#e0e0e0"
 call s:hi("Normal",         s:normalfg,       s:normalbg,       s:none,           s:none)
 call s:hi("NormalFg",       s:normalfg,       s:reset,          s:none,           s:none)
 call s:hi("ColorColumn",    s:reset,          s:slightbg,       s:none,           s:none)
-call s:hi("Cursor",         "bg",             "fg",             s:none,           s:none)
+call s:hi("Cursor",         s:none,           s:none,           s:none,           "reverse")
+call s:hi("CursorInsert",   "bg",             s:brightmagenta,  s:none,           s:reset)
+call s:hi("CursorReplace",  "bg",             s:brightmagenta,  s:none,           s:reset)
 call s:hi("CursorColumn",   s:reset,          s:slightbg,       s:none,           s:none)
 call s:hi("CursorLine",     s:reset,          s:slightbg,       s:none,           s:none)
 call s:hi("CursorLineNr",   s:grey,           s:reset,          s:none,           "bold")
@@ -76,6 +78,7 @@ call s:hi("SpellRare",      s:reset,          s:darkyellow,     s:yellow,       
 call s:hi("TabLine",        s:brightgrey,     s:darkgrey,       s:none,           s:none)
 call s:hi("TabLineFill",    s:reset,          s:darkgrey,       s:none,           s:reset)
 call s:hi("TabLineSel",     s:reset,          s:grey,           s:none,           "bold")
+call s:hi("TermCursor",     "bg",             s:brightviolet,  s:none,           s:reset)
 call s:hi("Visual",         s:white,          s:normalbg,       s:none,           "reverse")
 call s:hi("VisualNOS",      s:reset,          s:reset,          s:none,           "reverse")
 
