@@ -123,7 +123,7 @@ Plug 'mhartington/formatter.nvim'
 Plug 'neovim/nvim-lspconfig'
 
 " nvim-treesitter
-Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdateSync'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdateSync'}
 Plug 'nvim-treesitter/playground'
 
 " telescope.nvim
@@ -201,7 +201,7 @@ nnoremap Q :Format<CR>
 " nvim-treesitter
 lua <<EOF
 require('nvim-treesitter.configs').setup {
-  ensure_installed ={
+  ensure_installed = {
     "bash",
     "c",
     "cpp",

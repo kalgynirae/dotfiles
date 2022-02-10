@@ -188,6 +188,15 @@ hi link docstring Comment
 hi link pythonTSNone TSParameter
 hi link pythonTSVariableBuiltin TSParameter
 
+hi link hgcommitAdded DiffAdd
+hi link hgcommitChanged DiffChange
+hi link hgcommitRemoved DiffDelete
+
+hi link phpMemberSelector Delimiter
+hi link phpVarSelector Identifier
+
+hi link rubyStringDelimiter String
+
 hi link rustTSField TSParameter
 
 hi link helpNote SpecialComment
