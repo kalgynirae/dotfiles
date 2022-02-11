@@ -1,0 +1,134 @@
+#!/usr/bin/env python3
+import argparse
+import logging
+import sys
+from contextlib import redirect_stderr
+from inspect import Parameter, signature
+from io import StringIO
+from pathlib import Path
+from subprocess import PIPE, run
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-c")
+parser.add_argument("--no-pager", action="store_true")
+parser.add_argument("--version", action="version", version="git version 2.31.1")
+parser.set_defaults(positionals=[])
+subparsers = parser.add_subparsers()
+
+
+def cmd(func):
+    cmdname = func.__name__.replace("_", "-")
+    p = subparsers.add_parser(cmdname)
+    for name, param in signature(func).parameters.items():
+        argargs = {}
+        if param.kind is Parameter.POSITIONAL_OR_KEYWORD:
+            argname = name
+        elif param.kind is Parameter.VAR_POSITIONAL:
+            argname = "positionals"
+            argargs["nargs"] = "+"
+        elif param.kind is Parameter.KEYWORD_ONLY:
+            if len(name) == 1:
+                argname = f"-{name}"
+            else:
+                argname = f"--{name.replace('_', '-')}"
+            if param.annotation is bool:
+                argargs["action"] = "store_true"
+            elif param.annotation is str:
+                pass
+            else:
+                argargs["type"] = param.annotation
+                if param.default is not Parameter.empty:
+                    argargs["default"] = param.default
+        else:
+            raise TypeError(f"Unhandled parameter kind {param.kind!r}")
+        p.add_argument(
+            argname,
+            **argargs,
+        )
+    p.set_defaults(func=func)
+
+
+def output(s, **kwargs) -> None:
+    logging.info("Output: %s", s)
+    print(s, **kwargs)
+
+
+@cmd
+def apply() -> int:
+    raise NotImplementedError("apply is not implemented")
+
+
+@cmd
+def diff(
+    *paths: str, no_ext_diff: bool, no_color: bool, no_pager: bool, U: int = 0
+) -> int:
+    result = run(["git", "diff", f"-U{U}", "--", *paths])
+    return result.returncode
+
+
+class NotInAMercurialRepo(Exception):
+    pass
+
+
+def _repo_root() -> Path:
+    result = run(["hg", "root"], stdout=PIPE, text=True)
+    if result.returncode != 0:
+        raise NotInAMercurialRepo(str(Path.cwd()))
+    return Path(result.stdout.rstrip("\n"))
+
+
+@cmd
+def ls_files(
+    path: str, *, error_unmatch: bool, full_name: bool, no_pager: bool, z: bool
+) -> int:
+    fullpath = Path.cwd().relative_to(_repo_root()) / path
+    output(fullpath, end="\x00")
+    return 0
+
+
+@cmd
+def rev_parse(*, show_cdup: bool) -> int:
+    if not show_cdup:
+        raise NotImplementedError("rev-parse without --show-cdup is not implemented")
+    relpath = Path.cwd().relative_to(_repo_root())
+    output("/".join(".." for _ in relpath.parts))
+    return 0
+
+
+@cmd
+def show(path: str, *, no_pager: bool) -> int:
+    if path.startswith(":"):
+        path = (_repo_root() / path[1:]).relative_to(Path.cwd())
+    logging.info("hg cat %s", path)
+    result = run(["hg", "cat", str(path)])
+    return result.returncode
+
+
+#logging.basicConfig(filename="/tmp/gitgutter-hg-wrapper.log", level=logging.DEBUG)
+logging.basicConfig(level=logging.ERROR)
+logging.debug("args: %s", sys.argv)
+logging.debug("cwd: %s", Path.cwd())
+try:
+    b = StringIO()
+    try:
+        with redirect_stderr(b):
+            args = parser.parse_args()
+    finally:
+        stderr = b.getvalue()
+        if stderr:
+            logging.warning("arg failure: %s", stderr)
+
+    func = args.func
+    positionals = args.positionals
+    del args.func
+    del args.positionals
+    del args.c
+
+    logging.info("Calling %s with %s %s", func.__name__, positionals, args)
+    sys.exit(func(*positionals, **vars(args)))
+except SystemExit as e:
+    logging.debug("exit: %s", e.code)
+    raise
+except Exception:
+    logging.exception("Crashed!")
+    raise

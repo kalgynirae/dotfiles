@@ -1,0 +1,94 @@
+#!/usr/local/bin/python3
+from __future__ import annotations
+
+from dataclasses import dataclass
+from itertools import groupby
+from operator import attrgetter
+from os import geteuid, readlink
+from pathlib import Path
+from shutil import get_terminal_size
+from sys import exit, stderr
+
+
+GREEN = "\033[1;32m"
+RESET = "\033[0m"
+
+
+def main():
+    if geteuid() != 0:
+        exit("This script must be run as root.")
+
+    terminal_width = get_terminal_size().columns
+
+    all_processes = filter(
+        None, map(Process.from_proc_path, Path("/proc").glob("[0-9]*"))
+    )
+    sorted_processes = sorted(all_processes, key=attrgetter("namespace", "pid"))
+    for namespace, proc_iter in groupby(sorted_processes, key=attrgetter("namespace")):
+        procs = list(proc_iter)
+        proc_list = " ".join(map(str, procs))
+        proc_list_width = terminal_width - len(namespace) - 3
+        for proc in procs:
+            try:
+                mounts = proc.get_mounts()
+            except FileNotFoundError:
+                continue
+            else:
+                break
+        else:
+            print(f"Skipping namespace {namespace} because all processes exited", file=stderr)
+            continue
+
+        print(f"{GREEN}{namespace} {chop(proc_list_width, proc_list)}{RESET}")
+        for mount in mounts:
+            print(f"  - {mount.mountpoint:{terminal_width - 50}} ({mount.type}, {mount.propagation})")
+
+
+def chop(length: int, s: str) -> str:
+    return f"{s[: length - 1]}…" if len(s) > length else s
+
+
+@dataclass(frozen=True)
+class Mount:
+    mountpoint: Path
+    propagation: str
+    type: str
+
+    @classmethod
+    def from_mountinfo_line(cls, line: str) -> List[Mount]:
+        fields = line.split()
+        return cls(
+            mountpoint=fields[4],
+            propagation=",".join(fields[6 : fields.index("-")]),
+            type=fields[8],
+        )
+
+
+@dataclass(frozen=True)
+class Process:
+    comm: str
+    namespace: str
+    path: Path
+    pid: int
+
+    def __str__(self) -> str:
+        return f"{self.pid}({self.comm})"
+
+    def get_mounts(self) -> List[Mount]:
+        return [Mount.from_mountinfo_line(line) for line in (self.path / "mountinfo").read_text().splitlines()]
+
+    @classmethod
+    def from_proc_path(cls, path: Path) -> Process:
+        try:
+            return cls(
+                comm=(path / "comm").read_text().strip(),
+                namespace=readlink(path / "ns/mnt"),
+                path=path,
+                pid=int(path.name),
+            )
+        except FileNotFoundError:
+            return None
+
+
+if __name__ == "__main__":
+    main()

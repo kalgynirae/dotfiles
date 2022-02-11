@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cat "$@" | printf '\e]52;;%s\a' "$(base64 -w0)"
