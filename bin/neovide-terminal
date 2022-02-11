@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec neovide --multigrid --nofork -- +'terminal NEOVIDE_MAIN_TERMINAL=yes bash -i'
+exec neovide --multigrid --nofork -- +'terminal CD_IN_NVIM=yes bash -i'

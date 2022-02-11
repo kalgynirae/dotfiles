@@ -66,7 +66,7 @@ cal() {
 
 # If inside of neovide-terminal
 cd() {
-  if [[ $NEOVIDE_MAIN_TERMINAL ]] && (( $# <= 1 )); then
+  if [[ $CD_IN_NVIM ]] && (( $# <= 1 )); then
     nvr -c "cd $1"
   fi
   command cd "$@"
