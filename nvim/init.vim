@@ -70,10 +70,10 @@ noremap <c-h> <c-w>h
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
-tnoremap <c-h> <c-\><c-n><c-w>h
-tnoremap <c-j> <c-\><c-n><c-w>j
-tnoremap <c-k> <c-\><c-n><c-w>k
-tnoremap <c-l> <c-\><c-n><c-w>l
+tmap <c-h> <c-\><c-n><c-h>
+tmap <c-j> <c-\><c-n><c-j>
+tmap <c-k> <c-\><c-n><c-k>
+tmap <c-l> <c-\><c-n><c-l>
 
 " Tabs
 nmap <c-n> <Cmd>tabnext<CR>
@@ -104,6 +104,8 @@ tnoremap <c-\><c-h> <c-h>
 tnoremap <c-\><c-j> <c-j>
 tnoremap <c-\><c-k> <c-k>
 tnoremap <c-\><c-l> <c-l>
+tnoremap <c-\>p <c-\><c-n>"+pi
+tnoremap <c-\>] <c-\><c-n>pi
 autocmd TermOpen * setlocal signcolumn=no
 autocmd TermClose * exe bufwinnr(str2nr(expand('<abuf>')))..'q'
 
@@ -118,6 +120,7 @@ endfunction
 " Plugins
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'farmergreg/vim-lastplace'
 Plug 'mhartington/formatter.nvim'
 Plug 'neovim/nvim-lspconfig'
@@ -154,6 +157,16 @@ EOF
 " vim-gitgutter
 let g:gitgutter_signs = 0
 let g:gitgutter_highlight_linenrs = 1
+
+" vim-tmux-navigator
+let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_no_mappings = 1
+if !empty($TMUX)
+  noremap <silent> <c-_>h <Cmd>TmuxNavigateLeft<CR>
+  noremap <silent> <c-_>j <Cmd>TmuxNavigateDown<CR>
+  noremap <silent> <c-_>k <Cmd>TmuxNavigateUp<CR>
+  noremap <silent> <c-_>l <Cmd>TmuxNavigateRight<CR>
+endif
 
 " formatter.nvim
 lua <<EOF
