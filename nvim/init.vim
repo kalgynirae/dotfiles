@@ -107,7 +107,7 @@ tnoremap <c-\><c-l> <c-l>
 tnoremap <c-\>p <c-\><c-n>"+pi
 tnoremap <c-\>] <c-\><c-n>pi
 autocmd TermOpen * setlocal nonumber signcolumn=no
-autocmd TermClose * if exists('b:overlay_terminal') | call feedkeys('^M') | else | exe bufwinnr(str2nr(expand('<abuf>')))..'q' | endif
+autocmd TermClose * if exists('b:overlay_terminal') | call feedkeys('') | else | exe bufwinnr(str2nr(expand('<abuf>')))..'q' | endif
 
 " For debugging color scheme and syntax definitions
 function ShowSyntaxNames()
