@@ -97,17 +97,17 @@ nmap dn <Cmd>lua vim.diagnostic.goto_next()<CR>
 nmap dp <Cmd>lua vim.diagnostic.goto_prev()<CR>
 
 " Terminal
-nnoremap <Leader>t <Cmd>terminal<CR>
-nnoremap <Leader>" <Cmd>split +terminal<CR>i
-nnoremap <Leader>% <Cmd>vsplit +terminal<CR>i
+nnoremap <Leader>t <Cmd>terminal<CR><Cmd>let b:overlay_terminal = 1<CR><Cmd>startinsert<CR>
+nnoremap <Leader>" <Cmd>split +terminal<CR><Cmd>startinsert<CR>
+nnoremap <Leader>% <Cmd>vsplit +terminal<CR><Cmd>startinsert<CR>
 tnoremap <c-\><c-h> <c-h>
 tnoremap <c-\><c-j> <c-j>
 tnoremap <c-\><c-k> <c-k>
 tnoremap <c-\><c-l> <c-l>
 tnoremap <c-\>p <c-\><c-n>"+pi
 tnoremap <c-\>] <c-\><c-n>pi
-autocmd TermOpen * setlocal signcolumn=no
-autocmd TermClose * exe bufwinnr(str2nr(expand('<abuf>')))..'q'
+autocmd TermOpen * setlocal nonumber signcolumn=no
+autocmd TermClose * if exists('b:overlay_terminal') | call feedkeys('^M') | else | exe bufwinnr(str2nr(expand('<abuf>')))..'q' | endif
 
 " For debugging color scheme and syntax definitions
 function ShowSyntaxNames()
@@ -116,6 +116,17 @@ function ShowSyntaxNames()
   endfor
   echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name")
 endfunction
+
+" Clipboard
+let g:clipboard = {
+\   'name': 'osc52copy',
+\   'copy': {
+\     '+': ['copy', '-'],
+\   },
+\   'paste': {
+\     '+': ['cat', '/dev/null'],
+\   },
+\ }
 
 " Plugins
 call plug#begin(stdpath('data') . '/plugged')
@@ -138,19 +149,30 @@ call plug#end()
 
 " nvim-lspconfig
 lua <<EOF
+local lspconfig = require('lspconfig')
+local configs = require('lspconfig.configs')
+local util = require('lspconfig.util')
+
 local lsp_attach = function(client)
   vim.api.nvim_buf_set_keymap(0, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {})
   vim.api.nvim_buf_set_keymap(0, "n", "gD", "<Cmd>lua vim.lsp.buf.implementation()<CR>", {})
   vim.api.nvim_buf_set_keymap(0, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", {})
+  vim.api.nvim_buf_set_keymap(0, "n", "Q", "<Cmd>lua vim.lsp.buf.formatting()<CR>", {})
   vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
   vim.api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
-require('lspconfig').rust_analyzer.setup{
+lspconfig.rust_analyzer.setup{
   on_attach = lsp_attach,
+  handlers = {
+    ['window/showStatus'] = vim.lsp.handlers['window/showMessage'],
+  },
 }
-require('lspconfig').pylsp.setup{
+lspconfig.pylsp.setup{
   cmd = { "pipenv", "run", "pylsp" },
   on_attach = lsp_attach,
+  handlers = {
+    ['window/showStatus'] = vim.lsp.handlers['window/showMessage'],
+  },
 }
 EOF
 
