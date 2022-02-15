@@ -115,11 +115,6 @@ colortest() {
   }'
 }
 
-# Copy text to the system clipboard
-copy() {
-  cat "$@" | printf '\e]52;;%s\a' "$(base64 -w0)"
-}
-
 # Create a temporary directory with a friendly name and cd to it
 d() {
   local name

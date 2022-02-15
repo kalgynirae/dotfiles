@@ -1,3 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-cat "$@" | printf '\e]52;;%s\a' "$(base64 -w0)"
+if [[ $NVIM_LISTEN_ADDRESS ]]; then
+  nvim_pid=$(lsof -Fp $NVIM_LISTEN_ADDRESS | sed -n 's/^p\(.*\)/\1/p')
+  tty=$(tty </proc/$nvim_pid/fd/0)
+else
+  tty=/dev/tty
+fi
+
+echo >&2 "Copying via ${tty@Q}"
+cat "$@" | printf >>"$tty" '\e]52;;%s\a' "$(base64 -w0)"
