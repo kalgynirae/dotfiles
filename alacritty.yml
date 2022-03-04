@@ -20,6 +20,7 @@ colors:
     magenta: '0xc866bb'
     cyan:    '0x00b2ab'
     white:   '0xe0e0e0'
+  transparent_background_colors: true
 
 draw_bold_text_with_bright_colors: false
 
@@ -48,3 +49,4 @@ selection:
 
 window:
   dynamic_padding: true
+  opacity: 0.98
