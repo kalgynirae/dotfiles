@@ -118,15 +118,17 @@ function ShowSyntaxNames()
 endfunction
 
 " Clipboard
-let g:clipboard = {
-\   'name': 'osc52copy',
-\   'copy': {
-\     '+': ['copy', '-'],
-\   },
-\   'paste': {
-\     '+': ['cat', '/dev/null'],
-\   },
-\ }
+if !empty($TMUX)
+  let g:clipboard = {
+  \   'name': 'osc52copy',
+  \   'copy': {
+  \     '+': ['copy', '-'],
+  \   },
+  \   'paste': {
+  \     '+': ['cat', '/dev/null'],
+  \   },
+  \ }
+endif
 
 " Plugins
 call plug#begin(stdpath('data') . '/plugged')
