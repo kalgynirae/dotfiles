@@ -1,0 +1,15 @@
+[general]
+temp-day=6000
+temp-night=4400
+brightness-night=0.75
+gamma-night=1.1
+{{^colinchan-fedora}}
+dawn-time=08:00-08:30
+dusk-time=21:30-22:00
+{{/colinchan-fedora}}
+{{#colinchan-fedora}}
+location-provider=manual
+[manual]
+lat=37.47
+lon=-122.24
+{{/colinchan-fedora}}
