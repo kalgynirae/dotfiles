@@ -126,11 +126,4 @@ render-quote "$dir/resized-lock.mpc" "$dir/wallpaper-lock.jpg"
 # Overwrite the old ones
 mv -t ~/.cache "$dir/wallpaper.jpg" "$dir/wallpaper-lock.jpg"
 
-# Copy to a uniquely-named tempfile so that oguri will actually read it
-wallpaper=~/.cache/wallpaper.jpg
-if tempfile=$(mktemp /tmp/wallpaper.XXXX.jpg); then
-  cp ~/.cache/wallpaper.jpg "$tempfile"
-  wallpaper=$tempfile
-fi
-
-ogurictl output '*' --image "$wallpaper" --scaling-mode fill --filter best
+systemctl --user try-restart swaybg

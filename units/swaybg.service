@@ -1,0 +1,9 @@
+[Unit]
+BindsTo=sway.service
+After=sway.service
+
+[Service]
+ExecStart=swaybg --output * --image %h/.cache/wallpaper.jpg --mode fill
+
+[Install]
+WantedBy=graphical-session.target
