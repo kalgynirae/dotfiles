@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #primarysize=$(swaymsg -t get_outputs | jq -r '.[]|.current_mode|"\(.width)x\(.height)"' | head -n1)
-if [[ $HOSTNAME == colinchan-fedora-PC166WVV ]]; then
+if [[ $HOSTNAME == colinchan-fedora-* ]]; then
   primarysize=1600x2560
 else
   primarysize=2560x1440
