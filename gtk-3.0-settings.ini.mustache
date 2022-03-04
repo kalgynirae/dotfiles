@@ -1,7 +1,12 @@
 [Settings]
+{{#dark-theme}}
 gtk-application-prefer-dark-theme=true
-gtk-cursor-blink=false
+{{/dark-theme}}
+{{^dark-theme}}
+gtk-application-prefer-dark-theme=false
+{{/dark-theme}}
 gtk-cursor-theme-name=Adwaita
+gtk-cursor-blink=false
 gtk-cursor-theme-size=32
 gtk-font-name=Liberation Sans 10
 gtk-recent-files-max-age=0
