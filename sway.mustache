@@ -69,7 +69,12 @@ workspace 4 output DP-5
 workspace 6 output DP-4
 {{/apartmantwo}}
 
+{{#colinchan-fedora}}
+seat * xcursor_theme Adwaita 48
+{{/colinchan-fedora}}
+{{^colinchan-fedora}}
 seat * xcursor_theme Adwaita 32
+{{/colinchan-fedora}}
 
 # Sway
 bindsym $mod+Shift+r reload
