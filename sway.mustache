@@ -183,7 +183,7 @@ client.urgent           $orange     $orange     $normalfg   $yellow
 include /etc/sway/config.d/*
 
 # Applications
-bindsym $mod+Return exec systemd-run-launch-app neovide-terminal neovide-terminal
+bindsym $mod+Return exec systemd-run-launch-app $term $term -e tmux new-session
 bindsym $mod+Shift+Return exec systemd-run-launch-app $term $term
 bindsym $mod+Shift+Mod1+Return exec $term
 bindsym $mod+Space exec applauncher
