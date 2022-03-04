@@ -56,43 +56,51 @@ render() {
   fi
 }
 
-maybelink XCompose ~/.XCompose
-maybelink alacritty.yml ~/.config/alacritty/alacritty.yml
-maybelink alsoftrc ~/.alsoftrc
-maybelink bash_profile ~/.bash_profile
-maybelink bashrc ~/.bashrc
-maybelink bin ~/bin
-maybelink electron-flags.conf ~/.config/electron-flags.conf
-maybelink electron15-flags.conf ~/.config/electron15-flags.conf
-maybelink environment.conf ~/.config/environment.d/environment.conf
-maybelink fonts.conf ~/.config/fontconfig/fonts.conf
-maybelink gammastep.ini ~/.config/gammastep/config.ini
-maybelink gemrc ~/.gemrc
-maybelink gitconfig ~/.gitconfig
-maybelink gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
-maybelink gtkrc-2.0 ~/.gtkrc-2.0
-maybelink imv ~/.config/imv/config
-maybelink index.theme ~/.local/share/icons/default/index.theme
-maybelink inputrc ~/.inputrc
-maybelink ipython_config.py ~/.ipython/profile_default/ipython_config.py
-maybelink mpv.conf ~/.config/mpv/mpv.conf
-maybelink nvim ~/.config/nvim
-maybelink nvim/plugins ~/.local/share/nvim/site/pack/plugins/start
-maybelink pipewire/alsa-monitor.conf ~/.config/pipewire/media-session.d/alsa-monitor.conf
-maybelink profile ~/.profile
-maybelink pythonrc ~/.pythonrc
-maybelink swaylock ~/.config/swaylock/config
-maybelink tmux.conf ~/.tmux.conf
-maybelink user-dirs.dirs ~/.config/user-dirs.dirs
-maybelink wezterm.lua ~/.config/wezterm/wezterm.lua
-render sway ~/.config/sway/config
-render waybar ~/.config/waybar/config
-render waybar.css ~/.config/waybar/style.css
+install() {
+  if [[ -e $1.mustache ]]; then
+    render "$@"
+  else
+    maybelink "$@"
+  fi
+}
+
+install XCompose ~/.XCompose
+install alacritty.yml ~/.config/alacritty/alacritty.yml
+install alsoftrc ~/.alsoftrc
+install bash_profile ~/.bash_profile
+install bashrc ~/.bashrc
+install bin ~/bin
+install electron-flags.conf ~/.config/electron-flags.conf
+install electron15-flags.conf ~/.config/electron15-flags.conf
+install environment.conf ~/.config/environment.d/environment.conf
+install fonts.conf ~/.config/fontconfig/fonts.conf
+install gammastep.ini ~/.config/gammastep/config.ini
+install gemrc ~/.gemrc
+install gitconfig ~/.gitconfig
+install gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
+install gtkrc-2.0 ~/.gtkrc-2.0
+install imv ~/.config/imv/config
+install index.theme ~/.local/share/icons/default/index.theme
+install inputrc ~/.inputrc
+install ipython_config.py ~/.ipython/profile_default/ipython_config.py
+install mpv.conf ~/.config/mpv/mpv.conf
+install nvim ~/.config/nvim
+install nvim/plugins ~/.local/share/nvim/site/pack/plugins/start
+install pipewire/alsa-monitor.conf ~/.config/pipewire/media-session.d/alsa-monitor.conf
+install profile ~/.profile
+install pythonrc ~/.pythonrc
+install swaylock ~/.config/swaylock/config
+install tmux.conf ~/.tmux.conf
+install user-dirs.dirs ~/.config/user-dirs.dirs
+install wezterm.lua ~/.config/wezterm/wezterm.lua
+install sway ~/.config/sway/config
+install waybar ~/.config/waybar/config
+install waybar.css ~/.config/waybar/style.css
 
 # Mirror various GTK settings in gsettings (waybar and Firefox seem to use these)
-gsettings set org.gnome.desktop.interface cursor-blink "$(grep 'gtk-cursor-blink' gtk-3.0-settings.ini | cut -d= -f2)"
-gsettings set org.gnome.desktop.interface cursor-theme "$(grep 'gtk-cursor-theme-name' gtk-3.0-settings.ini | cut -d= -f2)"
-gsettings set org.gnome.desktop.interface cursor-size "$(grep 'gtk-cursor-theme-size' gtk-3.0-settings.ini | cut -d= -f2)"
+gsettings set org.gnome.desktop.interface cursor-blink "$(grep 'gtk-cursor-blink' ~/.config/gtk-3.0/settings.ini | cut -d= -f2)"
+gsettings set org.gnome.desktop.interface cursor-theme "$(grep 'gtk-cursor-theme-name' ~/.config/gtk-3.0/settings.ini | cut -d= -f2)"
+gsettings set org.gnome.desktop.interface cursor-size "$(grep 'gtk-cursor-theme-size' ~/.config/gtk-3.0/settings.ini | cut -d= -f2)"
 
 for app in applications/*; do
   if [[ $app == minecraft.desktop && $HOSTNAME != colinchan-fedora* ]]; then
@@ -114,8 +122,8 @@ count=${#firefox_default_profiles[@]}
 if (( count == 1 )); then
   profile=${firefox_default_profiles[0]}
   [[ ! -d "$profile"/chrome ]] && mkdir -v "$profile"/chrome
-  render userChrome.css "$profile"/chrome/userChrome.css
-  render userContent.css "$profile"/chrome/userContent.css
+  install userChrome.css "$profile"/chrome/userChrome.css
+  install userContent.css "$profile"/chrome/userContent.css
 else
   echo "$count Firefox profiles found; skipping"
 fi
