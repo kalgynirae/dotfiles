@@ -6,12 +6,12 @@ adobe-source-sans-pro-fonts
 adobe-source-serif-pro-fonts
 alsa-utils
 atop
+clang
 dos2unix
 ffmpeg
 firefox
 gentium-plus-font
 gnu-free-fonts
-grim
 gsfonts
 gst-plugin-pipewire
 gvfs
@@ -22,7 +22,6 @@ jq
 libaacs
 light
 lolcat
-mako
 mpv
 nautilus
 noto-fonts
@@ -43,12 +42,9 @@ ripgrep
 rsync
 rubygems
 seahorse
-slurp
 socat
 sshfs
 strace
-sway
-swayidle
 tmux
 traceroute
 tree
@@ -71,11 +67,8 @@ ttf-tahoma
 ttf-ubuntu-font-family
 ttf-windows
 tumbler
-waybar
-wf-recorder
 wget
 wireplumber
-wofi
 words
 xdg-desktop-portal-wlr
 xdg-user-dirs
