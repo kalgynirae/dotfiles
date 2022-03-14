@@ -66,10 +66,10 @@ imap <c-f> <Right>
 imap <c-b> <Left>
 
 " Splits
-noremap <c-h> <c-w>h
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
 tmap <c-h> <c-\><c-n><c-h>
 tmap <c-j> <c-\><c-n><c-j>
 tmap <c-k> <c-\><c-n><c-k>
