@@ -91,6 +91,14 @@ lua <<EOF
 vim.diagnostic.config({
   severity_sort = true,
   signs = false,
+  float = {
+    source = true,
+  },
+  virtual_text = {
+    format = function(diagnostic)
+      return string.format("%s [%s]", diagnostic.message, diagnostic.source)
+    end,
+  },
 })
 EOF
 nmap dn <Cmd>lua vim.diagnostic.goto_next()<CR>
