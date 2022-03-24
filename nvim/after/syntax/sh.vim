@@ -1,0 +1,1 @@
+hi! link TSParameter NormalFg
