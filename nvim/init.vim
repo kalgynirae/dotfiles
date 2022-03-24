@@ -101,6 +101,8 @@ vim.diagnostic.config({
   },
 })
 EOF
+nmap cn <Cmd>cnext<CR>
+nmap cp <Cmd>cprevious<CR>
 nmap dn <Cmd>lua vim.diagnostic.goto_next()<CR>
 nmap dp <Cmd>lua vim.diagnostic.goto_prev()<CR>
 
@@ -143,6 +145,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'farmergreg/vim-lastplace'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'mhartington/formatter.nvim'
 Plug 'neovim/nvim-lspconfig'
 
@@ -288,6 +291,7 @@ require('telescope').setup {
   },
 }
 EOF
+nnoremap <Leader>b <Cmd>Telescope buffers<CR>
 nnoremap <Leader>d <Cmd>Telescope diagnostics<CR>
 nnoremap <Leader>f <Cmd>Telescope find_files theme=get_dropdown<CR>
 nnoremap <Leader>g <Cmd>Telescope live_grep theme=get_dropdown<CR>
