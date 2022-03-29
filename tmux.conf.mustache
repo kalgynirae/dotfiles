@@ -24,8 +24,6 @@ set -g automatic-rename off
 set -g default-command "${SHELL}"
 set -g history-limit 1000000
 set -g mouse on
-set -g pane-active-border-style "fg=blue"
-set -g pane-border-style "fg=black"
 set -g renumber-windows on
 set -g set-titles on
 set -g set-titles-string "#{?#{==:#S,0},,[#S] }#I:#W (#{host})"
@@ -34,10 +32,7 @@ set -g status-left "#{?#{==:#S,0},,[#S]} "
 set -g status-left-length 50
 set -g status-right "#{host} • %Y-%m-%d %H:%M "
 set -g status-right-length 100
-set -g status-style "bg=black"
-set -g window-status-bell-style "fg=yellow,bold"
 set -g window-status-current-format "#I:#W#{?window_zoomed_flag,[Z],}"
-set -g window-status-current-style bold
 set -g window-status-format "#I:#W#{?window_zoomed_flag,[Z],}"
 set -g wrap-search off
 set -ga update-environment "TERM"
@@ -45,6 +40,20 @@ set -s default-terminal "tmux-256color"
 set -s escape-time 0
 set -s focus-events on
 set -s set-clipboard on
+{{#dark-theme}}
+set -g pane-active-border-style "fg=blue"
+set -g pane-border-style "fg=black"
+set -g status-style "bg=black"
+set -g window-status-bell-style "fg=yellow,bold"
+set -g window-status-current-style bold
+{{/dark-theme}}
+{{^dark-theme}}
+set -g pane-active-border-style "fg=blue"
+set -g pane-border-style "fg=white"
+set -g status-style "bg=white"
+set -g window-status-bell-style "fg=red,bold"
+set -g window-status-current-style bold
+{{/dark-theme}}
 
 # Smart pane switching with awareness of Vim splits.
 # See: https://github.com/christoomey/vim-tmux-navigator

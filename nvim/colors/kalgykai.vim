@@ -24,36 +24,70 @@ endfunction
 
 let s:none = ""
 let s:reset = "NONE"
-let s:normalbg = "#1c2022"
-let s:slightbg = "#232729"
-let s:black = "#000000"
-let s:darkgrey = "#303436"
-let s:darkred = "#390c00"
-let s:darkorange = "#351b00"
-let s:darkyellow = "#2e2600"
-let s:darkcyan = "#002b29"
-let s:darkblue = "#002444"
-let s:grey = "#505050"
-let s:brightgrey = "#707070"
-let s:normalfg = "#a0a0a0"
-let s:red = "#b44738"
-let s:brightred = "#d2614f"
-let s:orange = "#af6423"
-let s:brightorange = "#cd7e3c"
-let s:yellow = "#a79026"
-let s:brightyellow = "#c9b047"
-let s:green = "#518921"
-let s:brightgreen = "#6ea63f"
-let s:cyan = "#008f89"
-let s:brightcyan = "#00b2ab"
-let s:blue = "#3982ce"
-let s:brightblue = "#5799e7"
-let s:violet = "#806acc"
-let s:brightviolet = "#957fe3"
-let s:magenta = "#ae4fa3"
-let s:brightmagenta = "#c866bb"
-let s:white = "#c0c0c0"
-let s:brightwhite = "#e0e0e0"
+
+if &background == "dark"
+  let s:normalbg = "#1c2022"
+  let s:slightbg = "#232729"
+  let s:black = "#000000"
+  let s:darkgrey = "#303436"
+  let s:darkred = "#390c00"
+  let s:darkorange = "#351b00"
+  let s:darkyellow = "#2e2600"
+  let s:darkcyan = "#002b29"
+  let s:darkblue = "#002444"
+  let s:grey = "#505050"
+  let s:brightgrey = "#707070"
+  let s:normalfg = "#a0a0a0"
+  let s:red = "#b44738"
+  let s:brightred = "#d2614f"
+  let s:orange = "#af6423"
+  let s:brightorange = "#cd7e3c"
+  let s:yellow = "#a79026"
+  let s:brightyellow = "#c9b047"
+  let s:green = "#518921"
+  let s:brightgreen = "#6ea63f"
+  let s:cyan = "#008f89"
+  let s:brightcyan = "#00b2ab"
+  let s:blue = "#3982ce"
+  let s:brightblue = "#5799e7"
+  let s:violet = "#806acc"
+  let s:brightviolet = "#957fe3"
+  let s:magenta = "#ae4fa3"
+  let s:brightmagenta = "#c866bb"
+  let s:white = "#c0c0c0"
+  let s:brightwhite = "#e0e0e0"
+else
+  let s:normalbg = "#eff1f4"
+  let s:slightbg = "#f4f6f8"
+  let s:black = "#111111"
+  let s:darkgrey = "#303436"
+  let s:darkred = "#390c00"
+  let s:darkorange = "#351b00"
+  let s:darkyellow = "#2e2600"
+  let s:darkcyan = "#002b29"
+  let s:darkblue = "#002444"
+  let s:grey = "#262626"
+  let s:brightgrey = "#404040"
+  let s:normalfg = "#5e5e5e"
+  let s:red = "#aa4840"
+  let s:brightred = "#cd675d"
+  let s:orange = "#a15d2a"
+  let s:brightorange = "#c47c47"
+  let s:yellow = "#7c730f"
+  let s:brightyellow = "#9c9232"
+  let s:green = "#4b7924"
+  let s:brightgreen = "#6a9842"
+  let s:cyan = "#007d76"
+  let s:brightcyan = "#009d95"
+  let s:blue = "#246fb4"
+  let s:brightblue = "#4e8dd5"
+  let s:violet = "#715faf"
+  let s:brightviolet = "#917dd0"
+  let s:magenta = "#994c8f"
+  let s:brightmagenta = "#ba6aaf"
+  let s:white = "#ababab"
+  let s:brightwhite = "#cccccc"
+end
 
 " Note: use "nocombine" in the gui arg to override instead of combining
 
@@ -122,7 +156,7 @@ call s:hi("Exception",      s:brightgrey,     s:reset,          s:none,         
 call s:hi("Float",          s:blue,           s:reset,          s:none,           s:none)
 call s:hi("FoldColumn",     s:grey,           s:reset,          s:none,           s:none)
 call s:hi("Folded",         s:grey,           s:reset,          s:none,           s:none)
-call s:hi("Function",       s:green,          s:reset,          s:none,           s:none)
+call s:hi("Function",       s:yellow,         s:reset,          s:none,           s:none)
 call s:hi("Identifier",     s:reset,          s:reset,          s:none,           s:none)
 call s:hi("Ignore",         s:brightgrey,     s:reset,          s:none,           s:none)
 call s:hi("Include",        s:brightgrey,     s:reset,          s:none,           "bold")
@@ -140,7 +174,7 @@ call s:hi("Pmenu",          s:reset,          s:black,          s:none,         
 call s:hi("PmenuSel",       s:reset,          s:grey,           s:none,           "bold")
 call s:hi("PmenuSbar",      s:reset,          s:darkgrey,       s:none,           s:none)
 call s:hi("PmenuThumb",     s:reset,          s:green,          s:none,           s:none)
-call s:hi("PreCondit",      s:green,          s:reset,          s:none,           "bold")
+call s:hi("PreCondit",      s:yellow,         s:reset,          s:none,           "bold")
 call s:hi("PreProc",        s:violet,         s:reset,          s:none,           "italic")
 call s:hi("Question",       s:cyan,           s:reset,          s:none,           s:none)
 call s:hi("Repeat",         s:brightgrey,     s:reset,          s:none,           "bold")
@@ -148,11 +182,11 @@ call s:hi("Search",         s:darkgrey,       s:yellow,         s:none,         
 call s:hi("SignColumn",     s:blue,           s:reset,          s:none,           s:none)
 call s:hi("Special",        s:orange,         s:reset,          s:none,           "italic")
 call s:hi("SpecialChar",    s:orange,         s:reset,          s:none,           "italic")
-call s:hi("SpecialComment", s:green,          s:reset,          s:none,           s:none)
+call s:hi("SpecialComment", s:yellow,         s:reset,          s:none,           s:none)
 call s:hi("SpecialKey",     s:cyan,           s:reset,          s:none,           "italic")
 call s:hi("Statement",      s:brightgrey,     s:reset,          s:none,           "bold")
 call s:hi("StorageClass",   s:brightorange,   s:reset,          s:none,           "italic")
-call s:hi("String",         s:yellow,         s:reset,          s:none,           s:none)
+call s:hi("String",         s:green,          s:reset,          s:none,           s:none)
 call s:hi("Structure",      s:cyan,           s:reset,          s:none,           s:none)
 call s:hi("Tag",            s:blue,           s:reset,          s:none,           "italic")
 call s:hi("Title",          s:brightorange,   s:reset,          s:none,           s:none)
@@ -174,10 +208,10 @@ call s:hi("diffSubname",    s:white,          s:reset,          s:none,         
 call s:hi("htmlLink",       s:reset,          s:reset,          "fg",             "underline")
 
 call s:hi("TSConstBuiltin", s:blue,           s:none,           s:none,           s:none)
-call s:hi("TSFuncBuiltin",  s:green,          s:none,           s:none,           s:none)
+call s:hi("TSFuncBuiltin",  s:yellow,         s:none,           s:none,           s:none)
 call s:hi("TSFuncMacro",    s:violet,         s:none,           s:none,           s:none)
-call s:hi("TSFunction",     s:green,          s:none,           s:none,           s:none)
-call s:hi("TSMethod",       s:green,          s:none,           s:none,           s:none)
+call s:hi("TSFunction",     s:yellow,         s:none,           s:none,           s:none)
+call s:hi("TSMethod",       s:yellow,         s:none,           s:none,           s:none)
 call s:hi("TSParameter",    s:brightgrey,     s:none,           s:none,           s:none)
 call s:hi("TSType",         s:cyan,           s:none,           s:none,           s:none)
 call s:hi("TSVariable",     s:normalfg,       s:reset,          s:none,           s:none)

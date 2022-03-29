@@ -1,3 +1,4 @@
+{{#dark-theme}}
 colors:
   primary:
     background: '0x1c2022'
@@ -21,6 +22,31 @@ colors:
     cyan:    '0x00b2ab'
     white:   '0xe0e0e0'
   transparent_background_colors: true
+{{/dark-theme}}
+{{^dark-theme}}
+colors:
+  primary:
+    background: '0xeff1f4'
+    foreground: '0x5e5e5e'
+  normal:
+    black:   '0x101010'
+    red:     '0xaa4840'
+    green:   '0x4b7924'
+    yellow:  '0x7c730f'
+    blue:    '0x246fb4'
+    magenta: '0x994c8f'
+    cyan:    '0x007d76'
+    white:   '0xababab'
+  bright:
+    black:   '0x000000'
+    red:     '0xcd675d'
+    green:   '0x6a9842'
+    yellow:  '0x9c9232'
+    blue:    '0x4e8dd5'
+    magenta: '0xba6aaf'
+    cyan:    '0x009d95'
+    white:   '0xcccccc'
+{{/dark-theme}}
 
 draw_bold_text_with_bright_colors: false
 
@@ -49,4 +75,4 @@ selection:
 
 window:
   dynamic_padding: true
-  opacity: 0.97
+  opacity: {{#dark-theme}}0.97{{/dark-theme}}{{^dark-theme}}1{{/dark-theme}}

@@ -1,7 +1,6 @@
-colorscheme kalgykai
-
 set autoindent
 set autoread
+set background=light
 set backupcopy=yes
 set colorcolumn=89
 set completeopt=menu
@@ -33,6 +32,8 @@ set undofile
 set wildignore+=*/node_modules/*
 set wildignorecase
 set wildmode=list:longest
+
+colorscheme kalgykai
 
 " Custom shortcuts
 let mapleader = ' '
