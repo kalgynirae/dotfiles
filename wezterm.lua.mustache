@@ -6,6 +6,7 @@ return {
 
   bold_brightens_ansi_colors = false,
   force_reverse_video_cursor = true,
+{{#dark-theme}}
   colors = {
     background = '#1c2022',
     foreground = '#c0c0c0',
@@ -30,9 +31,36 @@ return {
       '#e0e0e0',
     },
   },
+{{/dark-theme}}
+{{^dark-theme}}
+  colors = {
+    background = '#f4f4f4',
+    foreground = '#303030',
+    ansi = {
+      '#707070',
+      '#aa4840',
+      '#4b7924',
+      '#7c730f',
+      '#246fb4',
+      '#994c8f',
+      '#007d76',
+      '#ababab',
+    },
+    brights = {
+      '#909090',
+      '#cd675d',
+      '#6a9842',
+      '#9c9232',
+      '#4e8dd5',
+      '#ba6aaf',
+      '#009d95',
+      '#cccccc',
+    },
+  },
+{{/dark-theme}}
   font = wezterm.font_with_fallback({
-    "Liberation Mono",
-    "DejaVu Sans Mono",
+    "Iosevka Term",
     "Font Awesome 5 Pro Solid",
   }),
+  font_size = 18,
 }
