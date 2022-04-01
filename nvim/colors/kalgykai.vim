@@ -28,13 +28,13 @@ let s:reset = "NONE"
 if &background == "dark"
   let s:normalbg = "#1c2022"
   let s:slightbg = "#232729"
-  let s:black = "#000000"
-  let s:darkgrey = "#303436"
-  let s:darkred = "#390c00"
-  let s:darkorange = "#351b00"
-  let s:darkyellow = "#2e2600"
-  let s:darkcyan = "#002b29"
-  let s:darkblue = "#002444"
+  let s:intensebg = "#000000"
+  let s:bggrey = "#303436"
+  let s:bgred = "#390c00"
+  let s:bgorange = "#351b00"
+  let s:bgyellow = "#2e2600"
+  let s:bgcyan = "#002b29"
+  let s:bgblue = "#002444"
   let s:grey = "#505050"
   let s:brightgrey = "#707070"
   let s:normalfg = "#a0a0a0"
@@ -59,13 +59,13 @@ if &background == "dark"
 else
   let s:normalbg = "#f4f4f4"
   let s:slightbg = "#eaeaea"
-  let s:black = "#303030"
-  let s:darkgrey = "#303436"
-  let s:darkred = "#390c00"
-  let s:darkorange = "#351b00"
-  let s:darkyellow = "#2e2600"
-  let s:darkcyan = "#002b29"
-  let s:darkblue = "#002444"
+  let s:intensebg = "#ffffff"
+  let s:bggrey = "#e0e0e0"
+  let s:bgred = "#f6ddda"
+  let s:bgorange = "#f2dfd3"
+  let s:bgyellow = "#e7e3d0"
+  let s:bgcyan = "#cfe9e1"
+  let s:bgblue = "#d0e7f1"
   let s:grey = "#707070"
   let s:brightgrey = "#909090"
   let s:normalfg = "#303030"
@@ -105,14 +105,14 @@ call s:hi("GitGutterChangeLineNr", s:yellow,  s:reset,          s:none,         
 call s:hi("GitGutterChangeDeleteLineNr", s:orange, s:reset,     s:none,           s:none)
 call s:hi("GitGutterDeleteLineNr", s:red,     s:reset,          s:none,           s:none)
 call s:hi("LineNr",         s:grey,           s:reset,          s:none,           s:none)
-call s:hi("SpellBad",       s:reset,          s:darkred,        s:red,            s:none)
-call s:hi("SpellCap",       s:reset,          s:darkyellow,     s:yellow,         s:none)
-call s:hi("SpellLocal",     s:reset,          s:darkyellow,     s:yellow,         s:none)
-call s:hi("SpellRare",      s:reset,          s:darkyellow,     s:yellow,         s:none)
-call s:hi("TabLine",        s:brightgrey,     s:darkgrey,       s:none,           s:none)
-call s:hi("TabLineFill",    s:reset,          s:darkgrey,       s:none,           s:reset)
+call s:hi("SpellBad",       s:reset,          s:bgred,          s:red,            s:none)
+call s:hi("SpellCap",       s:reset,          s:bgyellow,       s:yellow,         s:none)
+call s:hi("SpellLocal",     s:reset,          s:bgyellow,       s:yellow,         s:none)
+call s:hi("SpellRare",      s:reset,          s:bgyellow,       s:yellow,         s:none)
+call s:hi("TabLine",        s:brightgrey,     s:bggrey,         s:none,           s:none)
+call s:hi("TabLineFill",    s:reset,          s:bggrey,         s:none,           s:reset)
 call s:hi("TabLineSel",     s:reset,          s:grey,           s:none,           "bold")
-call s:hi("TermCursor",     "bg",             s:brightviolet,  s:none,           s:reset)
+call s:hi("TermCursor",     "bg",             s:brightviolet,   s:none,           s:reset)
 call s:hi("Visual",         s:white,          s:normalbg,       s:none,           "reverse")
 call s:hi("VisualNOS",      s:reset,          s:reset,          s:none,           "reverse")
 
@@ -120,13 +120,13 @@ call s:hi("DiagnosticError", s:brightred,     s:reset,          s:none,         
 call s:hi("DiagnosticWarn",  s:brightorange,  s:reset,          s:none,           "italic")
 call s:hi("DiagnosticInfo", s:brightblue,     s:reset,          s:none,           "italic")
 call s:hi("DiagnosticHint", s:brightcyan,     s:reset,          s:none,           "italic")
-call s:hi("DiagnosticUnderlineError", s:none, s:darkred,        s:none,           s:reset)
-call s:hi("DiagnosticUnderlineWarn", s:none,  s:darkorange,     s:none,           s:reset)
-call s:hi("DiagnosticUnderlineInfo", s:none,  s:darkblue,       s:none,           s:reset)
-call s:hi("DiagnosticUnderlineHint", s:none,  s:darkcyan,       s:none,           s:reset)
+call s:hi("DiagnosticUnderlineError", s:none, s:bgred,          s:none,           s:reset)
+call s:hi("DiagnosticUnderlineWarn", s:none,  s:bgorange,       s:none,           s:reset)
+call s:hi("DiagnosticUnderlineInfo", s:none,  s:bgblue,         s:none,           s:reset)
+call s:hi("DiagnosticUnderlineHint", s:none,  s:bgcyan,         s:none,           s:reset)
 
-call s:hi("StatusLine",     s:reset,          s:grey,           s:none,           "bold")
-call s:hi("StatusLineNC",   s:brightgrey,     s:darkgrey,       s:none,           s:reset)
+call s:hi("StatusLine",     s:reset,          s:brightgrey,     s:none,           "bold")
+call s:hi("StatusLineNC",   s:grey,           s:bggrey,         s:none,           s:reset)
 call s:hi("User1",          s:normalbg,       s:yellow,         s:none,           "bold")   " replace mode
 call s:hi("User2",          s:normalbg,       s:green,          s:none,           "bold")   " insert mode
 call s:hi("User3",          s:normalbg,       s:cyan,           s:none,           "bold")   " visual mode
@@ -150,7 +150,7 @@ call s:hi("DiffChange",     s:orange,         s:reset,          s:none,         
 call s:hi("DiffDelete",     s:red,            s:reset,          s:none,           s:none)
 call s:hi("DiffText",       s:brightgrey,     s:reset,          s:none,           "bold")
 call s:hi("Directory",      s:blue,           s:reset,          s:none,           "bold")
-call s:hi("Error",          s:reset,          s:darkred,        s:none,           s:none)
+call s:hi("Error",          s:reset,          s:bgred,          s:none,           s:none)
 call s:hi("ErrorMsg",       s:brightred,      s:reset,          s:none,           "italic")
 call s:hi("Exception",      s:brightgrey,     s:reset,          s:none,           "bold")
 call s:hi("Float",          s:blue,           s:reset,          s:none,           s:none)
@@ -170,15 +170,15 @@ call s:hi("MoreMsg",        s:brightyellow,   s:reset,          s:none,         
 call s:hi("NonText",        s:grey,           s:reset,          s:none,           s:none)
 call s:hi("Number",         s:blue,           s:reset,          s:none,           s:none)
 call s:hi("Operator",       s:brightgrey,     s:reset,          s:none,           s:none)
-call s:hi("Pmenu",          s:reset,          s:black,          s:none,           s:none)
+call s:hi("Pmenu",          s:reset,          s:intensebg,      s:none,           s:none)
 call s:hi("PmenuSel",       s:reset,          s:grey,           s:none,           "bold")
-call s:hi("PmenuSbar",      s:reset,          s:darkgrey,       s:none,           s:none)
+call s:hi("PmenuSbar",      s:reset,          s:bggrey,         s:none,           s:none)
 call s:hi("PmenuThumb",     s:reset,          s:green,          s:none,           s:none)
 call s:hi("PreCondit",      s:yellow,         s:reset,          s:none,           "bold")
 call s:hi("PreProc",        s:violet,         s:reset,          s:none,           "italic")
 call s:hi("Question",       s:cyan,           s:reset,          s:none,           s:none)
 call s:hi("Repeat",         s:brightgrey,     s:reset,          s:none,           "bold")
-call s:hi("Search",         s:darkgrey,       s:yellow,         s:none,           s:none)
+call s:hi("Search",         s:bggrey,         s:yellow,         s:none,           s:none)
 call s:hi("SignColumn",     s:blue,           s:reset,          s:none,           s:none)
 call s:hi("Special",        s:orange,         s:reset,          s:none,           "italic")
 call s:hi("SpecialChar",    s:orange,         s:reset,          s:none,           "italic")
@@ -196,7 +196,7 @@ call s:hi("Typedef",        s:cyan,           s:reset,          s:none,         
 call s:hi("Underlined",     s:reset,          s:reset,          s:none,           "underline")
 call s:hi("VertSplit",      s:grey,           s:reset,          s:none,           "bold")
 call s:hi("WarningMsg",     s:brightwhite,    s:reset,          s:none,           "bold")
-call s:hi("WildMenu",       s:blue,           s:black,          s:none,           s:none)
+call s:hi("WildMenu",       s:blue,           s:intensebg,      s:none,           s:none)
 call s:hi("diffAdded",      s:green,          s:reset,          s:none,           s:none)
 call s:hi("diffFile",       s:white,          s:reset,          s:none,           "bold")
 call s:hi("diffIndexLine",  s:white,          s:reset,          s:none,           "bold")
