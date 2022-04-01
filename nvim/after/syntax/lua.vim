@@ -1,0 +1,1 @@
+call hexcolor#init('luaString')
