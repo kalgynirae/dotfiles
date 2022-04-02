@@ -58,40 +58,43 @@ if &background == "dark"
   let s:brightwhite = "#e0e0e0"
 else
   let s:normalbg = "#f4f4f4"
-  let s:slightbg = "#eaeaea"
+  let s:slightbg = "#ebebeb"
   let s:intensebg = "#ffffff"
-  let s:bggrey = "#e0e0e0"
-  let s:bgred = "#f6ddda"
-  let s:bgorange = "#f2dfd3"
-  let s:bgyellow = "#e7e3d0"
-  let s:bgcyan = "#cfe9e1"
-  let s:bgblue = "#d0e7f1"
-  let s:grey = "#707070"
-  let s:brightgrey = "#909090"
+  let s:bggrey = "#ebebeb"
+  let s:bgred = "#ffe7e2"
+  let s:bgorange = "#fff2e3"
+  let s:bgyellow = "#fffde1"
+  let s:bggreen = "#ecf8e0"
+  let s:bgcyan = "#dbf7f4"
+  let s:bgblue = "#e7effd"
+  let s:bgviolet = "#f4eeff"
+  let s:bgmagenta = "#fce9f8"
+  let s:grey = "#b8aeb1"
+  let s:brightgrey = "#919191"
   let s:normalfg = "#303030"
-  let s:red = "#aa4840"
-  let s:brightred = "#cd675d"
-  let s:orange = "#a15d2a"
-  let s:brightorange = "#c47c47"
-  let s:yellow = "#7c730f"
-  let s:brightyellow = "#9c9232"
-  let s:green = "#4b7924"
-  let s:brightgreen = "#6a9842"
-  let s:cyan = "#007d76"
-  let s:brightcyan = "#009d95"
-  let s:blue = "#246fb4"
-  let s:brightblue = "#4e8dd5"
-  let s:violet = "#715faf"
-  let s:brightviolet = "#917dd0"
-  let s:magenta = "#994c8f"
-  let s:brightmagenta = "#ba6aaf"
-  let s:white = "#ababab"
-  let s:brightwhite = "#cccccc"
+  let s:red = "#b24b43"
+  let s:brightred = "#da675c"
+  let s:orange = "#a9612c"
+  let s:brightorange = "#cf7e42"
+  let s:yellow = "#847b12"
+  let s:brightyellow = "#a59a2b"
+  let s:green = "#4e7e25"
+  let s:brightgreen = "#6a9e3c"
+  let s:cyan = "#00837c"
+  let s:brightcyan = "#00a59c"
+  let s:blue = "#1f72ba"
+  let s:brightblue = "#4091e3"
+  let s:violet = "#7664b8"
+  let s:brightviolet = "#9681df"
+  let s:magenta = "#a04f96"
+  let s:brightmagenta = "#c66bba"
+  let s:white = "#6a6a6a"
+  let s:brightwhite = "#595959"
 end
 
 " Note: use "nocombine" in the gui arg to override instead of combining
 
-call s:hi("Normal",         s:normalfg,       s:normalbg,       s:none,           s:none)
+call s:hi("Normal",         s:reset,          s:reset,          s:none,           s:none)
 call s:hi("NormalFg",       s:normalfg,       s:reset,          s:none,           s:none)
 call s:hi("ColorColumn",    s:reset,          s:slightbg,       s:none,           s:none)
 call s:hi("Cursor",         s:none,           s:none,           s:none,           "reverse")
@@ -206,6 +209,8 @@ call s:hi("diffRemoved",    s:red,            s:reset,          s:none,         
 call s:hi("diffSubname",    s:white,          s:reset,          s:none,           "bold")
 
 call s:hi("htmlLink",       s:reset,          s:reset,          "fg",             "underline")
+
+call s:hi("Bold",           s:none,           s:none,           s:none,           "bold")
 
 call s:hi("TSConstBuiltin", s:blue,           s:none,           s:none,           s:none)
 call s:hi("TSFuncBuiltin",  s:yellow,         s:none,           s:none,           s:none)
