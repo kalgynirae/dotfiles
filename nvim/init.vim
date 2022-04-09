@@ -22,7 +22,7 @@ set scrolloff=3 sidescrolloff=5
 set shada='50,h
 set shiftwidth=4 softtabstop=-1 expandtab smarttab
 set showcmd
-set signcolumn=yes:1
+set signcolumn=no
 set smartcase
 set spelllang=en_us
 set splitbelow splitright
