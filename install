@@ -83,6 +83,7 @@ install imv ~/.config/imv/config
 install index.theme ~/.local/share/icons/default/index.theme
 install inputrc ~/.inputrc
 install ipython_config.py ~/.ipython/profile_default/ipython_config.py
+install kitty.conf ~/.config/kitty/kitty.conf
 install mpv.conf ~/.config/mpv/mpv.conf
 install nvim ~/.config/nvim
 install nvim/plugins ~/.local/share/nvim/site/pack/plugins/start
