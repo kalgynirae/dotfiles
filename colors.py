@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
+from itertools import starmap
 from math import atan2, cos, degrees, isclose, radians, sin, sqrt
 from textwrap import dedent
 
@@ -62,6 +63,22 @@ class Color:
         self.c = float(c)  # roughly 0 to 100
         self.h = float(h)  # degrees
 
+    def __eq__(self, other: Color) -> bool:
+        return all(
+            starmap(isclose, zip((self.l, self.c, self.h), (other.l, other.c, other.h)))
+        )
+
+    def __repr__(self) -> str:
+        return f"{type(self).__name__}({self.l}, {self.c}, {self.h})"
+
+    @classmethod
+    def from_lab(cls, L: float, a: float, b: float) -> Color:
+        C = sqrt(a**2 + b**2)
+        h = degrees(atan2(b, a)) % 360
+        l = L * 100
+        c = C * 300
+        return cls(l, c, h)
+
     def set(
         self, l: float | None = None, c: float | None = None, h: float | None = None
     ) -> Color:
@@ -72,9 +89,16 @@ class Color:
         )
 
     def adjust(self, l: float = 0, c: float = 0, h: float = 0) -> Color:
-        return self.set(l=self.l + l, c=self.c + c, h=self.h + h)
+        return self.set(
+            l=self.l + l, c=(self.c + c if self.c > 0 else 0.0), h=self.h + h
+        )
 
-    def as_rgb(self) -> tuple[float, float, float]:
+    def interpolate(self, other: Color, amount: float) -> Color:
+        return Color.from_lab(
+            *((1 - amount) * s + amount * o for s, o in zip(self.as_lab(), other.as_lab()))
+        )
+
+    def as_lab(self) -> tuple[float, float, float]:
         L = self.l / 100
         C = self.c / 300
         h = self.h if C > 0 else 0.0
@@ -82,12 +106,14 @@ class Color:
         b = C * sin(radians(h))
 
         # Verify math
-        assert isclose(C, sqrt(a**2 + b**2)), f"C={C} != {sqrt(a**2 + b**2)}"
-        assert isclose(
-            h, degrees(atan2(b, a)) % 360
-        ), f"h={h} != {degrees(atan2(b, a))}"
+        assert (
+            Color.from_lab(L, a, b) == self
+        ), f"{Color.from_lab(L, a, b)!r} != {self!r}"
 
-        return tuple(map(f, oklab_to_linear_srgb(L, a, b)))
+        return L, a, b
+
+    def as_rgb(self) -> tuple[float, float, float]:
+        return tuple(map(f, oklab_to_linear_srgb(*self.as_lab())))
 
     def as_clamped_rgb(self) -> tuple[float, float, float]:
         return tuple(map(clamp, self.as_rgb()))
@@ -112,35 +138,26 @@ class Color:
 
 
 if __name__ == "__main__":
-    gray = Color(l=50, c=0, h=0)
-    print("normal         ", gray.foreground())
-    print(
-        "black  ",
-        gray.adjust(l=32).foreground(),
-        gray.adjust(l=26).foreground(),
-        gray.adjust(l=18).foreground(),
-    )
-    print(
-        "white  ",
-        gray.adjust(l=-7).foreground(),
-        gray.adjust(l=-15).foreground(),
-        gray.adjust(l=-30).foreground(),
-    )
-
+    background = Color(l=96, c=0, h=0)
+    foreground = Color(l=50, c=0, h=0)
+    print("background     ", background.background())
+    print("foreground     ", foreground.foreground())
     colors = dict(
-        red=Color(l=53, c=50, h=25),
-        green=Color(l=52, c=50, h=140),
-        yellow=Color(l=56, c=52, h=102),
-        blue=Color(l=52, c=50, h=240),
-        magenta=Color(l=52, c=50, h=330),
-        cyan=Color(l=52, c=50, h=180),
-        orange=Color(l=54, c=50, h=72),
-        violet=Color(l=52, c=50, h=295),
+        black=foreground.adjust(l=26),
+        red=Color(l=59, c=46, h=25),
+        green=Color(l=58, c=47, h=140),
+        yellow=Color(l=62, c=49, h=102),
+        blue=Color(l=58, c=47, h=240),
+        magenta=Color(l=58, c=47, h=330),
+        cyan=Color(l=58, c=47, h=180),
+        white=foreground.adjust(l=-15),
+        orange=Color(l=60, c=47, h=72),
+        violet=Color(l=58, c=47, h=295),
     )
     for name, c in colors.items():
-        dim = c.adjust(l=-15, c=-0)
-        bright = c.adjust(l=15, c=5)
-        bg = c.adjust(l=42, c=-35)
+        dim = c.adjust(c=-20).interpolate(background, 0.3)
+        bright = c.adjust(c=10, l=10)
+        bg = c.interpolate(background, 0.85).adjust(l=5)
         print(
             f"{name:7}",
             dim.foreground(),

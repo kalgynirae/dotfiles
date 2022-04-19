@@ -18,6 +18,8 @@ function! s:hi(group, guifg, guibg, guisp, gui)
   endif
   if args == ""
     let args = "NONE"
+  else
+    let args = args." cterm=NONE"
   endif
   execute "hi" a:group args
 endfunction
@@ -57,39 +59,40 @@ if &background == "dark"
   let s:magenta = "#ae4fa3"
   let s:brightmagenta = "#c866bb"
 else
-  let s:normalbg = "#f4f4f4"
+  let s:normalbg = "#f2f2f2"
   let s:slightbg = "#ebebeb"
   let s:intensebg = "#ffffff"
   let s:bggrey = "#e0e0e0"
-  let s:bgred = "#ffe2de"
-  let s:bgorange = "#ffedce"
-  let s:bgyellow = "#fffbcf"
-  let s:bggreen = "#daf4d4"
-  let s:bgcyan = "#c8f7ec"
-  let s:bgblue = "#cef1ff"
-  let s:bgviolet = "#ede5ff"
-  let s:bgmagenta = "#ffe0fb"
-  let s:verydimfg = "#b1b1b1"
-  let s:dimfg = "#989898"
+  let s:bgred = "#ffeae8"
+  let s:bgorange = "#fbeee0"
+  let s:bgyellow = "#f4f2e0"
+  let s:bggreen = "#e8f4e5"
+  let s:bgcyan = "#e0f5f0"
+  let s:bgblue = "#e2f2fe"
+  let s:bgviolet = "#f0edfe"
+  let s:bgmagenta = "#f9eaf7"
+  let s:bgsearch = "#efe560"
+  let s:verydimfg = "#c4c4c4"
+  let s:dimfg = "#a1a1a1"
   let s:normalfg = "#636363"
   let s:brightfg = "#3a3a3a"
   let s:verybrightfg = "#161616"
-  let s:red = "#b93737"
-  let s:brightred = "#f5605c"
-  let s:orange = "#a75800"
-  let s:brightorange = "#df8300"
-  let s:yellow = "#8a7500"
-  let s:brightyellow = "#baa300"
-  let s:green = "#247e02"
-  let s:brightgreen = "#4daf35"
-  let s:cyan = "#00856d"
-  let s:brightcyan = "#00b79a"
-  let s:blue = "#0070bd"
-  let s:brightblue = "#009ff9"
-  let s:violet = "#724ebd"
-  let s:brightviolet = "#9f79f8"
-  let s:magenta = "#9b3c95"
-  let s:brightmagenta = "#d165ca"
+  let s:red = "#c85f4d"
+  let s:brightred = "#fa625d"
+  let s:orange = "#b86c00"
+  let s:brightorange = "#e48500"
+  let s:yellow = "#9b8700"
+  let s:brightyellow = "#bfa600"
+  let s:green = "#3f8f2b"
+  let s:brightgreen = "#4cb332"
+  let s:cyan = "#00967e"
+  let s:brightcyan = "#00bb9d"
+  let s:blue = "#0083cc"
+  let s:brightblue = "#00a3ff"
+  let s:violet = "#8363cc"
+  let s:brightviolet = "#a37aff"
+  let s:magenta = "#ac52a6"
+  let s:brightmagenta = "#d665cf"
 end
 
 " Note: use "nocombine" in the gui arg to override instead of combining
@@ -97,7 +100,7 @@ end
 call s:hi("Normal",         s:reset,          s:reset,          s:none,           s:none)
 call s:hi("NormalFg",       s:normalfg,       s:reset,          s:none,           s:none)
 call s:hi("ColorColumn",    s:reset,          s:slightbg,       s:none,           s:none)
-call s:hi("Cursor",         s:none,           s:none,           s:none,           "reverse")
+call s:hi("Cursor",         s:none,           s:none,           s:none,           s:none)
 call s:hi("CursorInsert",   "bg",             s:brightmagenta,  s:none,           s:reset)
 call s:hi("CursorReplace",  "bg",             s:brightmagenta,  s:none,           s:reset)
 call s:hi("CursorColumn",   s:reset,          s:slightbg,       s:none,           s:none)
@@ -123,10 +126,10 @@ call s:hi("DiagnosticError", s:brightred,     s:reset,          s:none,         
 call s:hi("DiagnosticWarn", s:brightorange,   s:reset,          s:none,           "italic")
 call s:hi("DiagnosticInfo", s:brightblue,     s:reset,          s:none,           "italic")
 call s:hi("DiagnosticHint", s:brightcyan,     s:reset,          s:none,           "italic")
-call s:hi("DiagnosticUnderlineError", s:none, s:bgred,          s:none,           s:reset)
-call s:hi("DiagnosticUnderlineWarn", s:none,  s:bgorange,       s:none,           s:reset)
-call s:hi("DiagnosticUnderlineInfo", s:none,  s:bgblue,         s:none,           s:reset)
-call s:hi("DiagnosticUnderlineHint", s:none,  s:bgcyan,         s:none,           s:reset)
+call s:hi("DiagnosticUnderlineError", s:none, s:none,           s:brightred,      "underline")
+call s:hi("DiagnosticUnderlineWarn", s:none,  s:none,           s:brightorange,   "underline")
+call s:hi("DiagnosticUnderlineInfo", s:none,  s:none,           s:brightblue,     "underline")
+call s:hi("DiagnosticUnderlineHint", s:none,  s:none,           s:brightcyan,     "underline")
 
 call s:hi("StatusLine",     s:reset,          s:dimfg,          s:none,           "bold")
 call s:hi("StatusLineNC",   s:verydimfg,      s:bggrey,         s:none,           s:reset)
@@ -163,7 +166,7 @@ call s:hi("Function",       s:green,          s:reset,          s:none,         
 call s:hi("Identifier",     s:reset,          s:reset,          s:none,           s:none)
 call s:hi("Ignore",         s:dimfg,          s:reset,          s:none,           s:none)
 call s:hi("Include",        s:dimfg,          s:reset,          s:none,           "bold")
-call s:hi("IncSearch",      s:reset,          s:bgblue,         s:none,           s:reset)
+call s:hi("IncSearch",      s:reset,          s:bgsearch,       s:none,           s:reset)
 call s:hi("Keyword",        s:dimfg,          s:reset,          s:none,           "bold")
 call s:hi("Label",          s:dimfg,          s:reset,          s:none,           "bold")
 call s:hi("Macro",          s:magenta,        s:reset,          s:none,           "italic")
@@ -181,7 +184,7 @@ call s:hi("PreCondit",      s:yellow,         s:reset,          s:none,         
 call s:hi("PreProc",        s:violet,         s:reset,          s:none,           "italic")
 call s:hi("Question",       s:cyan,           s:reset,          s:none,           s:none)
 call s:hi("Repeat",         s:dimfg,          s:reset,          s:none,           "bold")
-call s:hi("Search",         s:reset,          s:bgblue,         s:none,           s:none)
+call s:hi("Search",         s:reset,          s:bgsearch,       s:none,           s:none)
 call s:hi("SignColumn",     s:blue,           s:reset,          s:none,           s:none)
 call s:hi("Special",        s:orange,         s:reset,          s:none,           "italic")
 call s:hi("SpecialChar",    s:orange,         s:reset,          s:none,           "italic")
