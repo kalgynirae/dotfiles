@@ -235,6 +235,15 @@ repeat-prefix() {
   done
 }
 
+repeat-str() {
+  local result=""
+  local i
+  for (( i=0; i<$2; i++ )); do
+    result+=$1
+  done
+  echo "$result"
+}
+
 # Sort a file in-place (kinda)
 sorti() {
   local file="$1"
@@ -390,6 +399,7 @@ color='\[$(_hashcolor "$USER@$HOSTNAME:$(pwd -P)")\]'
 green='\[\e[32m\]'
 black='\[\e[30m\]'
 reset='\[\e[0m\]'
-PS1=$reset'▶▶▶ '$color'\u@\h:\W'$reset' '$black'[$((++_command_count))]'$reset'\n[\j]\$ '
+prefix=$(repeat-str '▶' "$SHLVL")
+PS1=$reset$prefix' '$color'\u@\h:\W'$reset' '$black'[$((++_command_count))]'$reset'\n[\j]\$ '
 SHORTPS1=$reset$green'[:\W]\$'$reset' '
 : "${_command_count:=-1}"
