@@ -1,8 +1,6 @@
 default_border pixel 4
 focus_on_window_activation urgent
-{{^colinchan-fedora}}
 gaps inner 25
-{{/colinchan-fedora}}
 tiling_drag enable
 titlebar_border_thickness 0
 titlebar_padding 4 2
@@ -51,7 +49,7 @@ output * subpixel rgb
 #output eDP-1 position 2560 1440
 # office
 output "Dell Inc. DELL UP3017 73GTT6BL101L" position 5760 0 transform 270
-output "Lenovo Group Limited LEN T32p-20 VNA595RB" position 1920 0
+output "Lenovo Group Limited LEN T32p-20 VNA595RB" position 1920 0 mode 3840x2160@60.000Hz
 output eDP-1 position 0 1080
 
 bindswitch --reload --locked lid:on output eDP-1 disable
