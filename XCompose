@@ -1,4 +1,6 @@
 include "%L"
 
 <Multi_key> <A> <N> <G> <E> <R> : "😠"
+<Multi_key> <s> <h> <r> <u> <g> : "🤷"
 <Multi_key> <s> <n> <o> <w> : "☃"
+<Multi_key> <n> <l> : "␤"
