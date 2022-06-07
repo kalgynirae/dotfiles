@@ -15,6 +15,7 @@
 
   "modules-right": [
     "tray",
+    "custom/wallpaper",
     "network",
     "custom/psi-cpu",
     "custom/psi-memory",
@@ -59,6 +60,11 @@
     "interval": 2,
     "return-type": "json",
     "exec": "waybar-psi io",
+  },
+
+  "custom/wallpaper": {
+    "format": "",
+    "on-click": "systemctl --user start update-wallpaper",
   },
 
   "idle_inhibitor": {
