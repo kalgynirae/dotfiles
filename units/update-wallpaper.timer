@@ -1,12 +1,9 @@
 [Unit]
-BindsTo=graphical-session.target
-After=graphical-session.target
+BindsTo=compositor.service
+After=compositor.service
 
 [Timer]
 AccuracySec=5m
 OnBootSec=90m
 OnUnitActiveSec=2h
 RandomizedDelaySec=30m
-
-[Install]
-WantedBy=graphical-session.target

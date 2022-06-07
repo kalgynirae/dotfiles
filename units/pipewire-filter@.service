@@ -1,6 +1,6 @@
 [Unit]
+Wants=pipewire.service
 After=pipewire.service
-BindsTo=pipewire.service
 
 [Service]
 Environment=PIPEWIRE_DEBUG=2

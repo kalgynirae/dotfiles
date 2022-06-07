@@ -1,9 +1,7 @@
 [Unit]
-BindsTo=graphical-session.target
-After=graphical-session.target
+BindsTo=compositor.service
+After=compositor.service
 
 [Service]
 ExecStart=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
-[Install]
-WantedBy=graphical-session.target
+Restart=on-failure

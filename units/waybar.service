@@ -1,10 +1,7 @@
 [Unit]
-BindsTo=graphical-session.target
-After=graphical-session.target
+BindsTo=compositor.service
+After=compositor.service
 
 [Service]
 ExecStart=/usr/bin/waybar
 Restart=on-failure
-
-[Install]
-WantedBy=graphical-session.target
