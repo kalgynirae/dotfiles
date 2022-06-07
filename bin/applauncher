@@ -1,6 +1,12 @@
 #!/bin/bash
 
-if ! name=$(find ~/.local/share/applications /usr/share/applications -name '*.desktop' -printf '%P\n' | sed 's/.desktop$//' | sort -u | wofi --dmenu -i); then
+IFS=: read -a data_dirs <<<"${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+dirs=(
+  "${XDG_DATA_HOME:-$HOME/.local/share}/applications"
+  "${data_dirs[@]/%//applications}"
+)
+
+if ! name=$(find "${dirs[@]}" -name '*.desktop' -printf '%P\n' | sed 's/.desktop$//' | sort -u | wofi --dmenu -i); then
   echo >&2 "canceled"
   exit 1
 fi
