@@ -21,6 +21,13 @@ input "1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall" {
     scroll_button BTN_EXTRA
     scroll_method on_button_down
 }
+bindsym --input-device=1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall --whole-window --inhibited BTN_TASK seat - cursor press BTN_MIDDLE
+bindsym --input-device=1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall --whole-window --inhibited --release BTN_TASK seat - cursor release BTN_MIDDLE
+bindsym --input-device=1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall --whole-window --inhibited BTN_FORWARD seat - cursor press BTN_EXTRA
+bindsym --input-device=1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall --whole-window --inhibited --release BTN_FORWARD seat - cursor release BTN_EXTRA
+bindsym --input-device=1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall --whole-window --inhibited BTN_BACK seat - cursor press BTN_SIDE
+bindsym --input-device=1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall --whole-window --inhibited --release BTN_BACK seat - cursor release BTN_SIDE
+bindsym --input-device=1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall --whole-window --inhibited BTN_SIDE wtype -k Return
 
 {{/fruitron}}
 {{#fruitron}}
