@@ -1,15 +1,21 @@
 [input]
+{{#colinchan-fedora}}
 cursor_theme = DMZ-White
 cursor_size = 48
+{{/colinchan-fedora}}
+{{^colinchan-fedora}}
+cursor_theme = Adwaita
+cursor_size = 32
+{{/colinchan-fedora}}
 
 disable_touchpad_while_typing = true
-
 kb_numlock_default_state = true
 kb_repeat_delay = 145
 kb_repeat_rate = 55
 xkb_layout = us
 xkb_options = caps:ctrl_modifier,compose:ralt
 
+{{#colinchan-fedora}}
 [output:eDP-1]
 position = 0,1080
 
@@ -19,15 +25,23 @@ position = 1920,0
 [output:DP-3]
 position = 5760,0
 transform = 90
+{{/colinchan-fedora}}
+
+{{#apartmantwo}}
+[output:DP-5]
+position = 0,0
+
+[output:DP-4]
+position = 2560,0
+{{/apartmantwo}}
 
 [core]
 plugins = \
   alpha \
-  animate \
-  autostart \
   blur \
-  command \
+  winshadows \
   decoration \
+  animate \
   fast-switcher \
   follow-focus \
   grid \
@@ -37,27 +51,23 @@ plugins = \
   place \
   resize \
   scale \
+  simple-tile \
   vswitch \
-  window-rules \
-  wm-actions \
   wrot \
-  zoom
+  zoom \
+  autostart \
+  command \
+  window-rules \
+  wm-actions
 
-# Close focused window.
-close_top_view = <super> KEY_Q | <alt> KEY_F4
-
-# Workspaces arranged into a grid: 3 × 3.
-vwidth = 3
-vheight = 3
-
-# Prefer client-side decoration or server-side decoration
-preferred_decoration_mode = client
-
-# Mouse bindings ───────────────────────────────────────────────────────────────
+close_top_view = <super> KEY_GRAVE
+vwidth = 4
+vheight = 1
+preferred_decoration_mode = server
 
 [move]
 activate = <super> BTN_LEFT
-snap_threshold = 50
+snap_threshold = 100
 
 [resize]
 activate = <super> BTN_RIGHT
@@ -79,6 +89,23 @@ threshold = 0
 # Applications ─────────────────────────────────────────────────────────────────
 
 [command]
+binding_quit = <super> <shift> KEY_Q
+command_quit = systemctl --user stop graphical-session.target
+command_shutdown = shutdown-prompt
+binding_shutdown = <super> <shift> KEY_S
+command_shutdown = shutdown-prompt
+binding_lock = <super> KEY_BACKSPACE
+command_lock = systemctl --user kill --signal USR1 swayidle
+binding_screenshot = KEY_PRINT
+command_screenshot = screenshot
+binding_screenshot_region = <shift> KEY_PRINT
+command_screenshot_region = screenshot --region
+binding_screenshot_window = <super> KEY_PRINT
+command_screenshot_window = screenshot --window
+binding_dismiss = <super> KEY_C
+command_dismiss = makoctl dismiss
+binding_interact = <super> KEY_X
+command_interact = makoctl menu wofi -d -p 'Choose Action: '
 
 binding_terminal = <super> KEY_ENTER
 command_terminal = systemd-run-launch-app kitty kitty -e tmux new-session
@@ -88,49 +115,22 @@ binding_terminal_direct = <super> <shift> <alt> KEY_ENTER
 command_terminal_direct = kitty
 binding_launcher = <super> KEY_SPACE
 command_launcher = applauncher
-binding_lock = <super> KEY_BACKSPACE
-command_lock = systemctl --user kill --signal USR1 swayidle
-binding_logout = <super> <shift> KEY_Q
-command_logout = wlogout
-binding_screenshot = KEY_PRINT
-command_screenshot = screenshot
-binding_screenshot_region = <shift> KEY_PRINT
-command_screenshot_region = screenshot --region
-binding_screenshot_window = <super> KEY_PRINT
-command_screenshot_window = screenshot --window
+binding_browser = <super> KEY_B
+command_browser = systemd-run-launch-app web-browser gtk-launch web-browser.desktop
+binding_files = <super> KEY_T
+command_files = systemd-run-launch-app nautilus gtk-launch org.gnome.Nautilus.desktop
+binding_volume = <super> KEY_V
+command_volume = systemd-run-launch-app pavucontrol gtk-launch pavucontrol.desktop
 
 # Windows ──────────────────────────────────────────────────────────────────────
 
-# Actions related to window management functionalities.
-#
-# Example configuration:
-#
 [wm-actions]
 toggle_fullscreen = <super> KEY_F
-# toggle_always_on_top = <super> KEY_X
-# toggle_sticky = <super> <shift> KEY_X
-
-# Position the windows in certain regions of the output.
-[grid]
-#
-# ⇱ ↑ ⇲   │ 7 8 9
-# ← f →   │ 4 5 6
-# ⇱ ↓ ⇲ d │ 1 2 3 0
-# ‾   ‾
-slot_bl = <super> KEY_KP1
-slot_b = <super> KEY_KP2
-slot_br = <super> KEY_KP3
-slot_l = <super> KEY_LEFT | <super> KEY_KP4
-slot_c = <super> KEY_UP | <super> KEY_KP5
-slot_r = <super> KEY_RIGHT | <super> KEY_KP6
-slot_tl = <super> KEY_KP7
-slot_t = <super> KEY_KP8
-slot_tr = <super> KEY_KP9
-# Restore default.
-restore = <super> KEY_DOWN | <super> KEY_KP0
+toggle_always_on_top = <super> <alt> KEY_SPACE
+toggle_sticky = <super> <ctrl> KEY_SPACE
 
 [fast-switcher]
-activate = <alt> KEY_TAB
+activate = <super> KEY_TAB
 
 # Workspaces ───────────────────────────────────────────────────────────────────
 
@@ -157,14 +157,48 @@ next_output_with_win = <super> <shift> KEY_O
 [invert]
 toggle = <super> KEY_I
 
+[grid]
+duration = 100
+
 [animate]
-duration = 250
+duration = 100
 open_animation = fade
 close_animation = fade
 
+[decoration]
+active_color = 0.0 0.6 0.1 0.7
+inactive_color = 0.0 0.0 0.0 0.4
+border_size = 3
+button_order =
+font = Source Sans Pro
+title_height = 16
+
+[blur]
+blur_by_default = type is "toplevel" | type is "panel" | type is "overlay"
+saturation = 1.0
+kawase_offset = 3
+kawase_degrade = 6
+kawase_iterations = 2
+
+[winshadows]
+clip_shadow_inside = false
+enabled_views = floating is true
+include_undecorated_views = true
+shadow_color = 0.0 0.0 0.0 1.0
+shadow_radius = 64
+shadow_emissiveness = 0.5
+
 [scale]
 toggle = <super>
-duration = 250
+duration = 150
+
+[simple-tile]
+key_toggle = <super> <shift> KEY_SPACE
+inner_gap_size = 12
+outer_horiz_gap_size = 24
+outer_vert_gap_size = 24
+animation_duration = 100
+tile_by_default = none
 
 [autostart]
 autostart_wf_shell = false
