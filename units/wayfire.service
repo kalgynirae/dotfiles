@@ -1,0 +1,25 @@
+[Unit]
+Wants=graphical-session-pre.target
+After=graphical-session-pre.target
+PartOf=graphical-session.target
+Before=graphical-session.target
+Wants=gammastep.service
+Wants=mako.service
+Wants=polkit-gnome.service
+Wants=swaybg.service
+Wants=swayidle.service
+Wants=update-wallpaper.timer
+Wants=waybar.service
+
+[Service]
+Type=notify
+Environment=WAYFIRE_PLUGIN_PATH=/usr/lib64/wayfire:/usr/local/lib64/wayfire
+ExecStartPre=systemctl --user set-environment XDG_CURRENT_DESKTOP=wayfire XDG_SESSION_TYPE=wayland
+ExecStart=wayfire
+ExecStopPost=systemctl --user unset-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XCURSOR_SIZE XCURSOR_THEME XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+OOMPolicy=continue
+NotifyAccess=all
+Slice=session.slice
+
+[Install]
+Alias=compositor.service

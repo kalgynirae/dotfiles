@@ -97,6 +97,7 @@ install wezterm.lua ~/.config/wezterm/wezterm.lua
 install sway ~/.config/sway/config
 install waybar ~/.config/waybar/config
 install waybar.css ~/.config/waybar/style.css
+install wayfire.ini ~/.config/wayfire.ini
 
 # Mirror various GTK settings in gsettings (waybar and Firefox seem to use these)
 gsettings set org.gnome.desktop.interface cursor-blink "$(grep 'gtk-cursor-blink' ~/.config/gtk-3.0/settings.ini | cut -d= -f2)"
