@@ -2,8 +2,9 @@
 shopt -s nullglob
 
 if grep -q "Arch Linux" /etc/os-release; then
-  read -rp "Install packages? [y/N] "
-  if [[ $REPLY == y ]]; then
+  if [[ $1 != --packages ]]; then
+    echo "Not installing packages without --packages"
+  else
     packages() {
       {
         cat packages
