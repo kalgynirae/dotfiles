@@ -51,9 +51,19 @@ render() {
       echo mv "$dest" "$dest.old"
       mv "$dest" "$dest.old"
     fi
-    echo mustache .data.yml "$source" \>"$dest"
-    mustache .data.yml "$source" >"$dest"
-    touch -mr "$source" "$dest"
+    if ! temp="$(mktemp)"; then
+      echo "Not rendering $dest because mktemp failed"
+      return
+    fi
+    echo mustache .data.yml "$source" \>"$temp"
+    mustache .data.yml "$source" >"$temp"
+    if ! cmp --quiet "$dest" "$temp"; then
+      mv -fTv "$temp" "$dest"
+      touch -mr "$source" "$dest"
+    else
+      echo "$dest is already correct; skipping"
+      rm "$temp"
+    fi
   fi
 }
 
