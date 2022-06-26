@@ -94,11 +94,11 @@ binding_shutdown = <super> <shift> KEY_S
 command_shutdown = shutdown-prompt
 binding_lock = <super> KEY_BACKSPACE
 command_lock = systemctl --user kill --signal USR1 swayidle
-binding_screenshot = KEY_PRINT
+binding_screenshot = KEY_SYSRQ
 command_screenshot = screenshot
-binding_screenshot_region = <shift> KEY_PRINT
+binding_screenshot_region = <shift> KEY_SYSRQ
 command_screenshot_region = screenshot --region
-binding_screenshot_window = <super> KEY_PRINT
+binding_screenshot_window = <super> KEY_SYSRQ
 command_screenshot_window = screenshot --window
 binding_dismiss = <super> KEY_C
 command_dismiss = makoctl dismiss
@@ -180,7 +180,7 @@ font = Source Sans Pro
 title_height = 16
 
 [blur]
-blur_by_default = type is "toplevel" | type is "panel" | type is "overlay"
+blur_by_default = type is "toplevel" | type is "panel"
 saturation = 1.0
 kawase_offset = 3
 kawase_degrade = 6
