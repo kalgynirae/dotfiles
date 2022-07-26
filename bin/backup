@@ -3,6 +3,7 @@
 source ~/.config/backup-params
 
 paths=(
+    ~/audio
     ~/blender
     ~/code
     ~/documents
