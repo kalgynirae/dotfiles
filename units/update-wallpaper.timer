@@ -1,9 +1,8 @@
-[Unit]
-BindsTo=compositor.service
-After=compositor.service
-
 [Timer]
 AccuracySec=5m
 OnActiveSec=90m
 OnUnitActiveSec=2h
 RandomizedDelaySec=30m
+
+[Install]
+WantedBy=timers.target
