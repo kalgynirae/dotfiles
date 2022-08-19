@@ -129,8 +129,8 @@ call s:hi("DiagnosticInfo", s:brightblue,     s:reset,          s:none,         
 call s:hi("DiagnosticHint", s:brightcyan,     s:reset,          s:none,           "italic")
 call s:hi("DiagnosticUnderlineError", s:none, s:none,           s:brightred,      "underline")
 call s:hi("DiagnosticUnderlineWarn", s:none,  s:none,           s:brightorange,   "underline")
-call s:hi("DiagnosticUnderlineInfo", s:none,  s:none,           s:brightblue,     "underline")
-call s:hi("DiagnosticUnderlineHint", s:none,  s:none,           s:brightcyan,     "underline")
+call s:hi("DiagnosticUnderlineInfo", s:none,  s:none,           s:none,           s:reset)
+call s:hi("DiagnosticUnderlineHint", s:none,  s:none,           s:none,           s:reset)
 
 call s:hi("StatusLine",     s:reset,          s:dimfg,          s:none,           "bold")
 call s:hi("StatusLineNC",   s:verydimfg,      s:bggrey,         s:none,           s:reset)
