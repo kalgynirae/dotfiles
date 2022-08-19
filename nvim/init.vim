@@ -1,6 +1,8 @@
 set autoindent
 set autoread
-set background=light
+if !empty($DARK_THEME)
+  set background=dark
+endif
 set backupcopy=yes
 set colorcolumn=89
 set completeopt=menu

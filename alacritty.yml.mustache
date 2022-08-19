@@ -22,6 +22,8 @@ colors:
     cyan:    '#00b2ab'
     white:   '#e0e0e0'
   transparent_background_colors: true
+env:
+  DARK_THEME: yes
 {{/dark-theme}}
 {{^dark-theme}}
 colors:
@@ -86,4 +88,4 @@ selection:
 
 window:
   dynamic_padding: true
-  opacity: {{#dark-theme}}0.97{{/dark-theme}}{{^dark-theme}}1{{/dark-theme}}
+  opacity: 1

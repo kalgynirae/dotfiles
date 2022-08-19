@@ -8,6 +8,29 @@ initial_window_width 120c
 remember_window_size no
 scrollback_lines 10000
 
+{{#dark-theme}}
+foreground #c0c0c0
+background #1c2022
+color0  #505050
+color1  #b44638
+color2  #518921
+color3  #a79026
+color4  #3982ce
+color5  #ae4fa3
+color6  #008f89
+color7  #c0c0c0
+color8  #707070
+color9  #d2614f
+color10 #6ea63f
+color11 #c9b047
+color12 #5799e7
+color13 #c866bb
+color14 #00b2ab
+color15 #e0e0e0
+wayland_titlebar_color #2a2f31
+env DARK_THEME=yes
+{{/dark-theme}}
+{{^dark-theme}}
 foreground #636363
 background #f2f2f2
 color0  #b1b1b1
@@ -26,6 +49,7 @@ color12 #00a3ff
 color13 #d665cf
 color14 #00bb9d
 color15 #555555
+{{/dark-theme}}
 dim_opacity 0.6
 cursor none
 selection_foreground none
