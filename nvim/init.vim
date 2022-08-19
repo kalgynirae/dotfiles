@@ -2,6 +2,8 @@ set autoindent
 set autoread
 if !empty($DARK_THEME)
   set background=dark
+else
+  set background=light
 endif
 set backupcopy=yes
 set colorcolumn=89
