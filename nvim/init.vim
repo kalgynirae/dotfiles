@@ -1,6 +1,6 @@
 set autoindent
 set autoread
-if !empty($DARK_THEME)
+if $DARK_THEME == "yes"
   set background=dark
 else
   set background=light
