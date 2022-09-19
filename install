@@ -115,6 +115,20 @@ gsettings set org.gnome.desktop.interface cursor-blink "$(grep 'gtk-cursor-blink
 gsettings set org.gnome.desktop.interface cursor-theme "$(grep 'gtk-cursor-theme-name' ~/.config/gtk-3.0/settings.ini | cut -d= -f2)"
 gsettings set org.gnome.desktop.interface cursor-size "$(grep 'gtk-cursor-theme-size' ~/.config/gtk-3.0/settings.ini | cut -d= -f2)"
 
+# Propagate dark theme setting to GNOME
+if [[ $(awk <.data.yml '/dark-theme:/ {print $2}') = true ]]; then
+  gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+else
+  gsettings set org.gnome.desktop.interface color-scheme default
+fi
+
+# Reload config in kitty
+pkill -USR1 kitty
+
+# Key repeat settings for GNOME
+gsettings set org.gnome.desktop.peripherals.keyboard delay 145
+gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 17
+
 for app in applications/*; do
   if [[ $app == minecraft.desktop && $HOSTNAME != colinchan-fedora* ]]; then
     continue
