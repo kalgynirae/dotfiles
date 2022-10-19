@@ -6,7 +6,6 @@ HISTFILE=~/.bash_history_actual
 HISTFILESIZE=-1
 HISTIGNORE="history:bg*:d:dls:e:fg*:ls:ll:la:su"
 HISTSIZE=-1
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 shopt -s histappend
 set +H
 
@@ -56,6 +55,14 @@ alias uncommas="tr , '\n'"
 
 # Disable C-s/C-q pausing and resuming output
 stty -ixon
+
+_prompt_command() {
+  history -a
+  if [[ $TMUX ]]; then
+    eval "$(tmux showenv -s DARK_THEME)"
+  fi
+}
+PROMPT_COMMAND="_prompt_command${PROMPT_COMMAND:+"; $PROMPT_COMMAND"}"
 
 cal() {
   local year
