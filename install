@@ -98,7 +98,7 @@ install kitty.conf ~/.config/kitty/kitty.conf
 install mpv.conf ~/.config/mpv/mpv.conf
 install nvim ~/.config/nvim
 install nvim/plugins ~/.local/share/nvim/site/pack/plugins/start
-install pipewire/alsa-monitor.conf ~/.config/pipewire/media-session.d/alsa-monitor.conf
+install pipewire/10-zeroconf.conf ~/.config/pipewire/pipewire.conf.d/10-zeroconf.conf
 install profile ~/.profile
 install pythonrc ~/.pythonrc
 install swaylock ~/.config/swaylock/config
