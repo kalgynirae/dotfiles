@@ -293,10 +293,13 @@ that() {
 
 # Execute a command whenever a file is written
 watchfile() {
-  local immediate
+  local git immediate
   declare -a args
   while (( $# > 0 )) && [[ $1 != -- ]]; do
     case "$1" in
+      --git)
+        git=yes
+        ;;
       -i)
         immediate=yes
         ;;
@@ -314,8 +317,15 @@ watchfile() {
   if [[ $immediate ]]; then
     "$@"
   fi
-  while inotifywait -e modify -e attrib -e close_write --exclude '\.git' -rq "${args[@]}"; do
-    echo >&2 ">> Executing $*"
+  _wait() {
+    if [[ $git ]]; then
+      find . -mindepth 1 -name .git -prune -o -execdir git check-ignore -q {} \; -prune -o -print0 | xargs -x0 inotifywait -e modify -e attrib -e close_write -rq
+    else
+      inotifywait -e modify -e attrib -e close_write --exclude '\.git' -rq "${args[@]}"
+    fi
+  }
+  while _wait "${args[@]}"; do
+    echo >&2 ">> Executing ${*@Q}"
     "$@"
   done
 }
