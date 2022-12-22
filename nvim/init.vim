@@ -159,9 +159,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdateSync'}
 Plug 'nvim-treesitter/playground'
 
 " telescope.nvim
-Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope.nvim', {'branch': '0.1.x'}
 
 call plug#end()
 
@@ -175,7 +174,7 @@ local lsp_attach = function(client)
   vim.api.nvim_buf_set_keymap(0, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {})
   vim.api.nvim_buf_set_keymap(0, "n", "gD", "<Cmd>lua vim.lsp.buf.implementation()<CR>", {})
   vim.api.nvim_buf_set_keymap(0, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", {})
-  vim.api.nvim_buf_set_keymap(0, "n", "Q", "<Cmd>lua vim.lsp.buf.formatting()<CR>", {})
+  vim.api.nvim_buf_set_keymap(0, "n", "Q", "<Cmd>lua vim.lsp.buf.format({timeout_ms = 1000})<CR>", {})
   vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
   vim.api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
@@ -253,6 +252,7 @@ nnoremap Q :Format<CR>
 
 " nvim-treesitter
 lua <<EOF
+require('nvim-treesitter.install').prefer_git = true
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
     "bash",
