@@ -1,8 +1,7 @@
 #!/bin/bash
 
-if [[ $NVIM_LISTEN_ADDRESS ]]; then
-  nvim_pid=$(lsof -Fp $NVIM_LISTEN_ADDRESS | sed -n 's/^p\(.*\)/\1/p')
-  tty=$(tty </proc/$nvim_pid/fd/0)
+if [[ $NVIM_LOG_FILE ]]; then
+  tty=$(tty </proc/$PPID/fd/0)
 else
   tty=/dev/tty
 fi
