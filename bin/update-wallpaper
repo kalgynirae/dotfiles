@@ -128,6 +128,7 @@ render-quote "$dir/resized-lock.mpc" "$dir/wallpaper-lock.jpg"
 mv -t ~/.cache "$dir/wallpaper.jpg" "$dir/wallpaper-lock.jpg"
 
 systemctl --user try-restart swaybg
+gsettings set org.gnome.desktop.background picture-options "zoom"
 gsettings set org.gnome.desktop.background picture-uri "file://$HOME/.cache/wallpaper.jpg"
 gsettings set org.gnome.desktop.background picture-uri-dark "file://$HOME/.cache/wallpaper.jpg"
 gsettings set org.gnome.desktop.screensaver picture-uri "file://$HOME/.cache/wallpaper-lock.jpg"
