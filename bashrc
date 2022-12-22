@@ -285,10 +285,10 @@ that() {
     end=${arg/*-/}
   fi
   tmux capture-pane -eJp -S - -E - | perl -ne '
-    if (/▶▶▶.*\['"$start"'\]/) {$p = 1}
-    if (/(.*)▶▶▶.*\['"$end"'\]/ && $p == 1) {print $1; exit}
+    if (/▶.*\['"$start"'\]/) {$p = 1}
+    if (/([^▶]*)▶.*\['"$end"'\]/ && $p == 1) {print $1; exit}
     print if $p
-  ' | sed '/▶▶▶.*\[/ s/\[[[:digit:]]\+\]//'
+  ' | sed '/▶.*\[/ s/\[[[:digit:]]\+\]//'
 }
 
 # Execute a command whenever a file is written
