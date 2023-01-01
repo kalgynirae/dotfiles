@@ -89,6 +89,7 @@ install gammastep.ini ~/.config/gammastep/config.ini
 install gemrc ~/.gemrc
 install gitconfig ~/.gitconfig
 install gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
+install gtk-4.0-settings.ini ~/.config/gtk-4.0/settings.ini
 install gtkrc-2.0 ~/.gtkrc-2.0
 install imv ~/.config/imv/config
 install index.theme ~/.local/share/icons/default/index.theme
