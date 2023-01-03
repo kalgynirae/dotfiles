@@ -1,9 +1,17 @@
 #!/bin/bash
 shopt -s nullglob
 
+log() {
+  printf '%s\n' "$*"
+}
+
+log-change() {
+  printf '\e[33m%s\e[39m\n' "$*"
+}
+
 if grep -q "Arch Linux" /etc/os-release; then
   if [[ $1 != --packages ]]; then
-    echo "Not installing packages without --packages"
+    log "Not installing packages without --packages"
   else
     packages() {
       {
@@ -18,16 +26,16 @@ fi
 
 maybelink() {
   if [[ ! -e $1 ]]; then
-    echo "$1 doesn't exist; skipping"
+    log "${1@Q} doesn't exist; skipping"
   elif [[ $2 -ef $1 ]]; then
-    echo "$2 is already correct; skipping"
+    log "${2@Q} is already correct; skipping"
   else
     mkdir -vp "$(dirname "$2")"
     if [[ -e $2 || -h $2 ]]; then
-      echo mv "$2" "$2.old"
+      log-change "mv ${2@Q} ${2@Q}.old"
       mv "$2" "$2.old"
     fi
-    echo ln --symbolic --relative "$1" "$2"
+    log-change "ln --symbolic --relative ${1@Q} ${2@Q}"
     ln --symbolic --relative "$1" "$2"
   fi
 }
@@ -36,32 +44,34 @@ render() {
   local source=$1.mustache
   local dest=$2
   if [[ ! -e .data.yml ]]; then
-    echo ".data.yml doesn't exist; skipping all rendering"
+    log ".data.yml doesn't exist; skipping all rendering"
     return
   elif [[ ! -e $source ]]; then
-    echo "$source doesn't exist; skipping"
+    log "${source@Q} doesn't exist; skipping"
     return
   fi
   if [[ $source -ot $dest ]]; then
-    echo "$dest was updated more recently than $source; skipping"
+    log "${dest@Q} was updated more recently than ${source@Q}; skipping"
     diff --color -u <(mustache .data.yml "$source") "$dest"
   else
     mkdir -vp "$(dirname "$dest")"
     if [[ -e $dest && ! -f $dest || -h $dest ]]; then
-      echo mv "$dest" "$dest.old"
+      log-change "mv ${dest@Q} ${dest@Q}.old"
       mv "$dest" "$dest.old"
     fi
     if ! temp="$(mktemp)"; then
-      echo "Not rendering $dest because mktemp failed"
+      log "Not rendering ${dest@Q} because mktemp failed"
       return
     fi
-    echo mustache .data.yml "$source" \>"$temp"
+    log "mustache .data.yml ${source@Q} >${temp@Q}"
     mustache .data.yml "$source" >"$temp"
     if ! cmp --quiet "$dest" "$temp"; then
+      log-change "mv -fTv ${temp@Q} ${dest@Q}"
       mv -fTv "$temp" "$dest"
+      log-change "touch -mr ${source@Q} ${dest@Q}"
       touch -mr "$source" "$dest"
     else
-      echo "$dest is already correct; skipping"
+      log "${dest@Q} is already correct; skipping"
       rm "$temp"
     fi
   fi
@@ -153,11 +163,11 @@ if (( count == 1 )); then
   install userChrome.css "$profile"/chrome/userChrome.css
   install userContent.css "$profile"/chrome/userContent.css
 else
-  echo "$count Firefox profiles found; skipping"
+  log "$count Firefox profiles found; skipping"
 fi
 
-echo "Compiling terminfos.ti"
+log-change "Compiling terminfos.ti"
 TERMINFO=/usr/share/terminfo tic -x -o ~/.terminfo terminfos.ti
 
-echo "Reloading systemd --user"
+log-change "Reloading systemd --user"
 systemctl --user daemon-reload
