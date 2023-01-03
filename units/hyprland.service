@@ -1,0 +1,24 @@
+[Unit]
+Wants=graphical-session-pre.target
+After=graphical-session-pre.target
+PartOf=graphical-session.target
+Before=graphical-session.target
+Wants=gammastep.service
+Wants=mako.service
+Wants=polkit-gnome.service
+Wants=swww.service
+Wants=update-wallpaper.timer
+Wants=waybar.service
+
+[Service]
+Type=notify
+ExecStartPre=systemctl --user set-environment XDG_CURRENT_DESKTOP=Hyprland XDG_SESSION_TYPE=wayland
+ExecStart=Hyprland
+ExecStopPost=systemctl --user unset-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XCURSOR_SIZE XCURSOR_THEME XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+OOMPolicy=continue
+NotifyAccess=all
+Slice=session.slice
+TimeoutStartSec=infinity
+
+[Install]
+Alias=compositor.service

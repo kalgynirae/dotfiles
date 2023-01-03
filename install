@@ -101,6 +101,7 @@ install gitconfig ~/.gitconfig
 install gtk-3.0-settings.ini ~/.config/gtk-3.0/settings.ini
 install gtk-4.0-settings.ini ~/.config/gtk-4.0/settings.ini
 install gtkrc-2.0 ~/.gtkrc-2.0
+install hyprland.conf ~/.config/hypr/hyprland.conf
 install imv ~/.config/imv/config
 install index.theme ~/.local/share/icons/default/index.theme
 install inputrc ~/.inputrc

@@ -1,0 +1,9 @@
+[Unit]
+BindsTo=compositor.service
+After=compositor.service
+
+[Service]
+Environment=SWWW_TRANSITION_TYPE=simple
+ExecStart=swww init --no-daemon
+ExecStartPost=swww img %h/.cache/wallpaper.jpg
+Restart=on-failure
