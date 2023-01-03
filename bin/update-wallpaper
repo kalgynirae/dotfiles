@@ -4,6 +4,7 @@
 if [[ $HOSTNAME == colinchan-fedora-* ]]; then
   primarysize=1600x2560
   #primarysize=1920x1080
+  #primarysize=3840x2160
 else
   primarysize=2560x1440
 fi
