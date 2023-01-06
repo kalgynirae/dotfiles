@@ -1,6 +1,12 @@
 #!/usr/bin/python3
 from __future__ import annotations
 
+import sys
+
+if (sys.version_info.major, sys.version_info.minor) < (3, 11):
+    print("error: This script requires Python 3.11 or later", file=sys.stderr)
+    sys.exit(1)
+
 CONFIGS = """
     XCompose .XCompose
     alacritty.yml .config/alacritty/alacritty.yml
@@ -39,13 +45,8 @@ CONFIGS = """
     wayfire.ini .config/wayfire.ini
 """
 
-import sys
-
-if (sys.version_info.major, sys.version_info.minor) < (3, 11):
-    print("error: This script requires Python 3.11 or later", file=sys.stderr)
-    sys.exit(1)
-
 import logging
+import os
 import tomllib
 from argparse import ArgumentParser, Namespace
 from dataclasses import asdict, dataclass
@@ -60,6 +61,7 @@ logger = logging.getLogger()
 def main() -> int:
     args = parse_args()
     configure_logging(logging.DEBUG)
+    os.chdir(os.path.dirname(__file__))
     env = Environment.load()
     logger.debug("Loaded env: %s", env)
 
@@ -152,8 +154,58 @@ def install_packages(env: Environment) -> None:
 def install_configs() -> None:
     configs = parse_configs()
     for config in configs:
-        # logger.debug("%s -> %s (template=%s)", config.source, config.dest, config.is_template)
-        pass
+        if config.is_template:
+            logger.warning("Skipping template config %s", config)
+            result, message = render_template(config.source, config.dest)
+        else:
+            result, message = ensure_symlink(config.source, config.dest)
+            result.log(config, message)
+
+
+def render_template(source: Path, dest: Path) -> tuple[Result, str | None]:
+    ...
+
+
+def ensure_symlink(source: Path, dest: Path) -> tuple[Result, str | None]:
+    dest_to_source_relpath = os.path.relpath(source, start=dest.parent)
+    if dest.is_symlink():
+        if os.readlink(dest) == dest_to_source_relpath:
+            return (Result.OK, None)
+        else:
+            return (Result.ERROR, f"dest is already a symlink")
+    elif dest.is_dir():
+        return (Result.ERROR, f"dest is already a directory")
+    elif dest.exists() and not dest.is_file():
+        return (Result.ERROR, f"dest exists but is not a symlink, directory, or file")
+    else:
+        if dest.is_file():
+            dest_old = dest.with_name(dest.name + ".old")
+            logger.debug("mv %r -> %r", str(dest), str(dest_old))
+            dest.rename(dest_old)
+        dest_to_source_relpath = os.path.relpath(source, start=dest.parent)
+        logger.debug("ln -s %r %r", dest_to_source_relpath, str(dest))
+        dest.symlink_to(dest_to_source_relpath)
+        return (Result.CHANGED, None)
+
+
+class Result(Enum):
+    OK = auto()
+    CHANGED = auto()
+    ERROR = auto()
+
+    def log(self, config: Config, message: str) -> str:
+        message = f" {message}" if message is not None else ""
+        match self:
+            case Result.OK:
+                logger.info("\033[1mok\033[22m \033[32m%s\033[39m%s", config, message)
+            case Result.CHANGED:
+                logger.info(
+                    "\033[1mchanged\033[22m \033[33m%s\033[39m%s", config, message
+                )
+            case Result.ERROR:
+                logger.info(
+                    "\033[1merror\033[22m \033[31m%s\033[39m%s", config, message
+                )
 
 
 @dataclass
@@ -162,11 +214,16 @@ class Config:
     dest: Path
     is_template: bool
 
+    def __str__(self) -> str:
+        return str(self.dest.relative_to(Path.home()))
+
 
 def parse_configs() -> list[Config]:
     configs = []
     for line in dedent(CONFIGS).strip().splitlines():
-        source, dest = map(Path, line.split(maxsplit=1))
+        source, dest = line.split(maxsplit=1)
+        source = Path(source)
+        dest = Path.home() / dest
         source_template = source.with_name(source.name + ".mustache")
         is_template = False
         if source.exists() and source_template.exists():
@@ -182,6 +239,10 @@ def parse_configs() -> list[Config]:
             is_template = True
         configs.append(Config(source, dest, is_template))
     return configs
+
+
+def green(s: Any) -> str:
+    return f"\033[32m{s}\033[39m"
 
 
 if __name__ == "__main__":
