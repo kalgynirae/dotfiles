@@ -1,12 +1,10 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 26,
+  "height": 30,
 
   "modules-left": [
-    "sway/workspaces",
-    "sway/mode",
-    "wlr/taskbar",
+    "wlr/workspaces",
     "idle_inhibitor"
   ],
 
@@ -97,9 +95,9 @@
     "tooltip": false
   },
 
-  "sway/workspaces": {
-    "disable-scroll-wraparound": true,
-    "enable-bar-scroll": true
+  "wlr/workspaces": {
+    "on-scroll-up": "hyprctl dispatch workspace m+1",
+    "on-scroll-down": "hyprctl dispatch workspace m-1"
   },
 
   "temperature": {
