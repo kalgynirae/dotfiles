@@ -1,3 +1,18 @@
 #!/bin/sh
 
+source ~/dotfiles/config.sh
+case $DESKTOP in
+  hyprland)
+    XDG_CURRENT_DESKTOP=Hyprland
+    ;;
+  sway)
+    XDG_CURRENT_DESKTOP=sway
+    ;;
+esac
+
+export XDG_CURRENT_DESKTOP
+export XDG_SESSION_TYPE=wayland
+
+systemctl --user import-environment XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 systemctl --user start --wait compositor.service
+systemctl --user unset-environment XDG_CURRENT_DESKTOP XDG_SESSION_TYPE

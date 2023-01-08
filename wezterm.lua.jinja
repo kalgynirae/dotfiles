@@ -6,7 +6,7 @@ return {
 
   bold_brightens_ansi_colors = false,
   force_reverse_video_cursor = true,
-{{#dark-theme}}
+{% if theme == "dark" %}
   colors = {
     background = '#1c2022',
     foreground = '#c0c0c0',
@@ -31,8 +31,7 @@ return {
       '#e0e0e0',
     },
   },
-{{/dark-theme}}
-{{^dark-theme}}
+{% else %}
   colors = {
     background = '#f4f4f4',
     foreground = '#303030',
@@ -57,7 +56,7 @@ return {
       '#cccccc',
     },
   },
-{{/dark-theme}}
+{% endif %}
   font = wezterm.font_with_fallback({
     "Iosevka Term",
     "Font Awesome 5 Pro Solid",

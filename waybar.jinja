@@ -1,7 +1,7 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 30,
+  "height": 28,
 
   "modules-left": [
     "wlr/workspaces",
@@ -17,9 +17,9 @@
     "custom/psi-io",
     "temperature",
     "pulseaudio",
-    {{#colinchan-fedora}}
+    {% if host == "colinchan-fedora" %}
     "battery",
-    {{/colinchan-fedora}}
+    {% endif %}
     "clock"
   ],
 

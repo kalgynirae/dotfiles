@@ -1,4 +1,4 @@
-{{#dark-theme}}
+{% if theme == "dark" %}
 colors:
   primary:
     background: '#1c2022'
@@ -24,8 +24,7 @@ colors:
   transparent_background_colors: true
 env:
   DARK_THEME: yes
-{{/dark-theme}}
-{{^dark-theme}}
+{% else %}
 colors:
   primary:
     background: '#f4f4f4'
@@ -61,7 +60,7 @@ colors:
     white:   '#505050'
 env:
   DARK_THEME: no
-{{/dark-theme}}
+{% endif %}
 
 draw_bold_text_with_bright_colors: false
 

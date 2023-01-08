@@ -1,12 +1,6 @@
 [input]
-{{#colinchan-fedora}}
-cursor_theme = DMZ-White
-cursor_size = 48
-{{/colinchan-fedora}}
-{{^colinchan-fedora}}
-cursor_theme = Adwaita
-cursor_size = 32
-{{/colinchan-fedora}}
+cursor_theme = {{ cursor_theme }}
+cursor_size = {{ cursor_size }}
 
 disable_touchpad_while_typing = true
 kb_numlock_default_state = true
@@ -15,7 +9,7 @@ kb_repeat_rate = 55
 xkb_layout = us
 xkb_options = caps:ctrl_modifier,compose:ralt
 
-{{#colinchan-fedora}}
+{% if host == "colinchan-fedora" %}
 [output:eDP-1]
 position = 0,1080
 
@@ -25,15 +19,15 @@ position = 1920,0
 [output:DP-3]
 position = 5760,0
 transform = 90
-{{/colinchan-fedora}}
+{% endif %}
 
-{{#apartmantwo}}
+{% if host == "apartmantwo" %}
 [output:DP-5]
 position = 0,0
 
 [output:DP-4]
 position = 2560,0
-{{/apartmantwo}}
+{% endif %}
 
 [core]
 plugins = \

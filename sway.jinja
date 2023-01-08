@@ -5,7 +5,20 @@ tiling_drag enable
 titlebar_border_thickness 0
 titlebar_padding 4 2
 
-{{^fruitron}}
+{% if host == "fruitron" %}
+font pango:DejaVu Sans 12
+set $mod Mod1
+set $term termite
+
+input type:keyboard {
+    repeat_delay 300
+    repeat_rate 30
+}
+input type:touchpad {
+    accel_profile adaptive
+    pointer_accel 1
+}
+{% else %}
 font pango:DejaVu Sans 10
 set $mod Mod4
 set $term kitty
@@ -29,25 +42,11 @@ bindsym --input-device=1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall --whole-wi
 bindsym --input-device=1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall --whole-window --inhibited --release BTN_BACK seat - cursor release BTN_SIDE
 bindsym --input-device=1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall --whole-window --inhibited BTN_SIDE wtype -k Return
 
-{{/fruitron}}
-{{#fruitron}}
-font pango:DejaVu Sans 12
-set $mod Mod1
-set $term termite
-
-input type:keyboard {
-    repeat_delay 300
-    repeat_rate 30
-}
-input type:touchpad {
-    accel_profile adaptive
-    pointer_accel 1
-}
-{{/fruitron}}
+{% endif %}
 
 output * subpixel rgb
 
-{{#colinchan-fedora}}
+{% if host == "colinchan-fedora" %}
 # laptop only
 #output eDP-1 position 0 0
 # home
@@ -63,22 +62,17 @@ bindswitch --reload --locked lid:on output eDP-1 disable
 bindswitch --reload --locked lid:off output eDP-1 enable
 
 output * max_render_time 12
-{{/colinchan-fedora}}
+{% endif %}
 
-{{#apartmantwo}}
+{% if host == "apartmantwo" %}
 output DP-5 position 0 0
 output DP-4 position 2560 0
 workspace 4 output DP-5
 workspace 6 output DP-4
 output * max_render_time 8
-{{/apartmantwo}}
+{% endif %}
 
-{{#colinchan-fedora}}
-seat * xcursor_theme DMZ-White 48
-{{/colinchan-fedora}}
-{{^colinchan-fedora}}
-seat * xcursor_theme Adwaita 32
-{{/colinchan-fedora}}
+seat * xcursor_theme {{ cursor_theme }} {{ cursor_size }}
 
 # Sway
 bindsym $mod+Shift+r reload

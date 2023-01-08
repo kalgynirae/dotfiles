@@ -1,0 +1,3 @@
+[[language]]
+name = "python"
+language-server = { command = "pipenv", args = ["run", "pylsp"] }

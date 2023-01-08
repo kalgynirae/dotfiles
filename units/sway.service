@@ -13,9 +13,10 @@ Wants=waybar.service
 
 [Service]
 Type=notify
-ExecStartPre=systemctl --user set-environment XDG_CURRENT_DESKTOP=sway XDG_SESSION_TYPE=wayland
+Environment=XDG_CURRENT_DESKTOP=sway
+Environment=XDG_SESSION_TYPE=wayland
 ExecStart=sway
-ExecStopPost=systemctl --user unset-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XCURSOR_SIZE XCURSOR_THEME XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+ExecStopPost=systemctl --user unset-environment XDG_CURRENT_DESKTOP XDG_SESSION_TYPE DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XCURSOR_SIZE XCURSOR_THEME
 OOMPolicy=continue
 NotifyAccess=all
 Slice=session.slice

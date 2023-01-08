@@ -8,7 +8,7 @@ initial_window_width 120c
 remember_window_size no
 scrollback_lines 10000
 
-{{#dark-theme}}
+{% if theme == "dark" %}
 foreground #c0c0c0
 background #1c2022
 color0  #505050
@@ -29,8 +29,7 @@ color14 #00b2ab
 color15 #e0e0e0
 wayland_titlebar_color #2a2f31
 env DARK_THEME=yes
-{{/dark-theme}}
-{{^dark-theme}}
+{% else %}
 foreground #636363
 background #f2f2f2
 color0  #b1b1b1
@@ -50,7 +49,7 @@ color13 #d665cf
 color14 #00bb9d
 color15 #555555
 env DARK_THEME=no
-{{/dark-theme}}
+{% endif %}
 dim_opacity 0.6
 cursor none
 selection_foreground none
