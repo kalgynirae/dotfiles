@@ -1,16 +1,10 @@
 #!/bin/sh
 
-source ~/dotfiles/config.sh
-case $DESKTOP in
-  hyprland)
-    XDG_CURRENT_DESKTOP=Hyprland
-    ;;
-  sway)
-    XDG_CURRENT_DESKTOP=sway
-    ;;
-esac
-
-export XDG_CURRENT_DESKTOP
+{% if desktop == "hyprland" %}
+export XDG_CURRENT_DESKTOP=Hyprland
+{% else %}
+export XDG_CURRENT_DESKTOP={{ desktop }}
+{% endif %}
 export XDG_SESSION_TYPE=wayland
 
 systemctl --user import-environment XDG_CURRENT_DESKTOP XDG_SESSION_TYPE

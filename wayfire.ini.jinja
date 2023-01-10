@@ -100,11 +100,11 @@ binding_interact = <super> KEY_X
 command_interact = makoctl menu wofi -d -p 'Choose Action: '
 
 binding_terminal = <super> KEY_ENTER
-command_terminal = systemd-run-launch-app kitty kitty -e tmux new-session
+command_terminal = systemd-run-launch-app {{ terminal_app }} {{ terminal_app }} -e tmux new-session
 binding_terminal_no_tmux = <super> <shift> KEY_ENTER
-command_terminal_no_tmux = systemd-run-launch-app kitty kitty
+command_terminal_no_tmux = systemd-run-launch-app {{ terminal_app }} {{ terminal_app }}
 binding_terminal_direct = <super> <shift> <alt> KEY_ENTER
-command_terminal_direct = kitty
+command_terminal_direct = {{ terminal_app }}
 binding_launcher = <super> KEY_SPACE
 command_launcher = applauncher
 binding_browser = <super> KEY_B

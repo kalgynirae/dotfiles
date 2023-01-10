@@ -61,7 +61,7 @@ dwindle {
 blurls = waybar
 
 $mod = SUPER
-$term = kitty
+$term = {{ terminal_app }}
 
 # Launching
 bind = $mod, Return, exec, systemd-run-launch-app $term $term -e tmux new-session

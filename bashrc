@@ -220,7 +220,7 @@ open() {
 pedit() {
   local file
   file="$(mktemp -d)/pedit" || return
-  $EDITOR >/dev/tty - +"file $file" +"set noreadonly"
+  nvim >/dev/tty - +"file $file" +"set noreadonly"
   [[ -f "$file" ]] && cat "$file" || return 1
 }
 
