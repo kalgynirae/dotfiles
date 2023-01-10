@@ -26,44 +26,47 @@ from jinja2 import Template
 
 CONFIGS = {
     ".XCompose": "XCompose",
-    ".config/alacritty/alacritty.yml": "alacritty.yml.jinja",
     ".alsoftrc": "alsoftrc",
     ".bash_profile": "bash_profile",
     ".bashrc": "bashrc",
+    ".config/alacritty/alacritty.yml": "alacritty.yml.jinja",
     ".config/electron-flags.conf": "electron-flags.conf",
     ".config/electron15-flags.conf": "electron15-flags.conf",
     ".config/environment.d/environment.conf": "environment.conf",
     ".config/fontconfig/fonts.conf": "fonts.conf",
     ".config/gammastep/config.ini": "gammastep.ini.jinja",
-    ".gemrc": "gemrc",
-    ".gitconfig": "gitconfig",
     ".config/gtk-3.0/settings.ini": "gtk-3.0-settings.ini.jinja",
     ".config/gtk-4.0/settings.ini": "gtk-4.0-settings.ini",
-    ".gtkrc-2.0": "gtkrc-2.0",
     ".config/helix/config.toml": "helix.toml",
     ".config/helix/languages.toml": "helix-languages.toml",
     ".config/hypr/hyprland.conf": "hyprland.conf.jinja",
     ".config/imv/config": "imv",
-    ".local/share/icons/default/index.theme": "index.theme.jinja",
-    ".inputrc": "inputrc",
-    ".ipython/profile_default/ipython_config.py": "ipython_config.py",
     ".config/kitty/kitty.conf": "kitty.conf.jinja",
     ".config/mpv/mpv.conf": "mpv.conf",
     ".config/nvim": "nvim",
     ".config/pipewire/pipewire.conf.d/10-zeroconf.conf": "pipewire/10-zeroconf.conf",
-    ".profile": "profile",
-    ".pythonrc": "pythonrc",
-    ".config/swaylock/config": "swaylock",
-    ".tmux.conf": "tmux.conf",
-    ".config/user-dirs.dirs": "user-dirs.dirs",
-    ".config/wezterm/wezterm.lua": "wezterm.lua.jinja",
     ".config/sway/config": "sway.jinja",
+    ".config/swaylock/config": "swaylock",
+    ".config/user-dirs.dirs": "user-dirs.dirs",
     ".config/waybar/config": "waybar.jinja",
     ".config/waybar/style.css": "waybar.css",
     ".config/wayfire.ini": "wayfire.ini.jinja",
+    ".config/wezterm/wezterm.lua": "wezterm.lua.jinja",
+    ".gemrc": "gemrc",
+    ".gitconfig": "gitconfig",
+    ".gtkrc-2.0": "gtkrc-2.0",
+    ".inputrc": "inputrc",
+    ".ipython/profile_default/ipython_config.py": "ipython_config.py",
+    ".local/share/icons/default/index.theme": "index.theme.jinja",
+    ".profile": "profile",
+    ".pythonrc": "pythonrc",
+    ".tmux.conf": "tmux.conf",
 }
+CONFIGS |= {f".local/share/{p}": str(p) for p in Path("applications").iterdir()}
+CONFIGS |= {str(p).removesuffix(".jinja"): str(p) for p in Path("bin").iterdir()}
 CONFIGS |= {
-    str(bin).removesuffix(".jinja"): str(bin) for bin in Path("bin").iterdir()
+    f".config/systemd/user/{p.name}".removesuffix(".jinja"): str(p)
+    for p in Path("units").iterdir()
 }
 
 environment = None
@@ -223,9 +226,7 @@ def install_configs() -> None:
             )
 
 
-def render_template(
-    source: Path, dest: Path
-) -> tuple[Result, str | Exception | None]:
+def render_template(source: Path, dest: Path) -> tuple[Result, str | Exception | None]:
     if not source.is_file():
         return (Result.ERROR, f"source is not a file")
     template = Template(
@@ -284,7 +285,7 @@ def ensure_symlink(source: Path, dest: Path) -> tuple[Result, str | Exception | 
         return (Result.ERROR, f"dest is already a directory")
     if dest.exists() and not dest.is_file():
         return (Result.ERROR, f"dest exists but is not a symlink, directory, or file")
-    
+
     try:
         mkdir_parents_and_backup_existing(dest)
     except RuntimeError as e:
@@ -428,8 +429,12 @@ def apply_settings() -> None:
         "org.gnome.desktop.interface.cursor-blink",
         "true" if environment.cursor_blink else "false",
     )
-    gsettings_set("org.gnome.desktop.interface.cursor-theme", str(environment.cursor_theme))
-    gsettings_set("org.gnome.desktop.interface.cursor-size", str(environment.cursor_size))
+    gsettings_set(
+        "org.gnome.desktop.interface.cursor-theme", str(environment.cursor_theme)
+    )
+    gsettings_set(
+        "org.gnome.desktop.interface.cursor-size", str(environment.cursor_size)
+    )
     gsettings_set(
         "org.gnome.desktop.peripherals.keyboard.delay", str(environment.keyrepeat_delay)
     )
