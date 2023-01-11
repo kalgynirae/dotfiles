@@ -15,11 +15,9 @@ Wants=waybar.service
 Type=notify
 Environment=XCURSOR_SIZE={{ cursor_size }}
 Environment=XCURSOR_THEME={{ cursor_theme }}
-Environment=XDG_CURRENT_DESKTOP=Hyprland
-Environment=XDG_SESSION_TYPE=wayland
-ExecStartPre=systemctl --user import-environment XCURSOR_SIZE XCURSOR_THEME XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+ExecStartPre=systemctl --user import-environment XCURSOR_SIZE XCURSOR_THEME
 ExecStart=Hyprland
-ExecStopPost=systemctl --user unset-environment XCURSOR_SIZE XCURSOR_THEME XDG_CURRENT_DESKTOP XDG_SESSION_TYPE DISPLAY WAYLAND_DISPLAY
+ExecStopPost=systemctl --user unset-environment XCURSOR_SIZE XCURSOR_THEME DISPLAY WAYLAND_DISPLAY
 OOMPolicy=continue
 NotifyAccess=all
 Slice=session.slice
