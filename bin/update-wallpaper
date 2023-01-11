@@ -132,7 +132,7 @@ case $XDG_CURRENT_DESKTOP in
   Hyprland)
     swww img ~/.cache/wallpaper.jpg
     ;;
-  sway|wayfire)
+  sway)
     systemctl --user try-restart swaybg
     ;;
   *)

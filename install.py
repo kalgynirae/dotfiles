@@ -50,7 +50,6 @@ CONFIGS = {
     ".config/user-dirs.dirs": "user-dirs.dirs",
     ".config/waybar/config": "waybar.jinja",
     ".config/waybar/style.css": "waybar.css",
-    ".config/wayfire.ini": "wayfire.ini.jinja",
     ".config/wezterm/wezterm.lua": "wezterm.lua.jinja",
     ".gemrc": "gemrc",
     ".gitconfig": "gitconfig",
