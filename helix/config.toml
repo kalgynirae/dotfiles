@@ -1,0 +1,21 @@
+theme = "kalgykai-dark"
+
+[editor]
+color-modes = true
+cursorline = true
+idle-timeout = 100
+
+[editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+'“' = '”'
+'‘' = '’'
+
+[editor.cursor-shape]
+insert = "bar"
+
+[editor.whitespace.render]
+tab = "all"

@@ -1,0 +1,102 @@
+"attribute" = "cyan"
+"comment" = { fg = "dim-white", modifiers = ["italic"] }
+"constant" = "blue"
+"constant.character" = "yellow"
+"constant.character.escape" = { fg = "orange", modifiers = ["italic"] }
+"function" = "green"
+"function.macro" = "violet"
+"function.special" = "violet"
+"keyword" = { fg = "dim-white", modifiers = ["bold"] }
+"label" = "cyan"
+"markup.bold" = { modifiers = ["bold"] }
+"markup.heading" = "orange"
+"markup.italic" = { modifiers = ["italic"] }
+"markup.link.label" = "blue"
+"operator" = "dim-white"
+"punctuation" = "dim-white"
+"string" = "yellow"
+"tag" = "green"
+"type" = "cyan"
+"variable.builtin" = { modifiers = ["bold"] }
+"variable.parameter" = "dim-white"
+
+"hint" = "bright-cyan"
+"info" = "bright-blue"
+"warning" = "bright-orange"
+"error" = "bright-red"
+"diagnostic.hint" = "bright-cyan"
+"diagnostic.info" = "bright-blue"
+"diagnostic.warning" = "bright-orange"
+"diagnostic.error" = "bright-red"
+
+"diff.plus" = "green"
+"diff.minus" = "red"
+"diff.delta" = "orange"
+
+"ui.cursor" = { fg = "bg", bg = "dim-white" }
+"ui.cursor.match" = { fg = "bright-orange", bg = "dim-grey" }
+"ui.cursor.primary" = { fg = "bg", bg = "bright-white" }
+"ui.cursor.primary.insert" = { fg = "bg", bg = "bright-green" }
+"ui.cursor.primary.select" = { fg = "bg", bg = "bright-cyan" }
+"ui.cursorline.primary" = { bg = "bright-bg" }
+"ui.linenr" = "grey"
+"ui.linenr.selected" = { fg = "grey", modifiers = ["bold"] }
+"ui.selection" = { bg = "hl-grey" }
+"ui.statusline" = { fg = "bright-white", bg = "grey", modifiers = ["bold"] }
+"ui.statusline.inactive" = { fg = "dim-white", bg = "bright-bg" }
+"ui.statusline.normal" = { fg = "black", bg = "bright-white", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "black", bg = "bright-green", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "black", bg = "bright-cyan", modifiers = ["bold"] }
+"ui.text" = "white"
+"ui.virtual.whitespace" = { fg = "dim-grey" }
+"ui.virtual.ruler" = { bg = "bright-bg" }
+"ui.window" = { fg = "grey" }  # border between windows
+
+# Command line
+"ui.help" = { fg = "bright-blue", bg = "bright-bg" }
+"ui.menu" = { bg = "bright-bg" }
+"ui.menu.selected" = { fg = "black", bg = "green" }
+
+# File picker
+"ui.background" = { fg = "dim-white", bg = "bg" }
+"ui.text.focus" = { fg = "black", bg = "green", modifiers = ["bold"] }
+"special" = { underline = { style = "line" } }  # matching characters in file picker
+"ui.highlight" = { bg = "hl-grey" }  # highlight on lines containing reference
+
+# Keybinding help popup
+"ui.popup" = { fg = "bright-blue", bg = "bright-bg" }
+"ui.text.info" = { fg = "bright-blue" }
+
+[palette]
+black = "#000000"
+bg = "#1c2022"
+bright-bg = "#232729"
+dim-grey = "#38383a"
+grey = "#505050"
+dim-white = "#707070"
+white = "#a0a0a0"
+red = "#b44738"
+orange = "#af6423"
+yellow = "#a79026"
+green = "#518921"
+cyan = "#008f89"
+blue = "#3982ce"
+violet = "#806acc"
+magenta = "#ae4fa3"
+bright-white = "#c0c0c0"
+bright-red = "#d2614f"
+bright-orange = "#cd7e3c"
+bright-yellow = "#c9b047"
+bright-green = "#6ea63f"
+bright-cyan = "#00b2ab"
+bright-blue = "#5799e7"
+bright-violet = "#957fe3"
+bright-magenta = "#c866bb"
+bg-red = "#390c00"
+bg-orange = "#351b00"
+bg-yellow = "#2e2600"
+bg-cyan = "#002b29"
+bg-blue = "#002444"
+hl-grey = "#505050"
+hl-yellow = "#5b5700"
+hl-cyan = "#387571"
