@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-from __future__ import annotations
-
 import sys
 
 if (sys.version_info.major, sys.version_info.minor) < (3, 10):
@@ -10,11 +8,11 @@ if (sys.version_info.major, sys.version_info.minor) < (3, 10):
 import logging
 import os
 import socket
-import tomli
 from argparse import ArgumentParser, Namespace
 from dataclasses import asdict, dataclass
 from difflib import unified_diff
 from enum import Enum, auto
+from os import PathLike
 from pathlib import Path
 from shutil import copyfile
 import subprocess
@@ -22,51 +20,71 @@ import shlex
 from tempfile import NamedTemporaryFile
 from textwrap import dedent
 
-from jinja2 import Template
+from jinja2 import Environment as JinjaEnvironment
 
-CONFIGS = {
-    ".XCompose": "XCompose",
-    ".alsoftrc": "alsoftrc",
-    ".bash_profile": "bash_profile",
-    ".bashrc": "bashrc",
-    ".config/alacritty/alacritty.yml": "alacritty.yml.jinja",
-    ".config/electron-flags.conf": "electron-flags.conf",
-    ".config/electron15-flags.conf": "electron15-flags.conf",
-    ".config/environment.d/environment.conf": "environment.conf",
-    ".config/fontconfig/fonts.conf": "fonts.conf",
-    ".config/gammastep/config.ini": "gammastep.ini.jinja",
-    ".config/gtk-3.0/settings.ini": "gtk-3.0-settings.ini.jinja",
-    ".config/gtk-4.0/settings.ini": "gtk-4.0-settings.ini",
-    ".config/helix/config.toml": "helix.toml",
-    ".config/helix/languages.toml": "helix-languages.toml",
-    ".config/hypr/hyprland.conf": "hyprland.conf.jinja",
-    ".config/imv/config": "imv",
-    ".config/kitty/kitty.conf": "kitty.conf.jinja",
-    ".config/mpv/mpv.conf": "mpv.conf",
-    ".config/nvim": "nvim",
-    ".config/pipewire/pipewire.conf.d/10-zeroconf.conf": "pipewire/10-zeroconf.conf",
-    ".config/sway/config": "sway.jinja",
-    ".config/swaylock/config": "swaylock",
-    ".config/user-dirs.dirs": "user-dirs.dirs",
-    ".config/waybar/config": "waybar.jinja",
-    ".config/waybar/style.css": "waybar.css",
-    ".config/wezterm/wezterm.lua": "wezterm.lua.jinja",
-    ".gemrc": "gemrc",
-    ".gitconfig": "gitconfig",
-    ".gtkrc-2.0": "gtkrc-2.0",
-    ".inputrc": "inputrc",
-    ".ipython/profile_default/ipython_config.py": "ipython_config.py",
-    ".local/share/icons/default/index.theme": "index.theme.jinja",
-    ".profile": "profile",
-    ".pythonrc": "pythonrc",
-    ".tmux.conf": "tmux.conf",
+from installer.environment import Environment
+from installer.outputs import render, symlink_to
+
+CONFIGS: dict[str, Output] = {
+    ".XCompose": symlink_to("XCompose"),
+    ".alsoftrc": symlink_to("alsoftrc"),
+    ".bash_profile": symlink_to("bash_profile"),
+    ".bashrc": symlink_to("bashrc"),
+    ".config/alacritty/alacritty.yml": render("alacritty.yml.jinja"),
+    ".config/electron-flags.conf": symlink_to("electron-flags.conf"),
+    ".config/electron15-flags.conf": symlink_to("electron15-flags.conf"),
+    ".config/environment.d/environment.conf": symlink_to(
+        "environment.conf"
+    ),
+    ".config/fontconfig/fonts.conf": symlink_to("fonts.conf"),
+    ".config/gammastep/config.ini": render("gammastep.ini.jinja"),
+    ".config/gtk-3.0/settings.ini": render("gtk-3.0-settings.ini.jinja"),
+    ".config/gtk-4.0/settings.ini": symlink_to("gtk-4.0-settings.ini"),
+    ".config/helix/config.toml": symlink_to("helix/config.toml"),
+    ".config/helix/languages.toml": symlink_to("helix/languages.toml"),
+    ".config/helix/themes/kalgykai-dark.toml": symlink_to("helix/kalgykai-dark.toml"),
+    ".config/hypr/hyprland.conf": render("hyprland.conf.jinja"),
+    ".config/imv/config": symlink_to("imv"),
+    ".config/kitty/kitty.conf": render("kitty.conf.jinja"),
+    ".config/mpv/mpv.conf": symlink_to("mpv.conf"),
+    ".config/nvim": symlink_to("nvim"),
+    ".config/pipewire/pipewire.conf.d/10-zeroconf.conf": symlink_to(
+        "pipewire/10-zeroconf.conf"
+    ),
+    ".config/sway/config": render("sway.jinja"),
+    ".config/swaylock/config": symlink_to("swaylock"),
+    ".config/user-dirs.dirs": symlink_to("user-dirs.dirs"),
+    ".config/waybar/config": render("waybar.jinja"),
+    ".config/waybar/style.css": symlink_to("waybar.css"),
+    ".config/wezterm/wezterm.lua": render("wezterm.lua.jinja"),
+    ".gemrc": symlink_to("gemrc"),
+    ".gitconfig": symlink_to("gitconfig"),
+    ".gtkrc-2.0": symlink_to("gtkrc-2.0"),
+    ".inputrc": symlink_to("inputrc"),
+    ".ipython/profile_default/ipython_config.py": symlink_to(
+        "ipython_config.py"
+    ),
+    ".local/share/icons/default/index.theme": render("index.theme.jinja"),
+    ".profile": symlink_to("profile"),
+    ".pythonrc": symlink_to("pythonrc"),
+    ".tmux.conf": symlink_to("tmux.conf"),
 }
-CONFIGS |= {f".local/share/{p}": str(p) for p in Path("applications").iterdir()}
-CONFIGS |= {str(p).removesuffix(".jinja"): str(p) for p in Path("bin").iterdir()}
-CONFIGS |= {
-    f".config/systemd/user/{p.name}".removesuffix(".jinja"): str(p)
-    for p in Path("units").iterdir()
-}
+
+for path in Path("applications").iterdir():
+    CONFIGS[f".local/share/applications/{path.name}"] = symlink_to(path)
+
+for path in Path("bin").iterdir():
+    if path.suffix == ".jinja":
+        CONFIGS[f"bin/{path.with_suffix('').name}"] = chmod(0o755, render(path))
+    else:
+        CONFIGS[f"bin/{path.name}"] = symlink_to(path)
+
+for path in Path("units").iterdir():
+    if path.suffix == ".jinja":
+        CONFIGS[f".config/systemd/user/{path.with_suffix('').name}"] = render(path)
+    else:
+        CONFIGS[f".config/systemd/user/{path.name}"] = symlink_to(path)
+
 
 environment = None
 logger = logging.getLogger()
@@ -100,107 +118,6 @@ def configure_logging(level: logging.Level) -> None:
     logging.basicConfig(format="%(levelname)7s %(message)s", level=level)
 
 
-@dataclass
-class Environment:
-    dry_run: bool
-    desktop: Desktop
-    host: Host
-    os: OS
-    theme: Theme
-    cursor_blink: bool
-    cursor_size: int
-    cursor_theme: str
-    keyrepeat_delay: int
-    keyrepeat_rate: int
-    terminal_app: str
-
-    def __str__(self) -> str:
-        pairs = [f"{key}={value}" for key, value in asdict(self).items()]
-        return f"Environment({', '.join(pairs)})"
-
-    def as_context(self) -> dict[str, str]:
-        context = {}
-        for key, value in asdict(self).items():
-            if isinstance(value, Enum):
-                context[key] = value.name.lower().replace("_", "-")
-            else:
-                context[key] = value
-        return context
-
-    @classmethod
-    def load(cls, dry_run: bool) -> Self:
-        config = cls.read_config_toml()
-        host = cls.determine_host()
-        os = cls.determine_os()
-        return cls(
-            dry_run=dry_run,
-            desktop=Desktop[config.get("desktop", "gnome").upper()],
-            host=host,
-            os=os,
-            theme=Theme[config.get("theme", "light").upper()],
-            cursor_blink=config.get("cursor_blink", False),
-            cursor_size=config.get("cursor_size", 32),
-            cursor_theme=config.get("cursor_theme", "Adwaita"),
-            keyrepeat_delay=config.get("keyrepeat_delay", 145),
-            keyrepeat_rate=config.get("keyrepeat_rate", 55),
-            terminal_app=config.get("terminal_app", "gnome-terminal"),
-        )
-
-    @staticmethod
-    def determine_host() -> Host:
-        hostname = socket.gethostname()
-        for member in Host:
-            if member.name.lower().replace("_", "-") in hostname:
-                return member
-        return Host.OTHER
-
-    @staticmethod
-    def determine_os() -> OS:
-        try:
-            os_release = Path("/etc/os-release").read_text()
-        except FileNotFoundError:
-            pass
-        else:
-            if "Arch Linux" in os_release:
-                return OS.ARCH
-            elif "Fedora Linux" in os_release:
-                return OS.FEDORA
-        return OS.OTHER
-
-    @staticmethod
-    def read_config_toml() -> dict[str, bool | str]:
-        try:
-            data = Path("config.toml").read_text()
-        except FileNotFoundError:
-            return {}
-        return tomli.loads(data)
-
-
-class Desktop(Enum):
-    GNOME = auto()
-    HYPRLAND = auto()
-    SWAY = auto()
-    WAYFIRE = auto()
-
-
-class Host(Enum):
-    APARTMANTWO = auto()
-    COLINCHAN_FEDORA = auto()
-    FRUITRON = auto()
-    OTHER = auto()
-
-
-class OS(Enum):
-    ARCH = auto()
-    FEDORA = auto()
-    OTHER = auto()
-
-
-class Theme(Enum):
-    DARK = auto()
-    LIGHT = auto()
-
-
 def install_packages() -> None:
     if environment.os != OS.ARCH:
         logger.debug("Skipping package installation on non-Arch OS")
@@ -228,12 +145,15 @@ def install_configs() -> None:
 def render_template(source: Path, dest: Path) -> tuple[Result, str | Exception | None]:
     if not source.is_file():
         return (Result.ERROR, f"source is not a file")
-    template = Template(
-        source.read_text(),
+    jinja_env = JinjaEnvironment(
         trim_blocks=True,
         lstrip_blocks=True,
         keep_trailing_newline=True,
         autoescape=False,
+    )
+    jinja_env.filters["shellquote"] = shlex.quote
+    template = jinja_env.from_string(
+        source.read_text(),
     )
     try:
         rendered = template.render(environment.as_context())
