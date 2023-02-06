@@ -8,5 +8,5 @@ export XDG_CURRENT_DESKTOP={{ desktop }}
 export XDG_SESSION_TYPE=wayland
 
 systemctl --user import-environment XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
-systemctl --user start --wait compositor.service
+systemctl --user start --wait {{ desktop|shellquote }}.service
 systemctl --user unset-environment XDG_CURRENT_DESKTOP XDG_SESSION_TYPE

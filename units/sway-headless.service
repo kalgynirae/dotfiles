@@ -18,6 +18,3 @@ ExecStopPost=systemctl --user unset-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_
 OOMPolicy=continue
 NotifyAccess=all
 Slice=session.slice
-
-[Install]
-Alias=compositor.service

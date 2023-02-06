@@ -5,7 +5,7 @@ eval "$(systemctl --user show-environment | sed 's/^/export /')"
 unset SYSTEMD_EXEC_PID
 
 # Start gnome-keyring-daemon
-if [ -z "$SSH_AUTH_SOCK" ] && pgrep -f gnome-keyring-daemon; then
+if [ -z "$SSH_AUTH_SOCK" ] && command -v gnome-keyring-daemon >/dev/null; then
   eval "$(gnome-keyring-daemon --start)"
   export SSH_AUTH_SOCK
 fi

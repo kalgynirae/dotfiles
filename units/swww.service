@@ -1,6 +1,6 @@
 [Unit]
-BindsTo=compositor.service
-After=compositor.service
+BindsTo=graphical-session.target
+After=graphical-session.target
 
 [Service]
 Environment=SWWW_TRANSITION_TYPE=simple
