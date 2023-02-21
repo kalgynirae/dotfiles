@@ -5,9 +5,15 @@ monitor = desc:Dell Inc. DELL U2520D GYCNGZ2, preferred, 0x0, 1
 monitor = desc:Dell Inc. DELL U2520DR 9JKMGZ2, preferred, 2560x0, 1
 {% elif host == "colinchan-fedora" %}
 monitor = eDP-1, preferred, 0x1080, 1
+workspace = eDP-1, 1
 monitor = DP-2, preferred, 1920x0, 1
+workspace = DP-2, 2
 monitor = DP-3, preferred, 5760x0, 1
 monitor = DP-3, transform, 1
+workspace = DP-3, 6
+monitor = DP-5, preferred, 1920x0, 1
+workspace = DP-5, 2
+monitor=HDMI-A-1,preferred,auto,1,mirror,eDP-1
 {% endif %}
 
 general {
