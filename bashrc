@@ -4,7 +4,7 @@
 HISTCONTROL=ignoreboth
 HISTFILE=~/.bash_history_actual
 HISTFILESIZE=-1
-HISTIGNORE="history:bg*:d:dls:e:fg*:ls:ll:la:su"
+HISTIGNORE="history:bg*:d:dls:e:fg*:ls:ll:la:su:ytd"
 HISTSIZE=-1
 shopt -s histappend
 set +H
