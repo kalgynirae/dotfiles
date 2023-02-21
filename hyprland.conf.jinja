@@ -142,5 +142,21 @@ bind = $mod, p, workspace, m-1
 bind = $mod, mouse_down, workspace, m+1
 bind = $mod, mouse_up, workspace, m-1
 
+# Move mode
+bind = $mod SHIFT, m, submap, move
+submap = move
+bind = , h, movetoworkspace, left
+bind = , j, movetoworkspace, down
+bind = , k, movetoworkspace, right
+bind = , l, movetoworkspace, right
+bind = SHIFT, h, movecurrentworkspacetomonitor, left
+bind = SHIFT, j, movecurrentworkspacetomonitor, down
+bind = SHIFT, k, movecurrentworkspacetomonitor, right
+bind = SHIFT, l, movecurrentworkspacetomonitor, right
+bind = , Enter, submap, reset
+bind = , Escape, submap, reset
+bind = CTRL, bracketleft, submap, reset
+submap = reset
+
 exec-once = systemctl --user import-environment DISPLAY WAYLAND_DISPLAY
 exec-once = systemd-notify --ready
