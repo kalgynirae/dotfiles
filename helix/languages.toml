@@ -1,4 +1,5 @@
 [[language]]
 name = "python"
+auto-format = true
 language-server = { command = "pipenv", args = ["run", "pylsp"] }
 rulers = [88]
