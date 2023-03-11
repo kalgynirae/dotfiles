@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import socket
+from contextvars import ContextVar
 from dataclasses import asdict, dataclass
 from enum import Enum, auto
 from pathlib import Path
 from typing import cast
 
 import tomli
+
+environment: ContextVar[Environment] = ContextVar("environment")
 
 
 @dataclass

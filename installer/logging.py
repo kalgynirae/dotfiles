@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import sys
+import traceback
 from contextlib import contextmanager
 from dataclasses import dataclass
 from difflib import unified_diff
 from enum import Enum
 from pathlib import Path
+from textwrap import indent
 from typing import Callable, Iterator
 
 
@@ -17,9 +19,12 @@ def abbreviate_home(path: Path) -> str:
 class Result:
     log_func: Callable[[str], None]
     diff_args: tuple[str, str, str, str] | None = None
+    exception: Exception | None = None
 
     def log(self, name: str) -> None:
         self.log_func(name)
+        if self.exception:
+            log_exception(self.exception)
         if self.diff_args:
             log_diff(*self.diff_args)
 
@@ -28,12 +33,16 @@ class Result:
         return cls(log_ok)
 
     @classmethod
+    def error(cls, e: Exception) -> Result:
+        return cls(log_error, exception=e)
+
+    @classmethod
     def changed(cls, diff_args: tuple[str, str, str, str] | None = None) -> Result:
-        return cls(log_changed, diff_args)
+        return cls(log_changed, diff_args=diff_args)
 
     @classmethod
     def dry(cls, diff_args: tuple[str, str, str, str] | None = None) -> Result:
-        return cls(log_dry, diff_args)
+        return cls(log_dry, diff_args=diff_args)
 
 
 @dataclass
@@ -49,11 +58,8 @@ class Color(Enum):
     CYAN = _Color("\x1b[36m", "\x1b[39m")
 
 
-def log(action: str, color: Color, message: str, extra: str | None = None) -> None:
-    extra = f" {extra}" if extra else ""
-    print(
-        f"\x1b[1m{action}\x1b[22m {color.value.set}{message}{color.value.reset}{extra}"
-    )
+def log(action: str, color: Color, message: str) -> None:
+    print(f"\x1b[1m{action}\x1b[22m {color.value.set}{message}{color.value.reset}")
 
 
 def log_ok(stepname: str) -> None:
@@ -64,12 +70,15 @@ def log_changed(stepname: str) -> None:
     log("changed", Color.YELLOW, stepname)
 
 
-def log_error(stepname: str, e: Exception) -> None:
-    log("  error", Color.RED, stepname, f"{type(e).__name__}: {e}")
+def log_error(stepname: str) -> None:
+    log("  error", Color.RED, stepname)
 
 
 def log_dry(stepname: str) -> None:
     log("    dry", Color.CYAN, stepname)
+
+
+INDENT = " " * 10
 
 
 def log_diff(
@@ -83,17 +92,21 @@ def log_diff(
         lineterm="",
     )
     for line in [next(difflines), next(difflines)]:
-        print(f"\033[2m{line}\033[22m", file=sys.stderr)
+        print(f"{INDENT}\033[2m{line}\033[22m", file=sys.stderr)
     for line in difflines:
         match line[0]:
             case "@":
-                print(f"\033[2;36m{line}\033[39m", file=sys.stderr)
+                print(f"{INDENT}\033[2;36m{line}\033[39m", file=sys.stderr)
             case "-":
-                print(f"\033[31m{line}\033[39m", file=sys.stderr)
+                print(f"{INDENT}\033[31m{line}\033[39m", file=sys.stderr)
             case "+":
-                print(f"\033[32m{line}\033[39m", file=sys.stderr)
+                print(f"{INDENT}\033[32m{line}\033[39m", file=sys.stderr)
             case " ":
-                print(f"\033[2m{line}\033[22m", file=sys.stderr)
+                print(f"{INDENT}\033[2m{line}\033[22m", file=sys.stderr)
+
+
+def log_exception(e: Exception) -> None:
+    print(indent("".join(traceback.format_exception(e)), INDENT), end="")
 
 
 @contextmanager
@@ -101,6 +114,7 @@ def step(name: str) -> Iterator[None]:
     try:
         yield
     except Exception as e:
-        log_error(name, e)
+        log_error(name)
+        log_exception(e)
     else:
         log_ok(name)

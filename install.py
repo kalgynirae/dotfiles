@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+if __name__ != "__main__":
+    raise RuntimeError("You accidentally imported install.py somehow")
+
 import os
 import shlex
 import socket
@@ -13,11 +16,27 @@ from pathlib import Path
 from textwrap import dedent
 from typing import Mapping, cast
 
-from installer.environment import OS, Environment, Theme
-from installer.logging import abbreviate_home, log, log_diff, log_dry, log_error, step
-from installer.outputs import Output, render, symlink_to
+from installer.actions import Output, gsettings_set, render, run, symlink_to
+from installer.environment import OS, Environment, Theme, environment
+from installer.logging import Result, log, log_diff, log_dry, log_error, step
 
-CONFIGS: dict[str, Output] = {
+parser = ArgumentParser()
+parser.add_argument("--dry-run", action="store_true")
+parser.add_argument("--packages", action="store_true")
+args = parser.parse_args()
+
+os.chdir(os.path.dirname(__file__))
+
+environment.set(Environment.load(dry_run=args.dry_run))
+print(f"Loaded env: {environment.get()}")
+
+if args.packages:
+    if environment.get().os == OS.ARCH:
+        print("Package installation isn't implemented yet")
+    else:
+        print("Skipping package installation on non-Arch OS")
+
+configs: dict[str, Output] = {
     ".XCompose": symlink_to("XCompose"),
     ".alsoftrc": symlink_to("alsoftrc"),
     ".bash_profile": symlink_to("bash_profile"),
@@ -59,108 +78,61 @@ CONFIGS: dict[str, Output] = {
 }
 
 for path in Path("applications").iterdir():
-    CONFIGS[f".local/share/applications/{path.name}"] = symlink_to(path)
+    configs[f".local/share/applications/{path.name}"] = symlink_to(path)
 
 for path in Path("bin").iterdir():
     if path.suffix == ".jinja":
-        CONFIGS[f"bin/{path.with_suffix('').name}"] = render(path, mode=0o755)
+        configs[f"bin/{path.with_suffix('').name}"] = render(path, mode=0o755)
     else:
-        CONFIGS[f"bin/{path.name}"] = symlink_to(path)
+        configs[f"bin/{path.name}"] = symlink_to(path)
 
 for path in Path("units").iterdir():
     if path.suffix == ".jinja":
-        CONFIGS[f".config/systemd/user/{path.with_suffix('').name}"] = render(path)
+        configs[f".config/systemd/user/{path.with_suffix('').name}"] = render(path)
     else:
-        CONFIGS[f".config/systemd/user/{path.name}"] = symlink_to(path)
+        configs[f".config/systemd/user/{path.name}"] = symlink_to(path)
 
+for dest_relpath, output in configs.items():
+    dest = Path.home() / dest_relpath
+    name = output.name(dest)
+    try:
+        result = output.install(dest)
+    except Exception as e:
+        result = Result.error(e)
+    result.log(name)
 
-environment: Environment = cast(Environment, None)
+with step("Apply gsettings"):
+    gsettings_set(
+        "org.gnome.desktop.interface.color-scheme",
+        "prefer-dark" if environment.get().theme == Theme.DARK else "default",
+    )
+    gsettings_set(
+        "org.gnome.desktop.interface.cursor-blink",
+        "true" if environment.get().cursor_blink else "false",
+    )
+    gsettings_set(
+        "org.gnome.desktop.interface.cursor-theme", str(environment.get().cursor_theme)
+    )
+    gsettings_set(
+        "org.gnome.desktop.interface.cursor-size", str(environment.get().cursor_size)
+    )
+    gsettings_set(
+        "org.gnome.desktop.peripherals.keyboard.delay",
+        str(environment.get().keyrepeat_delay),
+    )
+    gsettings_set(
+        "org.gnome.desktop.peripherals.keyboard.repeat-interval",
+        str(1000 // environment.get().keyrepeat_rate),
+    )
 
+with step("Complie terminfo definitions"):
+    run(
+        ["tic", "-x", "-o", Path.home() / ".terminfo", "terminfos.ti"],
+        env={"TERMINFO": "/usr/share/terminfo"},
+    )
 
-def main() -> int:
-    args = parse_args()
-    os.chdir(os.path.dirname(__file__))
+with step("Reload kitty config"):
+    run(["pkill", "-USR1", "kitty"])
 
-    global environment
-    environment = Environment.load(dry_run=args.dry_run)
-    print(f"Loaded env: {environment}")
-
-    if args.packages:
-        if environment.os == OS.ARCH:
-            print("Package installation isn't implemented yet")
-        else:
-            print("Skipping package installation on non-Arch OS")
-
-    for dest_relpath, output in CONFIGS.items():
-        dest = Path.home() / dest_relpath
-        name = f"file: {abbreviate_home(dest)}"
-        try:
-            result = output.install(dest, environment=environment)
-        except Exception as e:
-            log_error(name, e)
-        else:
-            result.log(name)
-
-    with step("Apply gsettings"):
-        gsettings_set(
-            "org.gnome.desktop.interface.color-scheme",
-            "prefer-dark" if environment.theme == Theme.DARK else "default",
-        )
-        gsettings_set(
-            "org.gnome.desktop.interface.cursor-blink",
-            "true" if environment.cursor_blink else "false",
-        )
-        gsettings_set(
-            "org.gnome.desktop.interface.cursor-theme", str(environment.cursor_theme)
-        )
-        gsettings_set(
-            "org.gnome.desktop.interface.cursor-size", str(environment.cursor_size)
-        )
-        gsettings_set(
-            "org.gnome.desktop.peripherals.keyboard.delay",
-            str(environment.keyrepeat_delay),
-        )
-        gsettings_set(
-            "org.gnome.desktop.peripherals.keyboard.repeat-interval",
-            str(1000 // environment.keyrepeat_rate),
-        )
-
-    with step("Complie terminfo definitions"):
-        run(
-            ["tic", "-x", "-o", Path.home() / ".terminfo", "terminfos.ti"],
-            env={"TERMINFO": "/usr/share/terminfo"},
-        )
-
-    with step("Reload kitty config"):
-        run(["pkill", "-USR1", "kitty"])
-
-    with step("Reload systemd"):
-        run(["systemctl", "--user", "daemon-reload"])
-
-    return 0
-
-
-def parse_args() -> Namespace:
-    parser = ArgumentParser()
-    parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--packages", action="store_true")
-    return parser.parse_args()
-
-
-def gsettings_set(path: str, value: str) -> None:
-    schema, key = path.rsplit(".", maxsplit=1)
-    run(["gsettings", "set", schema, key, value])
-
-
-def run(args: list[str | Path], env: Mapping[str, str] | None = None) -> None:
-    str_args = list(map(str, args))
-    if environment.dry_run:
-        log_dry(f"command: {shlex.join(str_args)}")
-    else:
-        subprocess.run(
-            str_args, check=True, env=None if env is None else os.environ | env
-        )
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+with step("Reload systemd"):
+    run(["systemctl", "--user", "daemon-reload"])
