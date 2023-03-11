@@ -4,13 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-black = "*"
-mypy = "*"
-isort = "*"
 jinja2 = "*"
-pyls-mypy = "*"
-pyls-black = "*"
-pyls-isort = "*"
 tomli = "*"
 
 [requires]
@@ -18,3 +12,10 @@ python_version = "3.10"
 
 [scripts]
 install = "python install.py"
+
+[dev-packages]
+python-lsp-server = "*"
+pylsp-mypy = "*"
+pyls-isort = "*"
+python-lsp-black = "*"
+pylsp-rope = "*"

@@ -1,8 +1,11 @@
 from __future__ import annotations
+
+import socket
 from dataclasses import asdict, dataclass
 from enum import Enum, auto
 from pathlib import Path
-import socket
+from typing import cast
+
 import tomli
 
 
@@ -40,16 +43,16 @@ class Environment:
         os = OS.load()
         return cls(
             dry_run=dry_run,
-            desktop=Desktop[config.get("desktop", "gnome").upper()],
+            desktop=Desktop[cast(str, config.get("desktop", "gnome")).upper()],
             host=host,
             os=os,
-            theme=Theme[config.get("theme", "light").upper()],
-            cursor_blink=config.get("cursor_blink", False),
-            cursor_size=config.get("cursor_size", 32),
-            cursor_theme=config.get("cursor_theme", "Adwaita"),
-            keyrepeat_delay=config.get("keyrepeat_delay", 145),
-            keyrepeat_rate=config.get("keyrepeat_rate", 55),
-            terminal_app=config.get("terminal_app", "gnome-terminal"),
+            theme=Theme[cast(str, config.get("theme", "light")).upper()],
+            cursor_blink=cast(bool, config.get("cursor_blink", False)),
+            cursor_size=cast(int, config.get("cursor_size", 32)),
+            cursor_theme=cast(str, config.get("cursor_theme", "Adwaita")),
+            keyrepeat_delay=cast(int, config.get("keyrepeat_delay", 145)),
+            keyrepeat_rate=cast(int, config.get("keyrepeat_rate", 55)),
+            terminal_app=cast(str, config.get("terminal_app", "gnome-terminal")),
         )
 
     @staticmethod
