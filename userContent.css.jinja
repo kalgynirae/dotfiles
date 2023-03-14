@@ -1,0 +1,51 @@
+/* Invert colors in sites without dark modes */
+/*
+@-moz-document
+  url-prefix("https://docs.google.com/document"),
+  url-prefix("https://www.internalfb.com/amp"),
+  url-prefix("https://www.internalfb.com/calendar"),
+  url-prefix("https://www.internalfb.com/chronos"),
+  url-prefix("https://www.internalfb.com/conveyor"),
+  url-prefix("https://www.internalfb.com/devservers_new"),
+  url-prefix("https://www.internalfb.com/intern/chronos"),
+  url-prefix("https://www.internalfb.com/intern/devservers"),
+  url-prefix("https://www.internalfb.com/intern/wiki"),
+  url-prefix("https://www.internalfb.com/performance"),
+  url-prefix("https://www.internalfb.com/profile"),
+  url-prefix("https://www.internalfb.com/team")
+{
+  @media (prefers-color-scheme: dark) {
+    html {
+      filter: invert(100%) hue-rotate(180deg) contrast(80%);
+    }
+    img {
+      filter: contrast(125%) hue-rotate(180deg) invert(100%);
+    }
+  }
+}
+*/
+
+/* Hide non-chat Workplace icons on chat pages */
+@-moz-document url-prefix("https://fb.workplace.com/chat") {
+  div[aria-label="Workplace apps"] [role="row"]:not(:nth-child(3)) {
+    display: none !important;
+  }
+}
+
+/* Hide Workplace chat icon on non-chat pages */
+@-moz-document url-prefix("https://fb.workplace.com/groups/"), url("https://fb.workplace.com/") {
+  div[aria-label="Workplace apps"] [role="row"]:nth-child(3) {
+    display: none !important;
+  }
+}
+
+/* Make the Workplace nav bar narrower */
+@-moz-document url-prefix("https://fb.workplace.com/") {
+  div[data-pagelet="GeminiLayoutNavigationAppList"] {
+    min-width: 60px !important;
+    width: 60px !important;
+  }
+  div[data-pagelet="GeminiLayoutNavigationAppList"]>div {
+    width: 60px !important;
+  }
+}
