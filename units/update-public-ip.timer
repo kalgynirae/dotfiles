@@ -1,0 +1,8 @@
+[Timer]
+OnCalendar=*:0/15
+AccuracySec=1s
+RandomizedDelaySec=15m
+FixedRandomDelay=yes
+
+[Install]
+WantedBy=timers.target

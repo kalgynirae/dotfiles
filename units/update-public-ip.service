@@ -1,0 +1,5 @@
+[Service]
+Type=oneshot
+ExecStart=%h/bin/update-public-ip
+TimeoutStartSec=30s
+Slice=background.slice
