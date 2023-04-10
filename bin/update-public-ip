@@ -1,0 +1,33 @@
+#!/bin/bash
+
+source ~/.config/update-public-ip
+
+echo >&2 "Looking up public IP..."
+if ! ip=$(curl -sS ifconfig.me); then
+  echo >&2 "Failed to look up public IP"
+  exit 1
+fi
+
+echo >&2 "Updating $RECORD_NAME to $ip..."
+
+# curl --request GET \
+#   --url "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records" \
+#   --header 'Content-Type: application/json' \
+#   --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+
+if ! response=$(curl -sS --request PATCH \
+  --url "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$RECORD_ID" \
+  --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  --header 'Content-Type: application/json' \
+  --data "$(jq -n --arg ip "$ip" --arg name "$RECORD_NAME" '{content:$ip, name:$name, type:"A"}')"
+); then
+  echo >&2 "Failed to curl the Cloudflare API"
+  exit 1
+fi
+
+if jq <<<"$response" -e '.success' >/dev/null; then
+  echo >&2 "Updated $RECORD_NAME to $ip"
+else
+  echo >&2 "Failed to update $RECORD_NAME"
+  exit 1
+fi
