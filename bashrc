@@ -16,7 +16,7 @@ export PYTHONSTARTUP=$HOME/.pythonrc
 export RSYNC_PROTECT_ARGS=1
 
 # Work around Kitty preventing my customized terminfo from being read
-if [[ $TERMINFO = /usr/lib64/kitty/terminfo ]]; then
+if [[ $TERMINFO = */kitty/terminfo ]]; then
   unset TERMINFO
 fi
 
