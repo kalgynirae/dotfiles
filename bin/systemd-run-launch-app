@@ -7,4 +7,4 @@ fi
 
 name=$1
 shift
-exec systemd-run --user --same-dir --scope --slice="app-$(systemd-escape --suffix=slice "$name")" --collect --quiet -- "$@"
+exec systemd-run --user --slice="app-$(systemd-escape --suffix=slice "$name")" --property=BindsTo=graphical-session.target --property=KillMode=process --collect --quiet -- "$@"

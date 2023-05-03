@@ -1,7 +1,7 @@
 [Unit]
 Wants=graphical-session-pre.target
 After=graphical-session-pre.target
-PartOf=graphical-session.target
+BindsTo=graphical-session.target
 Before=graphical-session.target
 Wants=gammastep.service
 Wants=mako.service

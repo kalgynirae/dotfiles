@@ -5,3 +5,4 @@ After=graphical-session.target
 [Service]
 ExecStart=/usr/bin/mako
 Restart=on-failure
+Slice=session.slice
