@@ -1,5 +1,28 @@
+use-grammars = { only = ["lilypond"] }
+
 [[language]]
 name = "python"
 auto-format = true
 language-server = { command = "pipenv", args = ["run", "pylsp"] }
 rulers = [88]
+
+[[language]]
+name = "lilypond"
+scope = "source.lilypond"
+file-types = ["ly"]
+roots = []
+comment-token = "%"
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "mex"
+scope = "source.mex"
+file-types = ["mex"]
+roots = []
+indent = { tab-width = 4, unit = "    " }
+rulers = [80]
+
+[[language]]
+name = "gdscript"
+language-server = { command = "nc", args = ["127.0.0.1", "6005"], language-id = "gdscript" }
+rulers = [80]
