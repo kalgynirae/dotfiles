@@ -1,0 +1,8 @@
+[Unit]
+Requires=sway-headless.service
+After=sway-headless.service
+BindsTo=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/wayvnc --gpu
+TimeoutStopSec=10
