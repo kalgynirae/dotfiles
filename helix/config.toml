@@ -1,6 +1,7 @@
 theme = "kalgykai-dark"
 
 [editor]
+bufferline = "multiple"
 color-modes = true
 cursorline = true
 idle-timeout = 100
@@ -12,8 +13,11 @@ idle-timeout = 100
 '“' = '”'
 '‘' = '’'
 
-[editor.cursor-shape]
-insert = "bar"
+[editor.gutters]
+layout = ["diagnostics", "line-numbers", "spacer", "diff"]
+
+[editor.soft-wrap]
+enable = true
 
 [editor.whitespace.render]
 tab = "all"

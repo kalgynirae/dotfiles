@@ -24,10 +24,10 @@
 "info" = "bright-blue"
 "warning" = "bright-orange"
 "error" = "bright-red"
-"diagnostic.hint" = "bright-cyan"
-"diagnostic.info" = "bright-blue"
-"diagnostic.warning" = "bright-orange"
-"diagnostic.error" = "bright-red"
+"diagnostic.hint" = { underline = { color = "bright-cyan" } }
+"diagnostic.info" = { underline = { color = "bright-blue" } }
+"diagnostic.warning" = { underline = { color = "bright-orange", style = "curl" } }
+"diagnostic.error" = { underline = { color = "bright-red", style = "curl" } }
 
 "diff.plus" = "green"
 "diff.minus" = "red"
@@ -38,6 +38,8 @@
 "ui.cursor.primary" = { fg = "bg", bg = "bright-white" }
 "ui.cursor.primary.insert" = { fg = "bg", bg = "bright-green" }
 "ui.cursor.primary.select" = { fg = "bg", bg = "bright-cyan" }
+"ui.cursor.insert" = { fg = "bg", bg = "green" }
+"ui.cursor.select" = { fg = "bg", bg = "cyan" }
 "ui.cursorline.primary" = { bg = "bright-bg" }
 "ui.linenr" = "grey"
 "ui.linenr.selected" = { fg = "grey", modifiers = ["bold"] }
@@ -56,6 +58,7 @@
 "ui.help" = { fg = "bright-blue", bg = "bright-bg" }
 "ui.menu" = { bg = "bright-bg" }
 "ui.menu.selected" = { fg = "black", bg = "green" }
+"ui.text.inactive" = { fg = "dim-white" }
 
 # File picker
 "ui.background" = { fg = "dim-white", bg = "bg" }
