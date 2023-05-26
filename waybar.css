@@ -19,25 +19,30 @@ label {
 .full {
   color: #4e9a06;
 }
+
 .warning {
   color: #c4a800;
 }
+
 .critical {
   color: #c81f1f;
 }
 
 #workspaces button {
-  color: #6f6f6b;
   padding: 0;
+  color: #6f6f6b;
+  text-shadow: 0 0 2px black;
   border-bottom: 2px solid transparent;
 }
-#workspaces button.focused {
+
+#workspaces button.active {
   color: inherit;
-  font-weight: 800;
+  border-bottom: 2px solid white;
 }
+
 #workspaces button.urgent {
   color: #f6db4a;
-  font-weight: 800;
+  border-bottom: 2px solid #f6db4a;
 }
 
 #mode {
@@ -53,6 +58,7 @@ label {
   font-size: 12px;
   padding: 0 2px;
 }
+
 #idle_inhibitor.activated {
   color: inherit;
 }
