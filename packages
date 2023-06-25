@@ -23,6 +23,8 @@ jq
 libaacs
 light
 lolcat
+lsp-plugins-docs
+lsp-plugins-lv2
 mpv
 nautilus
 noto-fonts
