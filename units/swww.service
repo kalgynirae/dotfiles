@@ -3,7 +3,7 @@ BindsTo=graphical-session.target
 After=graphical-session.target
 
 [Service]
-Environment=SWWW_TRANSITION_STEP=90
+Environment=SWWW_TRANSITION_STEP=255
 Environment=SWWW_TRANSITION_TYPE=simple
 ExecStart=swww init --no-daemon
 ExecStartPost=swww img %h/.cache/wallpaper.jpg

@@ -130,7 +130,7 @@ mv -t ~/.cache "$dir/wallpaper.jpg" "$dir/wallpaper-lock.jpg"
 
 case $XDG_CURRENT_DESKTOP in
   Hyprland)
-    swww img ~/.cache/wallpaper.jpg
+    swww img ~/.cache/wallpaper.jpg --transition-step 5
     ;;
   sway)
     systemctl --user try-restart swaybg
