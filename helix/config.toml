@@ -21,3 +21,12 @@ enable = true
 
 [editor.whitespace.render]
 tab = "all"
+
+[keys.normal]
+"X" = "extend_line_above"
+
+[keys.insert]
+"C-[" = "normal_mode"
+
+[keys.select]
+"C-[" = "normal_mode"
