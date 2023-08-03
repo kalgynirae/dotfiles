@@ -3,6 +3,7 @@
 #primarysize=$(swaymsg -t get_outputs | jq -r '.[]|.current_mode|"\(.width)x\(.height)"' | head -n1)
 if [[ $HOSTNAME == colinchan-fedora-* ]]; then
   primarysize=1600x2560
+  #primarysize=2560x1600
   #primarysize=1920x1080
   #primarysize=3840x2160
 else
@@ -15,6 +16,8 @@ echo "size: ${width}x${height}"
 while (( $# )); do
   if [[ -f ~/pictures/wallpapers/$1 ]]; then
     wallpaper=~/pictures/wallpapers/$1
+  elif [[ -f $1 ]]; then
+    wallpaper=$1
   else
     if ! quotematches=$(<~/dotfiles/quotes.txt grep -v '^#' | grep -i "\<$1"); then
       echo >&2 "No quote found for: $1"
