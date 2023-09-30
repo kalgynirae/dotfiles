@@ -7,5 +7,5 @@ Environment=SWWW_TRANSITION_STEP=255
 Environment=SWWW_TRANSITION_TYPE=simple
 ExecStart=swww init --no-daemon
 ExecStartPost=swww img %h/.cache/wallpaper.jpg
-Restart=on-failure
+Restart=always
 Slice=session.slice
