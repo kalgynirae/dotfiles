@@ -1,32 +1,64 @@
 #!/bin/bash
-# usage: screenshot [--region|--window]
+# usage: screenshot [--region|--window] [--delay SECONDS]
 #
-# Take a screenshot in Sway and save it to ~/pictures/screenshots/.
+# Take a screenshot in Hyprland and save it to ~/pictures/screenshots/.
 #
 # Area selection:
-#   (default)     Select the focused output
+#   (none)        Screenshot the focused output
 #   --region      Select a region with the mouse
-#   --window      Select the focused window
+#   --window      Screenshot the focused window
+#
+# Options:
+#   --delay SECONDS   Wait after area selection before taking the screenshot
 
 usage() {
   awk <"$0" '/$^/{exit};NR==2,0{print substr($0, 3)}'
 }
 
-if [[ " $* " == *" --help "* ]] || (( $# > 1 )); then
-  usage >&2
-  exit 1
-fi
+mode=
+while (( $# )); do
+  case "$1" in
+    --help)
+      usage
+      exit 0
+      ;;
+    --region)
+      mode=region
+      ;;
+    --window)
+      mode=window
+      ;;
+    --delay)
+      if [[ $2 =~ ^[[:digit:]]+$ ]]; then
+        delay=$2
+        shift
+      else
+        usage >&2
+        exit 2
+      fi
+      ;;
+    *)
+      usage >&2
+      exit 2
+      ;;
+  esac
+  shift
+done
 
-if [[ " $* " == *" --region "* ]]; then
+if [[ $mode == region ]]; then
   region=$(slurp)
   dimensions=$(cut -d' ' -f2 <<<"$region")
-elif [[ " $* " == *" --window "* ]]; then
-  region=$(sway-window --focused --rect)
+elif [[ $mode == window ]]; then
+  region=$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
   dimensions=$(cut -d' ' -f2 <<<"$region")
 else
-  outputs=$(swaymsg -t get_outputs)
+  outputs=$(hyprctl monitors -j)
   output=$(<<<"$outputs" jq -r '.[] | select(.focused) | .name')
   dimensions=$(<<<"$outputs" jq -r '.[] | select(.focused) | .current_mode | "\(.width)x\(.height)"')
+fi
+
+if [[ -v delay ]]; then
+  sleep "$delay"
 fi
 
 output_path=$HOME/pictures/screenshots/$(date '+%Y-%m-%d-%s')-$dimensions.png
@@ -46,7 +78,6 @@ else
 fi
 
 if grim "${args[@]}" "$output_path"; then
-  notify-send -a screenshot -t 5000 -u low screenshot "Screenshot saved to $output_path" &
   imv "$output_path" &
   wl-copy <"$output_path" &
 fi
