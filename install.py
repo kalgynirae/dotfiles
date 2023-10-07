@@ -66,6 +66,9 @@ configs: dict[str, Output] = {
     ".config/waybar/config": render("waybar.jinja"),
     ".config/waybar/style.css": symlink_to("waybar.css"),
     ".config/wezterm/wezterm.lua": render("wezterm.lua.jinja"),
+    ".config/wireplumber/main.lua.d/90-prevent-webrtc-adjusting.lua": symlink_to(
+        "wireplumber/90-prevent-webrtc-adjusting.lua"
+    ),
     ".gemrc": symlink_to("gemrc"),
     ".gitconfig": symlink_to("gitconfig"),
     ".gtkrc-2.0": symlink_to("gtkrc-2.0"),
