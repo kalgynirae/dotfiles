@@ -59,6 +59,7 @@ render-text() {
       --background "transparent" \
       --font "Gentium Basic Bold 38" \
       --foreground "$foreground" \
+      --antialias gray \
       --hinting full \
       --indent -24 \
       --markup \
