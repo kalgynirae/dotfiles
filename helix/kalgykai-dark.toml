@@ -22,12 +22,12 @@
 
 "hint" = "bright-cyan"
 "info" = "bright-blue"
-"warning" = "bright-orange"
-"error" = "bright-red"
+"warning" = "bright-violet"
+"error" = "bright-magenta"
 "diagnostic.hint" = { underline = { color = "bright-cyan" } }
 "diagnostic.info" = { underline = { color = "bright-blue" } }
-"diagnostic.warning" = { underline = { color = "bright-orange", style = "curl" } }
-"diagnostic.error" = { underline = { color = "bright-red", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "bright-violet", style = "curl" } }
+"diagnostic.error" = { underline = { color = "bright-magenta", style = "curl" } }
 
 "diff.plus" = "green"
 "diff.minus" = "red"
@@ -69,6 +69,9 @@
 # Keybinding help popup
 "ui.popup" = { fg = "bright-blue", bg = "bright-bg" }
 "ui.text.info" = { fg = "bright-blue" }
+
+"note" = { fg = "bright-orange" }
+"todo" = { fg = "bright-red" }
 
 [palette]
 black = "#000000"
