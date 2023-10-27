@@ -52,6 +52,7 @@
 "ui.text" = "white"
 "ui.virtual.whitespace" = { fg = "dim-grey" }
 "ui.virtual.ruler" = { bg = "bright-bg" }
+"ui.virtual.wrap" = { fg = "dim-grey" }
 "ui.window" = { fg = "grey" }  # border between windows
 
 # Command line
