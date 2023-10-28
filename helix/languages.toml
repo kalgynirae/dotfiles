@@ -9,6 +9,7 @@ name = "python"
 auto-format = true
 language-servers = ["pylsp"]
 rulers = [88]
+text-width = 88
 
 [[language]]
 name = "mex"
@@ -16,7 +17,6 @@ scope = "source.mex"
 file-types = ["mex"]
 roots = []
 indent = { tab-width = 4, unit = "    " }
-rulers = [80]
 
 [language-server.godot]
 command = "nc"
@@ -26,7 +26,6 @@ args = ["127.0.0.1", "6005"]
 name = "gdscript"
 language-id = "gdscript" 
 language-servers = ["godot"]
-rulers = [80]
 
 [[grammar]]
 name = "lilypond"
