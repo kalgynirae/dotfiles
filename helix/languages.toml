@@ -1,18 +1,14 @@
 use-grammars = { only = ["lilypond"] }
 
+[language-server.pylsp]
+command = "pipenv"
+args = ["run", "pylsp"]
+
 [[language]]
 name = "python"
 auto-format = true
-language-server = { command = "pipenv", args = ["run", "pylsp"] }
+language-servers = ["pylsp"]
 rulers = [88]
-
-[[language]]
-name = "lilypond"
-scope = "source.lilypond"
-file-types = ["ly"]
-roots = []
-comment-token = "%"
-indent = { tab-width = 2, unit = "  " }
 
 [[language]]
 name = "mex"
@@ -22,7 +18,24 @@ roots = []
 indent = { tab-width = 4, unit = "    " }
 rulers = [80]
 
+[language-server.godot]
+command = "nc"
+args = ["127.0.0.1", "6005"]
+
 [[language]]
 name = "gdscript"
-language-server = { command = "nc", args = ["127.0.0.1", "6005"], language-id = "gdscript" }
+language-id = "gdscript" 
+language-servers = ["godot"]
 rulers = [80]
+
+[[grammar]]
+name = "lilypond"
+source = { git = "https://github.com/tristanperalta/tree-sitter-lilypond", rev = "faebb5993c75053df690544b3e3abf9a358b7703" }
+
+[[language]]
+name = "lilypond"
+scope = "source.lilypond"
+file-types = ["ly"]
+roots = []
+comment-token = "%"
+indent = { tab-width = 2, unit = "  " }
