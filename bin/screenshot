@@ -78,6 +78,6 @@ else
 fi
 
 if grim "${args[@]}" "$output_path"; then
-  imv "$output_path" &
+  imv -w imv-screenshot "$output_path" &
   wl-copy <"$output_path" &
 fi
