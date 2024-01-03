@@ -60,8 +60,11 @@ configs: dict[str, Output] = {
     ".config/kitty/kitty.conf": render("kitty.conf.jinja"),
     ".config/mpv/mpv.conf": symlink_to("mpv.conf"),
     ".config/nvim": symlink_to("nvim"),
-    ".config/pipewire/pipewire.conf.d/10-zeroconf.conf": symlink_to(
-        "pipewire/10-zeroconf.conf"
+    ".config/pipewire/pipewire.conf.d/10-samplerate.conf": symlink_to(
+        "pipewire/10-samplerate.conf"
+    ),
+    ".config/pipewire/pipewire.conf.d/15-netjack2.conf": symlink_to(
+        "pipewire/15-netjack2.conf"
     ),
     ".config/sway/config": render("sway.jinja"),
     ".config/swaylock/config": symlink_to("swaylock"),
@@ -69,6 +72,9 @@ configs: dict[str, Output] = {
     ".config/waybar/config": render("waybar.jinja"),
     ".config/waybar/style.css": symlink_to("waybar.css"),
     ".config/wezterm/wezterm.lua": render("wezterm.lua.jinja"),
+    ".config/wireplumber/main.lua.d/51-focusrite-scarlett-solo-fix.lua": symlink_to(
+        "wireplumber/51-focusrite-scarlett-solo-fix.lua"
+    ),
     ".config/wireplumber/main.lua.d/90-prevent-webrtc-adjusting.lua": symlink_to(
         "wireplumber/90-prevent-webrtc-adjusting.lua"
     ),
