@@ -21,6 +21,7 @@ layout = ["diagnostics", "line-numbers", "spacer", "diff"]
 enable = true
 
 [editor.whitespace.render]
+newline = "all"
 tab = "all"
 
 [keys.normal]
@@ -29,5 +30,5 @@ tab = "all"
 [keys.insert]
 "C-[" = "normal_mode"
 
-[keys.select]
-"C-[" = "normal_mode"
+[keys.normal.space]
+"o" = ":reflow"

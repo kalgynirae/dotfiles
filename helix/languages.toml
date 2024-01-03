@@ -38,3 +38,14 @@ file-types = ["ly"]
 roots = []
 comment-token = "%"
 indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "markdown"
+grammar = "" # temporary because it crashes when typing "<b>\n<i>" and then deleting "<i"
+
+[[language]]
+name = "text"
+scope = "source.text"
+file-types = []
+roots = []
+indent = { tab-width = 4, unit = "    " }
