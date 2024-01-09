@@ -12,7 +12,6 @@ class AnsiStyle(Style):
         Token.Name.Decorator: "ansigreen",
     }
 
-c.TerminalInteractiveShell.autosuggestions_provider = None
 c.TerminalInteractiveShell.confirm_exit = False
 c.TerminalInteractiveShell.highlighting_style = AnsiStyle
 c.TerminalIPythonApp.display_banner = False
