@@ -95,6 +95,7 @@ bind = $mod SHIFT, s, exec, shutdown-prompt
 bind = $mod SHIFT, r, exec, hyprctl reload
 bind = $mod, Backspace, exec, systemctl --user kill --signal USR1 swayidle
 binde = $mod, c, exec, makoctl dismiss
+binde = $mod SHIFT, c, exec, makoctl restore
 bind = $mod, x, exec, makoctl menu wofi -d -p 'Choose Action: '
 binde = , XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%
 binde = , XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%

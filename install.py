@@ -58,6 +58,7 @@ configs: dict[str, Output] = {
     ".config/hypr/hyprland.conf": render("hyprland.conf.jinja"),
     ".config/imv/config": symlink_to("imv"),
     ".config/kitty/kitty.conf": render("kitty.conf.jinja"),
+    ".config/mako/config": symlink_to("mako"),
     ".config/mpv/mpv.conf": symlink_to("mpv.conf"),
     ".config/nvim": symlink_to("nvim"),
     ".config/pipewire/pipewire.conf.d/10-samplerate.conf": symlink_to(
