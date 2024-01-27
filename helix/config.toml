@@ -4,6 +4,7 @@ theme = "kalgykai-dark"
 bufferline = "multiple"
 color-modes = true
 cursorline = true
+idle-timeout = 100
 insert-final-newline = false
 text-width = 100
 
