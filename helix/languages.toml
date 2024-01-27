@@ -1,5 +1,9 @@
 use-grammars = { only = ["lilypond"] }
 
+[[language]]
+name = "html"
+indent = { tab-width = 2, unit = "  " }
+
 [language-server.pylsp]
 command = "pipenv"
 args = ["run", "pylsp"]
