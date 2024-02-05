@@ -1,5 +1,5 @@
 #!/bin/bash
-# usage: screenshot [--region|--window] [--delay SECONDS]
+# usage: screenshot [--region|--window] [--delay SECONDS] [--text]
 #
 # Take a screenshot in Hyprland and save it to ~/pictures/screenshots/.
 #
@@ -10,6 +10,7 @@
 #
 # Options:
 #   --delay SECONDS   Wait after area selection before taking the screenshot
+#   --text            Save pictured text to the clipboard and discard the image
 
 usage() {
   awk <"$0" '/$^/{exit};NR==2,0{print substr($0, 3)}'
@@ -36,6 +37,9 @@ while (( $# )); do
         usage >&2
         exit 2
       fi
+      ;;
+    --text)
+      text=yes
       ;;
     *)
       usage >&2
@@ -78,6 +82,11 @@ else
 fi
 
 if grim "${args[@]}" "$output_path"; then
-  imv -w imv-screenshot "$output_path" &
-  wl-copy <"$output_path" &
+  if [[ -v text ]]; then
+    tesseract "$output_path" - -l eng | wl-copy -n
+    rm "$output_path"
+  else
+    imv -w imv-screenshot "$output_path" &
+    wl-copy <"$output_path" &
+  fi
 fi

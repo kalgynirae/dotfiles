@@ -88,6 +88,7 @@ bind = $mod, v, exec, systemd-run-launch-app pavucontrol gtk-launch pavucontrol.
 bind = , Print, exec, screenshot
 bind = SHIFT, Print, exec, screenshot --region
 bind = $mod, Print, exec, screenshot --window
+bind = ALT, Print, exec, screenshot --region --text
 
 # Global
 bind = $mod SHIFT, q, exec, systemctl --user stop graphical-session.target; hyprctl dispatch exit
