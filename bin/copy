@@ -1,4 +1,26 @@
 #!/bin/bash
+# Usage: copy [-s] [FILE...]
+
+usage() {
+  awk <"$0" '/$^/{exit}; NR==2,0{print substr($0, 3)}'
+}
+
+cat_args=()
+while (( $# )); do
+  case "$1" in
+    --help)
+      usage
+      exit
+      ;;
+    -s)
+      strip_trailing_whitespace=yes
+      ;;
+    *)
+      cat_args+=("$1")
+      ;;
+  esac
+  shift
+done
 
 if [[ $NVIM_LOG_FILE ]]; then
   tty=$(tty </proc/$PPID/fd/0)
@@ -7,4 +29,9 @@ else
 fi
 
 echo >&2 "Copying via ${tty@Q}"
-cat "$@" | printf >>"$tty" '\e]52;;%s\a' "$(base64 -w0)"
+if [[ $strip_trailing_whitespace ]]; then
+  stdin="$(cat)"
+  cat "$@" | printf >>"$tty" '\e]52;;%s\a' "$(printf '%s' "$stdin" | base64 -w0)"
+else
+  cat "$@" | printf >>"$tty" '\e]52;;%s\a' "$(base64 -w0)"
+fi
