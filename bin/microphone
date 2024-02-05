@@ -1,6 +1,15 @@
 #!/bin/bash
+# usage: <SCRIPT> (toggle|mute|unmute)
+
+usage() {
+  awk <"$0" '/$^/{exit}; NR==2,0{print substr($0, 3)}'
+}
 
 case "$1" in
+  --help)
+    usage
+    exit
+    ;;
   toggle)
     arg=toggle
     ;;
@@ -10,5 +19,10 @@ case "$1" in
   unmute)
     arg=0
     ;;
+  *)
+    usage >&2
+    exit 1
+    ;;
 esac
-#pactl set-source-mute @DEFAULT_SOURCE@ "$arg"
+
+pactl set-source-mute @DEFAULT_SOURCE@ "$arg"

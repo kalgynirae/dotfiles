@@ -100,7 +100,9 @@ bind = $mod, x, exec, makoctl menu wofi -d -p 'Choose Action: '
 binde = , XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%
 binde = , XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%
 binde = , XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle
-bind = , XF86Calculator, exec, wl-color-picker
+bind = , XF86Tools, exec, hyprpicker | tr '[:upper:]' '[:lower:]' | wl-copy -n
+bind = , XF86Launch6, exec, microphone unmute
+bindr = , XF86Launch6, exec, microphone mute
 
 # Windows
 binde = $mod, h, movefocus, l
