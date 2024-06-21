@@ -2,10 +2,10 @@
 
 #primarysize=$(swaymsg -t get_outputs | jq -r '.[]|.current_mode|"\(.width)x\(.height)"' | head -n1)
 if [[ $HOSTNAME == colinchan-fedora-* ]]; then
-  primarysize=1600x2560
+  #primarysize=1600x2560
   #primarysize=2560x1600
   #primarysize=1920x1080
-  #primarysize=3840x2160
+  primarysize=3840x2160
 else
   primarysize=2560x1440
 fi
@@ -134,7 +134,7 @@ mv -t ~/.cache "$dir/wallpaper.jpg" "$dir/wallpaper-lock.jpg"
 
 case $XDG_CURRENT_DESKTOP in
   Hyprland)
-    swww img ~/.cache/wallpaper.jpg --transition-step 5
+    swww img ~/.cache/wallpaper.jpg
     ;;
   sway)
     systemctl --user try-restart swaybg
