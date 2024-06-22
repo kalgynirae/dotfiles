@@ -79,7 +79,7 @@ configs: dict[str, Output] = {
     ),
     ".gemrc": symlink_to("gemrc"),
     ".gitconfig": symlink_to("gitconfig"),
-    ".gtkrc-2.0": symlink_to("gtkrc-2.0"),
+    ".gtkrc-2.0": render("gtkrc-2.0.jinja"),
     ".inputrc": symlink_to("inputrc"),
     ".ipython/profile_default/ipython_config.py": symlink_to("ipython_config.py"),
     ".local/share/icons/default/index.theme": render("index.theme.jinja"),
