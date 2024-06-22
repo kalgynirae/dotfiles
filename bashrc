@@ -325,7 +325,7 @@ watchfile() {
     fi
   }
   while _wait "${args[@]}"; do
-    echo >&2 ">> Executing ${*@Q}"
+    printf >&2 "\e[1;33m>> Executing ${*@Q}\e[0m\n"
     "$@"
   done
 }

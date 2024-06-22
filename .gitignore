@@ -1,4 +1,3 @@
-.data.yml
 .mypy_cache
 bin/calendar-notifier
 /config.toml

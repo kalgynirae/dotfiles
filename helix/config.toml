@@ -12,11 +12,19 @@ text-width = 100
 '(' = ')'
 '{' = '}'
 '[' = ']'
+'<' = '>'
+'«' = '»'
+'"' = '"'
 '“' = '”'
+"'" = "'"
 '‘' = '’'
+'`' = '`'
 
 [editor.gutters]
 layout = ["diagnostics", "line-numbers", "spacer", "diff"]
+
+[editor.lsp]
+display-inlay-hints = true
 
 [editor.soft-wrap]
 enable = true

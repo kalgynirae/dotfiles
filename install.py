@@ -48,7 +48,7 @@ configs: dict[str, Output] = {
     ".config/fontconfig/fonts.conf": symlink_to("fonts.conf"),
     ".config/gammastep/config.ini": render("gammastep.ini.jinja"),
     ".config/gtk-3.0/settings.ini": render("gtk-3.0-settings.ini.jinja"),
-    ".config/gtk-4.0/settings.ini": symlink_to("gtk-4.0-settings.ini"),
+    ".config/gtk-4.0/settings.ini": render("gtk-4.0-settings.ini.jinja"),
     ".config/helix/config.toml": symlink_to("helix/config.toml"),
     ".config/helix/languages.toml": symlink_to("helix/languages.toml"),
     ".config/helix/themes/kalgykai-dark.toml": symlink_to("helix/kalgykai-dark.toml"),
@@ -61,6 +61,7 @@ configs: dict[str, Output] = {
     ".config/mako/config": symlink_to("mako"),
     ".config/mpv/mpv.conf": symlink_to("mpv.conf"),
     ".config/nvim": symlink_to("nvim"),
+    ".config/paru/paru.conf": symlink_to("paru.conf"),
     ".config/pipewire/pipewire.conf.d/15-netjack2.conf": symlink_to(
         "pipewire/15-netjack2.conf"
     ),

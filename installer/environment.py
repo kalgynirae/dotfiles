@@ -52,9 +52,9 @@ class Environment:
             theme=Theme[cast(str, config.get("theme", "light")).upper()],
             cursor_blink=cast(bool, config.get("cursor_blink", False)),
             cursor_size=cast(int, config.get("cursor_size", 32)),
-            cursor_theme=cast(str, config.get("cursor_theme", "Adwaita")),
-            keyrepeat_delay=cast(int, config.get("keyrepeat_delay", 145)),
-            keyrepeat_rate=cast(int, config.get("keyrepeat_rate", 55)),
+            cursor_theme=cast(str, config.get("cursor_theme", "Breeze_Light")),
+            keyrepeat_delay=cast(int, config.get("keyrepeat_delay", 180)),
+            keyrepeat_rate=cast(int, config.get("keyrepeat_rate", 50)),
             terminal_app=cast(str, config.get("terminal_app", "gnome-terminal")),
         )
 
