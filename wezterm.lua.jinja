@@ -1,65 +1,63 @@
-local wezterm = require 'wezterm';
-return {
-  --enable_tab_bar = false,
-  enable_wayland = true,
-  exit_behavior = "Close",
+local wezterm = require 'wezterm'
+local config = wezterm.config_builder()
+config.animation_fps = 10
+config.bold_brightens_ansi_colors = 'No'
+config.force_reverse_video_cursor = true
+config.scrollback_lines = 50000
 
-  bold_brightens_ansi_colors = false,
-  force_reverse_video_cursor = true,
+config.font = wezterm.font 'Iosevka Term'
+config.font_size = 16
+
 {% if theme == "dark" %}
-  colors = {
-    background = '#1c2022',
-    foreground = '#c0c0c0',
-    ansi = {
-      '#505050',
-      '#b44738',
-      '#518921',
-      '#a79026',
-      '#3982ce',
-      '#ae4fa3',
-      '#008f89',
-      '#c0c0c0',
-    },
-    brights = {
-      '#707070',
-      '#d2614f',
-      '#6ea63f',
-      '#c9b047',
-      '#5799e7',
-      '#c866bb',
-      '#00b2ab',
-      '#e0e0e0',
-    },
+config.colors = {
+  background = '#1c2022',
+  foreground = '#c0c0c0',
+  ansi = {
+    '#505050',
+    '#b44738',
+    '#518921',
+    '#a79026',
+    '#3982ce',
+    '#ae4fa3',
+    '#008f89',
+    '#c0c0c0',
   },
-{% else %}
-  colors = {
-    background = '#f4f4f4',
-    foreground = '#303030',
-    ansi = {
-      '#707070',
-      '#aa4840',
-      '#4b7924',
-      '#7c730f',
-      '#246fb4',
-      '#994c8f',
-      '#007d76',
-      '#ababab',
-    },
-    brights = {
-      '#909090',
-      '#cd675d',
-      '#6a9842',
-      '#9c9232',
-      '#4e8dd5',
-      '#ba6aaf',
-      '#009d95',
-      '#cccccc',
-    },
+  brights = {
+    '#707070',
+    '#d2614f',
+    '#6ea63f',
+    '#c9b047',
+    '#5799e7',
+    '#c866bb',
+    '#00b2ab',
+    '#e0e0e0',
   },
-{% endif %}
-  font = wezterm.font_with_fallback({
-    "Iosevka Term",
-    "Font Awesome 5 Pro Solid",
-  }),
-  font_size = 18,
 }
+{% else %}
+config.colors = {
+  background = '#f4f4f4',
+  foreground = '#303030',
+  ansi = {
+    '#707070',
+    '#aa4840',
+    '#4b7924',
+    '#7c730f',
+    '#246fb4',
+    '#994c8f',
+    '#007d76',
+    '#ababab',
+  },
+  brights = {
+    '#909090',
+    '#cd675d',
+    '#6a9842',
+    '#9c9232',
+    '#4e8dd5',
+    '#ba6aaf',
+    '#009d95',
+    '#cccccc',
+  },
+}
+{% endif %}
+
+return config
