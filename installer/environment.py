@@ -46,16 +46,16 @@ class Environment:
         os = OS.load()
         return cls(
             dry_run=dry_run,
-            desktop=Desktop[cast(str, config.get("desktop", "gnome")).upper()],
+            desktop=Desktop[cast(str, config.get("desktop", "hyprland")).upper()],
             host=host,
             os=os,
-            theme=Theme[cast(str, config.get("theme", "light")).upper()],
+            theme=Theme[cast(str, config.get("theme", "dark")).upper()],
             cursor_blink=cast(bool, config.get("cursor_blink", False)),
-            cursor_size=cast(int, config.get("cursor_size", 32)),
+            cursor_size=cast(int, config.get("cursor_size", 36)),
             cursor_theme=cast(str, config.get("cursor_theme", "Breeze_Light")),
             keyrepeat_delay=cast(int, config.get("keyrepeat_delay", 180)),
             keyrepeat_rate=cast(int, config.get("keyrepeat_rate", 50)),
-            terminal_app=cast(str, config.get("terminal_app", "gnome-terminal")),
+            terminal_app=cast(str, config.get("terminal_app", "kitty")),
         )
 
     @staticmethod
