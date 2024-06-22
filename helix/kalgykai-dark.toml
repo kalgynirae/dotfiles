@@ -33,32 +33,31 @@
 "diff.minus" = "red"
 "diff.delta" = "orange"
 
-"ui.cursor" = { fg = "bg", bg = "dim-white" }
-"ui.cursor.match" = { fg = "bright-orange", bg = "dim-grey" }
+"ui.cursor" = { bg = "dim-white" }
+"ui.cursor.match" = { fg = "bright-orange" }
 "ui.cursor.primary" = { fg = "bg", bg = "bright-white" }
 "ui.cursor.primary.insert" = { fg = "bg", bg = "bright-green" }
 "ui.cursor.primary.select" = { fg = "bg", bg = "bright-cyan" }
-"ui.cursor.insert" = { fg = "bg", bg = "green" }
-"ui.cursor.select" = { fg = "bg", bg = "cyan" }
 "ui.cursorline.primary" = { bg = "bright-bg" }
 "ui.linenr" = "grey"
 "ui.linenr.selected" = { fg = "grey", modifiers = ["bold"] }
 "ui.selection" = { bg = "hl-grey" }
+"ui.selection.primary" = { fg = "bg", bg = "white" } # TODO:
 "ui.statusline" = { fg = "bright-white", bg = "grey", modifiers = ["bold"] }
 "ui.statusline.inactive" = { fg = "dim-white", bg = "bright-bg" }
 "ui.statusline.normal" = { fg = "black", bg = "bright-white", modifiers = ["bold"] }
 "ui.statusline.insert" = { fg = "black", bg = "bright-green", modifiers = ["bold"] }
 "ui.statusline.select" = { fg = "black", bg = "bright-cyan", modifiers = ["bold"] }
 "ui.text" = "white"
-"ui.virtual.whitespace" = { fg = "dim-grey" }
+"ui.virtual" = { fg = "dim-grey" }
+"ui.virtual.inlay-hint" = { fg = "grey", modifiers = ["italic"] }
 "ui.virtual.ruler" = { bg = "bright-bg" }
-"ui.virtual.wrap" = { fg = "dim-grey" }
 "ui.window" = { fg = "grey" }  # border between windows
 
 # Command line
 "ui.help" = { fg = "bright-blue", bg = "bright-bg" }
-"ui.menu" = { bg = "bright-bg" }
-"ui.menu.selected" = { fg = "black", bg = "green" }
+"ui.menu" = { fg = "blue", bg = "bright-bg" }
+"ui.menu.selected" = { fg = "bg", bg = "blue" }
 "ui.text.inactive" = { fg = "dim-white" }
 
 # File picker

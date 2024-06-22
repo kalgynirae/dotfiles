@@ -24,7 +24,9 @@ text-width = 100
 layout = ["diagnostics", "line-numbers", "spacer", "diff"]
 
 [editor.lsp]
-display-inlay-hints = true
+display-inlay-hints = false
+display-messages = true
+snippets = false
 
 [editor.soft-wrap]
 enable = true
