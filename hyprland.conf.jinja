@@ -10,10 +10,13 @@ monitor = DP-2, preferred, 1920x0, 1
 workspace = DP-2, 2
 monitor = DP-3, preferred, 5760x0, 1
 monitor = DP-3, transform, 1
+#monitor = DP-3, preferred, 1920x0, 1
 workspace = DP-3, 6
 monitor = DP-5, preferred, 1920x0, 1
 workspace = DP-5, 2
 monitor=HDMI-A-1,preferred,auto,1,mirror,eDP-1
+#monitor=HDMI-A-1,preferred,1920x0,1
+workspace = HDMI-A-1, 2
 {% endif %}
 
 general {
@@ -53,6 +56,11 @@ input {
     numlock_by_default = true
     repeat_rate = {{ keyrepeat_rate }}
     repeat_delay = {{ keyrepeat_delay }}
+
+    touchpad {
+        clickfinger_behavior = true
+        natural_scroll = true
+    }
 }
 
 gestures {
