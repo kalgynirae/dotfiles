@@ -130,14 +130,22 @@ with step("Apply gsettings"):
         "prefer-dark" if environment.get().theme == Theme.DARK else "default",
     )
     gsettings_set(
-        "org.gnome.desktop.interface.cursor-blink",
-        "true" if environment.get().cursor_blink else "false",
+        "org.gnome.desktop.interface.cursor-blink", "false"
+    )
+    gsettings_set(
+        "org.gnome.desktop.interface.cursor-size", str(environment.get().cursor_size)
     )
     gsettings_set(
         "org.gnome.desktop.interface.cursor-theme", str(environment.get().cursor_theme)
     )
     gsettings_set(
-        "org.gnome.desktop.interface.cursor-size", str(environment.get().cursor_size)
+        "org.gnome.desktop.interface.font-name", str(environment.get().font_name)
+    )
+    gsettings_set(
+        "org.gnome.desktop.interface.gtk-theme", str(environment.get().gtk_theme)
+    )
+    gsettings_set(
+        "org.gnome.desktop.interface.icon-theme", str(environment.get().icon_theme)
     )
     gsettings_set(
         "org.gnome.desktop.peripherals.keyboard.delay",
