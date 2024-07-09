@@ -33,8 +33,13 @@ decoration {
     inactive_opacity = 0.95
     shadow_range = 40
     shadow_render_power = 2
+    {% if theme == "dark" %}
     col.shadow = rgba(000000cc)
     col.shadow_inactive = rgba(00000088)
+    {% else %}
+    col.shadow = rgba(00000088)
+    col.shadow_inactive = rgba(00000048)
+    {% endif %}
     blur {
         size = 10
     }

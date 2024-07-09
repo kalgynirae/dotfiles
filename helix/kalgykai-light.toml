@@ -1,0 +1,108 @@
+"attribute" = "cyan"
+"comment" = { fg = "dim-white", modifiers = ["italic"] }
+"constant" = "blue"
+"constant.character" = "yellow"
+"constant.character.escape" = { fg = "orange", modifiers = ["italic"] }
+"function" = "green"
+"function.macro" = "violet"
+"function.special" = "violet"
+"keyword" = { fg = "dim-white", modifiers = ["bold"] }
+"label" = "cyan"
+"markup.bold" = { modifiers = ["bold"] }
+"markup.heading" = "orange"
+"markup.italic" = { modifiers = ["italic"] }
+"markup.link.label" = "blue"
+"operator" = "dim-white"
+"punctuation" = "dim-white"
+"string" = "yellow"
+"tag" = "green"
+"type" = "cyan"
+"variable.builtin" = { modifiers = ["bold"] }
+"variable.parameter" = "dim-white"
+
+"hint" = "bright-cyan"
+"info" = "bright-blue"
+"warning" = "bright-violet"
+"error" = "bright-magenta"
+"diagnostic.hint" = { underline = { color = "bright-cyan" } }
+"diagnostic.info" = { underline = { color = "bright-blue" } }
+"diagnostic.warning" = { underline = { color = "bright-violet", style = "curl" } }
+"diagnostic.error" = { underline = { color = "bright-magenta", style = "curl" } }
+
+"diff.plus" = "green"
+"diff.minus" = "red"
+"diff.delta" = "orange"
+
+"ui.cursor" = { bg = "dim-white" }
+"ui.cursor.match" = { fg = "bright-orange" }
+"ui.cursor.primary" = { fg = "bg", bg = "bright-white" }
+"ui.cursor.primary.insert" = { fg = "bg", bg = "bright-green" }
+"ui.cursor.primary.select" = { fg = "bg", bg = "bright-cyan" }
+"ui.cursorline.primary" = { bg = "bright-bg" }
+"ui.linenr" = "grey"
+"ui.linenr.selected" = { fg = "grey", modifiers = ["bold"] }
+"ui.selection" = { bg = "hl-grey" }
+"ui.selection.primary" = { fg = "bg", bg = "white" } # TODO:
+"ui.statusline" = { fg = "bright-white", bg = "grey", modifiers = ["bold"] }
+"ui.statusline.inactive" = { fg = "dim-white", bg = "bright-bg" }
+"ui.statusline.normal" = { fg = "black", bg = "bright-white", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "black", bg = "bright-green", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "black", bg = "bright-cyan", modifiers = ["bold"] }
+"ui.text" = "white"
+"ui.virtual" = { fg = "dim-grey" }
+"ui.virtual.inlay-hint" = { fg = "grey", modifiers = ["italic"] }
+"ui.virtual.ruler" = { bg = "bright-bg" }
+"ui.window" = { fg = "grey" }  # border between windows
+
+# Command line
+"ui.help" = { fg = "bright-blue", bg = "bright-bg" }
+"ui.menu" = { fg = "blue", bg = "bright-bg" }
+"ui.menu.selected" = { fg = "bg", bg = "blue" }
+"ui.text.inactive" = { fg = "dim-white" }
+
+# File picker
+"ui.background" = { fg = "dim-white", bg = "bg" }
+"ui.text.focus" = { fg = "black", bg = "green", modifiers = ["bold"] }
+"special" = { underline = { style = "line" } }  # matching characters in file picker
+"ui.highlight" = { bg = "hl-grey" }  # highlight on lines containing reference
+
+# Keybinding help popup
+"ui.popup" = { fg = "bright-blue", bg = "bright-bg" }
+"ui.text.info" = { fg = "bright-blue" }
+
+"note" = { fg = "bright-orange" }
+"todo" = { fg = "bright-red" }
+
+[palette]
+black = "#000000"
+bg = "#f2f2f2"
+bright-bg = "#ffffff"
+dim-grey = "#d0d0d0"
+grey = "#b0b0b0"
+dim-white = "#909090"
+white = "#636363"
+red = "#c8514d"
+orange = "#b86c00"
+yellow = "#9b8700"
+green = "#3f8f2b"
+cyan = "#00967e"
+blue = "#0083cc"
+violet = "#8363cc"
+magenta = "#ac52a6"
+bright-white = "#555555"
+bright-red = "#fa625d"
+bright-orange = "#e48500"
+bright-yellow = "#bfa600"
+bright-green = "#4cb332"
+bright-cyan = "#00bb9d"
+bright-blue = "#00a3ff"
+bright-violet = "#a37aff"
+bright-magenta = "#d665cf"
+bg-red = "#ffeae8"
+bg-orange = "#fbeee0"
+bg-yellow = "#f4f2e0"
+bg-cyan = "#e0f5f0"
+bg-blue = "#e2f2fe"
+hl-grey = "#d6d6d6"
+hl-yellow = "#f9f4c1"
+hl-cyan = "#bffcef"

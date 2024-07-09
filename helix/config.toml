@@ -1,4 +1,4 @@
-theme = "kalgykai-dark"
+theme = "kalgykai-light"
 
 [editor]
 bufferline = "multiple"

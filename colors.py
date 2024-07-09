@@ -158,13 +158,15 @@ if __name__ == "__main__":
         dim = c.adjust(c=-20).interpolate(background, 0.3)
         bright = c.adjust(c=10, l=10)
         bg = c.interpolate(background, 0.85).adjust(l=5)
+        highlight = c.interpolate(background, 0.70).adjust(l=10, c=5)
         print(
             f"{name:7}",
             dim.foreground(),
-            c.foreground(),
-            bright.foreground(),
             dim.reverse(),
+            c.foreground(),
             c.reverse(),
+            bright.foreground(),
             bright.reverse(),
             bg.background(),
+            highlight.background(),
         )
