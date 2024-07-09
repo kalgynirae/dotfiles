@@ -16,3 +16,6 @@ font=Source Sans Pro Semibold 16px
 text-color=#ffffff
 background-color=#00000080
 progress-color=source #ffff0066
+
+[mode=do-not-disturb]
+invisible=1
