@@ -6,3 +6,4 @@ After=graphical-session.target
 ExecStart=/usr/bin/waybar
 Restart=on-failure
 Slice=session.slice
+TimeoutStopSec=5s
