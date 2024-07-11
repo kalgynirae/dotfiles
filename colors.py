@@ -5,6 +5,7 @@ from enum import Enum
 from itertools import starmap
 from math import atan2, cos, degrees, isclose, radians, sin, sqrt
 from textwrap import dedent
+from typing import Self
 
 
 def clamp(v: float) -> float:
@@ -55,13 +56,18 @@ def f_inv(x: float) -> float:
         return x / 12.92
 
 
+def parse_hex(s: str) -> tuple[int, int, int]:
+    hex = s.removeprefix("#")
+    return tuple(int(hex[n:n+2], 16) for n in [0,2,4])
+
+
 class Color:
     __slots__ = ["l", "c", "h"]
 
     def __init__(self, l: float | int, c: float | int, h: float | int) -> None:
         self.l = float(l)  # roughly 0 to 100
         self.c = float(c)  # roughly 0 to 100
-        self.h = float(h)  # degrees
+        self.h = float(h) if self.c > 0 else 0.0  # degrees
 
     def __eq__(self, other: Color) -> bool:
         return all(
@@ -69,15 +75,24 @@ class Color:
         )
 
     def __repr__(self) -> str:
-        return f"{type(self).__name__}({self.l}, {self.c}, {self.h})"
+        return f"{type(self).__name__}(l={self.l}, c={self.c}, h={self.h})"
 
     @classmethod
-    def from_lab(cls, L: float, a: float, b: float) -> Color:
+    def from_lab(cls, L: float, a: float, b: float) -> Self:
         C = sqrt(a**2 + b**2)
         h = degrees(atan2(b, a)) % 360
         l = L * 100
         c = C * 300
         return cls(l, c, h)
+
+    @classmethod
+    def from_rgb(cls, r: float, g: float, b: float) -> Self:
+        return cls.from_lab(*linear_srgb_to_oklab(*(map(f_inv, [r, g, b]))))
+
+    @classmethod
+    def from_rgb_hex(cls, hex: str) -> Self:
+        r, g, b = (i / 255 for i in parse_hex(hex))
+        return cls.from_rgb(r, g, b)
 
     def set(
         self, l: float | None = None, c: float | None = None, h: float | None = None
@@ -101,9 +116,8 @@ class Color:
     def as_lab(self) -> tuple[float, float, float]:
         L = self.l / 100
         C = self.c / 300
-        h = self.h if C > 0 else 0.0
-        a = C * cos(radians(h))
-        b = C * sin(radians(h))
+        a = C * cos(radians(self.h))
+        b = C * sin(radians(self.h))
 
         # Verify math
         assert (
@@ -137,36 +151,76 @@ class Color:
         return f"\033[7;38;2;{rgb_sequence}m{self.as_rgb_hex()}\033[m"
 
 
-if __name__ == "__main__":
-    background = Color(l=96, c=0, h=0)
-    foreground = Color(l=50, c=0, h=0)
-    print("background     ", background.background())
-    print("foreground     ", foreground.foreground())
-    colors = dict(
-        black=foreground.adjust(l=26),
-        red=Color(l=59, c=46, h=25),
-        green=Color(l=58, c=47, h=140),
-        yellow=Color(l=62, c=49, h=102),
-        blue=Color(l=58, c=47, h=240),
-        magenta=Color(l=58, c=47, h=330),
-        cyan=Color(l=58, c=47, h=180),
-        white=foreground.adjust(l=-15),
-        orange=Color(l=60, c=47, h=72),
-        violet=Color(l=58, c=47, h=295),
+for hex in ["#000000", "#111111", "#123456", "#ff00ff"]:
+    c = Color.from_rgb_hex(hex)
+    roundtrip = c.as_rgb_hex()
+    assert roundtrip == hex, f"roundtrip: {roundtrip} != {hex}"
+
+DEFINITIONS = """
+dark.bg         #1c2022
+dark.shadow     #000000
+dark.verydark   #38383a
+dark.dark       #505050
+dark.subtle     #a0a0a0
+dark.normal     #c0c0c0
+dark.red        #b44738
+dark.orange     #af6423
+dark.yellow     #a79026
+dark.green      #518921
+dark.cyan       #008f89
+dark.blue       #3982ce
+dark.violet     #806acc
+dark.magenta    #ae4fa3
+light.bg        #f4f4f4
+light.shadow    #ffffff
+light.verydark  #d0d0d0
+light.dark      #a0a0a0
+light.subtle    #707070
+light.normal    #404040
+light.red       #c8514d
+light.orange    #b86c00
+light.yellow    #9b8700
+light.green     #3f8f2b
+light.cyan      #00967e
+light.blue      #0083cc
+light.violet    #8363cc
+light.magenta   #ac52a6
+"""
+COLORS = {}
+for line in DEFINITIONS.strip().splitlines():
+    name, hex = line.split()
+    COLORS[name] = Color.from_rgb_hex(hex)
+
+def generate(name: str, c: Color, background: Color, dark: bool) -> None:
+    if dark:
+        dim = c.adjust(c=-5).interpolate(background, 0.2)
+        bright = c.adjust(c=0, l=10)
+        hi = c.interpolate(background, 0.35).adjust(l=8)
+        bg = c.interpolate(background, 0.4).adjust(l=-15)
+    else:
+        dim = c.adjust(c=-10, l=-10)
+        bright = c.adjust(c=5, l=5)
+        hi = c.interpolate(background, 0.35).adjust(l=8)
+        bg = c.interpolate(background, 0.7).adjust(l=10)
+    print(
+        f"{name:14}",
+        dim.foreground(),
+        c.foreground(),
+        bright.foreground(),
+        c.reverse(),
+        hi.background(),
+        bg.background(),
     )
-    for name, c in colors.items():
-        dim = c.adjust(c=-20).interpolate(background, 0.3)
-        bright = c.adjust(c=10, l=10)
-        bg = c.interpolate(background, 0.85).adjust(l=5)
-        highlight = c.interpolate(background, 0.70).adjust(l=10, c=5)
-        print(
-            f"{name:7}",
-            dim.foreground(),
-            dim.reverse(),
-            c.foreground(),
-            c.reverse(),
-            bright.foreground(),
-            bright.reverse(),
-            bg.background(),
-            highlight.background(),
-        )
+
+if __name__ == "__main__":
+    print("NAME           DIM     NORMAL  BRIGHT  REVERSE HI      BG")
+    darkbg = COLORS["dark.bg"]
+    for name, c in COLORS.items():
+        if name.startswith("dark."):
+            generate(name, c, darkbg, True)
+    print()
+    print("NAME           DIM     NORMAL  BRIGHT  REVERSE HI      BG")
+    lightbg = COLORS["light.bg"]
+    for name, c in COLORS.items():
+        if name.startswith("light."):
+            generate(name, c, lightbg, False)
