@@ -7,7 +7,8 @@ monitor = desc:Dell Inc. DELL U2520DR 9JKMGZ2, preferred, 2560x0, 1
 monitor = eDP-1, preferred, 0x1080, 1
 #monitor = eDP-1, preferred, 0x2160, 1
 workspace = eDP-1, 1
-monitor = DP-2, preferred, 1920x0, 1
+#monitor = DP-2, preferred, 1920x0, 1
+monitor = desc:Dell Inc. DELL U2520DR 4DKMGZ2, preferred, 1920x0, 1
 workspace = DP-2, 2
 monitor = DP-3, preferred, 5760x0, 1
 monitor = DP-3, transform, 1
@@ -21,24 +22,31 @@ workspace = HDMI-A-1, 2
 {% endif %}
 
 general {
-    border_size = 3
     gaps_in = 15
     gaps_out = 30
+    {% if theme == "dark" %}
+    border_size = 3
     col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
     col.inactive_border = rgba(595959aa)
+    {% else %}
+    border_size = 4
+    col.active_border = rgba(00ffffff) rgba(00c0ffff) 45deg
+    col.inactive_border = rgba(cccccc40)
+    {% endif %}
 }
 
 decoration {
     rounding = 10
     inactive_opacity = 0.95
-    shadow_range = 40
     shadow_render_power = 2
     {% if theme == "dark" %}
+    shadow_range = 40
     col.shadow = rgba(000000cc)
     col.shadow_inactive = rgba(00000088)
     {% else %}
-    col.shadow = rgba(00000088)
-    col.shadow_inactive = rgba(00000048)
+    shadow_range = 30
+    col.shadow = rgba(000000cc)
+    col.shadow_inactive = rgba(00000060)
     {% endif %}
     blur {
         size = 10
@@ -103,7 +111,7 @@ bind = $mod, r, exec, wofi --show drun
 bind = $mod, Space, exec, applauncher
 bind = $mod, b, exec, systemd-run-launch-app web-browser gtk-launch web-browser.desktop
 bind = $mod, t, exec, systemd-run-launch-app thunar gtk-launch thunar.desktop
-bind = $mod, v, exec, systemd-run-launch-app pavucontrol gtk-launch pavucontrol.desktop
+bind = $mod, v, exec, systemd-run-launch-app pavucontrol gtk-launch org.pulseaudio.pavucontrol.desktop
 # TODO lock screen: bind = $mod, Backspace, exec, ...
 bind = , Print, exec, screenshot
 bind = SHIFT, Print, exec, screenshot --region
