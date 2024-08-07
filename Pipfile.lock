@@ -70,7 +70,6 @@
                 "sha256:bc5dd2abb727a5319567b7a813e6a2e7318c39f4f487cfe6c89c6f9c7d25197d"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.7'",
             "version": "==3.1.4"
         },
         "markupsafe": {
@@ -145,7 +144,6 @@
                 "sha256:e49b98c7ab37c8fe75d838319cbc0f4769a06536ec039633f1cded39b813a055"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.6' and python_version < '4.0'",
             "version": "==1.32.2"
         },
         "tomli": {
@@ -154,7 +152,6 @@
                 "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.7'",
             "version": "==2.0.1"
         }
     },
@@ -313,7 +310,6 @@
                 "sha256:3f8307ca07d7e253e50e38c5fe31c371ceace0bc33d31c3429fa035d6d41bd5f"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.8'",
             "version": "==0.6.8"
         },
         "pylsp-rope": {
@@ -322,7 +318,6 @@
                 "sha256:d680b688c60a40257a8842ec808a6e0de1596a47a5300f22aecfdc69555020a7"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.6'",
             "version": "==0.1.16"
         },
         "python-lsp-black": {
@@ -331,7 +326,6 @@
                 "sha256:d5efdee45f5fa9e5241f5d4d396cd46127f45c85817916b1fd92c2986652bf7e"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.8'",
             "version": "==2.0.0"
         },
         "python-lsp-jsonrpc": {
@@ -348,7 +342,6 @@
                 "sha256:89edd6fb3f7852e4bf5a3d1d95ea41484d1a28fa94b6e3cbff12b9db123b8e86"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.8'",
             "version": "==1.11.0"
         },
         "pytoolconfig": {
@@ -376,7 +369,6 @@
                 "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.7'",
             "version": "==2.0.1"
         },
         "typing-extensions": {
