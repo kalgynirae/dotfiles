@@ -1,13 +1,14 @@
 clipboard_control write-clipboard write-primary read-clipboard-ask read-primary-ask no-append
 cursor_blink_interval 0
 enable_audio_bell no
-font_family Iosevka Term
-font_size 18.0
+font_family Iosevka Term Medium
+bold_font Iosevka Term Bold
+font_size 16.5
 initial_window_height 35c
 initial_window_width 120c
 remember_window_size no
 scrollback_lines 10000
-touch_scroll_multiplier 4.0
+touch_scroll_multiplier 6.0
 
 {% if theme == "dark" %}
 foreground #c0c0c0
@@ -33,7 +34,7 @@ env DARK_THEME=yes
 {% else %}
 foreground #404040
 background #f4f4f4
-color0  #ffffff
+color0  #e0e0e0
 color1  #c8514d
 color2  #3f8f2b
 color3  #9b8700
@@ -41,7 +42,7 @@ color4  #0083cc
 color5  #ac52a6
 color6  #00967e
 color7  #202020
-color8  #e4e4e4
+color8  #d0d0d0
 color9  #e05a55
 color10 #46a02e
 color11 #ad9600
