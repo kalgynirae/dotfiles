@@ -1,14 +1,6 @@
 #!/bin/bash
 
-#primarysize=$(swaymsg -t get_outputs | jq -r '.[]|.current_mode|"\(.width)x\(.height)"' | head -n1)
-if [[ $HOSTNAME == colinchan-fedora-* ]]; then
-  #primarysize=1600x2560
-  #primarysize=2560x1600
-  #primarysize=1920x1080
-  primarysize=3840x2160
-else
-  primarysize=2560x1440
-fi
+primarysize=$(hyprctl monitors -j | jq -r 'max_by(.width * .height)|"\(.width)x\(.height)"')
 width=$(cut -dx -f1 <<<"$primarysize")
 height=$(cut -dx -f2 <<<"$primarysize")
 echo "size: ${width}x${height}"
