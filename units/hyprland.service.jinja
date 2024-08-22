@@ -5,6 +5,7 @@ PartOf=graphical-session.target
 Before=graphical-session.target
 Wants=gammastep.service
 Wants=mako.service
+Wants=pipewire.service
 Wants=polkit-gnome.service
 Wants=swayidle.service
 Wants=swww.service
@@ -17,8 +18,11 @@ Environment=XCURSOR_SIZE={{ cursor_size }}
 Environment=XCURSOR_THEME={{ cursor_theme }}
 ExecStartPre=systemctl --user import-environment XCURSOR_SIZE XCURSOR_THEME
 ExecStart=Hyprland
-ExecStopPost=systemctl --user unset-environment XCURSOR_SIZE XCURSOR_THEME DISPLAY WAYLAND_DISPLAY
+ExecStopPost=systemctl --user stop graphical-session.target
+ExecStopPost=systemctl --user unset-environment XCURSOR_SIZE XCURSOR_THEME DISPLAY WAYLAND_DISPLAY HYPRLAND_INSTANCE_SIGNATURE
 OOMPolicy=continue
 NotifyAccess=all
+Restart=on-failure
+RestartSec=5s
 Slice=session.slice
 TimeoutStartSec=infinity
