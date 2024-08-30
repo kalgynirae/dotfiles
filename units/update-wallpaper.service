@@ -5,3 +5,4 @@ StartLimitIntervalSec=0
 ExecStart=%h/bin/update-wallpaper
 Type=oneshot
 Slice=background.slice
+MemoryMax=1G

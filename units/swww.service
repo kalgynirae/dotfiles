@@ -1,9 +1,10 @@
 [Unit]
-BindsTo=graphical-session.target
-After=graphical-session.target
+BindsTo=compositor.service
+After=compositor.service
 
 [Service]
 ExecStart=swww-daemon
 ExecStartPost=swww restore
 Restart=always
 Slice=session.slice
+MemoryMax=1G

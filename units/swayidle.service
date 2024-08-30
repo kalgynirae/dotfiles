@@ -1,6 +1,6 @@
 [Unit]
-BindsTo=graphical-session.target
-After=graphical-session.target
+BindsTo=compositor.service
+After=compositor.service
 
 [Service]
 ExecStart=/usr/bin/swayidle -w timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' timeout 910 'swaylock -f' before-sleep 'swaylock -f'

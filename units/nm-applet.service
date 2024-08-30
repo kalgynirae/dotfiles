@@ -1,10 +1,12 @@
 [Unit]
-BindsTo=graphical-session.target
-After=graphical-session.target
+BindsTo=compositor.service
+After=compositor.service
 
 [Service]
 ExecStart=/usr/bin/nm-applet --indicator
 Restart=on-failure
+Slice=session.slice
+MemoryMax=1G
 
 [Install]
 WantedBy=graphical-session.target

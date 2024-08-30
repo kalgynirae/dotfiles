@@ -1,7 +1,9 @@
 [Unit]
-BindsTo=graphical-session.target
-After=graphical-session.target
+BindsTo=compositor.service
+After=compositor.service
 
 [Service]
 ExecStart=swaybg --output * --image %h/.cache/wallpaper.jpg --mode fill
 Restart=on-failure
+Slice=session.slice
+MemoryMax=1G

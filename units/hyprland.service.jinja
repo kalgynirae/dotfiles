@@ -1,28 +1,36 @@
 [Unit]
 Wants=graphical-session-pre.target
 After=graphical-session-pre.target
-PartOf=graphical-session.target
+Requires=graphical-session.target
 Before=graphical-session.target
 Wants=gammastep.service
 Wants=mako.service
 Wants=pipewire.service
+Wants=pipewire-pulse.service
 Wants=polkit-gnome.service
 Wants=swayidle.service
 Wants=swww.service
 Wants=update-wallpaper.timer
 Wants=waybar.service
+StartLimitBurst=3
+StartLimitIntervalSec=20s
 
 [Service]
 Type=notify
 Environment=XCURSOR_SIZE={{ cursor_size }}
 Environment=XCURSOR_THEME={{ cursor_theme }}
-ExecStartPre=systemctl --user import-environment XCURSOR_SIZE XCURSOR_THEME
+Environment=XDG_CURRENT_DESKTOP=Hyprland
+Environment=XDG_SESSION_TYPE=wayland
+ExecStartPre=systemctl --user import-environment XCURSOR_SIZE XCURSOR_THEME XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 ExecStart=Hyprland
-ExecStopPost=systemctl --user stop graphical-session.target
-ExecStopPost=systemctl --user unset-environment XCURSOR_SIZE XCURSOR_THEME DISPLAY WAYLAND_DISPLAY HYPRLAND_INSTANCE_SIGNATURE
+ExecStopPost=systemctl --user unset-environment XCURSOR_SIZE XCURSOR_THEME XDG_CURRENT_DESKTOP XDG_SESSION_TYPE DISPLAY WAYLAND_DISPLAY HYPRLAND_INSTANCE_SIGNATURE
 OOMPolicy=continue
 NotifyAccess=all
 Restart=on-failure
 RestartSec=5s
 Slice=session.slice
-TimeoutStartSec=infinity
+TimeoutStartSec=15s
+TimeoutStopSec=30s
+
+[Install]
+Alias=compositor.service

@@ -6,6 +6,7 @@ After=pipewire.service
 Environment=PIPEWIRE_DEBUG=2
 ExecStart=/usr/bin/pipewire -c %h/dotfiles/pipewire/filters/%i.conf
 Slice=session.slice
+MemoryMax=1G
 
 [Install]
 WantedBy=pipewire.service

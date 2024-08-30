@@ -15,7 +15,6 @@ environment: ContextVar[Environment] = ContextVar("environment")
 @dataclass
 class Environment:
     dry_run: bool
-    desktop: Desktop
     host: Host
     os: OS
     theme: Theme
@@ -48,7 +47,6 @@ class Environment:
         os = OS.load()
         return cls(
             dry_run=dry_run,
-            desktop=Desktop[cast(str, config.get("desktop", "hyprland")).upper()],
             host=host,
             os=os,
             theme=Theme[cast(str, config.get("theme", "dark")).upper()],
@@ -69,13 +67,6 @@ class Environment:
         except FileNotFoundError:
             return {}
         return tomli.loads(data)
-
-
-class Desktop(Enum):
-    GNOME = auto()
-    HYPRLAND = auto()
-    SWAY = auto()
-    WAYFIRE = auto()
 
 
 class Host(Enum):
