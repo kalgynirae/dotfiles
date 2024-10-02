@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SECS=3
+
+[[ -f $RUNTIME_DIRECTORY/ready$SECS ]] && exit 0
+
+for n in $(seq 0 $SECS); do
+  if [[ ! -f $RUNTIME_DIRECTORY/ready$n ]]; then
+    touch $RUNTIME_DIRECTORY/ready$n
+    if (( n == SECS )); then
+      systemd-notify --ready
+    fi
+    echo "NOT READY"
+    exit 0
+  fi
+done

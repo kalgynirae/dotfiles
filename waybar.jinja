@@ -6,11 +6,12 @@
   "modules-left": [
     "hyprland/workspaces",
     "idle_inhibitor",
-    "hyprland/submap"
+    "hyprland/submap",
   ],
 
   "modules-center": [
     "pulseaudio#mic",
+    "custom/ready",
   ],
 
   "modules-right": [
@@ -25,7 +26,7 @@
     {% if host == "colinchan-fedora" %}
     "battery",
     {% endif %}
-    "clock"
+    "clock",
   ],
 
   "battery": {
@@ -60,6 +61,12 @@
     "interval": 2,
     "return-type": "json",
     "exec": "waybar-psi io",
+  },
+
+  "custom/ready": {
+    "exec": "waybar-ready",
+    "interval": 1,
+    "hide-empty-text": true,
   },
 
   "custom/wallpaper": {

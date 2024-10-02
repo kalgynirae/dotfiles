@@ -1,10 +1,16 @@
 [Unit]
 BindsTo=compositor.service
 After=compositor.service
+Wants=pipewire-pulse.service
+After=pipewire-pulse.service
 
 [Service]
+Type=notify
+NotifyAccess=all
 ExecStart=/usr/bin/waybar
 Restart=on-failure
 Slice=session.slice
+TimeoutStartSec=5s
 TimeoutStopSec=2s
-MemoryMax=2G
+MemoryMax=256M
+RuntimeDirectory=waybar
