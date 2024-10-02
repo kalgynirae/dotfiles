@@ -10,7 +10,7 @@ shopt -s histappend
 set +H
 
 export COLORTERM=truecolor
-export LESS='--chop-long-lines --ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS'
+export LESS='-SR --ignore-case --mouse --no-init --quit-if-one-screen --wheel-lines=5'
 export PYTHONDONTWRITEBYTECODE=yes
 export PYTHONSTARTUP=$HOME/.pythonrc
 export RSYNC_PROTECT_ARGS=1
