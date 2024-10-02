@@ -423,5 +423,5 @@ black='\[\e[30m\]'
 reset='\[\e[0m\]'
 prefix=$(repeat-str '▶' "$SHLVL")
 PS1=$reset$prefix' '$color'\u@\h:\W'$reset' '$black'[$((++_command_count))]'$reset'\n[\j]\$ '
-SHORTPS1=$reset$green'[:\W]\$'$reset' '
+SHORTPS1=$reset$green'[:\W:\j]\$'$reset' '
 : "${_command_count:=-1}"
