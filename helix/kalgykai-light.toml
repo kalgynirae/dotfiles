@@ -17,7 +17,8 @@
 "string" = "yellow"
 "tag" = "green"
 "type" = "cyan"
-"variable.builtin" = { modifiers = ["bold"] }
+"variable" = "normal"
+"variable.builtin" = { fg = "subtle", modifiers = ["bold"] }
 "variable.parameter" = "subtle"
 
 "hint" = "bright-cyan"
@@ -33,26 +34,28 @@
 "diff.minus" = "red"
 "diff.delta" = "orange"
 
+"ui.bufferline" = { fg = "subtle", bg = "veryfaint" }
+"ui.bufferline.active" = { fg = "normal", bg = "bright-bg", modifiers = ["bold"] }
 "ui.cursor" = { bg = "subtle" }
 "ui.cursor.match" = { fg = "bright-orange" }
-"ui.cursor.primary" = { fg = "bg", bg = "bright-normal" }
+"ui.cursor.primary" = { fg = "bg", bg = "normal" }
 "ui.cursor.primary.insert" = { fg = "bg", bg = "bright-green" }
 "ui.cursor.primary.select" = { fg = "bg", bg = "bright-cyan" }
 "ui.cursorline.primary" = { bg = "bright-bg" }
-"ui.linenr" = "dark"
-"ui.linenr.selected" = { fg = "dark", modifiers = ["bold"] }
+"ui.linenr" = "faint"
+"ui.linenr.selected" = { fg = "faint", modifiers = ["bold"] }
 "ui.selection" = { bg = "hl-grey" }
-"ui.selection.primary" = { fg = "bg", bg = "normal" }
-"ui.statusline" = { fg = "bright-normal", bg = "dark", modifiers = ["bold"] }
+"ui.selection.primary" = { fg = "bg", bg = "subtle" }
+"ui.statusline" = { fg = "normal", bg = "faint", modifiers = ["bold"] }
 "ui.statusline.inactive" = { fg = "subtle", bg = "bright-bg" }
-"ui.statusline.normal" = { fg = "shadow", bg = "bright-normal", modifiers = ["bold"] }
-"ui.statusline.insert" = { fg = "shadow", bg = "bright-green", modifiers = ["bold"] }
-"ui.statusline.select" = { fg = "shadow", bg = "bright-cyan", modifiers = ["bold"] }
+"ui.statusline.normal" = { fg = "bg", bg = "normal", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "bg", bg = "bright-green", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "bg", bg = "bright-cyan", modifiers = ["bold"] }
 "ui.text" = "normal"
-"ui.virtual" = { fg = "verydark" }
-"ui.virtual.inlay-hint" = { fg = "dark", modifiers = ["italic"] }
+"ui.virtual" = { fg = "veryfaint" }
+"ui.virtual.inlay-hint" = { fg = "faint", modifiers = ["italic"] }
 "ui.virtual.ruler" = { bg = "bright-bg" }
-"ui.window" = { fg = "dark" }  # border between windows
+"ui.window" = { fg = "faint" }  # border between windows
 
 # Command line
 "ui.help" = { fg = "bright-blue", bg = "bright-bg" }
@@ -62,7 +65,7 @@
 
 # File picker
 "ui.background" = { fg = "subtle", bg = "bg" }
-"ui.text.focus" = { fg = "shadow", bg = "green", modifiers = ["bold"] }
+"ui.text.focus" = { fg = "bg", bg = "green", modifiers = ["bold"] }
 "special" = { underline = { style = "line" } }  # matching characters in file picker
 "ui.highlight" = { bg = "hl-grey" }  # highlight on lines containing reference
 
@@ -74,38 +77,39 @@
 "todo" = { fg = "bright-red" }
 
 [palette]
-shadow = "#000000"
-bg = "#f4f4f4"
-bright-bg = "#fafafa"
-verydark = "#d0d0d0"
-dark = "#a0a0a0"
-subtle = "#707070"
-normal = "#404040"
-red = "#c8514d"
-orange = "#b86c00"
-yellow = "#9b8700"
-green = "#3f8f2b"
-cyan = "#00967e"
-blue = "#0083cc"
-violet = "#8363cc"
-magenta = "#ac52a6"
-bright-normal = "#514d43"
-bright-red = "#e05a55"
-bright-orange = "#cf7800"
-bright-yellow = "#ad9600"
-bright-green = "#46a02e"
-bright-cyan = "#00a88d"
-bright-blue = "#0093e6"
-bright-violet = "#936fe5"
-bright-magenta = "#c15bba"
-bg-red = "#ffe5e1"
-bg-orange = "#ffecd5"
-bg-yellow = "#f9f4d7"
-bg-green = "#dff7d9"
-bg-cyan = "#daf9f0"
-bg-blue = "#d8f4ff"
-bg-violet = "#f1e9ff"
-bg-magenta = "#ffe4fe"
+bg = "#ebe7e3"
+bright-bg = "#f2edea"
+shadow = "#e1ddda"
+veryfaint = "#d1cdc9"
+faint = "#b1adaa"
+subtle = "#837f7c"
+normal = "#3d3a37"
+bright = "#040302"
+red = "#ca625e"
+orange = "#bd7119"
+yellow = "#9c8600"
+green = "#5b9845"
+cyan = "#009f91"
+blue = "#2d8dd0"
+violet = "#8d74cd"
+magenta = "#b166ad"
+bright-red = "#ef736f"
+bright-orange = "#e08619"
+bright-yellow = "#b89e00"
+bright-green = "#6bb450"
+bright-cyan = "#00bcab"
+bright-blue = "#33a6f6"
+bright-violet = "#a689f3"
+bright-magenta = "#d179cd"
+bg-red = "#f1cfca"
+bg-orange = "#ecd3be"
+bg-yellow = "#e0d8bc"
+bg-green = "#d0ddc5"
+bg-cyan = "#c2e0d8"
+bg-blue = "#c8dbeb"
+bg-violet = "#dcd4eb"
+bg-magenta = "#e8d0e1"
+hl-grey = "#a0a0a0"
 hl-normal = "#929292"
-hl-yellow = "#d3c687"
-hl-cyan = "#8dd1bf"
+hl-yellow = "#d5c685"
+hl-cyan = "#87d7cb"

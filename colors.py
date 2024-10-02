@@ -1,15 +1,43 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+import random
+import re
+import shutil
+import textwrap
+import traceback
+from contextlib import contextmanager
+from contextvars import ContextVar
+from dataclasses import dataclass, field, fields
 from enum import Enum
-from itertools import starmap
+from itertools import cycle, starmap
 from math import atan2, cos, degrees, isclose, radians, sin, sqrt
 from textwrap import dedent
-from typing import Self
+from typing import Iterator, Self
+
+
+@dataclass
+class Clamped:
+    clamped: bool
+
+
+_clamped = ContextVar("_clamped")
+
+
+@contextmanager
+def detect_clamping() -> Iterator[None]:
+    c = Clamped(False)
+    token = _clamped.set(c)
+    try:
+        yield c
+    finally:
+        _clamped.reset(token)
 
 
 def clamp(v: float) -> float:
-    return max(0.0, min(1.0, v))
+    cv = max(0.0, min(1.0, v))
+    if cv != v and (clamped := _clamped.get(None)) is not None:
+        clamped.clamped = True
+    return cv
 
 
 # Oklab <-> linear sRGB conversions from https://bottosson.github.io/posts/oklab/
@@ -58,7 +86,7 @@ def f_inv(x: float) -> float:
 
 def parse_hex(s: str) -> tuple[int, int, int]:
     hex = s.removeprefix("#")
-    return tuple(int(hex[n:n+2], 16) for n in [0,2,4])
+    return tuple(int(hex[n : n + 2], 16) for n in [0, 2, 4])
 
 
 class Color:
@@ -110,7 +138,10 @@ class Color:
 
     def interpolate(self, other: Color, amount: float) -> Color:
         return Color.from_lab(
-            *((1 - amount) * s + amount * o for s, o in zip(self.as_lab(), other.as_lab()))
+            *(
+                (1 - amount) * s + amount * o
+                for s, o in zip(self.as_lab(), other.as_lab())
+            )
         )
 
     def as_lab(self) -> tuple[float, float, float]:
@@ -136,19 +167,30 @@ class Color:
         return tuple(round(v * 255) for v in self.as_clamped_rgb())
 
     def as_rgb_hex(self) -> str:
-        return "#" + "".join(f"{v:02x}" for v in self.as_rgb_ints())
+        with detect_clamping() as c:
+            hex_digits = "".join(f"{v:02x}" for v in self.as_rgb_ints())
+        return f"‼{hex_digits}" if c.clamped else f"#{hex_digits}"
+
+    def bg_escape(self) -> str:
+        rgb_sequence = ";".join(map(str, self.as_rgb_ints()))
+        return f"\033[48;2;{rgb_sequence}m"
+
+    def fg_escape(self) -> str:
+        rgb_sequence = ";".join(map(str, self.as_rgb_ints()))
+        return f"\033[38;2;{rgb_sequence}m"
 
     def background(self) -> str:
-        rgb_sequence = ";".join(map(str, self.as_rgb_ints()))
-        return f"\033[48;2;{rgb_sequence}m{self.as_rgb_hex()}\033[m"
+        return f"{self.bg_escape()}{self.as_rgb_hex()}\033[49m"
 
     def foreground(self) -> str:
-        rgb_sequence = ";".join(map(str, self.as_rgb_ints()))
-        return f"\033[38;2;{rgb_sequence}m{self.as_rgb_hex()}\033[m"
+        return f"{self.fg_escape()}{self.as_rgb_hex()}\033[39m"
 
     def reverse(self) -> str:
         rgb_sequence = ";".join(map(str, self.as_rgb_ints()))
-        return f"\033[7;38;2;{rgb_sequence}m{self.as_rgb_hex()}\033[m"
+        return f"\033[7;38;2;{rgb_sequence}m{self.as_rgb_hex()}\033[39;27m"
+
+    def lch_foreground(self) -> str:
+        return f"{self.fg_escape()}(l={self.l:5.2f}, c={self.c:5.2f}, h={self.h:6.2f})\033[39m"
 
 
 for hex in ["#000000", "#111111", "#123456", "#ff00ff"]:
@@ -156,71 +198,256 @@ for hex in ["#000000", "#111111", "#123456", "#ff00ff"]:
     roundtrip = c.as_rgb_hex()
     assert roundtrip == hex, f"roundtrip: {roundtrip} != {hex}"
 
-DEFINITIONS = """
-dark.bg         #1c2022
-dark.shadow     #000000
-dark.verydark   #38383a
-dark.dark       #505050
-dark.subtle     #a0a0a0
-dark.normal     #c0c0c0
-dark.red        #b44738
-dark.orange     #af6423
-dark.yellow     #a79026
-dark.green      #518921
-dark.cyan       #008f89
-dark.blue       #3982ce
-dark.violet     #806acc
-dark.magenta    #ae4fa3
-light.bg        #f4f4f4
-light.shadow    #ffffff
-light.verydark  #d0d0d0
-light.dark      #a0a0a0
-light.subtle    #707070
-light.normal    #404040
-light.red       #c8514d
-light.orange    #b86c00
-light.yellow    #9b8700
-light.green     #3f8f2b
-light.cyan      #00967e
-light.blue      #0083cc
-light.violet    #8363cc
-light.magenta   #ac52a6
-"""
-COLORS = {}
-for line in DEFINITIONS.strip().splitlines():
-    name, hex = line.split()
-    COLORS[name] = Color.from_rgb_hex(hex)
 
-def generate(name: str, c: Color, background: Color, dark: bool) -> None:
-    if dark:
-        dim = c.adjust(c=-5).interpolate(background, 0.2)
-        bright = c.adjust(c=0, l=10)
-        hi = c.interpolate(background, 0.35).adjust(l=8)
-        bg = c.interpolate(background, 0.4).adjust(l=-15)
-    else:
-        dim = c.adjust(c=-10, l=-10)
-        bright = c.adjust(c=5, l=5)
-        hi = c.interpolate(background, 0.35).adjust(l=8)
-        bg = c.interpolate(background, 0.7).adjust(l=10)
-    print(
-        f"{name:14}",
-        dim.foreground(),
-        c.foreground(),
-        bright.foreground(),
-        c.reverse(),
-        hi.background(),
-        bg.background(),
-    )
+_theme = ContextVar("_theme")
+
+
+@contextmanager
+def active_theme(t: Theme) -> Iterator[None]:
+    token = _theme.set(t)
+    try:
+        yield
+    finally:
+        _theme.reset(token)
+
+
+@dataclass(frozen=True)
+class BaseColor:
+    color: Color
+
+    @classmethod
+    def from_lch(cls, l: float, c: float, h: float) -> Self:
+        return cls(Color(l, c, h))
+
+    @classmethod
+    def from_rgb_hex(cls, hex: str) -> Self:
+        return cls(Color.from_rgb_hex(hex))
+
+    @property
+    def dim(self) -> Color:
+        return _theme.get().bg.color
+
+    @property
+    def normal(self) -> Color:
+        return self.color
+
+    @property
+    def bright(self) -> Color:
+        return _theme.get().bg.color
+
+    @property
+    def highlight(self) -> Color:
+        return _theme.get().bg.color
+
+    @property
+    def background(self) -> Color:
+        return _theme.get().bg.color
+
+
+@dataclass(frozen=True)
+class DarkThemeColor(BaseColor):
+    @property
+    def dim(self) -> Color:
+        return self.color.adjust(c=-5).interpolate(_theme.get().bg.color, 0.2)
+
+    @property
+    def bright(self) -> Color:
+        return self.color.adjust(c=0, l=10)
+
+    @property
+    def highlight(self) -> Color:
+        return self.color.interpolate(_theme.get().bg.color, 0.35).adjust(l=8)
+
+    @property
+    def background(self) -> Color:
+        return self.color.interpolate(_theme.get().bg.color, 0.4).adjust(l=-15)
+
+
+@dataclass(frozen=True)
+class LightThemeColor(BaseColor):
+    @property
+    def dim(self) -> Color:
+        return self.color.adjust(l=-10).interpolate(_theme.get().bg.color, 0.5)
+
+    @property
+    def bright(self) -> Color:
+        return self.color.adjust(c=6, l=8)
+
+    @property
+    def highlight(self) -> Color:
+        return self.color.adjust(c=10, l=10).interpolate(_theme.get().bg.color, 0.5)
+
+    @property
+    def background(self) -> Color:
+        return self.color.adjust(c=-5, l=15).interpolate(_theme.get().bg.color, 0.7)
+
+
+@dataclass(frozen=True)
+class Theme:
+    bg: BaseColor
+    brightbg: BaseColor
+    shadow: BaseColor
+    veryfaint: BaseColor
+    faint: BaseColor
+    subtle: BaseColor
+    normal: BaseColor
+    bright: BaseColor
+    red: BaseColor
+    orange: BaseColor
+    yellow: BaseColor
+    green: BaseColor
+    cyan: BaseColor
+    blue: BaseColor
+    violet: BaseColor
+    magenta: BaseColor
+
+    palette: Iterator[BaseColor] = field(init=False)
+
+    def __post_init__(self):
+        palette = [
+            self.subtle,
+            self.bright,
+            self.red,
+            self.orange,
+            self.yellow,
+            self.green,
+            self.cyan,
+            self.blue,
+            self.violet,
+            self.magenta,
+        ]
+        object.__setattr__(self, "palette", cycle(random.sample(palette, len(palette))))
+
+    def randcolor(self, s: str) -> str:
+        out = []
+        for word in s.split():
+            if (i := hash(word) % 6) == 0:
+                out.append(
+                    next(self.palette).color.fg_escape()
+                    + word
+                    + self.normal.color.fg_escape()
+                )
+            else:
+                out.append(word)
+        return " ".join(out)
+
+
+dark = Theme(
+    bg=BaseColor.from_rgb_hex("#1c2022"),
+    brightbg=BaseColor.from_rgb_hex("#1c2022"),
+    shadow=BaseColor.from_rgb_hex("#000000"),
+    veryfaint=BaseColor.from_rgb_hex("#38383a"),
+    faint=BaseColor.from_rgb_hex("#505050"),
+    subtle=BaseColor.from_rgb_hex("#a0a0a0"),
+    normal=BaseColor.from_rgb_hex("#c0c0c0"),
+    bright=BaseColor.from_rgb_hex("#c0c0c0"),
+    red=DarkThemeColor.from_rgb_hex("#b44738"),
+    orange=DarkThemeColor.from_rgb_hex("#af6423"),
+    yellow=DarkThemeColor.from_rgb_hex("#a79026"),
+    green=DarkThemeColor.from_rgb_hex("#518921"),
+    cyan=DarkThemeColor.from_rgb_hex("#008f89"),
+    blue=DarkThemeColor.from_rgb_hex("#3982ce"),
+    violet=DarkThemeColor.from_rgb_hex("#806acc"),
+    magenta=DarkThemeColor.from_rgb_hex("#ae4fa3"),
+)
+
+light = Theme(
+    bg=BaseColor.from_lch(l=93.0, c=2.0, h=60.0),
+    brightbg=BaseColor.from_lch(l=95.0, c=2.0, h=60.0),
+    shadow=BaseColor.from_lch(l=90.0, c=2.0, h=60.0),
+    veryfaint=BaseColor.from_lch(l=85.0, c=2.0, h=60.0),
+    faint=BaseColor.from_lch(l=75.0, c=2.0, h=60.0),
+    subtle=BaseColor.from_lch(l=60.0, c=2.0, h=60.0),
+    normal=BaseColor.from_lch(l=35.0, c=2.0, h=60.0),
+    bright=BaseColor.from_lch(l=10.0, c=2.0, h=60.0),
+    red=LightThemeColor.from_lch(l=62.0, c=40.0, h=24.0),
+    orange=LightThemeColor.from_lch(l=62.0, c=40.0, h=63.0),
+    yellow=LightThemeColor.from_lch(l=62.0, c=40.0, h=98.0),
+    green=LightThemeColor.from_lch(l=62.0, c=40.0, h=138.0),
+    cyan=LightThemeColor.from_lch(l=62.0, c=40.0, h=185.0),
+    blue=LightThemeColor.from_lch(l=62.0, c=40.0, h=244.0),
+    violet=LightThemeColor.from_lch(l=62.0, c=40.0, h=295.0),
+    magenta=LightThemeColor.from_lch(l=62.0, c=40.0, h=329.0),
+)
+
+
+COLS = shutil.get_terminal_size().columns
+ESCAPE_PATTERN = re.compile("\033\\[.*?m")
+
+_print = print
+
+
+def print(*args: str) -> None:
+    theme = _theme.get()
+    reset = theme.bg.color.bg_escape() + theme.normal.color.fg_escape()
+    parts = [reset]
+    width = 0
+    for arg in args:
+        width += len(ESCAPE_PATTERN.sub("", arg)) + 1
+        if width < COLS:
+            parts.append(arg)
+        else:
+            parts.append("…")
+            break
+    if (remainder := COLS - width) > 1:
+        parts.append(" " * (remainder - 1))
+    _print(*parts, sep=f"{reset} ")
+
 
 if __name__ == "__main__":
-    print("NAME           DIM     NORMAL  BRIGHT  REVERSE HI      BG")
-    darkbg = COLORS["dark.bg"]
-    for name, c in COLORS.items():
-        if name.startswith("dark."):
-            generate(name, c, darkbg, True)
-    print()
-    print("NAME           DIM     NORMAL  BRIGHT  REVERSE HI      BG")
-    lightbg = COLORS["light.bg"]
-    for name, c in COLORS.items():
-        if name.startswith("light."):
-            generate(name, c, lightbg, False)
+    namelen = max(len(f.name) for f in fields(Theme))
+    for theme in [dark, light]:
+        try:
+            with active_theme(theme):
+                print()
+                print(
+                    *(
+                        f"\033[4m{s}\033[0m"
+                        for s in [
+                            "NAME".ljust(namelen),
+                            "DIM    ",
+                            "NORMAL ",
+                            "BRIGHT ",
+                            "REVERSE",
+                            "HI     ",
+                            "BG     ",
+                            "Color                            ",
+                        ]
+                    ),
+                )
+                for field in fields(theme):
+                    if field.type != "BaseColor":
+                        continue
+                    c = getattr(theme, field.name)
+                    print(
+                        f"{field.name:{namelen}}",
+                        c.dim.foreground(),
+                        c.normal.foreground(),
+                        c.bright.foreground(),
+                        c.normal.reverse(),
+                        c.highlight.background(),
+                        c.background.background(),
+                        c.normal.lch_foreground(),
+                    )
+                print()
+                for line in textwrap.fill(
+                    """
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book. It has survived not only five centuries,
+                    but also the leap into electronic typesetting, remaining
+                    essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum
+                    passages, and more recently with desktop publishing software
+                    like Aldus PageMaker including versions of Lorem Ipsum.
+                    """.strip(),
+                    width=COLS,
+                ).splitlines():
+                    print(theme.randcolor(line))
+                print()
+        except Exception:
+            traceback.print_exc()
+        finally:
+            _print("\033[0m")

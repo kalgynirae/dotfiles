@@ -1,18 +1,24 @@
 clipboard_control write-clipboard write-primary read-clipboard-ask read-primary-ask no-append
 cursor_blink_interval 0
 enable_audio_bell no
-font_family Iosevka Term Medium
-bold_font Iosevka Term Bold
-font_size 16.5
+font_size 15
+window_padding_width 4
 initial_window_height 35c
 initial_window_width 120c
 remember_window_size no
 scrollback_lines 10000
+scrollback_pager less --RAW-CONTROL-CHARS --chop-long-lines --ignore-case --mouse --wheel-lines=5 +INPUT_LINE_NUMBER
 touch_scroll_multiplier 6.0
+wheel_scroll_multiplier 1.0
 
 {% if theme == "dark" %}
+font_family Iosevka Term
+bold_font Iosevka Term Bold
+italic_font Iosevka Term Italic
+bold_italic_font Iosevka Term Bold Italic
 foreground #c0c0c0
 background #1c2022
+background_opacity 1.0
 color0  #505050
 color1  #b44638
 color2  #518921
@@ -29,30 +35,35 @@ color12 #5799e7
 color13 #c866bb
 color14 #00b2ab
 color15 #e0e0e0
+dim_opacity 0.5
 wayland_titlebar_color #2a2f31
 env DARK_THEME=yes
 {% else %}
-foreground #404040
-background #f4f4f4
-color0  #e0e0e0
-color1  #c8514d
-color2  #3f8f2b
-color3  #9b8700
-color4  #0083cc
-color5  #ac52a6
-color6  #00967e
-color7  #202020
-color8  #d0d0d0
-color9  #e05a55
-color10 #46a02e
-color11 #ad9600
-color12 #0093e6
-color13 #c15bba
-color14 #00a88d
+font_family Iosevka Term Medium
+bold_font Iosevka Term Extrabold
+italic_font Iosevka Term Medium Italic
+bold_italic_font Iosevka Term Extrabold Italic
+foreground #3d3a37
+background #ebe7e3
+color0  #d1cdc9
+color1  #ca625e
+color2  #5b9845
+color3  #9c8600
+color4  #2d8dd0
+color5  #b166ad
+color6  #009f91
+color7  #040302
+color8  #b1adaa
+color9  #ef736f
+color10 #6bb450
+color11 #b89e00
+color12 #33a6f6
+color13 #d179cd
+color14 #00bcab
 color15 #000000
+dim_opacity 0.7
 env DARK_THEME=no
 {% endif %}
-dim_opacity 0.6
 cursor none
 selection_foreground none
 selection_background none
