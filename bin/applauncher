@@ -10,8 +10,4 @@ if ! name=$(find "${dirs[@]}" -name '*.desktop' -printf '%P\n' | sed 's/.desktop
   echo >&2 "canceled"
   exit 1
 fi
-if [[ $XDG_CURRENT_DESKTOP = sway ]]; then
-  swaymsg exec -- systemd-run-launch-app "$name" gtk-launch "$name.desktop"
-else
-  systemd-run-launch-app "$name" gtk-launch "$name.desktop"
-fi
+systemd-run-launch-app "$name" gtk-launch "$name.desktop"
