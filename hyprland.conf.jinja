@@ -36,16 +36,18 @@ general {
 decoration {
     rounding = 10
     inactive_opacity = 0.9
-    shadow_render_power = 2
-    {% if theme == "dark" %}
-    shadow_range = 40
-    col.shadow = rgba(000000cc)
-    col.shadow_inactive = rgba(00000088)
-    {% else %}
-    shadow_range = 30
-    col.shadow = rgba(000000cc)
-    col.shadow_inactive = rgba(00000060)
-    {% endif %}
+    shadow {
+        render_power = 2
+        {% if theme == "dark" %}
+        range = 40
+        color = rgba(000000cc)
+        color_inactive = rgba(00000088)
+        {% else %}
+        range = 30
+        color = rgba(000000cc)
+        color_inactive = rgba(00000060)
+        {% endif %}
+    }
     blur {
         passes = 3
         size = 12
