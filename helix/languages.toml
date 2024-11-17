@@ -33,7 +33,7 @@ language-servers = ["godot"]
 
 [[grammar]]
 name = "lilypond"
-source = { git = "https://github.com/tristanperalta/tree-sitter-lilypond", rev = "faebb5993c75053df690544b3e3abf9a358b7703" }
+source = { git = "https://github.com/nwhetsell/tree-sitter-lilypond", rev = "2c64b5b2de6d1611c86d332c0c3a343034b7a717" }
 
 [[language]]
 name = "lilypond"
