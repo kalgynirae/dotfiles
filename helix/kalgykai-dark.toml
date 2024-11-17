@@ -17,6 +17,7 @@
 "string" = "yellow"
 "tag" = "green"
 "type" = "cyan"
+"variable" = "white"
 "variable.builtin" = { modifiers = ["bold"] }
 "variable.parameter" = "dim-white"
 
@@ -33,6 +34,8 @@
 "diff.minus" = "red"
 "diff.delta" = "orange"
 
+"ui.bufferline" = { fg = "dim-white", bg = "bright-bg" }
+"ui.bufferline.active" = { fg = "bright-white", bg = "grey", modifiers = ["bold"]}
 "ui.cursor" = { bg = "dim-white" }
 "ui.cursor.match" = { fg = "bright-orange" }
 "ui.cursor.primary" = { fg = "bg", bg = "bright-white" }
