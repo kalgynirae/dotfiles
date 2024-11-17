@@ -26,6 +26,7 @@ class Environment:
     keyrepeat_delay: int
     keyrepeat_rate: int
     terminal_app: str
+    terminal_font_size: str
 
     def __str__(self) -> str:
         pairs = [f"{key}={value}" for key, value in asdict(self).items()]
@@ -58,6 +59,7 @@ class Environment:
             keyrepeat_delay=cast(int, config.get("keyrepeat_delay", 180)),
             keyrepeat_rate=cast(int, config.get("keyrepeat_rate", 50)),
             terminal_app=cast(str, config.get("terminal_app", "kitty")),
+            terminal_font_size=cast(str, config.get("terminal_font_size", "15")),
         )
 
     @staticmethod
