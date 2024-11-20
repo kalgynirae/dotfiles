@@ -1,5 +1,6 @@
 [Unit]
 BindsTo=compositor.service
+PartOf=compositor.service
 After=compositor.service
 
 [Service]
