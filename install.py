@@ -163,6 +163,9 @@ with step("Complie terminfo definitions"):
         env={"TERMINFO": "/usr/share/terminfo"},
     )
 
+with step("Reload hyprland config"):
+    run(["hyprctl", "reload"])
+
 with step("Reload kitty config"):
     run(["pkill", "-USR1", "kitty"])
 
