@@ -1,0 +1,22 @@
+font-family = "Iosevka Term"
+font-style-bold = "Bold"
+font-style-italic = "Italic"
+font-style-bold-italic = "Bold Italic"
+foreground = #c0c0c0
+background = #1c2022
+palette = 0=#505050
+palette = 1=#b44638
+palette = 2=#518921
+palette = 3=#a79026
+palette = 4=#3982ce
+palette = 5=#ae4fa3
+palette = 6=#008f89
+palette = 7=#c0c0c0
+palette = 8=#707070
+palette = 9=#d2614f
+palette = 10=#6ea63f
+palette = 11=#c9b047
+palette = 12=#5799e7
+palette = 13=#c866bb
+palette = 14=#00b2ab
+palette = 15=#e0e0e0
