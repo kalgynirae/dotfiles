@@ -1,8 +1,13 @@
-font-family = "Iosevka Term"
+font-family = {{ terminal_font }}
+{% if terminal_font == "Iosevka Term" %}
 font-style = "Medium"
 font-style-bold = "Extrabold"
-font-style-italic = "Medium Italic"
-font-style-bold-italic = "Extrabold Italic"
+{% elif terminal_font == "Berkeley Mono Variable" %}
+font-style = "Regular"
+font-style-bold = "Regular"
+font-variation = wght=110
+font-variation-bold = wght=150
+{% endif %}
 foreground = #3d3a37
 background = #ebe7e3
 palette = 0=#d1cdc9

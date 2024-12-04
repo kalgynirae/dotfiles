@@ -104,7 +104,7 @@ $mod = SUPER
 $term = {{ terminal_app }}
 
 # Launching
-bind = $mod, Return, exec, systemd-run-launch-app $term $term -e tmux new-session
+bind = $mod, Return, exec, systemd-run-launch-app $term $term
 bind = $mod SHIFT, Return, exec, systemd-run-launch-app $term $term
 bind = $mod SHIFT ALT, Return, exec, $term
 bind = $mod, e, exec, dolphin

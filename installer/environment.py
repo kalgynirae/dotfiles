@@ -26,6 +26,7 @@ class Environment:
     keyrepeat_delay: int
     keyrepeat_rate: int
     terminal_app: str
+    terminal_font: str
     terminal_font_size: str
 
     def __str__(self) -> str:
@@ -58,7 +59,8 @@ class Environment:
             icon_theme=cast(str, config.get("icon_theme", "Adwaita")),
             keyrepeat_delay=cast(int, config.get("keyrepeat_delay", 180)),
             keyrepeat_rate=cast(int, config.get("keyrepeat_rate", 50)),
-            terminal_app=cast(str, config.get("terminal_app", "kitty")),
+            terminal_app=cast(str, config.get("terminal_app", "ghostty")),
+            terminal_font=cast(str, config.get("terminal_font", "Iosevka Term")),
             terminal_font_size=cast(str, config.get("terminal_font_size", "15")),
         )
 
