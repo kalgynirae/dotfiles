@@ -1,7 +1,5 @@
 cursor-style-blink = false
 # custom-shader = /home/colin/dotfiles/ghostty/glow.glsl
-font-family = {{ terminal_font }}
-font-size = {{ terminal_font_size }}
 scrollback-limit = 100_000_000
 shell-integration-features = no-cursor
 theme = light:kalgykai-light,dark:kalgykai-dark
@@ -9,10 +7,22 @@ window-padding-balance = true
 window-padding-x = 4
 window-padding-y = 4
 
+font-size = {{ terminal_font_size }}
+font-synthetic-style = false
 {% if terminal_font == "Iosevka Term" %}
+font-family = "Iosevka Term"
 font-feature = -calt
 font-feature = -dlig
-{% elif terminal_font.startswith("Berkeley Mono") %}
+{% elif terminal_font == "Berkeley Mono" %}
+font-family = "Berkeley Mono"
+adjust-cursor-thickness = 1
+adjust-underline-thickness = -1
+font-feature = ss02
+{% elif terminal_font == "TX-02 Condensed" %}
+font-family = "TX-02"
+font-family-bold = "TX-02"
+font-family-italic = "TX-02"
+font-family-bold-italic = "TX-02"
 adjust-cursor-thickness = 1
 adjust-underline-thickness = -1
 font-feature = ss02
