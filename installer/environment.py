@@ -20,7 +20,6 @@ class Environment:
     theme: Theme
     cursor_size: int
     cursor_theme: str
-    font_name: str
     gtk_theme: str
     icon_theme: str
     keyrepeat_delay: int
@@ -29,6 +28,10 @@ class Environment:
     terminal_app: str
     terminal_font: str
     terminal_font_size: str
+    ui_font_name: str
+    ui_font_size: str
+    waybar_font_size: str
+    waybar_height: int
 
     def __str__(self) -> str:
         pairs = [f"{key}={value}" for key, value in asdict(self).items()]
@@ -55,7 +58,6 @@ class Environment:
             theme=Theme[cast(str, config.get("theme", "dark")).upper()],
             cursor_size=cast(int, config.get("cursor_size", 36)),
             cursor_theme=cast(str, config.get("cursor_theme", "Breeze_Light")),
-            font_name=cast(str, config.get("font_name", "Noto Sans 10")),
             gtk_theme=cast(str, config.get("gtk_theme", "Adwaita")),
             icon_theme=cast(str, config.get("icon_theme", "Adwaita")),
             keyrepeat_delay=cast(int, config.get("keyrepeat_delay", 180)),
@@ -64,6 +66,10 @@ class Environment:
             terminal_app=cast(str, config.get("terminal_app", "ghostty")),
             terminal_font=cast(str, config.get("terminal_font", "Iosevka Term")),
             terminal_font_size=cast(str, config.get("terminal_font_size", "15")),
+            ui_font_name=cast(str, config.get("ui_font_name", "Noto Sans")),
+            ui_font_size=cast(str, config.get("ui_font_size", "10")),
+            waybar_font_size=cast(str, config.get("waybar_font_size", "14px")),
+            waybar_height=cast(int, config.get("waybar_height", "24")),
         )
 
     @staticmethod

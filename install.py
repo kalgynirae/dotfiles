@@ -73,7 +73,7 @@ configs: dict[str, Output] = {
     ".config/swaylock/config": symlink_to("swaylock"),
     ".config/user-dirs.dirs": symlink_to("user-dirs.dirs"),
     ".config/waybar/config": render("waybar.jinja"),
-    ".config/waybar/style.css": symlink_to("waybar.css"),
+    ".config/waybar/style.css": render("waybar.css.jinja"),
     ".config/wezterm/wezterm.lua": render("wezterm.lua.jinja"),
     ".config/wireplumber/wireplumber.conf.d/51-focusrite-scarlett-solo-fix.conf": symlink_to(
         "wireplumber/51-focusrite-scarlett-solo-fix.conf"
@@ -143,7 +143,7 @@ with step("Apply gsettings"):
         "org.gnome.desktop.interface.cursor-theme", str(environment.get().cursor_theme)
     )
     gsettings_set(
-        "org.gnome.desktop.interface.font-name", str(environment.get().font_name)
+        "org.gnome.desktop.interface.font-name", f"{environment.get().ui_font_name} {environment.get().ui_font_size}"
     )
     gsettings_set(
         "org.gnome.desktop.interface.gtk-theme", str(environment.get().gtk_theme)
