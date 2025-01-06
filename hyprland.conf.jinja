@@ -24,8 +24,8 @@ monitor = desc:BNQ BenQ RD280U S5R0002001Q, preferred, auto, 1, bitdepth, 10
 {% endif %}
 
 general {
-    gaps_in = 15
-    gaps_out = 30
+    gaps_in = {{ window_gap }}
+    gaps_out = {{ window_gap * 2 }}
     {% if theme == "dark" %}
     border_size = 3
     col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg

@@ -32,6 +32,7 @@ class Environment:
     ui_font_size: str
     waybar_font_size: str
     waybar_height: int
+    window_gap: int
 
     def __str__(self) -> str:
         pairs = [f"{key}={value}" for key, value in asdict(self).items()]
@@ -70,6 +71,7 @@ class Environment:
             ui_font_size=cast(str, config.get("ui_font_size", "10")),
             waybar_font_size=cast(str, config.get("waybar_font_size", "14px")),
             waybar_height=cast(int, config.get("waybar_height", "24")),
+            window_gap=cast(int, config.get("window_gap", "10")),
         )
 
     @staticmethod
