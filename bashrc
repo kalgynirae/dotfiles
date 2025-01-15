@@ -1,6 +1,8 @@
 #!/bin/bash
 [[ $- != *i* ]] && return
 
+PATH=/home/colin/bin:$PATH
+
 HISTCONTROL=ignoreboth
 HISTFILE=~/.bash_history_actual
 HISTFILESIZE=-1

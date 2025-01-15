@@ -108,13 +108,16 @@ for path in Path("units").iterdir():
         configs[f".config/systemd/user/{path.name}"] = symlink_to(path)
 
 firefox_profile_dir = None
-for dir in (Path.home() / ".mozilla/firefox").iterdir():
-    if dir.name.endswith(".default-release"):
-        firefox_profile_dir = dir.relative_to(Path.home())
-        break
-    elif dir.name.endswith(".default"):
-        firefox_profile_dir = dir.relative_to(Path.home())
-        break
+try:
+    for dir in (Path.home() / ".mozilla/firefox").iterdir():
+        if dir.name.endswith(".default-release"):
+            firefox_profile_dir = dir.relative_to(Path.home())
+            break
+        elif dir.name.endswith(".default"):
+            firefox_profile_dir = dir.relative_to(Path.home())
+            break
+except FileNotFoundError:
+    pass
 if firefox_profile_dir:
     configs[f"{firefox_profile_dir}/chrome/userChrome.css"] = render("userChrome.css.jinja")
     configs[f"{firefox_profile_dir}/chrome/userContent.css"] = render("userContent.css.jinja")
