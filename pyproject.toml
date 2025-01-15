@@ -1,2 +1,21 @@
+[project]
+name = "dotfiles"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "jinja2>=3.1.6",
+    "opentype-feature-freezer>=1.32.2",
+    "tomli>=2.2.1",
+]
+
 [tool.isort]
 profile = "black"
+
+[dependency-groups]
+dev = [
+    "pyls-isort>=0.2.2",
+    "pylsp-mypy>=0.7.0",
+    "pylsp-rope>=0.1.17",
+    "python-lsp-black>=2.0.0",
+    "python-lsp-server>=1.12.2",
+]
