@@ -201,7 +201,7 @@ bind = , Escape, submap, reset
 bind = CTRL, bracketleft, submap, reset
 submap = reset
 
-exec-once = systemctl --user import-environment DISPLAY WAYLAND_DISPLAY
+exec-once = dbus-update-activation-environment --systemd DISPLAY XDG_CURRENT_DESKTOP WAYLAND_DISPLAY
 exec-once = systemd-notify --ready
 
 windowrulev2 = float,title:^Firefox — Sharing Indicator$
