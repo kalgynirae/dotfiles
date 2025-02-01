@@ -70,8 +70,8 @@ class Environment:
             ui_font_name=cast(str, config.get("ui_font_name", "Noto Sans")),
             ui_font_size=cast(str, config.get("ui_font_size", "10")),
             waybar_font_size=cast(str, config.get("waybar_font_size", "14px")),
-            waybar_height=cast(int, config.get("waybar_height", "24")),
-            window_gap=cast(int, config.get("window_gap", "10")),
+            waybar_height=cast(int, config.get("waybar_height", 24)),
+            window_gap=cast(int, config.get("window_gap", 10)),
         )
 
     @staticmethod
