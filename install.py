@@ -54,7 +54,7 @@ configs: dict[str, Output] = {
     ".config/gtk-4.0/settings.ini": render("gtk-4.0-settings.ini.jinja"),
     ".config/helix/config.toml": render("helix/config.toml.jinja"),
     ".config/helix/languages.toml": symlink_to("helix/languages.toml"),
-    ".config/helix/themes/kalgykai-dark.toml": symlink_to("helix/kalgykai-dark.toml"),
+    ".config/helix/themes/kalgykai-dark.toml": render("helix/kalgykai-dark.toml.jinja"),
     ".config/helix/themes/kalgykai-light.toml": symlink_to("helix/kalgykai-light.toml"),
     ".config/helix/runtime/queries/comment/highlights.scm": symlink_to(
         "helix/queries/comment/highlights.scm"

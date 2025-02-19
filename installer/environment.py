@@ -15,6 +15,7 @@ environment: ContextVar[Environment] = ContextVar("environment")
 @dataclass
 class Environment:
     dry_run: bool
+    colors: dict[str, str]
     host: Host
     os: OS
     theme: Theme
@@ -39,7 +40,7 @@ class Environment:
         return f"Environment({', '.join(pairs)})"
 
     def as_context(self) -> dict[str, str]:
-        context = {}
+        context = self.colors.copy()
         for key, value in asdict(self).items():
             if isinstance(value, Enum):
                 context[key] = value.name.lower().replace("_", "-")
@@ -50,10 +51,12 @@ class Environment:
     @classmethod
     def load(cls, dry_run: bool) -> Environment:
         config = cls.read_config_toml()
+        colors = load_colors()
         host = Host.load()
         os = OS.load()
         return cls(
             dry_run=dry_run,
+            colors=colors,
             host=host,
             os=os,
             theme=Theme[cast(str, config.get("theme", "dark")).upper()],
@@ -81,6 +84,14 @@ class Environment:
         except FileNotFoundError:
             return {}
         return tomli.loads(data)
+
+
+def load_colors() -> dict[str, str]:
+    try:
+        data = Path("colors.toml").read_text()
+    except FileNotFoundError:
+        raise RuntimeError("colors.toml not found (run colors.py first?)")
+    return tomli.loads(data)
 
 
 class Host(Enum):

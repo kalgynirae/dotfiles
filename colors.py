@@ -3,6 +3,7 @@ from __future__ import annotations
 import random
 import re
 import shutil
+import sys
 import textwrap
 import traceback
 from contextlib import contextmanager
@@ -11,6 +12,7 @@ from dataclasses import dataclass, field, fields
 from enum import Enum
 from itertools import cycle, starmap
 from math import atan2, cos, degrees, isclose, radians, sin, sqrt
+from pathlib import Path
 from textwrap import dedent
 from typing import Iterator, Self
 
@@ -171,6 +173,9 @@ class Color:
             hex_digits = "".join(f"{v:02x}" for v in self.as_rgb_ints())
         return f"‼{hex_digits}" if c.clamped else f"#{hex_digits}"
 
+    def as_rgb_hex_noprefix(self) -> str:
+        return "".join(f"{v:02x}" for v in self.as_rgb_ints())
+
     def bg_escape(self) -> str:
         rgb_sequence = ";".join(map(str, self.as_rgb_ints()))
         return f"\033[48;2;{rgb_sequence}m"
@@ -243,16 +248,21 @@ class BaseColor:
     def background(self) -> Color:
         return _theme.get().bg.color
 
+    def data(self) -> dict[str, str]:
+        return {
+            "": self.normal.as_rgb_hex_noprefix(),
+        }
+
 
 @dataclass(frozen=True)
 class DarkThemeColor(BaseColor):
     @property
     def dim(self) -> Color:
-        return self.color.adjust(c=-5).interpolate(_theme.get().bg.color, 0.2)
+        return self.color.adjust(c=-8, l=-15)
 
     @property
     def bright(self) -> Color:
-        return self.color.adjust(c=0, l=10)
+        return self.color.adjust(c=0, l=13)
 
     @property
     def highlight(self) -> Color:
@@ -260,7 +270,16 @@ class DarkThemeColor(BaseColor):
 
     @property
     def background(self) -> Color:
-        return self.color.interpolate(_theme.get().bg.color, 0.4).adjust(l=-15)
+        return self.color.adjust(c=-5, l=-25).interpolate(_theme.get().bg.color, 0.5)
+
+    def data(self) -> dict[str, str]:
+        return {
+            "": self.normal.as_rgb_hex_noprefix(),
+            "_dim": self.dim.as_rgb_hex_noprefix(),
+            "_bright": self.bright.as_rgb_hex_noprefix(),
+            "_hl": self.highlight.as_rgb_hex_noprefix(),
+            "_bg": self.background.as_rgb_hex_noprefix(),
+        }
 
 
 @dataclass(frozen=True)
@@ -275,11 +294,20 @@ class LightThemeColor(BaseColor):
 
     @property
     def highlight(self) -> Color:
-        return self.color.adjust(c=10, l=10).interpolate(_theme.get().bg.color, 0.5)
+        return self.color.adjust(l=35)
 
     @property
     def background(self) -> Color:
-        return self.color.adjust(c=-5, l=15).interpolate(_theme.get().bg.color, 0.7)
+        return self.color.adjust(c=-8, l=30).interpolate(_theme.get().bg.color, 0.7)
+
+    def data(self) -> dict[str, str]:
+        return {
+            "": self.normal.as_rgb_hex_noprefix(),
+            "_dim": self.dim.as_rgb_hex_noprefix(),
+            "_bright": self.bright.as_rgb_hex_noprefix(),
+            "_hl": self.highlight.as_rgb_hex_noprefix(),
+            "_bg": self.background.as_rgb_hex_noprefix(),
+        }
 
 
 @dataclass(frozen=True)
@@ -333,41 +361,41 @@ class Theme:
 
 
 dark = Theme(
-    bg=BaseColor.from_rgb_hex("#1c2022"),
-    brightbg=BaseColor.from_rgb_hex("#1c2022"),
-    shadow=BaseColor.from_rgb_hex("#000000"),
-    veryfaint=BaseColor.from_rgb_hex("#38383a"),
-    faint=BaseColor.from_rgb_hex("#505050"),
-    subtle=BaseColor.from_rgb_hex("#a0a0a0"),
-    normal=BaseColor.from_rgb_hex("#c0c0c0"),
-    bright=BaseColor.from_rgb_hex("#c0c0c0"),
-    red=DarkThemeColor.from_rgb_hex("#b44738"),
-    orange=DarkThemeColor.from_rgb_hex("#af6423"),
-    yellow=DarkThemeColor.from_rgb_hex("#a79026"),
-    green=DarkThemeColor.from_rgb_hex("#518921"),
-    cyan=DarkThemeColor.from_rgb_hex("#008f89"),
-    blue=DarkThemeColor.from_rgb_hex("#3982ce"),
-    violet=DarkThemeColor.from_rgb_hex("#806acc"),
-    magenta=DarkThemeColor.from_rgb_hex("#ae4fa3"),
+    bg=BaseColor.from_lch(l=21, c=2, h=190),
+    brightbg=BaseColor.from_lch(l=25, c=1, h=240),
+    shadow=BaseColor.from_lch(l=0, c=0, h=0),
+    veryfaint=BaseColor.from_lch(l=30, c=2, h=240),
+    faint=BaseColor.from_lch(l=42, c=2, h=240),
+    subtle=BaseColor.from_lch(l=60, c=1, h=240),
+    normal=BaseColor.from_lch(l=78, c=0, h=0),
+    bright=BaseColor.from_lch(l=92, c=0, h=0),
+    red=DarkThemeColor.from_lch(l=60, c=46, h=28),
+    orange=DarkThemeColor.from_lch(l=63, c=40, h=60),
+    yellow=DarkThemeColor.from_lch(l=68, c=38, h=97),
+    green=DarkThemeColor.from_lch(l=63, c=48, h=135),
+    cyan=DarkThemeColor.from_lch(l=64, c=35, h=182),
+    blue=DarkThemeColor.from_lch(l=64, c=45, h=247),
+    violet=DarkThemeColor.from_lch(l=61, c=48, h=292),
+    magenta=DarkThemeColor.from_lch(l=60, c=44, h=332),
 )
 
 light = Theme(
-    bg=BaseColor.from_lch(l=93.0, c=2.0, h=60.0),
-    brightbg=BaseColor.from_lch(l=95.0, c=2.0, h=60.0),
-    shadow=BaseColor.from_lch(l=90.0, c=2.0, h=60.0),
-    veryfaint=BaseColor.from_lch(l=85.0, c=2.0, h=60.0),
-    faint=BaseColor.from_lch(l=75.0, c=2.0, h=60.0),
-    subtle=BaseColor.from_lch(l=60.0, c=2.0, h=60.0),
-    normal=BaseColor.from_lch(l=35.0, c=2.0, h=60.0),
-    bright=BaseColor.from_lch(l=10.0, c=2.0, h=60.0),
-    red=LightThemeColor.from_lch(l=62.0, c=40.0, h=24.0),
-    orange=LightThemeColor.from_lch(l=62.0, c=40.0, h=63.0),
-    yellow=LightThemeColor.from_lch(l=62.0, c=40.0, h=98.0),
-    green=LightThemeColor.from_lch(l=62.0, c=40.0, h=138.0),
-    cyan=LightThemeColor.from_lch(l=62.0, c=40.0, h=185.0),
-    blue=LightThemeColor.from_lch(l=62.0, c=40.0, h=244.0),
-    violet=LightThemeColor.from_lch(l=62.0, c=40.0, h=295.0),
-    magenta=LightThemeColor.from_lch(l=62.0, c=40.0, h=329.0),
+    bg=BaseColor.from_lch(l=96, c=2, h=60),
+    brightbg=BaseColor.from_lch(l=98, c=2, h=60),
+    shadow=BaseColor.from_lch(l=92, c=1, h=60),
+    veryfaint=BaseColor.from_lch(l=85, c=4, h=60),
+    faint=BaseColor.from_lch(l=70, c=3, h=60),
+    subtle=BaseColor.from_lch(l=52, c=3, h=60),
+    normal=BaseColor.from_lch(l=35, c=2, h=60),
+    bright=BaseColor.from_lch(l=5, c=2, h=60),
+    red=LightThemeColor.from_lch(l=50, c=38, h=28),
+    orange=LightThemeColor.from_lch(l=50, c=35, h=60),
+    yellow=LightThemeColor.from_lch(l=55, c=35, h=97),
+    green=LightThemeColor.from_lch(l=50, c=38, h=132),
+    cyan=LightThemeColor.from_lch(l=49, c=30, h=182),
+    blue=LightThemeColor.from_lch(l=50, c=35, h=245),
+    violet=LightThemeColor.from_lch(l=50, c=35, h=292),
+    magenta=LightThemeColor.from_lch(l=50, c=35, h=332),
 )
 
 
@@ -396,7 +424,9 @@ def print(*args: str) -> None:
 
 if __name__ == "__main__":
     namelen = max(len(f.name) for f in fields(Theme))
-    for theme in [dark, light]:
+    for name, theme in [("dark", dark), ("light", light)]:
+        if len(sys.argv) == 2 and name != sys.argv[1]:
+            continue
         try:
             with active_theme(theme):
                 print()
@@ -451,3 +481,15 @@ if __name__ == "__main__":
             traceback.print_exc()
         finally:
             _print("\033[0m")
+
+    theme_data = {}
+    for theme_name, theme in [("dark", dark), ("light", light)]:
+        with active_theme(theme):
+            for field in fields(theme):
+                if field.type != "BaseColor":
+                    continue
+                c = getattr(theme, field.name)
+                for k, v in c.data().items():
+                    theme_data[f"{theme_name}_{field.name}{k}"] = v
+    data_toml = "".join(f'{k} = "{v}"\n' for k, v in theme_data.items())
+    Path("colors.toml").write_text(data_toml)
