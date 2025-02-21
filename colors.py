@@ -360,23 +360,32 @@ class Theme:
         return " ".join(out)
 
 
+RED_HUE = 28
+ORANGE_HUE = 60
+YELLOW_HUE = 97
+GREEN_HUE = 135
+CYAN_HUE = 182
+BLUE_HUE = 247
+VIOLET_HUE = 292
+MAGENTA_HUE = 332
+
 dark = Theme(
     bg=BaseColor.from_lch(l=21, c=2, h=190),
     brightbg=BaseColor.from_lch(l=25, c=1, h=240),
     shadow=BaseColor.from_lch(l=0, c=0, h=0),
     veryfaint=BaseColor.from_lch(l=30, c=2, h=240),
-    faint=BaseColor.from_lch(l=42, c=2, h=240),
-    subtle=BaseColor.from_lch(l=60, c=1, h=240),
+    faint=BaseColor.from_lch(l=40, c=2, h=240),
+    subtle=BaseColor.from_lch(l=56, c=1, h=240),
     normal=BaseColor.from_lch(l=78, c=0, h=0),
-    bright=BaseColor.from_lch(l=92, c=0, h=0),
-    red=DarkThemeColor.from_lch(l=60, c=46, h=28),
-    orange=DarkThemeColor.from_lch(l=63, c=40, h=60),
-    yellow=DarkThemeColor.from_lch(l=68, c=38, h=97),
-    green=DarkThemeColor.from_lch(l=63, c=48, h=135),
-    cyan=DarkThemeColor.from_lch(l=64, c=35, h=182),
-    blue=DarkThemeColor.from_lch(l=64, c=45, h=247),
-    violet=DarkThemeColor.from_lch(l=61, c=48, h=292),
-    magenta=DarkThemeColor.from_lch(l=60, c=44, h=332),
+    bright=BaseColor.from_lch(l=93, c=0, h=0),
+    red=DarkThemeColor.from_lch(l=60, c=46, h=RED_HUE),
+    orange=DarkThemeColor.from_lch(l=63, c=40, h=ORANGE_HUE),
+    yellow=DarkThemeColor.from_lch(l=68, c=38, h=YELLOW_HUE),
+    green=DarkThemeColor.from_lch(l=63, c=48, h=GREEN_HUE),
+    cyan=DarkThemeColor.from_lch(l=64, c=35, h=CYAN_HUE),
+    blue=DarkThemeColor.from_lch(l=64, c=45, h=BLUE_HUE),
+    violet=DarkThemeColor.from_lch(l=61, c=48, h=VIOLET_HUE),
+    magenta=DarkThemeColor.from_lch(l=60, c=44, h=MAGENTA_HUE),
 )
 
 light = Theme(
@@ -384,18 +393,18 @@ light = Theme(
     brightbg=BaseColor.from_lch(l=98, c=2, h=60),
     shadow=BaseColor.from_lch(l=92, c=1, h=60),
     veryfaint=BaseColor.from_lch(l=85, c=4, h=60),
-    faint=BaseColor.from_lch(l=70, c=3, h=60),
-    subtle=BaseColor.from_lch(l=52, c=3, h=60),
-    normal=BaseColor.from_lch(l=35, c=2, h=60),
-    bright=BaseColor.from_lch(l=5, c=2, h=60),
-    red=LightThemeColor.from_lch(l=50, c=38, h=28),
-    orange=LightThemeColor.from_lch(l=50, c=35, h=60),
-    yellow=LightThemeColor.from_lch(l=55, c=35, h=97),
-    green=LightThemeColor.from_lch(l=50, c=38, h=132),
-    cyan=LightThemeColor.from_lch(l=49, c=30, h=182),
-    blue=LightThemeColor.from_lch(l=50, c=35, h=245),
-    violet=LightThemeColor.from_lch(l=50, c=35, h=292),
-    magenta=LightThemeColor.from_lch(l=50, c=35, h=332),
+    faint=BaseColor.from_lch(l=72, c=3, h=60),
+    subtle=BaseColor.from_lch(l=56, c=3, h=60),
+    normal=BaseColor.from_lch(l=30, c=2, h=60),
+    bright=BaseColor.from_lch(l=15, c=2, h=60),
+    red=LightThemeColor.from_lch(l=50, c=38, h=RED_HUE),
+    orange=LightThemeColor.from_lch(l=50, c=35, h=ORANGE_HUE),
+    yellow=LightThemeColor.from_lch(l=55, c=35, h=YELLOW_HUE),
+    green=LightThemeColor.from_lch(l=50, c=38, h=GREEN_HUE),
+    cyan=LightThemeColor.from_lch(l=49, c=30, h=CYAN_HUE),
+    blue=LightThemeColor.from_lch(l=50, c=35, h=BLUE_HUE),
+    violet=LightThemeColor.from_lch(l=50, c=35, h=VIOLET_HUE),
+    magenta=LightThemeColor.from_lch(l=50, c=35, h=MAGENTA_HUE),
 )
 
 

@@ -19,4 +19,6 @@ font-feature = -dlig
 font-family = "Berkeley Mono Variable"
 adjust-cursor-thickness = 1
 adjust-underline-thickness = -1
+{% else %}
+font-family = "{{ terminal_font }}"
 {% endif %}
