@@ -55,7 +55,7 @@ configs: dict[str, Output] = {
     ".config/helix/config.toml": render("helix/config.toml.jinja"),
     ".config/helix/languages.toml": symlink_to("helix/languages.toml"),
     ".config/helix/themes/kalgykai-dark.toml": render("helix/kalgykai-dark.toml.jinja"),
-    ".config/helix/themes/kalgykai-light.toml": symlink_to("helix/kalgykai-light.toml"),
+    ".config/helix/themes/kalgykai-light.toml": render("helix/kalgykai-light.toml.jinja"),
     ".config/helix/runtime/queries/comment/highlights.scm": symlink_to(
         "helix/queries/comment/highlights.scm"
     ),
