@@ -167,10 +167,17 @@ with step("Complie terminfo definitions"):
     )
 
 with step("Reload hyprland config"):
-    run(["hyprctl", "reload"])
+    try:
+        run(["hyprctl", "reload"])
+    except FileNotFoundError:
+        raise FileNotFoundError("hyprctl not found") from None
 
 with step("Reload kitty config"):
-    run(["pkill", "-USR1", "kitty"])
+    try:
+        run(["pkill", "-USR1", "kitty"])
+    except subprocess.CalledProcessError as e:
+        if e.returncode != 1:
+            raise
 
 with step("Reload systemd"):
     run(["systemctl", "--user", "daemon-reload"])
