@@ -429,7 +429,9 @@ prefix=$(repeat-str '▶' "$SHLVL")
 PS1=$reset$prefix' '$color'\u@\h:\W'$reset' '$black'[$((++_command_count))]'$reset'\n[\j]\$ '
 SHORTPS1=$reset$green'[${USER##colin*}:\W:\j]\$'$reset' '
 : "${_command_count:=-1}"
+export LESS_LINES=-1
 
 shortprompt() {
   PS1=$SHORTPS1
+  unset LESS_LINES
 }
