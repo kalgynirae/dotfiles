@@ -166,6 +166,16 @@ with step("Complie terminfo definitions"):
         env={"TERMINFO": "/usr/share/terminfo"},
     )
 
+with step("Install fonts"):
+    changed = False
+    for font in Path("assets/fonts").iterdir():
+        dest = Path.home() / ".local/share/fonts" / font.name
+        if not dest.exists():
+            run(["cp", "-v", "--update=none-fail", font, dest])
+            changed = True
+    if changed:
+        run(["fc-cache"])
+
 with step("Reload hyprland config"):
     try:
         run(["hyprctl", "reload"])
