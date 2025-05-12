@@ -4,12 +4,13 @@ source ~/.config/backup-params
 
 paths=(
     ~/audio
+    ~/backup
     ~/blender
     ~/code
     ~/documents
     ~/dotfiles
+    ~/Dygma
     ~/games
-    ~/lumeh.org-files-backup
     ~/misc
     ~/music
     ~/pictures
@@ -21,6 +22,9 @@ paths=(
     ~/sounds
     ~/stepmania
     ~/videos
+    ~/.local/share/fonts
+    ~/.minecraft/saves
+    ~/.minecraft/resourcepacks
 )
 
 common_args=(
