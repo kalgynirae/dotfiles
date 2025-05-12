@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [[ $HOSTNAME == colinchan-fedora-* ]]; then
-  exec google-chrome --ozone-platform-hint=auto --gtk-version=4 --enable-features=TouchpadOverscrollHistoryNavigation "$@"
+if [[ $HOSTNAME == apartmantwo ]]; then
+  exec zen-browser "$@"
 else
   exec firefox "$@"
 fi
