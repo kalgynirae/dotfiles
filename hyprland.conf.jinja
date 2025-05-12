@@ -1,26 +1,7 @@
 monitor = , preferred, auto, auto
 
 {% if host == "apartmantwo" %}
-monitor = desc:BNQ BenQ RD280U S5R0002001Q, preferred, auto, 1, bitdepth, 10
-{% elif host == "colinchan-fedora" %}
-    monitor = eDP-1, preferred, 0x0, 1, mirror, HDMI-A-1
-    workspace = eDP-1, 1
-    {% if monitors == "home" %}
-    monitor = DP-2, preferred, 1920x0, 1
-    workspace = DP-2, 2
-    monitor = DP-3, preferred, 5760x0, 1
-    monitor = DP-3, transform, 1
-    #monitor = DP-3, preferred, 1920x0, 1
-    workspace = DP-3, 6
-    monitor = DP-5, preferred, 1920x0, 1
-    workspace = DP-5, 2
-    {% elif monitors == "florida" %}
-    monitor = desc:Dell Inc. DELL P2217 G58F56911ANB, preferred, 1920x0, 1
-    monitor = desc:Dell Inc. DELL S2415H FXV3359L11KL, preferred, 3600x0, 1
-    {% endif %}
-
-    bindl = , switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"
-    bindl = , switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, preferred, 0x0, 1"
+monitor = desc:BNQ BenQ RD280U S5R0002001Q, preferred, auto, 1
 {% endif %}
 
 general {
