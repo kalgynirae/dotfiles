@@ -3,9 +3,10 @@
 set-next-boot() {
   local output
   if output=$(efibootmgr | grep "$1") && [[ $output =~ Boot([[:xdigit:]]{4}) ]]; then
-    local number=${BASH_REMATCH[1]}
-    echo >&2 "efibootmgr --bootnext ${number@Q}"
-    sudo efibootmgr --bootnext "$number"
+    sudo efibootmgr --bootnext "${BASH_REMATCH[1]}"
+  else
+    echo >&2 "No EFI boot entry found matching ${1@Q}"
+    return 1
   fi
 }
 
