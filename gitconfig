@@ -17,7 +17,7 @@
 [diff]
 	renames = true
 [merge]
-	conflictstyle = diff3
+	conflictstyle = zdiff3
 [pull]
 	ff = only
 [user]
