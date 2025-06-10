@@ -14,6 +14,7 @@ export LESS='-SR -#.1 --ignore-case --mouse --quit-if-one-screen --redraw-on-qui
 export PYTHONDONTWRITEBYTECODE=yes
 export PYTHONSTARTUP=$HOME/.pythonrc
 export RSYNC_PROTECT_ARGS=1
+export SYSTEMD_LESS=$LESS
 
 # if [[ $GHOSTTY_RESOURCES_DIR ]]; then
 #   source "$GHOSTTY_RESOURCES_DIR/shell-integration/bash/ghostty.bash"
