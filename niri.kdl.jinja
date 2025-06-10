@@ -1,0 +1,189 @@
+input {
+    keyboard {
+        xkb {
+            layout "us"
+            options "caps:ctrl_modifier,compose:ralt"
+        }
+        numlock
+        repeat-delay {{ keyrepeat_delay }}
+        repeat-rate {{ keyrepeat_rate }}
+    }
+    touchpad {
+        natural-scroll
+    }
+}
+
+output "PNP(BNQ) BenQ RD280U S5R0002001Q" {
+    scale 1.5
+}
+
+layout {
+    gaps {{ window_gap }}
+    preset-column-widths {
+        proportion 0.33
+        proportion 0.5
+        proportion 0.67
+    }
+    default-column-width { proportion 0.5; }
+    focus-ring {
+        width 3
+        active-color "#20e050"
+        inactive-color "#505050"
+    }
+    shadow {
+        on
+        softness 30
+        spread 2
+        offset x=0 y=4
+        color "#000f"
+    }
+    struts {
+        left 30
+        right 30
+    }
+}
+
+cursor {
+    xcursor-theme "{{ cursor_theme }}"
+    xcursor-size {{ cursor_size }}
+    hide-when-typing
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+prefer-no-csd
+screenshot-path "~/pictures/screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+spawn-at-startup "systemctl" "--user" "start" "gammastep.service"
+spawn-at-startup "systemctl" "--user" "start" "mako.service"
+spawn-at-startup "systemctl" "--user" "start" "polkit-gnome.service"
+spawn-at-startup "systemctl" "--user" "start" "swayidle.service"
+spawn-at-startup "systemctl" "--user" "start" "swww.service"
+spawn-at-startup "systemctl" "--user" "start" "waybar.service"
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+    Mod+O repeat=false { toggle-overview; }
+
+    Mod+Q { close-window; }
+
+    Mod+H { focus-column-left; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+    Mod+L { focus-column-right; }
+    Mod+Home { focus-column-first; }
+    Mod+End { focus-column-last; }
+    Mod+WheelScrollUp { focus-column-left; }
+    Mod+WheelScrollDown { focus-column-right; }
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+Home { move-column-to-first; }
+    Mod+Shift+End { move-column-to-last; }
+    Mod+Shift+WheelScrollUp { move-column-left; }
+    Mod+Shift+WheelScrollDown { move-column-right; }
+
+    Mod+N { focus-workspace-down; }
+    Mod+P { focus-workspace-up; }
+    Mod+Shift+N { move-column-to-workspace-down; }
+    Mod+Shift+P { move-column-to-workspace-up; }
+    Mod+Ctrl+Shift+N { move-workspace-down; }
+    Mod+Ctrl+Shift+P { move-workspace-up; }
+
+    Mod+Ctrl+H { focus-monitor-left; }
+    Mod+Ctrl+J { focus-monitor-down; }
+    Mod+Ctrl+K { focus-monitor-up; }
+    Mod+Ctrl+L { focus-monitor-right; }
+    Mod+Shift+Ctrl+H { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+J { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+K { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+L { move-column-to-monitor-right; }
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+
+    Mod+BracketLeft { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+Comma { consume-window-into-column; }
+    Mod+Period { expel-window-from-column; }
+
+    Mod+U { switch-preset-column-width; }
+    Mod+Shift+U { expand-column-to-available-width; }
+    Mod+I { switch-preset-window-height; }
+    Mod+Shift+I { reset-window-height; }
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Alt+Minus { set-window-height "-10%"; }
+    Mod+Alt+Equal { set-window-height "+10%"; }
+    Mod+M { maximize-column; }
+    Mod+F { fullscreen-window; }
+    Mod+Shift+F { toggle-windowed-fullscreen; }
+    Mod+Y { center-column; }
+    Mod+Shift+Y { center-visible-columns; }
+
+    Mod+Shift+Space { toggle-window-floating; }
+    Mod+Tab { switch-focus-between-floating-and-tiling; }
+
+    Mod+W { toggle-column-tabbed-display; }
+
+    Print { screenshot-screen; }
+    Shift+Print { screenshot; }
+    Super+Print { screenshot-window; }
+    //Alt+Print { spawn "screenshot" "--region" "--text"; }
+    XF86Tools { spawn "sh" "-c" "hyprpicker | tr '[:upper:]' '[:lower:]' | wl-copy -n"; }
+
+    Mod+Shift+Q { quit; }
+    Ctrl+Alt+Delete { quit; }
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Backspace hotkey-overlay-title="Lock the screen" { spawn "systemctl" "--user" "kill" "--signal" "USR1" "swayidle"; }
+    Mod+Alt+Backspace { power-off-monitors; }
+
+    Mod+Return hotkey-overlay-title="Open terminal" { spawn "ghostty"; }
+    Mod+Space hotkey-overlay-title="Open app launcher" { spawn "fuzzel"; }
+    Mod+T hotkey-overlay-title="Open file browser" { spawn "thunar"; }
+
+    Mod+C hotkey-overlay-title="Dismiss notification" { spawn "makoctl" "dismiss"; }
+    Mod+Shift+C hotkey-overlay-title="Restore notification" { spawn "makoctl" "restore"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+" "--limit" "1.5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+}
+
+// Work around WezTerm's initial configure bug
+// by setting an empty default-column-width.
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}

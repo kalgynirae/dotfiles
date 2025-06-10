@@ -1,8 +1,6 @@
 [Unit]
-BindsTo=compositor.service
-After=compositor.service
-Wants=pipewire-pulse.service
-After=pipewire-pulse.service
+PartOf=graphical-session.target
+After=graphical-session.target
 
 [Service]
 Type=notify

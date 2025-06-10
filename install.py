@@ -64,6 +64,7 @@ configs: dict[str, Output] = {
     ".config/kitty/kitty.conf": render("kitty.conf.jinja"),
     ".config/mako/config": symlink_to("mako"),
     ".config/mpv/mpv.conf": symlink_to("mpv.conf"),
+    ".config/niri/config.kdl": render("niri.kdl.jinja"),
     ".config/nvim": symlink_to("nvim"),
     ".config/paru/paru.conf": symlink_to("paru.conf"),
     ".config/pipewire/pipewire.conf.d/15-netjack2.conf": symlink_to(
