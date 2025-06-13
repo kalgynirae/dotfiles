@@ -1,0 +1,107 @@
+[keyboard]
+bindings = [
+  { key = "Plus", mods = "Control|Shift", action = "IncreaseFontSize" },
+  { key = "Equals", mods = "Control", action = "None" },
+]
+
+[mouse]
+hide_when_typing = true
+
+[selection]
+save_to_clipboard = true
+
+[window]
+dynamic_padding = true
+
+[font]
+{% if terminal_font == "Iosevka Term" %}
+normal = { family = "Iosevka Term" }
+{% elif terminal_font == "Berkeley Mono" %}
+normal = { family = "Berkeley Mono Variable", style = "Book Condensed" }
+bold = { style = "ExtraBold Condensed" }
+italic = { style = "Book Condensed Oblique" }
+bold_italic = { style = "ExtraBold Condensed Oblique" }
+{% endif %}
+size = 12.0
+
+{% if theme == "dark" %}
+[colors.primary]
+background = "#{{ dark_bg }}"
+foreground = "#{{ dark_normal }}"
+bright_foreground = "#{{ dark_bright }}"
+dim_foreground = "#{{ dark_subtle }}"
+
+[colors.normal]
+black = "#{{ dark_faint }}"
+red = "#{{ dark_red }}"
+green = "#{{ dark_green }}"
+yellow = "#{{ dark_yellow }}"
+blue = "#{{ dark_blue }}"
+magenta = "#{{ dark_magenta }}"
+cyan = "#{{ dark_cyan }}"
+white = "#{{ dark_bright }}"
+
+[colors.bright]
+black = "#{{ dark_subtle }}"
+red = "#{{ dark_red_bright }}"
+green = "#{{ dark_green_bright }}"
+yellow = "#{{ dark_yellow_bright }}"
+blue = "#{{ dark_blue_bright }}"
+magenta = "#{{ dark_magenta_bright }}"
+cyan = "#{{ dark_cyan_bright }}"
+white = "#ffffff"
+
+[colors.dim]
+black = "#{{ dark_veryfaint }}"
+red = "#{{ dark_red_dim }}"
+green = "#{{ dark_green_dim }}"
+yellow = "#{{ dark_yellow_dim }}"
+blue = "#{{ dark_blue_dim }}"
+magenta = "#{{ dark_magenta_dim }}"
+cyan = "#{{ dark_cyan_dim }}"
+white = "#{{ dark_subtle }}"
+
+[env]
+DARK_THEME = "yes"
+
+{% else %}
+[colors.primary]
+background = "#{{ light_bg }}"
+foreground = "#{{ light_normal }}"
+bright_foreground = "#{{ light_bright }}"
+dim_foreground = "#{{ light_subtle }}"
+
+[colors.normal]
+black = "#{{ light_faint }}"
+red = "#{{ light_red }}"
+green = "#{{ light_green }}"
+yellow = "#{{ light_yellow }}"
+blue = "#{{ light_blue }}"
+magenta = "#{{ light_magenta }}"
+cyan = "#{{ light_cyan }}"
+white = "#{{ light_bright }}"
+
+[colors.bright]
+black = "#{{ light_subtle }}"
+red = "#{{ light_red_bright }}"
+green = "#{{ light_green_bright }}"
+yellow = "#{{ light_yellow_bright }}"
+blue = "#{{ light_blue_bright }}"
+magenta = "#{{ light_magenta_bright }}"
+cyan = "#{{ light_cyan_bright }}"
+white = "#000000"
+
+[colors.dim]
+black = "#{{ light_veryfaint }}"
+red = "#{{ light_red_dim }}"
+green = "#{{ light_green_dim }}"
+yellow = "#{{ light_yellow_dim }}"
+blue = "#{{ light_blue_dim }}"
+magenta = "#{{ light_magenta_dim }}"
+cyan = "#{{ light_cyan_dim }}"
+white = "#{{ light_subtle }}"
+
+[env]
+DARK_THEME = "no"
+
+{% endif %}

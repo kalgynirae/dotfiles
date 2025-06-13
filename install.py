@@ -41,7 +41,7 @@ configs: dict[str, Output] = {
     ".alsoftrc": symlink_to("alsoftrc"),
     ".bash_profile": symlink_to("bash_profile"),
     ".bashrc": symlink_to("bashrc"),
-    ".config/alacritty/alacritty.yml": render("alacritty.yml.jinja"),
+    ".config/alacritty/alacritty.toml": render("alacritty.toml.jinja"),
     ".config/electron-flags.conf": symlink_to("electron-flags.conf"),
     ".config/electron15-flags.conf": symlink_to("electron15-flags.conf"),
     ".config/environment.d/environment.conf": symlink_to("environment.conf"),
