@@ -1,3 +1,7 @@
+environment {
+    DISPLAY ":0"
+}
+
 input {
     keyboard {
         xkb {
@@ -11,13 +15,16 @@ input {
     touchpad {
         natural-scroll
     }
+    warp-mouse-to-focus
 }
 
 output "PNP(BNQ) BenQ RD280U S5R0002001Q" {
     scale 1.5
+    backdrop-color "#454850"
 }
 
 layout {
+    background-color "#58606c"
     gaps {{ window_gap }}
     preset-column-widths {
         proportion 0.33
@@ -27,19 +34,26 @@ layout {
     default-column-width { proportion 0.5; }
     focus-ring {
         width 3
-        active-color "#20e050"
-        inactive-color "#505050"
+        active-gradient from="#00e0d0" to="#00d0f0" angle=160 in="oklch longer hue"
+        inactive-color "#505460"
     }
     shadow {
         on
-        softness 30
-        spread 2
-        offset x=0 y=4
-        color "#000f"
+        softness 24
+        spread 0
+        offset x=0 y=3
+        color "#000000c0"
     }
     struts {
-        left 30
-        right 30
+        left 16
+        right 16
+    }
+    tab-indicator {
+        gap -12
+        gaps-between-tabs 3
+        length total-proportion=0.2
+        width 6
+        position "left"
     }
 }
 
@@ -60,8 +74,8 @@ spawn-at-startup "systemctl" "--user" "start" "gammastep.service"
 spawn-at-startup "systemctl" "--user" "start" "mako.service"
 spawn-at-startup "systemctl" "--user" "start" "polkit-gnome.service"
 spawn-at-startup "systemctl" "--user" "start" "swayidle.service"
-spawn-at-startup "systemctl" "--user" "start" "swww.service"
 spawn-at-startup "systemctl" "--user" "start" "waybar.service"
+spawn-at-startup "systemctl" "--user" "start" "xwayland-satellite.service"
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -153,6 +167,7 @@ binds {
 
     Mod+Shift+Q { quit; }
     Ctrl+Alt+Delete { quit; }
+    Mod+Shift+S { spawn "shutdown-prompt"; }
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     Mod+Backspace hotkey-overlay-title="Lock the screen" { spawn "systemctl" "--user" "kill" "--signal" "USR1" "swayidle"; }
     Mod+Alt+Backspace { power-off-monitors; }
@@ -160,6 +175,8 @@ binds {
     Mod+Return hotkey-overlay-title="Open terminal" { spawn "ghostty"; }
     Mod+Space hotkey-overlay-title="Open app launcher" { spawn "fuzzel"; }
     Mod+T hotkey-overlay-title="Open file browser" { spawn "thunar"; }
+    Mod+B hotkey-overlay-title="Open web browser" { spawn "web-browser"; }
+    Mod+V hotkey-overlay-title="Open audio mixer" { spawn "pwvucontrol"; }
 
     Mod+C hotkey-overlay-title="Dismiss notification" { spawn "makoctl" "dismiss"; }
     Mod+Shift+C hotkey-overlay-title="Restore notification" { spawn "makoctl" "restore"; }
@@ -167,7 +184,7 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-
+    XF86Launch6 { spawn "microphone" "toggle"; }
 }
 
 // Work around WezTerm's initial configure bug

@@ -25,4 +25,4 @@ case "$1" in
     ;;
 esac
 
-pactl set-source-mute @DEFAULT_SOURCE@ "$arg"
+wpctl set-mute @DEFAULT_SOURCE@ "$arg"
