@@ -1,6 +1,7 @@
 theme = "kalgykai-{{ theme }}"
 
 [editor]
+auto-completion = false
 bufferline = "multiple"
 color-modes = true
 cursorline = true
@@ -24,9 +25,7 @@ text-width = 100
 layout = ["diagnostics", "line-numbers", "spacer", "diff"]
 
 [editor.lsp]
-display-inlay-hints = false
-display-messages = true
-snippets = false
+auto-signature-help = false
 
 [editor.soft-wrap]
 enable = true
@@ -42,8 +41,12 @@ tab = "all"
 "C-k" = "jump_view_up"
 "C-l" = "jump_view_right"
 
-[keys.insert]
-"C-[" = "normal_mode"
-
 [keys.normal.space]
 "o" = ":reflow"
+
+[keys.insert]
+"C-n" = "completion"
+"C-[" = "normal_mode"
+
+[keys.select]
+"C-[" = "normal_mode"
