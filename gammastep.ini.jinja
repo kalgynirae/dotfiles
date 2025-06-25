@@ -1,17 +1,6 @@
 [general]
 temp-day=6000
 temp-night=4000
-{% if host == "colinchan-fedora" %}
-  location-provider=manual
-  [manual]
-  # MPK
-  lat=37.47
-  lon=-122.24
-  # NYC
-  #lat=40.75
-  #lon=-74.00
-{% else %}
-  brightness-night=0.90
-  dawn-time=07:00-08:00
-  dusk-time=20:30-21:30
-{% endif %}
+brightness-night=0.90
+dawn-time=07:00-08:00
+dusk-time=20:30-21:30

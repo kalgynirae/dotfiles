@@ -28,7 +28,6 @@ fi
 alias commas='paste -sd,'
 alias diff='diff --color=always --minimal --unified'
 alias dnf='dnf --cacheonly'
-[[ $HOSTNAME == colinchan-fedora-* ]] && alias et='et -p 8080'
 alias f1='field 1'
 alias f2='field 2'
 alias f3='field 3'
@@ -393,7 +392,7 @@ up() {
 }
 
 git_prompt_path=/usr/share/git/git-prompt.sh
-if [[ $HOSTNAME == colinchan-fedora-* ]]; then
+if [[ -e /etc/fedora-release ]]; then
   git_prompt_path=/usr/share/git-core/contrib/completion/git-prompt.sh
 fi
 if [[ -e "$git_prompt_path" ]]; then
