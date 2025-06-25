@@ -96,8 +96,8 @@ def load_colors() -> dict[str, str]:
 
 class Host(Enum):
     APARTMANTWO = auto()
-    COLINCHAN_FEDORA = auto()
     FRUITRON = auto()
+    IROH = auto()
     OTHER = auto()
 
     @classmethod

@@ -17,7 +17,7 @@ from textwrap import dedent
 from typing import Mapping, cast
 
 from installer.actions import Output, gsettings_set, render, run, symlink_to
-from installer.environment import OS, Environment, Theme, environment
+from installer.environment import Host, OS, Environment, Theme, environment
 from installer.logging import Result, log, log_diff, log_dry, log_error, step
 
 parser = ArgumentParser()
@@ -67,9 +67,6 @@ configs: dict[str, Output] = {
     ".config/niri/config.kdl": render("niri.kdl.jinja"),
     ".config/nvim": symlink_to("nvim"),
     ".config/paru/paru.conf": symlink_to("paru.conf"),
-    ".config/pipewire/pipewire.conf.d/15-netjack2.conf": symlink_to(
-        "pipewire/15-netjack2.conf"
-    ),
     ".config/sway/config": render("sway.jinja"),
     ".config/swaylock/config": symlink_to("swaylock"),
     ".config/user-dirs.dirs": symlink_to("user-dirs.dirs"),
@@ -92,6 +89,9 @@ configs: dict[str, Output] = {
     ".pythonrc": symlink_to("pythonrc"),
     ".tmux.conf": symlink_to("tmux.conf"),
 }
+
+if environment.get().host == Host.APARTMANTWO:
+    configs[".config/pipewire/pipewire.conf.d/15-netjack2.conf"] = symlink_to("pipewire/15-netjack2.conf")
 
 for path in Path("applications").iterdir():
     configs[f".local/share/applications/{path.name}"] = symlink_to(path)
