@@ -10,7 +10,9 @@
   ],
 
   "modules-center": [
+    {% if host == "apartmantwo" %}
     "pulseaudio#mic",
+    {% endif %}
     "custom/ready",
   ],
 
