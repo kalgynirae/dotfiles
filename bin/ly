@@ -1,0 +1,2 @@
+#!/bin/bash
+lilypond -dno-point-and-click --loglevel=PROGRESS "$@"
