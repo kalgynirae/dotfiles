@@ -1,0 +1,28 @@
+#!/bin/bash
+# usage: $0 FILE...
+
+firstfile=$1
+if ! mimetype=$(xdg-mime query filetype "$firstfile"); then
+  echo >&2 "Failed to query filetype for ${firstfile@Q}"
+  exit 1
+fi
+if ! desktopfile=$(xdg-mime query default "$mimetype"); then
+  echo >&2 "Failed to query default application for ${mimetype@Q}"
+  exit 1
+fi
+app=${desktopfile%.desktop}
+
+case "$XDG_CURRENT_DESKTOP" in
+  niri)
+    systemd-run --user --quiet --collect \
+      --working-directory=$PWD \
+      --slice="app-$(systemd-escape --suffix=slice "$app")" \
+      --property=BindsTo=graphical-session.target \
+      --property=KillMode=process \
+      -- gtk-launch "$app" "$@"
+    ;;
+  *)
+    echo >&2 "error: not implemented yet for XDG_CURRENT_DESKTOP=${XDG_CURRENT_DESKTOP@Q}"
+    exit 1
+    ;;
+esac

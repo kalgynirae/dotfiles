@@ -216,10 +216,6 @@ mkcd() {
   mkdir -p "$1" && cd "$1"
 }
 
-open() {
-  xdg-open "$1" &>/dev/null
-}
-
 # Open stdin for manual editing, then write it to stdout when saved
 pedit() {
   local file
