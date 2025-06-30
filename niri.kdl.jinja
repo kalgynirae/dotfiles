@@ -13,14 +13,21 @@ input {
         repeat-rate {{ keyrepeat_rate }}
     }
     touchpad {
+        click-method "clickfinger"
+        dwt
         natural-scroll
+        tap
     }
     warp-mouse-to-focus
 }
 
+output "*" {
+    scale 1
+    backdrop-color "#454850"
+}
+
 output "PNP(BNQ) BenQ RD280U S5R0002001Q" {
     scale 1.5
-    backdrop-color "#454850"
 }
 
 layout {
