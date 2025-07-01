@@ -179,7 +179,7 @@ binds {
     Mod+Backspace hotkey-overlay-title="Lock the screen" { spawn "systemctl" "--user" "kill" "--signal" "USR1" "swayidle"; }
     Mod+Alt+Backspace { power-off-monitors; }
 
-    Mod+Return hotkey-overlay-title="Open terminal" { spawn "ghostty"; }
+    Mod+Return hotkey-overlay-title="Open terminal" { spawn "{{ terminal_app }}"; }
     Mod+Space hotkey-overlay-title="Open app launcher" { spawn "fuzzel"; }
     Mod+T hotkey-overlay-title="Open file browser" { spawn "thunar"; }
     Mod+B hotkey-overlay-title="Open web browser" { spawn "web-browser"; }

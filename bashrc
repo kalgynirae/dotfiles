@@ -16,15 +16,6 @@ export PYTHONSTARTUP=$HOME/.pythonrc
 export RSYNC_PROTECT_ARGS=1
 export SYSTEMD_LESS=$LESS
 
-# if [[ $GHOSTTY_RESOURCES_DIR ]]; then
-#   source "$GHOSTTY_RESOURCES_DIR/shell-integration/bash/ghostty.bash"
-# fi
-
-# Work around Kitty preventing my customized terminfo from being read
-if [[ $TERMINFO = */kitty/terminfo ]]; then
-  unset TERMINFO
-fi
-
 alias commas='paste -sd,'
 alias diff='diff --color=always --minimal --unified'
 alias dnf='dnf --cacheonly'

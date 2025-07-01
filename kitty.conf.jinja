@@ -1,68 +1,100 @@
 clipboard_control write-clipboard write-primary read-clipboard-ask read-primary-ask no-append
 cursor_blink_interval 0
-cursor_trail 1
+cursor_trail 10
+cursor_trail_decay 0.1 0.3
+cursor_trail_start_threshold 5
 enable_audio_bell no
 font_size {{ terminal_font_size }}
 window_padding_width 4
 initial_window_height 35c
 initial_window_width 120c
 remember_window_size no
-scrollback_lines 10000
-scrollback_pager less --RAW-CONTROL-CHARS --chop-long-lines --ignore-case --mouse --wheel-lines=5 +INPUT_LINE_NUMBER
+scrollback_fill_enlarged_window yes
+scrollback_lines 5000
+scrollback_pager less -SR -#.1 --ignore-case --mouse --wheel-lines=5 +INPUT_LINE_NUMBER
+scrollback_pager_history_size 64
 touch_scroll_multiplier 6.0
 wheel_scroll_multiplier 1.0
 
+enabled_layouts splits:split_axis=horizontal
+map kitty_mod+e launch --location=hsplit --cwd=current
+map kitty_mod+o launch --location=vsplit --cwd=current
+map kitty_mod+u open_url_with_hints
+map kitty_mod+y detach_window
+map kitty_mod+alt+y detach_window ask
+map alt+h neighboring_window left
+map alt+j neighboring_window down
+map alt+k neighboring_window up
+map alt+l neighboring_window right
+
+map kitty_mod+equal change_font_size current +1.0
+map kitty_mod+minus change_font_size current -1.0
+map kitty_mod+0 change_font_size current 0
+map ctrl+shift+backspace
+
 {% if theme == "dark" %}
+{% if terminal_font == "Berkeley Mono" %}
+font_family family="Berkeley Mono Variable" features="-calt -dlig" style="Book Condensed"
+bold_font family="Berkeley Mono Variable" features="-calt -dlig" style="ExtraBold Condensed"
+italic_font family="Berkeley Mono Variable" features="-calt -dlig" style="Book Condensed Oblique"
+bold_italic_font family="Berkeley Mono Variable" features="-calt -dlig" style="ExtraBold Condensed Oblique"
+modify_font underline_thickness 75%
+{% elif terminal_font == "Iosevka Term" %}
 font_family Iosevka Term
 bold_font Iosevka Term Bold
 italic_font Iosevka Term Italic
 bold_italic_font Iosevka Term Bold Italic
-foreground #c0c0c0
-background #1c2022
-background_opacity 1.0
-color0  #505050
-color1  #b44638
-color2  #518921
-color3  #a79026
-color4  #3982ce
-color5  #ae4fa3
-color6  #008f89
-color7  #c0c0c0
-color8  #707070
-color9  #d2614f
-color10 #6ea63f
-color11 #c9b047
-color12 #5799e7
-color13 #c866bb
-color14 #00b2ab
-color15 #e0e0e0
-dim_opacity 0.5
-wayland_titlebar_color #2a2f31
+{% endif %}
+foreground #{{ dark_normal }}
+background #{{ dark_bg }}
+color0  #{{ dark_faint }}
+color1  #{{ dark_red }}
+color2  #{{ dark_green }}
+color3  #{{ dark_yellow }}
+color4  #{{ dark_blue }}
+color5  #{{ dark_magenta }}
+color6  #{{ dark_cyan }}
+color7  #{{ dark_bright }}
+color8  #{{ dark_subtle }}
+color9  #{{ dark_red_bright }}
+color10 #{{ dark_green_bright }}
+color11 #{{ dark_yellow_bright }}
+color12 #{{ dark_blue_bright }}
+color13 #{{ dark_magenta_bright }}
+color14 #{{ dark_cyan_bright }}
+color15 #ffffff
 env DARK_THEME=yes
 {% else %}
+{% if terminal_font == "Berkeley Mono" %}
+font_family family="Berkeley Mono Variable" features="-calt -dlig" style="Medium Condensed"
+bold_font style="ExtraBold Condensed"
+italic_font style="Medium Condensed Oblique"
+bold_italic_font style="ExtraBold Condensed Oblique"
+{% elif terminal_font == "Iosevka Term" %}
 font_family Iosevka Term Medium
 bold_font Iosevka Term Extrabold
 italic_font Iosevka Term Medium Italic
 bold_italic_font Iosevka Term Extrabold Italic
-foreground #3d3a37
-background #ebe7e3
-color0  #d1cdc9
-color1  #ca625e
-color2  #5b9845
-color3  #9c8600
-color4  #2d8dd0
-color5  #b166ad
-color6  #009f91
-color7  #040302
-color8  #b1adaa
-color9  #ef736f
-color10 #6bb450
-color11 #b89e00
-color12 #33a6f6
-color13 #d179cd
-color14 #00bcab
+{% endif %}
+foreground #{{ light_normal }}
+background #{{ light_bg }}
+color0  #{{ light_faint }}
+color1  #{{ light_red }}
+color2  #{{ light_green }}
+color3  #{{ light_yellow }}
+color4  #{{ light_blue }}
+color5  #{{ light_magenta }}
+color6  #{{ light_cyan }}
+color7  #{{ light_bright }}
+color8  #{{ light_subtle }}
+color9  #{{ light_red_bright }}
+color10 #{{ light_green_bright }}
+color11 #{{ light_yellow_bright }}
+color12 #{{ light_blue_bright }}
+color13 #{{ light_magenta_bright }}
+color14 #{{ light_cyan_bright }}
 color15 #000000
-dim_opacity 0.7
+dim_opacity 0.6
 env DARK_THEME=no
 {% endif %}
 cursor none
