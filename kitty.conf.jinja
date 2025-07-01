@@ -36,8 +36,8 @@ map ctrl+shift+backspace
 {% if terminal_font == "Berkeley Mono" %}
 font_family family="Berkeley Mono Variable" features="-calt -dlig" style="Book Condensed"
 bold_font family="Berkeley Mono Variable" features="-calt -dlig" style="ExtraBold Condensed"
-italic_font family="Berkeley Mono Variable" features="-calt -dlig" style="Book Condensed Oblique"
-bold_italic_font family="Berkeley Mono Variable" features="-calt -dlig" style="ExtraBold Condensed Oblique"
+italic_font family="Iosevka Slab" style="Italic"
+bold_italic_font family="Iosevka Slab" style="Bold Italic"
 modify_font underline_thickness 75%
 {% elif terminal_font == "Iosevka Term" %}
 font_family Iosevka Term
@@ -67,9 +67,9 @@ env DARK_THEME=yes
 {% else %}
 {% if terminal_font == "Berkeley Mono" %}
 font_family family="Berkeley Mono Variable" features="-calt -dlig" style="Medium Condensed"
-bold_font style="ExtraBold Condensed"
-italic_font style="Medium Condensed Oblique"
-bold_italic_font style="ExtraBold Condensed Oblique"
+bold_font family="Berkeley Mono Variable" features="-calt -dlig" style="ExtraBold Condensed"
+italic_font family="Iosevka Slab" style="Medium Italic"
+bold_italic_font family="Iosevka Slab" style="ExtraBold Italic"
 {% elif terminal_font == "Iosevka Term" %}
 font_family Iosevka Term Medium
 bold_font Iosevka Term Extrabold
