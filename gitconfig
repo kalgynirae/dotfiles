@@ -16,6 +16,8 @@
 	excludesfile = ~/dotfiles/gitignore
 [diff]
 	renames = true
+[difftool "diff-pdf"]
+	cmd = "diff-pdf --view \"$LOCAL\" \"$REMOTE\""
 [merge]
 	conflictstyle = zdiff3
 [pull]
@@ -29,3 +31,4 @@
 	detachedHead = false
 [push]
 	autoSetupRemote = true
+	recurseSubmodules = on-demand
