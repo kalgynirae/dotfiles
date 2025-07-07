@@ -67,7 +67,7 @@ class Environment:
             keyrepeat_delay=cast(int, config.get("keyrepeat_delay", 200)),
             keyrepeat_rate=cast(int, config.get("keyrepeat_rate", 50)),
             monitors=cast(str, config.get("monitors", "default")),
-            terminal_app=cast(str, config.get("terminal_app", "kitty")),
+            terminal_app=cast(str, config.get("terminal_app", "ghostty")),
             terminal_font=cast(str, config.get("terminal_font", "Berkeley Mono")),
             terminal_font_size=cast(str, config.get("terminal_font_size", "14")),
             ui_font_name=cast(str, config.get("ui_font_name", "Noto Sans")),
