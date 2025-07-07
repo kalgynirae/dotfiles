@@ -64,7 +64,7 @@ class Environment:
             cursor_theme=cast(str, config.get("cursor_theme", "Breeze_Light")),
             gtk_theme=cast(str, config.get("gtk_theme", "Adwaita")),
             icon_theme=cast(str, config.get("icon_theme", "Adwaita")),
-            keyrepeat_delay=cast(int, config.get("keyrepeat_delay", 180)),
+            keyrepeat_delay=cast(int, config.get("keyrepeat_delay", 200)),
             keyrepeat_rate=cast(int, config.get("keyrepeat_rate", 50)),
             monitors=cast(str, config.get("monitors", "default")),
             terminal_app=cast(str, config.get("terminal_app", "kitty")),
