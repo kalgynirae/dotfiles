@@ -8,30 +8,18 @@ import os
 import random
 import sys
 import unicodedata
-import urllib
-from collections import Counter, OrderedDict, defaultdict, namedtuple
+from collections import Counter, defaultdict
 from contextlib import contextmanager
+from dataclasses import dataclass, field, fields, asdict
 from datetime import date, datetime, timedelta
+from decimal import Decimal
 from fractions import Fraction
 from functools import partial, reduce
-from ipaddress import IPv6Address, IPv6Network
+from ipaddress import ip_address, ip_network
 from itertools import chain, combinations, count, permutations, product, starmap
+from pathlib import Path
 from random import choice, sample
 from shlex import quote
-from typing import NamedTuple
-from urllib.parse import quote as url_quote
-from urllib.parse import unquote as url_unquote
-
-if sys.version_info.major > 2:
-    from pathlib import Path
-else:
-    try:
-        import readline
-    except ImportError:
-        print(".pythonrc: Module readline not available.")
-    else:
-        import rlcompleter
-
-        readline.parse_and_bind("tab: complete")
-
-parser = argparse.ArgumentParser()
+from urllib.parse import quote as urlquote
+from urllib.parse import unquote as urlunquote
+from urllib.parse import urlencode
