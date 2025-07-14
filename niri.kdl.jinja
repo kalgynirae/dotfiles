@@ -27,7 +27,7 @@ output "*" {
 }
 
 output "PNP(BNQ) BenQ RD280U S5R0002001Q" {
-    scale 1.5
+    scale 2.0
 }
 
 layout {
@@ -52,8 +52,8 @@ layout {
         color "#000000c0"
     }
     struts {
-        left 16
-        right 16
+        left {{ window_gap // 2 }}
+        right {{ window_gap // 2 }}
     }
     tab-indicator {
         gap -12
