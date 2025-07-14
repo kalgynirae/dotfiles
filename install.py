@@ -66,6 +66,8 @@ configs: dict[str, Output] = {
     ".config/niri/config.kdl": render("niri.kdl.jinja"),
     ".config/nvim": symlink_to("nvim"),
     ".config/paru/paru.conf": symlink_to("paru.conf"),
+    ".config/qt5ct/qt5ct.conf": render("qt5ct.conf.jinja"),
+    ".config/qt6ct/qt6ct.conf": render("qt6ct.conf.jinja"),
     ".config/sway/config": render("sway.jinja"),
     ".config/swaylock/config": symlink_to("swaylock"),
     ".config/user-dirs.dirs": symlink_to("user-dirs.dirs"),
