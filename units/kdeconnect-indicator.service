@@ -1,0 +1,9 @@
+[Unit]
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/kdeconnect-indicator
+Restart=on-failure
+Slice=session.slice
+MemoryMax=1G

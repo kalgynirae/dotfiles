@@ -27,7 +27,7 @@ output "*" {
 }
 
 output "PNP(BNQ) BenQ RD280U S5R0002001Q" {
-    scale 2.0
+    scale 1.5
 }
 
 layout {
@@ -78,6 +78,7 @@ prefer-no-csd
 screenshot-path "~/pictures/screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 spawn-at-startup "systemctl" "--user" "start" "gammastep.service"
+spawn-at-startup "systemctl" "--user" "start" "kdeconnect-indicator.service"
 spawn-at-startup "systemctl" "--user" "start" "mako.service"
 spawn-at-startup "systemctl" "--user" "start" "polkit-gnome.service"
 spawn-at-startup "systemctl" "--user" "start" "swayidle.service"
