@@ -80,6 +80,7 @@ configs: dict[str, Output] = {
     ".config/wireplumber/wireplumber.conf.d/90-prevent-webrtc-adjusting.conf": symlink_to(
         "wireplumber/90-prevent-webrtc-adjusting.conf"
     ),
+    ".config/xfce4/helpers.rc": render("xfce4-helpers.rc.jinja"),
     ".gemrc": symlink_to("gemrc"),
     ".gitconfig": symlink_to("gitconfig"),
     ".gtkrc-2.0": render("gtkrc-2.0.jinja"),
