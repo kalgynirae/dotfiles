@@ -5,6 +5,7 @@ auto-completion = false
 bufferline = "multiple"
 color-modes = true
 cursorline = true
+end-of-line-diagnostics = "warning"
 idle-timeout = 50
 insert-final-newline = false
 text-width = 100
@@ -24,6 +25,9 @@ text-width = 100
 [editor.gutters]
 layout = ["diagnostics", "line-numbers", "spacer", "diff"]
 
+[editor.inline-diagnostics]
+cursor-line = "hint"
+
 [editor.lsp]
 auto-signature-help = false
 
@@ -33,6 +37,9 @@ enable = true
 [editor.whitespace.render]
 newline = "all"
 tab = "all"
+
+[editor.whitespace.characters]
+newline = "⏎"
 
 [keys.normal]
 "X" = "extend_line_above"
