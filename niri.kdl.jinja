@@ -52,11 +52,11 @@ layout {
         color "#000000c0"
     }
     struts {
-        left {{ window_gap // 2 }}
-        right {{ window_gap // 2 }}
+        left {{ window_gap }}
+        right {{ window_gap }}
     }
     tab-indicator {
-        gap -12
+        gap {{ window_gap // -2 }}
         gaps-between-tabs 3
         length total-proportion=0.2
         width 6
