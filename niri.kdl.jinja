@@ -216,3 +216,10 @@ window-rule {
     geometry-corner-radius {{ window_gap * 2 // 3 }}
     clip-to-geometry true
 }
+
+// Steam notifications
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="top-right"
+    open-focused false
+}
