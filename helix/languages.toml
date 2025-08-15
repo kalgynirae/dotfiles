@@ -4,14 +4,10 @@ use-grammars = { only = ["lilypond"] }
 name = "html"
 indent = { tab-width = 2, unit = "  " }
 
-[language-server.pylsp]
-command = "pipenv"
-args = ["run", "pylsp"]
-
 [[language]]
 name = "python"
 auto-format = true
-language-servers = ["pylsp"]
+language-servers = ["ruff"]
 rulers = [88]
 text-width = 88
 
