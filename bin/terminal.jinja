@@ -1,0 +1,82 @@
+#!/bin/bash
+# {% raw %}usage: $0 [--same-dir] [--split] [-- ARGS...]
+#
+# --same-dir    Detect and use the focused terminal's cwd
+# --split       Open the terminal as a split window (depends on compositor)
+# ARGS...       (passed directly to the actual terminal invocation)
+
+usage() {
+  awk <"$0" '/$^/{exit}; NR==2,0{print substr($0, 3)}'
+}
+
+# shellcheck disable=SC1083
+TERMINAL={% endraw %}{{ terminal_app|shellquote }}{% raw %}
+
+extra_args=()
+while (( $# > 0 )); do
+  case "$1" in
+    --help)
+      usage
+      exit
+      ;;
+    --same-dir)
+      same_dir=yes
+      shift
+      ;;
+    --split)
+      split=yes
+      shift
+      ;;
+    --)
+      shift
+      extra_args=("$@")
+      shift $#
+      ;;
+    *)
+      echo 2>&1 "Unrecognized option ${1#Q}"
+      exit 2
+      ;;
+  esac
+done
+
+if [[ $same_dir ]]; then
+  case "$XDG_CURRENT_DESKTOP" in
+    niri)
+      focused_pid=$(niri msg --json focused-window | jq -r .pid)
+      ;;
+    *)
+      echo >&2 "$0: not implemented yet for XDG_CURRENT_DESKTOP=${XDG_CURRENT_DESKTOP@Q}"
+      exit 1
+      ;;
+  esac
+  if [[ $(basename "$(readlink "/proc/$focused_pid/exe")") == "$TERMINAL" ]]; then
+    mapfile -t child_pids < <(cat /proc/"$focused_pid"/task/*/children | tr ' ' '\n')
+    for child_pid in "${child_pids[@]}"; do
+      echo >&2 "checking child $child_pid"
+      if [[ $(basename "$(readlink "/proc/$child_pid/exe")") == bash ]]; then
+        cwd=$(readlink "/proc/$child_pid/cwd")
+        echo >&2 "found cwd: ${cwd@Q}"
+        break
+      fi
+    done
+  fi
+fi
+
+case "$TERMINAL" in
+  ghostty)
+    args=(ghostty --working-directory="${cwd:-home}")
+    if [[ $split ]]; then
+      args+=(--initial-command='sleep 0.1; niri msg action consume-or-expel-window-left; bash -i')
+    fi
+    if (( ${#extra_args[@]} > 0 )); then
+      args+=("${extra_args[@]}")
+    fi
+    ;;
+  *)
+    echo >&2 "$0: not implemented yet for TERMINAL=${TERMINAL@Q}"
+    exit 1
+    ;;
+esac
+
+exec "${args[@]}"
+# (This comment leftover from dotfiles Jinja processing){% endraw %}
