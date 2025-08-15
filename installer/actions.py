@@ -98,6 +98,9 @@ class RenderedFile(Output):
         logger.debug("mv %r %r", str(temp), str(dest))
         copyfile(temp, dest, follow_symlinks=False)
 
+        if self.mode is not None:
+            dest.chmod(self.mode)
+
         # Set the dest's mtime to the source's mtime
         dest_atime = dest.stat().st_atime_ns
         source_mtime = self.source.stat().st_mtime_ns
