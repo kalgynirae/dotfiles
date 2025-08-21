@@ -1,0 +1,20 @@
+#!/bin/bash
+
+SLEEP_ACTIVATE_SECONDS=5
+MIN_ASLEEP_SECONDS=10
+
+while true; do
+	attempt_start=$EPOCHSECONDS
+	min_allowed_wake_time=$(( attempt_start + SLEEP_ACTIVATE_SECONDS + MIN_ASLEEP_SECONDS ))
+	if ! systemctl sleep; then
+		echo >&2 "$0: 'systemctl sleep' exited nonzero"
+		exit 1
+	fi
+	sleep $SLEEP_ACTIVATE_SECONDS
+	if (( EPOCHSECONDS >= min_allowed_wake_time )); then
+		break
+	else
+		echo >&2 "$0: didn't sleep for long enough; retrying in 5 sec"
+		sleep 5
+	fi
+done
