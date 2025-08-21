@@ -4,11 +4,12 @@ ACTIONS=(poweroff reboot reboot-to-windows suspend)
 ACTION=$(printf '%s\n' "${ACTIONS[@]}" | wofi --dmenu)
 
 if [[ $ACTION == reboot-to-windows ]]; then
+  echo >&2 ">> reboot-to-windows"
   reboot-to-windows
-  exit
-fi
-
-if [[ -n $ACTION ]]; then
-  echo >&2 "systemctl ${ACTION@Q}"
+elif [[ $ACTION == suspend ]]; then
+  echo >&2 ">> suspend"
+  suspend
+elif [[ -n $ACTION ]]; then
+  echo >&2 ">> systemctl ${ACTION@Q}"
   systemctl --quiet --no-block "$ACTION"
 fi
