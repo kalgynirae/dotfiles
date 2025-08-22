@@ -7,8 +7,8 @@ if [[ $ACTION == reboot-to-windows ]]; then
   echo >&2 ">> reboot-to-windows"
   reboot-to-windows
 elif [[ $ACTION == suspend ]]; then
-  echo >&2 ">> suspend"
-  suspend
+  echo >&2 ">> sleep-repeatedly"
+  sleep-repeatedly
 elif [[ -n $ACTION ]]; then
   echo >&2 ">> systemctl ${ACTION@Q}"
   systemctl --quiet --no-block "$ACTION"
