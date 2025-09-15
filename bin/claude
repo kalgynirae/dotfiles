@@ -1,2 +1,0 @@
-#!/bin/bash
-exec npx @anthropic-ai/claude-code "$@"
