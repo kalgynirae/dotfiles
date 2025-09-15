@@ -30,7 +30,6 @@ alias jc=journalctl
 alias jcu='journalctl --user'
 alias l=less
 alias la='ls --almost-all --classify'
-alias lilypond='lilypond -dno-point-and-click --loglevel=PROGRESS'
 alias lines='xargs printf "%s\n"'
 alias ll='ls -l --human-readable'
 alias lolcat='lolcat -ft'
