@@ -27,14 +27,22 @@ output "PNP(BNQ) BenQ RD280U S5R0002001Q" {
     backdrop-color "#454850"
 }
 
+{% if host == "iroh" %}
 output "eDP-1" {
     scale 1.0
     backdrop-color "#454850"
 }
+{% endif %}
 
 {% if host == "colinchan-arch" %}
-output "DP-2" {
-    off
+output "Acer Technologies XZ322QU V3 251306FD63W01" {
+    mode "2560x1440@119.998"
+    scale 1.0
+    position x=0 y=0
+}
+output "eDP-1" {
+    scale 1.5
+    position x=2560 y=240
 }
 {% endif %}
 
