@@ -24,7 +24,7 @@
 	ff = only
 [user]
 	name = Colin Chan
-	email = colin+git@lumeh.org
+	email = colin@pylonlending.com
 [init]
 	defaultBranch = main
 [advice]
