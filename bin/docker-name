@@ -1,0 +1,15 @@
+#!/bin/bash
+
+readarray -t names < <(docker ps -a --format "{{.Names}}")
+
+if [[ " $* " == *" -a "* ]]; then
+  printf '%s\n' "${names[@]}"
+else
+  if (( ${#names[@]} == 1 )); then
+    printf '%s\n' "${names[0]}"
+  else
+    printf >&2 '\e[31m%s\e[39m\n' "$0: ${#names[@]} containers exist"
+    echo "FAKE_CONTAINER_NAME"
+    exit 1
+  fi
+fi
