@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Note: Docker doesn't seem to be able to handle "ctrl-[" as the first in the
+# detach key sequence, so this effectively disables detaching.
+docker exec -it --detach-keys "ctrl-@,ctrl-d" "$(docker-name "$@")" "$SHELL" -li
