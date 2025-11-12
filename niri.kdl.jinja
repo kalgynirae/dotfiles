@@ -31,6 +31,12 @@ output "eDP-1" {
     backdrop-color "#454850"
 }
 
+{% if host == "colinchan-arch" %}
+output "DP-2" {
+    off
+}
+{% endif %}
+
 layout {
     background-color "#58606c"
     gaps {{ window_gap }}
@@ -90,31 +96,37 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+O repeat=false { toggle-overview; }
 
-    Mod+Q { close-window; }
+    Mod+Q hotkey-overlay-title="Close window" { close-window; }
 
-    Mod+H { focus-column-left; }
-    Mod+J { focus-window-down; }
-    Mod+K { focus-window-up; }
-    Mod+L { focus-column-right; }
-    Mod+Home { focus-column-first; }
-    Mod+End { focus-column-last; }
-    Mod+WheelScrollUp { focus-column-left; }
-    Mod+WheelScrollDown { focus-column-right; }
-    Mod+Shift+H { move-column-left; }
-    Mod+Shift+J { move-window-down; }
-    Mod+Shift+K { move-window-up; }
-    Mod+Shift+L { move-column-right; }
-    Mod+Shift+Home { move-column-to-first; }
-    Mod+Shift+End { move-column-to-last; }
-    Mod+Shift+WheelScrollUp { move-column-left; }
-    Mod+Shift+WheelScrollDown { move-column-right; }
+    Mod+H hotkey-overlay-title="Focus left" { focus-column-or-monitor-left; }
+    Mod+L hotkey-overlay-title="Focus right" { focus-column-or-monitor-right; }
+    Mod+J hotkey-overlay-title="Focus down" { focus-window-or-workspace-down; }
+    Mod+K hotkey-overlay-title="Focus up" { focus-window-or-workspace-up; }
+    Mod+Shift+H hotkey-overlay-title="Move column left" { move-column-left-or-to-monitor-left; }
+    Mod+Shift+L hotkey-overlay-title="Move column right" { move-column-right-or-to-monitor-right; }
+    Mod+Shift+J hotkey-overlay-title="Move window down" { move-window-down-or-to-workspace-down; }
+    Mod+Shift+K hotkey-overlay-title="Move window up" { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Alt+H hotkey-overlay-title="Move workspace left" { move-workspace-to-monitor-left; }
+    Mod+Shift+Alt+L hotkey-overlay-title="Move workspace right" { move-workspace-to-monitor-right; }
+    Mod+Shift+Alt+J hotkey-overlay-title="Move workspace down" { move-workspace-down; }
+    Mod+Shift+Alt+K hotkey-overlay-title="Move workspace up" { move-workspace-up; }
 
-    Mod+N { focus-workspace-down; }
-    Mod+P { focus-workspace-up; }
-    Mod+Shift+N { move-column-to-workspace-down; }
-    Mod+Shift+P { move-column-to-workspace-up; }
-    Mod+Ctrl+Shift+N { move-workspace-down; }
-    Mod+Ctrl+Shift+P { move-workspace-up; }
+    Mod+Home hotkey-overlay-title="Jump leftmost column" { focus-column-first; }
+    Mod+End hotkey-overlay-title="Jump rightmost column" { focus-column-last; }
+
+    Mod+WheelScrollUp { focus-workspace-up; }
+    Mod+WheelScrollDown { focus-workspace-down; }
+    Mod+Shift+WheelScrollUp { move-workspace-up; }
+    Mod+Shift+WheelScrollDown { move-workspace-down; }
+    Mod+WheelScrollLeft { focus-monitor-left; }
+    Mod+WheelScrollRight { focus-monitor-right; }
+
+    Mod+N hotkey-overlay-title="Jump monitor next" { focus-monitor-next; }
+    Mod+P hotkey-overlay-title="Jump monitor previous" { focus-monitor-previous; }
+    Mod+Shift+N hotkey-overlay-title="Move monitor next" { move-window-to-monitor-next; }
+    Mod+Shift+P hotkey-overlay-title="Move monitor previous" { move-window-to-monitor-previous; }
+    Mod+Ctrl+Shift+N hotkey-overlay-title="" { move-workspace-down; }
+    Mod+Ctrl+Shift+P hotkey-overlay-title="" { move-workspace-up; }
 
     Mod+Ctrl+H { focus-monitor-left; }
     Mod+Ctrl+J { focus-monitor-down; }
