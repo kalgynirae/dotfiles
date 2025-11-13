@@ -5,7 +5,7 @@ case $XDG_CURRENT_DESKTOP in
     primarysize=$(hyprctl monitors -j | jq -r 'max_by(.width * .height)|"\(.width)x\(.height)"')
     ;;
   niri)
-    primarysize=$(niri msg --json outputs | jq -r '[.[]|.logical]|max_by(.width * .height)|"\(.width)x\(.height)"')
+    primarysize=$(niri msg --json outputs | jq -r '[.[]|.logical|values]|max_by(.width * .height)|"\(.width)x\(.height)"')
     ;;
 esac
 width=$(cut -dx -f1 <<<"$primarysize")
