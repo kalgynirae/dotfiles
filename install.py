@@ -54,12 +54,15 @@ configs: dict[str, Output] = {
     ".config/helix/config.toml": render("helix/config.toml.jinja"),
     ".config/helix/languages.toml": symlink_to("helix/languages.toml"),
     ".config/helix/themes/kalgykai-dark.toml": render("helix/kalgykai-dark.toml.jinja"),
-    ".config/helix/themes/kalgykai-light.toml": render("helix/kalgykai-light.toml.jinja"),
+    ".config/helix/themes/kalgykai-light.toml": render(
+        "helix/kalgykai-light.toml.jinja"
+    ),
     ".config/helix/runtime/queries/comment/highlights.scm": symlink_to(
         "helix/queries/comment/highlights.scm"
     ),
     ".config/hypr/hyprland.conf": render("hyprland.conf.jinja"),
     ".config/imv/config": symlink_to("imv"),
+    ".config/jj/config.toml": symlink_to("jj-config.toml"),
     ".config/kitty/kitty.conf": render("kitty.conf.jinja"),
     ".config/mako/config": symlink_to("mako"),
     ".config/mpv/mpv.conf": symlink_to("mpv.conf"),
@@ -93,7 +96,9 @@ configs: dict[str, Output] = {
 }
 
 if environment.get().host == Host.APARTMANTWO:
-    configs[".config/pipewire/pipewire.conf.d/15-netjack2.conf"] = symlink_to("pipewire/15-netjack2.conf")
+    configs[".config/pipewire/pipewire.conf.d/15-netjack2.conf"] = symlink_to(
+        "pipewire/15-netjack2.conf"
+    )
 
 for path in Path("applications").iterdir():
     configs[f".local/share/applications/{path.name}"] = symlink_to(path)
@@ -119,8 +124,12 @@ for dir in (Path.home() / ".mozilla/firefox").iterdir():
         firefox_profile_dir = dir.relative_to(Path.home())
         break
 if firefox_profile_dir:
-    configs[f"{firefox_profile_dir}/chrome/userChrome.css"] = render("userChrome.css.jinja")
-    configs[f"{firefox_profile_dir}/chrome/userContent.css"] = render("userContent.css.jinja")
+    configs[f"{firefox_profile_dir}/chrome/userChrome.css"] = render(
+        "userChrome.css.jinja"
+    )
+    configs[f"{firefox_profile_dir}/chrome/userContent.css"] = render(
+        "userContent.css.jinja"
+    )
 
 for dest_relpath, output in configs.items():
     dest = Path.home() / dest_relpath
@@ -136,9 +145,7 @@ with step("Apply gsettings"):
         "org.gnome.desktop.interface.color-scheme",
         "prefer-dark" if environment.get().theme == Theme.DARK else "default",
     )
-    gsettings_set(
-        "org.gnome.desktop.interface.cursor-blink", "false"
-    )
+    gsettings_set("org.gnome.desktop.interface.cursor-blink", "false")
     gsettings_set(
         "org.gnome.desktop.interface.cursor-size", str(environment.get().cursor_size)
     )
@@ -146,7 +153,8 @@ with step("Apply gsettings"):
         "org.gnome.desktop.interface.cursor-theme", str(environment.get().cursor_theme)
     )
     gsettings_set(
-        "org.gnome.desktop.interface.font-name", f"{environment.get().ui_font_name} {environment.get().ui_font_size}"
+        "org.gnome.desktop.interface.font-name",
+        f"{environment.get().ui_font_name} {environment.get().ui_font_size}",
     )
     gsettings_set(
         "org.gnome.desktop.interface.gtk-theme", str(environment.get().gtk_theme)

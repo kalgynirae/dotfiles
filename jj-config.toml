@@ -1,0 +1,12 @@
+[user]
+name = "Colin Chan"
+email = "colin+git@lumeh.org"
+
+[ui]
+default-command = "log"
+diff-formatter = ":git"
+
+[colors]
+"diff added" = { fg = "green" }
+"diff token" = { underline = false }
+"diff remoed" = { fg = "red" }
