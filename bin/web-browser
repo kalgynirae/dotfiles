@@ -1,7 +1,3 @@
 #!/bin/bash
 
-if [[ $HOSTNAME == apartmantwo ]]; then
-  exec zen-browser "$@"
-else
-  exec firefox "$@"
-fi
+exec firefox "$@"
