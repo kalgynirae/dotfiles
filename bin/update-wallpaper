@@ -56,7 +56,7 @@ render-text() {
     pango-view \
       <(echo "$text") \
       --background "transparent" \
-      --font "Gentium Basic Bold 38" \
+      --font "Gentium Plus Bold 38" \
       --foreground "$foreground" \
       --antialias gray \
       --hinting full \
