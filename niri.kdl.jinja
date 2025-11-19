@@ -56,15 +56,15 @@ layout {
     }
     default-column-width { proportion 0.5; }
     focus-ring {
-        width 3
-        active-gradient from="#00e0d0" to="#00d0f0" angle=160 in="oklch longer hue"
+        width 4
+        active-color "#ff4080"
         inactive-color "#505460"
     }
     shadow {
         on
-        softness 24
-        spread 0
-        offset x=0 y=3
+        softness 32
+        spread 12
+        offset x=0 y=4
         color "#000000ff"
     }
     struts {
@@ -98,6 +98,7 @@ spawn-at-startup "systemctl" "--user" "start" "kdeconnect-indicator.service"
 spawn-at-startup "systemctl" "--user" "start" "mako.service"
 spawn-at-startup "systemctl" "--user" "start" "polkit-gnome.service"
 spawn-at-startup "systemctl" "--user" "start" "swayidle.service"
+spawn-at-startup "systemctl" "--user" "start" "swww.service"
 spawn-at-startup "systemctl" "--user" "start" "waybar.service"
 spawn-at-startup "systemctl" "--user" "start" "xwayland-satellite.service"
 
