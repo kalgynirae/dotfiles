@@ -45,3 +45,7 @@ scope = "source.text"
 file-types = []
 roots = []
 indent = { tab-width = 4, unit = "    " }
+
+[[language]]
+name = "typescript"
+auto-format = true
