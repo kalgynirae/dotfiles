@@ -1,15 +1,33 @@
 #!/bin/bash
 
-cp -v ~/dotfiles/ssh-with-dotfiles/bash_profile .bash_profile
-cp -v ~/dotfiles/bashrc .bashrc
-cp -v ~/dotfiles/inputrc .inputrc
-cp -v ~/dotfiles/pythonrc .pythonrc
-cp -v ~/dotfiles/tmux.conf .tmux.conf
-cp -v ~/.gitconfig .gitconfig
+install -vpm 644 ~/dotfiles/ssh-with-dotfiles/bash_profile .bash_profile
+install -vpm 644 ~/dotfiles/bashrc .bashrc
+install -vpm 644 ~/dotfiles/inputrc .inputrc
+install -vpm 644 ~/dotfiles/pythonrc .pythonrc
+install -vpm 644 ~/dotfiles/tmux.conf .tmux.conf
+install -vpm 644 ~/.gitconfig .gitconfig
+install -vDpm 755 ~/dotfiles/bin/copy bin/copy
+install -vDpm 755 ~/dotfiles/bin/jfd bin/jfd
+
+# ssh-with-dotfiles
+install -vDpm 755 ~/dotfiles/ssh-with-dotfiles/install .config/ssh-with-dotfiles/install
+
+# Helix
+install -vDpm 755 ~/dotfiles/bin/e bin/e
+install -vDpm 644 ~/.config/helix/config.toml .config/helix/config.toml
+install -vDpm 644 ~/dotfiles/helix/languages.toml .config/helix/languages.toml
+install -vDpm 644 ~/.config/helix/themes/kalgykai-dark.toml .config/helix/themes/kalgykai-dark.toml
+install -vDpm 755 ~/.cargo/bin/hx .local/bin/hx
+install -vd .local/share/helix/runtime
+rsync -vr --times --perms --links --exclude /grammars/sources --exclude /themes ~/src/helix/runtime/ .local/share/helix/runtime/
+
+# jj
+install -vDpm 644 ~/dotfiles/jj-config.toml .config/jj/config.toml
+install -vDpm 755 ~/.cargo/bin/jj .local/bin/jj
 
 # Terminfo
-mkdir -vp .cache/ssh-with-dotfiles
+install -vd .cache/ssh-with-dotfiles
 infocmp -x >.cache/ssh-with-dotfiles/terminfo
-mkdir -vp .config/ssh-with-dotfiles
-echo "tic -o ~/.terminfo -x - <~/.cache/ssh-with-dotfiles/terminfo" >.config/ssh-with-dotfiles/install
-chmod +x .config/ssh-with-dotfiles/install
+
+# Graphite
+install -vDpm 644 ~/dotfiles/graphite_nuxes .local/share/graphite/nuxes

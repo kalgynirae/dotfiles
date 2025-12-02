@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Original homedir
+h=$1
+
+if [[ $USER == pylon ]]; then
+  paths=(
+    .bashrc
+    .config/helix
+    .config/jj/config.toml
+    .inputrc
+    .local/bin/hx
+    .local/bin/jj
+    .local/share/helix
+    .tmux.conf
+    bin/copy
+    bin/e
+    bin/jfd
+  )
+  for path in "${paths[@]}"; do
+    if [[ -f $h/$path && ! -L $h/$path ]]; then
+      mv -vn "$h/$path" "$h/$path-pylon"
+    fi
+    if [[ $path == */* ]]; then
+      mkdir -vp "$(dirname "$h/$path")"
+    fi
+    if [[ ! -e $h/$path ]]; then
+      ln -vs --relative $path "$h/$path"
+    fi
+  done
+
+  echo "Setting \$HOME back to ${h@Q}"
+  HOME=$h
+  if ! cd; then
+    echo >&2 "cd to $HOME failed"
+    exit 1
+  fi
+fi
