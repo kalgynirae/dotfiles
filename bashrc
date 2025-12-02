@@ -379,6 +379,15 @@ up() {
 r() {
   local repo path_append
   case ${1%/} in
+    braid)
+      if [[ $CODESPACES ]]; then
+        repo=/workspaces/braid
+        path_append=$repo/tools/bin
+      else
+        repo=~/code/braid
+        path_append=$repo/tools/bin
+      fi
+      ;;
     dotfiles|d)
       if [[ $CODESPACES ]]; then
         repo=/workspaces/.codespaces/.persistedshare/dotfiles
@@ -453,3 +462,36 @@ shortprompt() {
   PS1=$SHORTPS1
   unset LESS_LINES
 }
+
+if [[ $USER == pylon ]]; then
+  source /home/pylon/.bashrc.d/800-pg-utils
+  source /home/pylon/.bashrc.d/999-runtime-secrets
+  source /home/pylon/.bashrc.d/github-user.sh
+  export EDITOR=hx
+  export HELIX_RUNTIME=~/.local/share/helix/runtime
+  LESS='-SR -#.1 -x4 --ignore-case --mouse --quit-if-one-screen --no-init'
+  PATH=/home/pylon/.local/bin:/workspace/braid/tools/bin:$PATH:/home/pylon/bin
+  if [[ $PYLON_ENV ]]; then
+    export NX_PUBLIC_PYLON_ENV=$PYLON_ENV
+  fi
+  export TZ=America/Los_Angeles
+
+  alias pc=process-compose
+  alias sso='aws sso login --use-device-code --no-browser'
+  alias tail-logs='less -RS +F ~/process-compose.log'
+elif [[ $USER == coder ]]; then
+  export EDITOR=hx
+  export LC_ALL=C.UTF-8
+  PATH="$HOME/bin:$PATH"
+  # source ~/.config/fusion/shellrc.sh
+fi
+
+if [[ $USER == pylon || $USER == coder ]]; then
+  if ! tmux has-session 2>/dev/null; then
+    # no sessions -> create one
+    tmux new-session -s "${HOSTNAME%%.*}" -A
+  elif [[ $(tmux list-sessions -F '#{session_attached}') == '0' ]]; then
+    # single session with no attached clients -> attach
+    tmux attach
+  fi
+fi
