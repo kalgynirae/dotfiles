@@ -48,7 +48,6 @@ fi
 quoteline=$(<<<"$quotematches" shuf -n1)
 echo "quote: $quoteline"
 
-
 render-text() {
   local text=$1
   local outfilebase=$2
@@ -56,7 +55,7 @@ render-text() {
     pango-view \
       <(echo "$text") \
       --background "transparent" \
-      --font "Gentium Plus Bold 38" \
+      --font "Gentium Plus Bold 32" \
       --foreground "$foreground" \
       --antialias gray \
       --hinting full \
@@ -71,9 +70,9 @@ render-text() {
 dir=~/.cache/update-wallpaper
 mkdir -p "$dir"
 
-borderradius=20
+borderradius=16
 bottompadding=150
-quotepadding=20
+quotepadding=16
 
 # shellcheck disable=SC1111
 quote="“$(<<<"$quoteline" sed 's# // #\n#g' | head -n-1 | awk 'NR==1 { print } NR>1 { print "<span alpha=\"1\">“</span>" $0 }' | sed "s/'/’/g")”"
