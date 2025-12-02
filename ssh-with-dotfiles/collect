@@ -13,3 +13,7 @@ infocmp -x >.cache/ssh-with-dotfiles/terminfo
 mkdir -vp .config/ssh-with-dotfiles
 echo "tic -o ~/.terminfo -x - <~/.cache/ssh-with-dotfiles/terminfo" >.config/ssh-with-dotfiles/install
 chmod +x .config/ssh-with-dotfiles/install
+
+# Graphite
+mkdir -vp .local/share/graphite
+cp -v ~/dotfiles/graphite_nuxes .local/share/graphite/nuxes
