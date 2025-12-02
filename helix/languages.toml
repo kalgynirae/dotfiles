@@ -118,4 +118,9 @@ indent = { tab-width = 4, unit = "    " }
 
 [[language]]
 name = "typescript"
+language-servers = ["typescript-language-server"]
+formatter = { command = "node_modules/.bin/prettier", args = ["--parser", "typescript"] }
 auto-format = true
+
+[language-server.typescript-language-server]
+command = "node_modules/.bin/typescript-language-server"
