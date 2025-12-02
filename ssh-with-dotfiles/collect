@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cp -v ~/dotfiles/ssh-with-dotfiles/bash_profile .bash_profile
+cp -v ~/dotfiles/bashrc .bashrc
+cp -v ~/dotfiles/inputrc .inputrc
+cp -v ~/dotfiles/pythonrc .pythonrc
+cp -v ~/dotfiles/tmux.conf .tmux.conf
+cp -v ~/.gitconfig .gitconfig
+
+# Terminfo
+mkdir -vp .cache/ssh-with-dotfiles
+infocmp -x >.cache/ssh-with-dotfiles/terminfo
+mkdir -vp .config/ssh-with-dotfiles
+echo "tic -o ~/.terminfo -x - <~/.cache/ssh-with-dotfiles/terminfo" >.config/ssh-with-dotfiles/install
+chmod +x .config/ssh-with-dotfiles/install
