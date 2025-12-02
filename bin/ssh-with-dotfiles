@@ -5,10 +5,10 @@
 #
 # Collect dotfiles, transfer them to a remote host, and spawn a shell.
 #
-# Dotfiles are collected into a temporary directory by executing
-# ~/.config/ssh-with-dotfiles/collect with the tempdir path as the first
-# argument. collect is encouraged to log its actions to stdout (e.g. using
-# 'cp -v'); this output will be hidden normally but shown with --debug.
+# Dotfiles are collected into a temporary directory by cd'ing into the tempdir
+# and executing ~/.config/ssh-with-dotfiles/collect. collect is encouraged to
+# log its actions to stdout (e.g. using 'cp -v'); this output will be hidden
+# normally but shown with --debug.
 #
 # On the remote host, the collected dotfiles are placed in the directory
 # ~/.$USER-ssh-home. HOME is set to this path. If
@@ -19,12 +19,14 @@
 set -u
 
 REAL_SSH=/usr/bin/ssh
+COMPRESS='zstd -19'
+DECOMPRESS=zstd
 
 usage() {
   awk <"$0" -v script="$0" '/$^/{exit}; NR==2,0{gsub(/<SCRIPT>/, script); print substr($0, 3)}'
 }
 
-if [[ $1 == --help ]]; then
+if [[ $# -gt 0 && $1 == --help ]]; then
   usage
   exit
 elif [[ $# -eq 1 && $1 != -* ]]; then
@@ -48,6 +50,9 @@ if ! tempdir=$(mktemp --tmpdir -d ssh-with-dotfiles.XXXX); then
   echo >&2 "$0: Failed to create temp dir; aborting"
   exit 1
 fi
+if ! cd "$tempdir"; then
+  echo >&2 "$0: Failed to cd to the temp dir; aborting"
+fi
 
 if [[ $debug ]]; then
   printf >&2 "\e[35m%s: Collecting dotfiles into %s...\e[39m\n" "$0" "$tempdir"
@@ -57,37 +62,37 @@ if ! ~/.config/ssh-with-dotfiles/collect "$tempdir" >"$scripts_stdout"; then
   exit 1
 fi
 
-if ! data=$(tar cf - -I 'zstd -15' -C "$tempdir" . | base64 -); then
+if ! data=$(tar cf - -I "$COMPRESS" -C "$tempdir" . | base64 -); then
   echo >&2 "$0: Failed to tar and compress collected dotfiles; aborting"
   exit 1
 fi
 
-quoted_home=~/.${USER@Q}-ssh-home
+quoted_home=\~/.${USER@Q}-ssh-home
 if [[ $debug ]]; then
-  extract_message="printf >&2 '\e[36m%s remote: Extracting dotfiles...\e[39m\n' ${0@Q}"
+  extract_message_command="printf >&2 '\e[36m%s remote: Extracting dotfiles into %s...\e[39m\n' ${0@Q} \"\$(pwd)\""
+  shell_message_command="printf >&2 '\e[36m%s remote: Launching shell...\e[39m\n' ${0@Q}"
   tar_verbose_flag=v
-  shell_message="printf >&2 '\e[36m%s remote: Launching shell...\e[39m\n' ${0@Q}"
 else
-  extract_message=
+  extract_message_command=
+  shell_message_command=
   tar_verbose_flag=
-  shell_message=
 fi
 remote_script="
 if ! mkdir -p $quoted_home; then
   printf >&2 '%s remote: Failed to create %s\n' ${0@Q} $quoted_home
   exit 5
 fi
-export HOME=$quoted_home
-if ! cd; then
+if ! cd $quoted_home; then
   printf >&2 '%s remote: Failed to cd into %s\n' ${0@Q} $quoted_home
   exit 5
 fi
-$extract_message
-base64 -d <<<'$data' | tar x${tar_verbose_flag}f - --strip-components 1 -I zstd
+export HOME=$quoted_home
+$extract_message_command
+base64 -d <<<'$data' | tar x${tar_verbose_flag}f - --strip-components 1 -I ${DECOMPRESS@Q}
 if [[ -e ~/.config/ssh-with-dotfiles/install ]]; then
   ~/.config/ssh-with-dotfiles/install >$scripts_stdout
 fi
-$shell_message
-exec \$SHELL -i
+$shell_message_command
+exec -l \$SHELL -i
 "
 exec -a ssh "$REAL_SSH" -t "$hostname" "bash -c ${remote_script@Q}"
