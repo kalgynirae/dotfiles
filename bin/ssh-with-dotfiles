@@ -19,8 +19,8 @@
 set -u
 
 REAL_SSH=/usr/bin/ssh
-COMPRESS='zstd -19'
-DECOMPRESS=zstd
+COMPRESS='gzip -9'
+DECOMPRESS=gzip
 
 usage() {
   awk <"$0" -v script="$0" '/$^/{exit}; NR==2,0{gsub(/<SCRIPT>/, script); print substr($0, 3)}'
