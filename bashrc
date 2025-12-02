@@ -41,7 +41,7 @@ alias quotes="sed \"s/^/'/; s/$/'/\""
 alias rm='rm --one-file-system'
 alias sc=systemctl
 alias scu='systemctl --user'
-alias ssh='ssh-with-terminfo'
+alias ssh='ssh-with-dotfiles'
 alias ssh-patient='ssh -o ConnectTimeout=60 -o ServerAliveCountMax=6 -o ServerAliveInterval=10'
 alias tree='tree -CF --charset=utf-8'
 alias uncommas="tr , '\n'"
@@ -420,3 +420,18 @@ shortprompt() {
   PS1=$SHORTPS1
   unset LESS_LINES
 }
+
+if [[ $USER == pylon ]]; then
+  source /home/pylon/.bashrc.d/800-pg-utils
+  source /home/pylon/.bashrc.d/github-user.sh
+  export EDITOR=hx
+  export HELIX_RUNTIME=~/.local/share/helix/runtime
+  LESS='-SR -#.1 -x4 --ignore-case --mouse --quit-if-one-screen --no-init --wheel-lines=5'
+  PATH=/home/pylon/.local/bin:/workspace/braid/tools/bin:$PATH
+  if [[ $PYLON_ENV ]]; then
+    export NX_PUBLIC_PYLON_ENV=$PYLON_ENV
+  fi
+
+  alias pc=process-compose
+  alias tail-logs='less -RS +F ~/process-compose.log'
+fi
