@@ -376,6 +376,24 @@ up() {
   if in-git-repo; then git checkout "$@"; else hg update "$@"; fi
 }
 
+r() {
+  case $1 in
+    braid)
+      cd ~/code/braid && PATH=$PATH:~/code/braid/tools/bin && rename-tmux-window braid
+      ;;
+    dotfiles|d)
+      cd ~/dotfiles && rename-tmux-window dotfiles
+      ;;
+    *)
+      if [[ -d ~/code/$1 ]]; then
+        cd ~/code/$1 && rename-tmux-window "$1"
+      else
+        echo >&2 "Unknown repo: ${1@Q}"
+        return 1
+      fi
+  esac
+}
+
 git_prompt_path=/usr/share/git/git-prompt.sh
 if [[ -e /etc/fedora-release ]]; then
   git_prompt_path=/usr/share/git-core/contrib/completion/git-prompt.sh
@@ -420,3 +438,19 @@ shortprompt() {
   PS1=$SHORTPS1
   unset LESS_LINES
 }
+
+if [[ $USER == pylon ]]; then
+  source /home/pylon/.bashrc.d/800-pg-utils
+  source /home/pylon/.bashrc.d/github-user.sh
+  export EDITOR=hx
+  export HELIX_RUNTIME=~/.local/share/helix/runtime
+  LESS='-SR -#.1 -x4 --ignore-case --mouse --quit-if-one-screen --no-init'
+  PATH=/home/pylon/.local/bin:/workspace/braid/tools/bin:$PATH
+  if [[ $PYLON_ENV ]]; then
+    export NX_PUBLIC_PYLON_ENV=$PYLON_ENV
+  fi
+
+  alias pc=process-compose
+  alias sso='aws sso login --use-device-code --no-browser'
+  alias tail-logs='less -RS +F ~/process-compose.log'
+fi
