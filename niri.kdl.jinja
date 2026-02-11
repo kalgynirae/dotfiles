@@ -105,6 +105,7 @@ spawn-at-startup "systemctl" "--user" "start" "kdeconnect-indicator.service"
 spawn-at-startup "systemctl" "--user" "start" "mako.service"
 spawn-at-startup "systemctl" "--user" "start" "polkit-gnome.service"
 spawn-at-startup "systemctl" "--user" "start" "swayidle.service"
+spawn-at-startup "systemctl" "--user" "start" "swayosd.service"
 spawn-at-startup "systemctl" "--user" "start" "swww.service"
 spawn-at-startup "systemctl" "--user" "start" "waybar.service"
 spawn-at-startup "systemctl" "--user" "start" "xwayland-satellite.service"
@@ -219,12 +220,12 @@ binds {
 
     Mod+C hotkey-overlay-title="Dismiss notification" { spawn "makoctl" "dismiss"; }
     Mod+Shift+C hotkey-overlay-title="Restore notification" { spawn "makoctl" "restore"; }
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+" "--limit" "1.5"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
-    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-    XF86MonBrightnessUp allow-when-locked=true { spawn "light" "-A" "10"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "light" "-U" "10"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "+5" "--max-volume" "130"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "-5" "--max-volume" "130"; }
+    XF86AudioMute        allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "swayosd-client" "--brightness" "+10"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "swayosd-client" "--brightness" "-10"; }
     XF86Launch6 { spawn "microphone" "toggle"; }
 }
 
