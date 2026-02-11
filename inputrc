@@ -14,8 +14,9 @@ set vi-cmd-mode-string "\1\e[2 q\2"
 set vi-ins-mode-string "\1\e[6 q\2"
 
 set keymap emacs
-"\C-n":history-search-forward
-"\C-p":history-search-backward
-"\C-]":old-menu-complete
+"\C-H": backward-kill-word
+"\C-n": history-search-forward
+"\C-p": history-search-backward
+"\C-]": old-menu-complete
 
 set editing-mode emacs
