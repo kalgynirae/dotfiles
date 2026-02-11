@@ -12,3 +12,6 @@ pager = "less"
 "diff token" = { underline = false }
 "diff removed" = { fg = "red" }
 "line_number" = { fg = "black" }
+
+[remotes.origin]
+auto-track-bookmarks = "colin/*"
