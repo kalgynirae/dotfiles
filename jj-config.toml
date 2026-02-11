@@ -15,3 +15,6 @@ pager = "less"
 
 [remotes.origin]
 auto-track-bookmarks = "colin/*"
+
+[templates]
+file_annotate = "join(' ', commit.commit_id().short(8), pad_start(12, truncate_end(12, commit.author().timestamp().ago())), pad_start(9, truncate_end(9, commit.author().name())), pad_start(3, line_number), content)"
