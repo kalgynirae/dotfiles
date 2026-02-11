@@ -10,4 +10,5 @@ pager = "less"
 [colors]
 "diff added" = { fg = "green" }
 "diff token" = { underline = false }
-"diff remoed" = { fg = "red" }
+"diff removed" = { fg = "red" }
+"line_number" = { fg = "black" }
