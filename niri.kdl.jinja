@@ -63,9 +63,9 @@ layout {
     }
     shadow {
         on
-        softness 32
-        spread 12
-        offset x=0 y=4
+        softness {{ window_gap }}
+        spread {{ window_gap // 3 }}
+        offset x=0 y={{ window_gap // 6 }}
         color "#000000ff"
     }
     struts {
