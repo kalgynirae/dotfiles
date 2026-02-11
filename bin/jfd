@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+read -rd '' JIFFYDIFFY <<JIFFYDIFFY
+_______________________________________________________________________
+______  /__(_)__  __/__  __/____  ____  __ \__(_)__  __/__  __/____  __
+___ _  /__  /__  /_ __  /_ __  / / /_  / / /_  /__  /_ __  /_ __  / / /
+/ /_/ / _  / _  __/ _  __/ _  /_/ /_  /_/ /_  / _  __/ _  __/ _  /_/ /_
+\____/  /_/  /_/    /_/    _\__, / /_____/ /_/  /_/    /_/    _\__, /__
+__________________________ /____/____________________________ /____/___
+
+         ~~~~~~~~ We'll have your diff up in a jiffy! ~~~~~~~~
+JIFFYDIFFY
+echo >&2 "$JIFFYDIFFY"
+
+if ! bookmarks=($(jj log -r main@origin..@ --no-graph --reversed -T 'self.local_bookmarks().map(|b| b.name()) ++ "\n"')); then
+  echo >&2 "$0: 'jj log' failed; aborting"
+  exit 1
+fi
+
+for (( i = ${#bookmarks[@]} - 1; i >= 0; i-- )); do
+  if ! gt untrack "${bookmarks[i]}" --force; then
+    echo >&2 "$0: 'gt untrack' failed; aborting"
+    exit 1
+  fi
+done
+
+# TODO: Figure out the correct base for the stack instead of assuming main.
+# It might be someone else's PR. Might make sense to find the first non-tracked
+# remote bookmark?
+previous=main
+for b in "${bookmarks[@]}"; do
+  if ! gt track "$b" --parent "$previous"; then
+    echo >&2 "$0: 'gt track' failed; aborting"
+    exit 1
+  fi
+  previous=$b
+done
+
+if ! gt submit --draft --no-edit --branch "${bookmarks[-1]}" --force; then
+  echo >&2 "$0: 'gt submit' failed"
+  exit 1
+fi
