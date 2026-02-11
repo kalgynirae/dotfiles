@@ -5,6 +5,7 @@ email = "colin+git@lumeh.org"
 [ui]
 default-command = "log"
 diff-formatter = ":git"
+pager = "less"
 
 [colors]
 "diff added" = { fg = "green" }
