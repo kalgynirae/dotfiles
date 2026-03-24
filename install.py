@@ -62,7 +62,7 @@ configs: dict[str, Output] = {
     ),
     ".config/hypr/hyprland.conf": render("hyprland.conf.jinja"),
     ".config/imv/config": symlink_to("imv"),
-    ".config/jj/config.toml": symlink_to("jj-config.toml"),
+    ".config/jj/config.toml": render("jj-config.toml.jinja"),
     ".config/kitty/kitty.conf": render("kitty.conf.jinja"),
     ".config/mako/config": symlink_to("mako"),
     ".config/mpv/mpv.conf": symlink_to("mpv.conf"),
