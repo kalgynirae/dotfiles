@@ -38,8 +38,30 @@ bookmark-advance-to = "@-"
 log-graph-prioritize = "trunk()"
 
 [templates]
+draft_commit_description = '''
+if(description,
+  builtin_draft_commit_description_with_diff,
+  concat(commit_message_template, builtin_draft_commit_description_with_diff),
+)
+'''
 file_annotate = "join(' ', commit.commit_id().short(8), pad_start(12, truncate_end(12, commit.author().timestamp().ago())), pad_start(9, truncate_end(9, commit.author().name())), pad_start(3, line_number), content)"
 git_push_bookmark = '"colin/push-" ++ change_id.short()'
 
 [template-aliases]
 "format_short_signature(signature)" = "signature.name()"
+"commit_message_template" = """'(no title)
+
+## Overview
+
+
+
+## Customer visible changes
+
+N/A
+
+## How did you test these changes?
+
+- [ ]  The changes are fully covered by automated tests.
+- [ ]  The changes cannot affect production.
+- [ ]  I will manually test this functionality on every release until automated (<my playbook>).'
+"""
