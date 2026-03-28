@@ -106,13 +106,13 @@ gestures {
 prefer-no-csd
 screenshot-path "~/pictures/screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
+spawn-at-startup "systemctl" "--user" "start" "awww.service"
 spawn-at-startup "systemctl" "--user" "start" "gammastep.service"
 spawn-at-startup "systemctl" "--user" "start" "kdeconnect-indicator.service"
 spawn-at-startup "systemctl" "--user" "start" "mako.service"
 spawn-at-startup "systemctl" "--user" "start" "polkit-gnome.service"
 spawn-at-startup "systemctl" "--user" "start" "swayidle.service"
 spawn-at-startup "systemctl" "--user" "start" "swayosd.service"
-spawn-at-startup "systemctl" "--user" "start" "swww.service"
 spawn-at-startup "systemctl" "--user" "start" "waybar.service"
 spawn-at-startup "systemctl" "--user" "start" "xwayland-satellite.service"
 
