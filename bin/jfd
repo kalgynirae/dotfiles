@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if ! repo_root=$(jj root); then
+  echo >&2 "Failed to get repository root. Is this a jj repo?"
+  exit 1
+fi
+
 read -rd '' JIFFYDIFFY <<JIFFYDIFFY
 _______________________________________________________________________
 ______  /__(_)__  __/__  __/____  ____  __ \__(_)__  __/__  __/____  __
