@@ -23,6 +23,7 @@ bottom = ["new", "bottom"]
 auto-track-bookmarks = "colin/*"
 
 [revset-aliases]
+"immutable_heads()" = "builtin_immutable_heads() ~ (bookmarks() & remote_bookmarks(graphite-base/*))"
 tip = "latest(visible())"
 
 # Stack navigation
@@ -35,7 +36,7 @@ bottom = "exactly(roots(::current ~ immutable()) ~ empty() & visible(), 1)"
 
 [revsets]
 bookmark-advance-to = "@-"
-log-graph-prioritize = "trunk()"
+log-graph-prioritize = "coalesce(latest(heads(descendants(trunk()..@)) ~ empty()), trunk())"
 
 [templates]
 draft_commit_description = '''
