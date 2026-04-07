@@ -27,15 +27,18 @@ tip = "latest(visible())"
 
 # Stack navigation
 current = "coalesce((@ & empty() & heads(@::))-, @)"
-top = "exactly(heads(current::) ~ empty() & visible(), 1)"
-bottom = "exactly(roots(::current ~ immutable()) ~ empty() & visible(), 1)"
+tops = "heads(current:: ~ empty() & visible())"
+top = "exactly(tops, 1)"
+bottoms = "roots(::current & mutable() & visible())"
+bottom = "exactly(bottoms, 1)"
+stack = "bottom::top"
 
 # Allow changes with graphite-base/* bookmarks to remain mutable
 "immutable_heads()" = "builtin_immutable_heads() ~ (bookmarks() & remote_bookmarks(graphite-base/*))"
 
 [revsets]
 bookmark-advance-to = "@-"
-log-graph-prioritize = "trunk()"
+log-graph-prioritize = "coalesce(tops, trunk())"
 
 [templates]
 file_annotate = "join(' ', commit.commit_id().short(8), pad_start(12, truncate_end(12, commit.author().timestamp().ago())), pad_start(9, truncate_end(9, commit.author().name())), pad_start(3, line_number), content)"
