@@ -91,6 +91,7 @@ configs: dict[str, Output] = {
     ".inputrc": symlink_to("inputrc"),
     ".ipython/profile_default/ipython_config.py": symlink_to("ipython_config.py"),
     ".local/share/icons/default/index.theme": render("index.theme.jinja"),
+    ".npmrc": symlink_to("npmrc"),
     ".profile": symlink_to("profile"),
     ".pythonrc": symlink_to("pythonrc"),
     ".tmux.conf": symlink_to("tmux.conf"),
