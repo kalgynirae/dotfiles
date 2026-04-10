@@ -1,0 +1,18 @@
+#!/bin/bash
+# usage: <SCRIPT> [LIMIT]
+#
+# Arguments:
+#   [LIMIT]     number of commits to show (default: 20)
+
+usage() {
+  awk <"$0" -v script="$0" '/$^/{exit}; NR==2,0{gsub(/<SCRIPT>/, script); print substr($0, 3)}'
+}
+
+if [[ " $* " == " --help " ]]; then
+  usage
+  exit
+fi
+
+# TODO: Find a reasonable way to limit the colored output to the screen size
+# (instead of requiring a manually-set commit limit).
+watchexec --ignore-nothing --watch .jj/repo/op_heads/heads --clear -o queue --shell none -- jj --ignore-working-copy --no-pager log -n "${1:-20}"
