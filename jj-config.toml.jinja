@@ -9,6 +9,8 @@ pager = "less"
 [aliases]
 dup = ["duplicate"]
 fetch = ["git", "fetch"]
+top = ["new", "top"]
+bottom = ["new", "bottom"]
 
 [colors]
 "diff color_words added" = { fg = "#{{ dark_green_bright }}", bg = "#{{ dark_green_bg }}" }
@@ -22,7 +24,14 @@ auto-track-bookmarks = "colin/*"
 
 [revset-aliases]
 tip = "latest(visible())"
-top = "exactly(heads(@::) & visible(), 1)"
+
+# Stack navigation
+current = "coalesce((@ & empty() & heads(@::))-, @)"
+top = "exactly(heads(current::) ~ empty() & visible(), 1)"
+bottom = "exactly(roots(::current ~ immutable()) ~ empty() & visible(), 1)"
+
+# Allow changes with graphite-base/* bookmarks to remain mutable
+"immutable_heads()" = "builtin_immutable_heads() ~ (bookmarks() & remote_bookmarks(graphite-base/*))"
 
 [revsets]
 bookmark-advance-to = "@-"
