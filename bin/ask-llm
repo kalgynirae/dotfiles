@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+usage() {
+  echo "usage: $(basename "$0") QUERY"
+}
+
+log() {
+  printf >&2 '\e[2m%s\e[0m\n' "$*"
+}
+
+model=qwen3-32b
+model_id=qwen.qwen3-32b-v1:0
+query=
+quiet=
+while (( $# )); do
+  case "$1" in
+    -q)
+      quiet=yes
+      ;;
+    --help)
+      usage
+      exit 0
+      ;;
+    *)
+      if [[ $query ]]; then
+        usage >&2
+        exit 1
+      else
+        query=$1
+      fi
+  esac
+  shift
+done
+
+messages=$(jq -n --arg query "$query" '[{role: "user", content: [{text: $query}]}]')
+
+if ! output=$(aws bedrock-runtime converse --model-id "$model_id" --messages "$messages"); then
+  echo "aws bedrock-runtime failed"
+  exit 1
+fi
+
+if [[ ! $quiet ]]; then
+  usage=$(jq -r --arg model "$model" <<<"$output" '.usage | "model:\($model) in:\(.inputTokens) out:\(.outputTokens)"')
+  log "$usage"
+fi
+
+jq -r <<<"$output" '.output.message.content[].text'
