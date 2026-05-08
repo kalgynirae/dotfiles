@@ -1,5 +1,16 @@
 #!/bin/bash
 
+if [[ $1 == --conflicts ]]; then
+  shift
+  if (( $# > 0 )); then
+    args=("$@")
+  else
+    args=(-r @-)
+  fi
+  jj log --no-graph -T'conflicted_files.map(|f| f.path()).join("\0") ++ "\0"' "${args[@]}" | xargs -0 e
+  exit
+fi
+
 if [[ $NVIM_LISTEN_ADDRESS ]]; then
   exec nvr --nostart -O "$@"
 else
