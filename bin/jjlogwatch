@@ -13,6 +13,15 @@ if [[ " $* " == " --help " ]]; then
   exit
 fi
 
+if ! jj_root=$(jj workspace root); then
+  echo >&2 "$0: 'jj workspace root' failed (is this a jj repo?)"
+  exit 1
+fi
+jj_repo_path=$jj_root/.jj/repo
+if [[ -f $jj_repo_path ]]; then
+  jj_repo_path=$(dirname "$jj_repo_path")/$(<"$jj_repo_path")
+fi
+
 # TODO: Find a reasonable way to limit the colored output to the screen size
 # (instead of requiring a manually-set commit limit).
-watchexec --ignore-nothing --watch .jj/repo/op_heads/heads --clear -o queue --shell none -- jj --ignore-working-copy --no-pager log -n "${1:-20}"
+watchexec --ignore-nothing --watch "$jj_repo_path"/op_heads/heads --clear -o queue --shell none -- jj --ignore-working-copy --no-pager log -n "${1:-20}"
