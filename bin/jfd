@@ -17,10 +17,54 @@ __________________________ /____/____________________________ /____/___
 JIFFYDIFFY
 echo >&2 "$JIFFYDIFFY"
 
-if ! bookmarks=($(jj log -r main@origin..@ --no-graph --reversed -T 'self.local_bookmarks().map(|b| b.name()) ++ "\n"')); then
-  echo >&2 "$0: 'jj log' failed; aborting"
+add-bookmark() {
+  local change=$1
+  local message=$(jj log -r "$change" --no-graph -T 'description.first_line()' | sed 's/\[[^]]*\]//g')
+  if ! name=$(ask-llm -q "Respond with a short (hyphen-separated, fewer than 12 characters) branch name based on this commit message: $message"); then
+    echo >&2 "ask-llm failed"
+    return 1
+  fi
+  local bookmark=$bookmark_prefix/$name
+  if ! jj bookmark create -r "$change" "$bookmark"; then
+    echo >&2 "Failed to create bookmark $bookmark at change $change"
+    return 1
+  fi
+  echo "$bookmark"
+}
+
+auto_track_pattern=$(jj config get remotes.origin.auto-track-bookmarks)
+if [[ $auto_track_pattern != *"/*" ]]; then
+  echo >&2 "$0: Unsupported auto-track-bookmarks setting: $auto_track_pattern"
   exit 1
 fi
+bookmark_prefix=${auto_track_pattern%/\*}
+
+if ! changes=($(jj log -r stack --no-graph --reversed -T 'change_id ++ "\n"')); then
+  echo >&2 "$0: Failed to list the current stack"
+  exit 1
+fi
+
+bookmarks=()
+for change in "${changes[@]}"; do
+  if ! change_bookmarks=($(jj log -r "$change" --no-graph -T 'local_bookmarks.map(|b| b.name())')); then
+    echo >&2 "$0: Failed to list bookmarks for change $change"
+    exit 1
+  fi
+  bookmark=
+  for cb in ${change_bookmarks[@]}; do
+    if [[ $cb == $auto_track_pattern ]]; then
+      bookmark=$cb
+      break
+    fi
+  done
+  if [[ ! $bookmark ]]; then
+    if ! bookmark=$(add-bookmark "$change"); then
+      echo >&2 "$0: Failed to add a bookmark to change $change"
+      exit 1
+    fi
+  fi
+  bookmarks+=("$bookmark")
+done
 
 for (( i = ${#bookmarks[@]} - 1; i >= 0; i-- )); do
   if ! gt untrack "${bookmarks[i]}" --force; then
