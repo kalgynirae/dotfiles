@@ -5,8 +5,7 @@ Edits should always be made in a new change first, and then squashed once they a
 - `jj squash` to squash into the parent revision
 
 Custom revsets:
-- `stack` represents all the commits in the current stack (works even when the
-  current commit is an empty child created by `jj new`)
+- `stack` represents all the commits in the current stack (works even when the current commit is an empty child created by `jj new`)
 
 Other key commands:
 - `jj squash --from <rev> --into <rev> -- <paths>` to move whole files between commits
@@ -19,3 +18,7 @@ Other key commands:
 Rebasing and conflicts:
 - jj automatically rebases descendants when editing earlier commits. Expect cascading conflicts after modifying earlier commits, and resolve them working down the stack.
 - Use `jj new <rev>` and `jj squash` when resolving conflicts.
+
+Things to avoid:
+- Avoid `jj absorb` -- in a complex stack, it's likely to lose changes or put things into the wrong commits.
+- Avoid `jj edit` -- always prefer `jj new` followed by `jj squash` (once you're confident)
