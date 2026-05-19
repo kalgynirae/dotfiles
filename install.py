@@ -42,7 +42,8 @@ configs: dict[str, Output] = {
     ".bash_profile": symlink_to("bash_profile"),
     ".bashrc": symlink_to("bashrc"),
     ".claude/CLAUDE.md": symlink_to("claude/CLAUDE.md"),
-    ".claude/jj_workflow.md": symlink_to("claude/jj_workflow.md"),
+    ".claude/code-comments.md": symlink_to("claude/code-comments.md"),
+    ".claude/jj-workflow.md": symlink_to("claude/jj-workflow.md"),
     ".claude/skills/handle-pr-feedback/SKILL.md": symlink_to(
         "claude/handle-pr-feedback.md"
     ),
