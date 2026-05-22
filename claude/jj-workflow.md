@@ -2,6 +2,7 @@ Use `jj` instead of `git` or `gt` for all version control operations. User maint
 
 Edits should always be made in a new commit first, and then squashed once they are finalized:
 - `jj new <id>` to open a new commit beneath an existing one
+- make the changes
 - `jj squash --into <id>` to squash into the existing commit
 
 Custom revsets:
@@ -17,8 +18,8 @@ Other key commands:
 
 Rebasing and conflicts:
 - jj automatically rebases descendants when editing earlier commits. Expect cascading conflicts after modifying earlier commits, and resolve them working down the stack.
-- Use `jj new <id>` and `jj squash --into <id>` when resolving conflicts.
+- Use the `new`, ..., `squash` sequence when resolving conflicts.
 
 Things to avoid:
 - Avoid `jj absorb` -- in a complex stack, it's likely to lose changes or put things into the wrong commits.
-- Avoid `jj edit <id>` -- always prefer `jj new <id>` followed by `jj squash --into <id>`.
+- Avoid `jj edit <id>` -- always prefer to open a new commit (`jj new <id>`) first.
