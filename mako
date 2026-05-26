@@ -1,4 +1,5 @@
 max-history=20
+sort=+time
 
 anchor=top-right
 outer-margin=8
