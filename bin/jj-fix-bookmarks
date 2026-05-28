@@ -1,6 +1,26 @@
 #!/usr/bin/env bash
+# usage: <SCRIPT> REVSET
+#
+# Resolve all conflicted local bookmarks to their commits in REVSET.
+#
+# Known issues:
+#   * Fails if any commit in the set has more than one local bookmark.
 
-if ! input=$(jj log -r stack --no-graph -T 'change_id.short() ++ " " ++ coalesce(local_bookmarks.map(|b| b.name()), "NONE") ++ "\n"'); then
+usage() {
+  awk <"$0" -v script="$0" '/$^/{exit}; NR==2,0{gsub(/<SCRIPT>/, script); print substr($0, 3)}'
+}
+
+if (( $# != 1 )); then
+  usage >&2
+  exit 1
+elif [[ $1 == --help ]]; then
+  usage
+  exit 0
+fi
+
+revset=$1
+
+if ! input=$(jj log -r "$revset" --no-graph -T 'change_id.short() ++ " " ++ coalesce(local_bookmarks.map(|b| b.name()), "NONE") ++ "\n"'); then
   echo >&2 "jj log failed"
   exit 1
 fi
