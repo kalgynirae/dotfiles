@@ -85,3 +85,6 @@ if ! gt submit --draft --no-edit --branch "${bookmarks[-1]}" --force; then
   echo >&2 "$0: 'gt submit' failed"
   exit 1
 fi
+
+# Update jj state after the gt-submit
+jj util snapshot
