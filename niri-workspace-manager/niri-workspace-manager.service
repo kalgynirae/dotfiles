@@ -1,0 +1,12 @@
+[Unit]
+Requisite=niri.service
+After=niri.service
+PartOf=niri.service
+
+[Service]
+Type=exec
+ExecStart=zig run %h/dotfiles/niri-workspace-manager/main.zig
+TimeoutStopSec=2s
+
+[Install]
+WantedBy=niri.service
