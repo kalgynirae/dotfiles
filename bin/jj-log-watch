@@ -1,8 +1,8 @@
 #!/bin/bash
-# usage: <SCRIPT> [LIMIT]
+# usage: <SCRIPT> [ARGS...]
 #
 # Arguments:
-#   [LIMIT]     number of commits to show (default: 20)
+#   [ARGS...]    args to pass to 'jj log' (default: -r bottoms-::tops)
 
 usage() {
   awk <"$0" -v script="$0" '/$^/{exit}; NR==2,0{gsub(/<SCRIPT>/, script); print substr($0, 3)}'
@@ -22,6 +22,10 @@ if [[ -f $jj_repo_path ]]; then
   jj_repo_path=$(dirname "$jj_repo_path")/$(<"$jj_repo_path")
 fi
 
-# TODO: Find a reasonable way to limit the colored output to the screen size
-# (instead of requiring a manually-set commit limit).
-watchexec --ignore-nothing --watch "$jj_repo_path"/op_heads/heads --clear -o queue --shell none -- jj --ignore-working-copy --no-pager log -n "${1:-20}"
+if (( $# == 0 )); then
+  logargs=(-r bottoms-::tops)
+else
+  logargs=("$@")
+fi
+
+watchexec --ignore-nothing --watch "$jj_repo_path"/op_heads/heads --clear -o queue --shell none -- jj --ignore-working-copy --no-pager log "${logargs[@]}"
