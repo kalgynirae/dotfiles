@@ -24,9 +24,8 @@ Starting at the root commit of the revset, do the following:
 
 3. Choose an action for each comment (and record it in the ledger):
 - `fix`: change code/tests/docs, summarize what was changed.
-- `ignore`: explain why no change is needed.
-- `stale`: (needs no further explanation — used when the comment is stale or already marked as resolved)
-- `resolved-elsewhere`: point to a different commit or comment where the issue is already resolved.
+- `comment`: leave a comment explaining why the review comment doesn't need to be addressed or pointing to a different commit where the issue is resolved.
+- `ignore`: do nothing (e.g. because the comment is stale or marked as resolved).
 
 4. Implement fixes holistically:
 - Apply fixes by concern area, not comment order, to avoid conflicting patches.
