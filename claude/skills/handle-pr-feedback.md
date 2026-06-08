@@ -37,7 +37,11 @@ Starting at the root commit of the revset, do the following:
 - If code changes were made, use `$verify-changes` for tests, lint, typechecks, and build steps.
 - If no code changes are needed, validate by tracing the exact code path and checking current behavior against reviewer intent.
 
-6. Final pass:
+6. Mark comments resolved:
+- For each comment that was resolved by making a code change, mark the comment resolved (no need to leave a reply).
+- For each comment that was resolved by replying to it, mark the comment resolved.
+
+7. Final pass:
 - Confirm every ledger row is `addressed`.
 - If code changes were made, confirm `$verify-changes` succeeded or clearly report any blocker.
 
