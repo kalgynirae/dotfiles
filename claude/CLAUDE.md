@@ -4,11 +4,10 @@
 
 # Code comments
 - Comments describe the final code's intent, not the decisions/changes that produced it.
-- Always review @code-comments.md before writing code.
+- Review @code-comments.md before writing code.
 
-# Writing comments/PRs/tickets via the user's accounts
-- Always identify yourself as Claude when writing things that will appear with the user's identity (e.g. GitHub, Linear, Slack):
-    - PR titles: Put "[claude]" after the ticket number and any other tags (`[SG-1][claude] ...`)
-    - PR comments: Start the comment with "[claude]:"
-    - Linear tickets: Start the description with "[claude]:"
-    - Linear comments: Start the comment with "[claude]:"
+# PR descriptions
+- Review @pr-descriptions.md before writing PR descriptions.
+
+# Writing comments/PRs/tickets as Claude via the user's accounts
+- Review @writing-as-claude.md before writing any text that will appear with the user's identity (e.g. GitHub, Linear, Slack).

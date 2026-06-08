@@ -44,9 +44,13 @@ configs: dict[str, Output] = {
     ".claude/CLAUDE.md": symlink_to("claude/CLAUDE.md"),
     ".claude/code-comments.md": symlink_to("claude/code-comments.md"),
     ".claude/jj-workflow.md": symlink_to("claude/jj-workflow.md"),
-    ".claude/skills/babysit-stack/SKILL.md": symlink_to("claude/babysit-stack.md"),
+    ".claude/pr-descriptions.md": symlink_to("claude/pr-descriptions.md"),
+    ".claude/writing-as-claude.md": symlink_to("claude/writing-as-claude.md"),
+    ".claude/skills/babysit-stack/SKILL.md": symlink_to(
+        "claude/skills/babysit-stack.md"
+    ),
     ".claude/skills/handle-pr-feedback/SKILL.md": symlink_to(
-        "claude/handle-pr-feedback.md"
+        "claude/skills/handle-pr-feedback.md"
     ),
     ".config/alacritty/alacritty.toml": render("alacritty.toml.jinja"),
     ".config/electron-flags.conf": symlink_to("electron-flags.conf"),
