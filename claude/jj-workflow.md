@@ -26,7 +26,7 @@ Things to avoid:
 Edits should always be made in a new commit, and then squashed once they are finalized:
 - `jj new <id>` to open a new child of an existing commit
 - make the changes
-- `jj squash --into <id>` to squash into the existing commit
+- `jj squash --into <id> --use-destination-message` to squash into the existing commit
 
 If the intent is to *add* a new commit rather than edit an existing one:
 - use `jj new <id>` where <id> is the top commit of the stack
