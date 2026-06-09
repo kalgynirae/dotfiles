@@ -4,21 +4,13 @@ if __name__ != "__main__":
     raise RuntimeError("You accidentally imported install.py somehow")
 
 import os
-import shlex
-import socket
 import subprocess
-import sys
-from argparse import ArgumentParser, Namespace
-from dataclasses import asdict, dataclass
-from enum import Enum, auto
-from os import PathLike
+from argparse import ArgumentParser
 from pathlib import Path
-from textwrap import dedent
-from typing import Mapping, cast
 
 from installer.actions import Output, gsettings_set, render, run, symlink_to
-from installer.environment import Host, OS, Environment, Theme, environment
-from installer.logging import Result, log, log_diff, log_dry, log_error, step
+from installer.environment import OS, Environment, Host, Theme, environment
+from installer.logging import Result, step
 
 parser = ArgumentParser()
 parser.add_argument("--dry-run", action="store_true")
