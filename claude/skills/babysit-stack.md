@@ -23,6 +23,6 @@ In a loop, do the following:
 
 5. If any changes were made in the earlier steps, push the changes using `jfd`.
 
-6. Compare each local commit message with the corresponding PR's title & description. If any information has been added to the commit message, see if it should be in the PR's description (following the pr-description guidance) — if so, add it there. Then, reconcile the PR's title with the commit's summary line. Finally, reduce the commit message to the summary line only (the PR description is the source of truth).
+6. Compare each local commit message with the corresponding PR's title & description. If any information has been added to the commit message, see if it should be in the PR's description (following the pr-description guidance) — if so, add it there. Then, reconcile the PR's title with the commit's summary line. Finally, reduce the commit message to the summary line only — this makes it clear that PR description is the source of truth — plus the PR number in parentheses "(#12345)".
 
 7. Exit when: no new unhandled review comments, and the `lint` and `test-optimized` jobs are showing SUCCESS on all the PRs.

@@ -18,7 +18,7 @@ Starting at the root commit of the revset, do the following:
 2. Build a comment ledger with: `change_id`, `branch`, `pr_number`, `comment_url`, `author`, `file_line`, `summary`, `action_type`, `status`, and `notes`. Give this a heading with the commit's change ID and branch name, and append it to the file: `<repo>/scratch/handle-pr-feedback-<session>.md`.
 
 3. Build context:
-- Read nearby code and com and make the changes there.
+- Read nearby code and comments.
 - Read surrounding commits in the stack and note where each concern is most logically fixed.
 - Group comments that describe the same root issue and resolve them together.
 
@@ -47,5 +47,4 @@ Starting at the root commit of the revset, do the following:
 
 ## Output
 
-- Return a list of comments and corresponding action taken (either summary of changes or explanation of why nothing was changed).
-- Treat success as: every reviewer comment receives either a verified fix or a clear, evidence-backed response, and all changed files pass validation.
+- Return a concise summary of the actions taken and point to the ledger file for details.

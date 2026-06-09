@@ -5,7 +5,8 @@
   },
   "permissions": {
     "allow": [
-      "Bash(gh *)""
+      "Bash(gh *)",
+      "Fetch(*)"
     ],
     "deny": [
       "Bash(gt *)"
