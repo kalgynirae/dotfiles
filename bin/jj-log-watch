@@ -2,7 +2,7 @@
 # usage: <SCRIPT> [ARGS...]
 #
 # Arguments:
-#   [ARGS...]    args to pass to 'jj log' (default: -r bottoms-::tops)
+#   [ARGS...]    args to pass to 'jj log' (default: -r stack_context)
 
 usage() {
   awk <"$0" -v script="$0" '/$^/{exit}; NR==2,0{gsub(/<SCRIPT>/, script); print substr($0, 3)}'
@@ -23,7 +23,7 @@ if [[ -f $jj_repo_path ]]; then
 fi
 
 if (( $# == 0 )); then
-  logargs=(-r bottoms-::tops)
+  logargs=(-r stack_context)
 else
   logargs=("$@")
 fi

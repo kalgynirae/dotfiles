@@ -34,9 +34,10 @@ top = "exactly(tops, 1)"
 bottoms = "roots(::current & mutable() & visible())"
 bottom = "exactly(bottoms, 1)"
 stack = "bottom::top"
+stack_context = "bottoms-::heads(current:: & visible())"
 
-# Allow changes with graphite-base/* bookmarks to remain mutable
-"immutable_heads()" = "builtin_immutable_heads() ~ (bookmarks() & remote_bookmarks(graphite-base/*))"
+# Allow changes with graphite bookmarks to remain mutable
+"immutable_heads()" = "builtin_immutable_heads() ~ (bookmarks() & (remote_bookmarks(graphite-base/*) | remote_bookmarks(gtmq_*)))"
 
 [revsets]
 bookmark-advance-to = "@-"
