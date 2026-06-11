@@ -85,6 +85,9 @@ configs: dict[str, Output] = {
     ".config/waybar/config": render("waybar.jinja"),
     ".config/waybar/style.css": render("waybar.css.jinja"),
     ".config/wezterm/wezterm.lua": render("wezterm.lua.jinja"),
+    ".config/wireplumber/wireplumber.conf.d/51-device-renames.conf": symlink_to(
+        "wireplumber/51-device-renames.conf"
+    ),
     ".config/wireplumber/wireplumber.conf.d/51-focusrite-scarlett-solo-fix.conf": symlink_to(
         "wireplumber/51-focusrite-scarlett-solo-fix.conf"
     ),
