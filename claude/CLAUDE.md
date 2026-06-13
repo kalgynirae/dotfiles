@@ -11,3 +11,8 @@
 
 # Writing comments/PRs/tickets as Claude via the user's accounts
 - Review @writing-as-claude.md before writing any text that will appear with the user's identity (e.g. GitHub, Linear, Slack).
+
+# Coding guidelines
+
+## Bash / shell scripts
+- Review @coding-guidelines/bash.md before writing any standalone Bash or shell scripts.
