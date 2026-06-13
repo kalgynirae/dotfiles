@@ -9,3 +9,7 @@ Don't reference any of these in a comment:
 Litmus test: would this comment read as natural rationale to someone who has never seen the PR, commit history, or review thread? If not, rewrite or delete it.
 
 This applies to all comments — new code, code added in response to review, refactors, anything. The temptation is highest when addressing review feedback: the change is fresh, the reasoning is loaded, and it's tempting to leave a paper trail in the source. Don't.
+
+Comments should also be concise. Edit them aggressively to remove unnecessary explanations and details that can be easily determined by reading the code itself.
+
+If a comment clarifies the meaning of a name in the code (a variable, function, parameter, etc.), then, if possible, that name should be changed to be clear enough to eliminate the need for the comment.

@@ -32,10 +32,10 @@ If the intent is to *add* a new commit rather than edit an existing one:
 - use `jj new <id>` where <id> is the top commit of the stack
 - or use `jj new --insert-before <id>` or `jj new --insert-after <id>` to insert a new commit mid-stack
 
-Be sure to give new commits a description. Make sure that bookmarks stay attached to their original commits.
+When squashing or splitting, make sure that bookmarks stay attached to their original commits (because bookmarks map to PRs).
 
 ## Pushing changes to GitHub/Graphite
 
-Verify stack first: Before pushing changes, always verify that there are no lingering temporary commits in the stack. New commits that were intentionally introduced (intended to become new PRs) are okay. If there are lingering temporary commits, **do not push** to GitHub; either resolve or get help from the user.
+Verify the stack first: Before pushing changes, always verify that there are no lingering temporary commits included in the `stack` revset. New commits that were intentionally introduced (intended to become new PRs) are fine. If there are lingering temporary commits, **do not push**; either resolve or get help from the user.
 
-After verifying the stack, run `jfd` to push to GitHub. This submits the whole stack as a 1:1 mapping of PRs to commits.
+After verifying the stack, run `jfd` to push to GitHub/Graphite. This submits all commits in the `stack` revset as a 1:1 mapping of PRs to commits.
