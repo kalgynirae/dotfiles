@@ -81,9 +81,7 @@ def log_dry(stepname: str) -> None:
 INDENT = " " * 10
 
 
-def log_diff(
-    existing: str, existing_path: str, rendered: str, rendered_path: str
-) -> None:
+def log_diff(existing: str, existing_path: str, rendered: str, rendered_path: str) -> None:
     difflines = unified_diff(
         existing.splitlines(),
         rendered.splitlines(),

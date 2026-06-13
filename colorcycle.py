@@ -10,13 +10,14 @@ import tempfile
 import time
 
 FPS = 10
-DURATION = 1. / FPS
+DURATION = 1.0 / FPS
 MIN_SLEEP = DURATION / 2
+
 
 def main():
     colors1 = colorcycle()
     colors2 = itertools.islice(colorcycle(), 10, None)
-    #degrees = itertools.cycle(range(0, 360, 2))
+    # degrees = itertools.cycle(range(0, 360, 2))
     while True:
         start = time.monotonic()
         args = [

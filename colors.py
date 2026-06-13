@@ -100,9 +100,7 @@ class Color:
         self.h = float(h) if self.c > 0 else 0.0  # degrees
 
     def __eq__(self, other: Color) -> bool:
-        return all(
-            starmap(isclose, zip((self.l, self.c, self.h), (other.l, other.c, other.h)))
-        )
+        return all(starmap(isclose, zip((self.l, self.c, self.h), (other.l, other.c, other.h))))
 
     def __repr__(self) -> str:
         return f"{type(self).__name__}(l={self.l}, c={self.c}, h={self.h})"
@@ -124,9 +122,7 @@ class Color:
         r, g, b = (i / 255 for i in parse_hex(hex))
         return cls.from_rgb(r, g, b)
 
-    def set(
-        self, l: float | None = None, c: float | None = None, h: float | None = None
-    ) -> Color:
+    def set(self, l: float | None = None, c: float | None = None, h: float | None = None) -> Color:
         return type(self)(
             l=self.l if l is None else max(l, 0.0),
             c=self.c if c is None else max(c, 0.0),
@@ -134,17 +130,10 @@ class Color:
         )
 
     def adjust(self, l: float = 0, c: float = 0, h: float = 0) -> Color:
-        return self.set(
-            l=self.l + l, c=(self.c + c if self.c > 0 else 0.0), h=self.h + h
-        )
+        return self.set(l=self.l + l, c=(self.c + c if self.c > 0 else 0.0), h=self.h + h)
 
     def interpolate(self, other: Color, amount: float) -> Color:
-        return Color.from_lab(
-            *(
-                (1 - amount) * s + amount * o
-                for s, o in zip(self.as_lab(), other.as_lab())
-            )
-        )
+        return Color.from_lab(*((1 - amount) * s + amount * o for s, o in zip(self.as_lab(), other.as_lab())))
 
     def as_lab(self) -> tuple[float, float, float]:
         L = self.l / 100
@@ -153,9 +142,7 @@ class Color:
         b = C * sin(radians(self.h))
 
         # Verify math
-        assert (
-            Color.from_lab(L, a, b) == self
-        ), f"{Color.from_lab(L, a, b)!r} != {self!r}"
+        assert Color.from_lab(L, a, b) == self, f"{Color.from_lab(L, a, b)!r} != {self!r}"
 
         return L, a, b
 
@@ -350,11 +337,7 @@ class Theme:
         out = []
         for word in s.split():
             if (i := hash(word) % 6) == 0:
-                out.append(
-                    next(self.palette).color.fg_escape()
-                    + word
-                    + self.normal.color.fg_escape()
-                )
+                out.append(next(self.palette).color.fg_escape() + word + self.normal.color.fg_escape())
             else:
                 out.append(word)
         return " ".join(out)

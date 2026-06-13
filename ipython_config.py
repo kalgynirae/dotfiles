@@ -2,6 +2,7 @@ from IPython.terminal.prompts import Prompts
 from pygments.style import Style
 from pygments.token import Token
 
+
 class AnsiStyle(Style):
     styles = {
         Token.Comment: "ansibrightblack",
@@ -11,6 +12,7 @@ class AnsiStyle(Style):
         Token.Literal.String.Escape: "ansicyan italic",
         Token.Name.Decorator: "ansigreen",
     }
+
 
 c.TerminalInteractiveShell.confirm_exit = False
 c.TerminalInteractiveShell.highlighting_style = AnsiStyle

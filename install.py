@@ -38,12 +38,8 @@ configs: dict[str, Output] = {
     ".claude/jj-workflow.md": symlink_to("claude/jj-workflow.md"),
     ".claude/pr-descriptions.md": symlink_to("claude/pr-descriptions.md"),
     ".claude/settings.json": symlink_to("claude/settings.json"),
-    ".claude/skills/babysit-stack/SKILL.md": symlink_to(
-        "claude/skills/babysit-stack.md"
-    ),
-    ".claude/skills/handle-pr-feedback/SKILL.md": symlink_to(
-        "claude/skills/handle-pr-feedback.md"
-    ),
+    ".claude/skills/babysit-stack/SKILL.md": symlink_to("claude/skills/babysit-stack.md"),
+    ".claude/skills/handle-pr-feedback/SKILL.md": symlink_to("claude/skills/handle-pr-feedback.md"),
     ".claude/writing-as-claude.md": symlink_to("claude/writing-as-claude.md"),
     ".config/alacritty/alacritty.toml": render("alacritty.toml.jinja"),
     ".config/electron-flags.conf": symlink_to("electron-flags.conf"),
@@ -58,12 +54,8 @@ configs: dict[str, Output] = {
     ".config/helix/config.toml": render("helix/config.toml.jinja"),
     ".config/helix/languages.toml": symlink_to("helix/languages.toml"),
     ".config/helix/themes/kalgykai-dark.toml": render("helix/kalgykai-dark.toml.jinja"),
-    ".config/helix/themes/kalgykai-light.toml": render(
-        "helix/kalgykai-light.toml.jinja"
-    ),
-    ".config/helix/runtime/queries/comment/highlights.scm": symlink_to(
-        "helix/queries/comment/highlights.scm"
-    ),
+    ".config/helix/themes/kalgykai-light.toml": render("helix/kalgykai-light.toml.jinja"),
+    ".config/helix/runtime/queries/comment/highlights.scm": symlink_to("helix/queries/comment/highlights.scm"),
     ".config/hypr/hyprland.conf": render("hyprland.conf.jinja"),
     ".config/imv/config": symlink_to("imv"),
     ".config/jj/config.toml": render("jj-config.toml.jinja"),
@@ -78,22 +70,14 @@ configs: dict[str, Output] = {
     ".config/ssh-with-dotfiles/collect": symlink_to("ssh-with-dotfiles/collect"),
     ".config/sway/config": render("sway.jinja"),
     ".config/swaylock/config": symlink_to("swaylock"),
-    ".config/systemd/user/niri-workspace-manager.service": symlink_to(
-        "niri-workspace-manager/niri-workspace-manager.service"
-    ),
+    ".config/systemd/user/niri-workspace-manager.service": symlink_to("niri-workspace-manager/niri-workspace-manager.service"),
     ".config/user-dirs.dirs": symlink_to("user-dirs.dirs"),
     ".config/waybar/config": render("waybar.jinja"),
     ".config/waybar/style.css": render("waybar.css.jinja"),
     ".config/wezterm/wezterm.lua": render("wezterm.lua.jinja"),
-    ".config/wireplumber/wireplumber.conf.d/51-device-renames.conf": symlink_to(
-        "wireplumber/51-device-renames.conf"
-    ),
-    ".config/wireplumber/wireplumber.conf.d/51-focusrite-scarlett-solo-fix.conf": symlink_to(
-        "wireplumber/51-focusrite-scarlett-solo-fix.conf"
-    ),
-    ".config/wireplumber/wireplumber.conf.d/90-prevent-webrtc-adjusting.conf": symlink_to(
-        "wireplumber/90-prevent-webrtc-adjusting.conf"
-    ),
+    ".config/wireplumber/wireplumber.conf.d/51-device-renames.conf": symlink_to("wireplumber/51-device-renames.conf"),
+    ".config/wireplumber/wireplumber.conf.d/51-focusrite-scarlett-solo-fix.conf": symlink_to("wireplumber/51-focusrite-scarlett-solo-fix.conf"),
+    ".config/wireplumber/wireplumber.conf.d/90-prevent-webrtc-adjusting.conf": symlink_to("wireplumber/90-prevent-webrtc-adjusting.conf"),
     ".config/xfce4/helpers.rc": render("xfce4-helpers.rc.jinja"),
     ".gemrc": symlink_to("gemrc"),
     ".gitconfig": symlink_to("gitconfig"),
@@ -108,9 +92,7 @@ configs: dict[str, Output] = {
 }
 
 if environment.get().host == Host.APARTMANTWO:
-    configs[".config/pipewire/pipewire.conf.d/15-netjack2.conf"] = symlink_to(
-        "pipewire/15-netjack2.conf"
-    )
+    configs[".config/pipewire/pipewire.conf.d/15-netjack2.conf"] = symlink_to("pipewire/15-netjack2.conf")
 
 for path in Path("applications").iterdir():
     configs[f".local/share/applications/{path.name}"] = symlink_to(path)
@@ -136,12 +118,8 @@ for dir in (Path.home() / ".mozilla/firefox").iterdir():
         firefox_profile_dir = dir.relative_to(Path.home())
         break
 if firefox_profile_dir:
-    configs[f"{firefox_profile_dir}/chrome/userChrome.css"] = render(
-        "userChrome.css.jinja"
-    )
-    configs[f"{firefox_profile_dir}/chrome/userContent.css"] = render(
-        "userContent.css.jinja"
-    )
+    configs[f"{firefox_profile_dir}/chrome/userChrome.css"] = render("userChrome.css.jinja")
+    configs[f"{firefox_profile_dir}/chrome/userContent.css"] = render("userContent.css.jinja")
 
 for dest_relpath, output in configs.items():
     dest = Path.home() / dest_relpath
@@ -153,35 +131,15 @@ for dest_relpath, output in configs.items():
     result.log(name)
 
 with step("Apply gsettings"):
-    gsettings_set(
-        "org.gnome.desktop.interface.color-scheme",
-        "prefer-dark" if environment.get().theme == Theme.DARK else "default",
-    )
+    gsettings_set("org.gnome.desktop.interface.color-scheme", "prefer-dark" if environment.get().theme == Theme.DARK else "default")
     gsettings_set("org.gnome.desktop.interface.cursor-blink", "false")
-    gsettings_set(
-        "org.gnome.desktop.interface.cursor-size", str(environment.get().cursor_size)
-    )
-    gsettings_set(
-        "org.gnome.desktop.interface.cursor-theme", str(environment.get().cursor_theme)
-    )
-    gsettings_set(
-        "org.gnome.desktop.interface.font-name",
-        f"{environment.get().ui_font_name} {environment.get().ui_font_size}",
-    )
-    gsettings_set(
-        "org.gnome.desktop.interface.gtk-theme", str(environment.get().gtk_theme)
-    )
-    gsettings_set(
-        "org.gnome.desktop.interface.icon-theme", str(environment.get().icon_theme)
-    )
-    gsettings_set(
-        "org.gnome.desktop.peripherals.keyboard.delay",
-        str(environment.get().keyrepeat_delay),
-    )
-    gsettings_set(
-        "org.gnome.desktop.peripherals.keyboard.repeat-interval",
-        str(1000 // environment.get().keyrepeat_rate),
-    )
+    gsettings_set("org.gnome.desktop.interface.cursor-size", str(environment.get().cursor_size))
+    gsettings_set("org.gnome.desktop.interface.cursor-theme", str(environment.get().cursor_theme))
+    gsettings_set("org.gnome.desktop.interface.font-name", f"{environment.get().ui_font_name} {environment.get().ui_font_size}")
+    gsettings_set("org.gnome.desktop.interface.gtk-theme", str(environment.get().gtk_theme))
+    gsettings_set("org.gnome.desktop.interface.icon-theme", str(environment.get().icon_theme))
+    gsettings_set("org.gnome.desktop.peripherals.keyboard.delay", str(environment.get().keyrepeat_delay))
+    gsettings_set("org.gnome.desktop.peripherals.keyboard.repeat-interval", str(1000 // environment.get().keyrepeat_rate))
 
 with step("Complie terminfo definitions"):
     run(

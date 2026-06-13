@@ -32,9 +32,7 @@ def run(args: list[str | Path], env: Mapping[str, str] | None = None) -> None:
     if environment.get().dry_run:
         log_dry(f"Run: {shlex.join(str_args)}")
     else:
-        subprocess.run(
-            str_args, check=True, env=None if env is None else os.environ | env
-        )
+        subprocess.run(str_args, check=True, env=None if env is None else os.environ | env)
 
 
 def gsettings_set(path: str, value: str) -> None:
@@ -55,8 +53,7 @@ class Output(metaclass=ABCMeta):
         return f"{type(self).__name__}: {abbreviate_home(dest)}"
 
     @abstractmethod
-    def install(self, dest: Path) -> Result:
-        ...
+    def install(self, dest: Path) -> Result: ...
 
 
 @dataclass
@@ -90,9 +87,7 @@ class RenderedFile(Output):
         mkdir_parents_and_backup_existing(dest)
 
         # Write to a tempfile and copy into place
-        with NamedTemporaryFile(
-            mode="w", prefix=f"{self.source.stem}-", delete=False
-        ) as f:
+        with NamedTemporaryFile(mode="w", prefix=f"{self.source.stem}-", delete=False) as f:
             f.write(rendered)
         temp = Path(f.name)
         logger.debug("mv %r %r", str(temp), str(dest))

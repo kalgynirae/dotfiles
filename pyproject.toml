@@ -8,14 +8,5 @@ dependencies = [
     "tomli>=2.2.1",
 ]
 
-[tool.isort]
-profile = "black"
-
-[dependency-groups]
-dev = [
-    "pyls-isort>=0.2.2",
-    "pylsp-mypy>=0.7.0",
-    "pylsp-rope>=0.1.17",
-    "python-lsp-black>=2.0.0",
-    "python-lsp-server>=1.12.2",
-]
+[tool.ruff]
+line-length = 160
