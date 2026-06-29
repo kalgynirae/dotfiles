@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Stop hook: prompt one self-review pass over changed code against Colin's
+# guidelines before finishing. Blocks the stop once per distinct working-copy diff
+# (fingerprint dedup), so each set of changes earns exactly one review and an
+# unchanged tree never loops.
+
+# Working-copy diff: jj if this is a jj repo, else git.
+diff=$(jj diff --git 2>/dev/null)
+[[ -z "$diff" ]] && diff=$(git diff HEAD 2>/dev/null)
+[[ -n "$diff" ]] || exit 0
+
+# Block only once per distinct diff: re-blocks when the diff changes (e.g. after an
+# edit made during the review) and converges once it stops changing.
+fp=$(printf '%s' "$diff" | sha1sum | cut -d" " -f1)
+key=$(printf '%s' "$PWD" | sha1sum | cut -d" " -f1)
+statefile="${TMPDIR:-/tmp}/claude-code-review-$key"
+[[ -f "$statefile" && "$(cat "$statefile" 2>/dev/null)" == "$fp" ]] && exit 0
+printf '%s' "$fp" >"$statefile"
+
+reason="Before stopping, do a review pass over the code you changed this session, per the guidelines in ~/.claude/coding-guidelines/review.md. Read that file, then re-read the added/changed lines and fix any violations. If it already complies, say so briefly and stop."
+
+jq -n --arg r "$reason" '{decision: "block", reason: $r}'

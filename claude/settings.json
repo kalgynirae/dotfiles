@@ -22,6 +22,20 @@
     "repair-ci-failures": "off",
     "resolve-merge-conflicts": "off"
   },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/review-changed-code",
+            "timeout": 15,
+            "statusMessage": "Reviewing changed code against guidelines..."
+          }
+        ]
+      }
+    ]
+  },
   "awaySummaryEnabled": false,
   "theme": "dark-ansi",
   "preferredNotifChannel": "terminal_bell",

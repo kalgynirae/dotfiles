@@ -36,6 +36,8 @@ configs: dict[str, Output] = {
     ".claude/CLAUDE.md": symlink_to("claude/CLAUDE.md"),
     ".claude/coding-guidelines/bash.md": symlink_to("claude/coding-guidelines/bash.md"),
     ".claude/coding-guidelines/comments.md": symlink_to("claude/coding-guidelines/comments.md"),
+    ".claude/coding-guidelines/review.md": symlink_to("claude/coding-guidelines/review.md"),
+    ".claude/hooks/review-changed-code": symlink_to("claude/hooks/review-changed-code"),
     ".claude/settings.json": symlink_to("claude/settings.json"),
     ".claude/skills/babysit-stack/SKILL.md": symlink_to("claude/skills/babysit-stack.md"),
     ".claude/skills/handle-pr-feedback/SKILL.md": symlink_to("claude/skills/handle-pr-feedback.md"),
