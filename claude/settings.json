@@ -29,8 +29,7 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/review-changed-code",
-            "timeout": 15,
-            "statusMessage": "Reviewing changed code against guidelines..."
+            "timeout": 10
           }
         ]
       }

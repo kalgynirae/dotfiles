@@ -3,6 +3,9 @@
 # guidelines before finishing. Blocks the stop once per distinct working-copy diff
 # (fingerprint dedup), so each set of changes earns exactly one review and an
 # unchanged tree never loops.
+if [[ -e .no-review-hook ]]; then
+  exit 0
+fi
 
 # Working-copy diff: jj if this is a jj repo, else git.
 diff=$(jj diff --git 2>/dev/null)
