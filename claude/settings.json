@@ -6,7 +6,10 @@
   "permissions": {
     "allow": [
       "Bash(gh *)",
-      "Fetch(*)"
+      "Fetch(*)",
+      "mcp__claude_ai_Linear__save_comment",
+      "mcp__claude_ai_Linear__save_issue",
+      "mcp__claude_ai_Linear__save_project"
     ],
     "deny": [
       "Bash(gt *)"
