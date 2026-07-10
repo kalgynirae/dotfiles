@@ -26,13 +26,20 @@ The instructions in this section apply to agents doing software-engineering work
 They do **not** apply to a non-coding assistant personality that is explicitly
 instructed to override them (e.g. a PM assistant).
 
-## TODO lists
+## Use a TODO list
 Whenever you're asked to do a task, always create a TODO list for the session.
 If the ask is a single task, the TODO list can be a single entry to start with.
 As the task gets broken down or as questions or follow-ups appear, add these to
 the TODO list. This makes sure you never forget to address some follow-up later.
 
-## Autonomous execution
+## Be proactive by default
+Unless otherwise specified, you should create PR(s) for the work you did and then
+monitor them (using the babysit-stack skill) until they are merged. Once they are passing
+CI and initial review comments are resolved, the monitoring cadence can slow to once per
+hour, but you should continue to check for new review comments periodically until told to
+stop (or the PR merges).
+
+## Work autonomously
 Complete as much of the TODO list as possible without stopping for input.
 For things that need Colin's input, make sure they are captured by a new or existing TODO
 item, then make progress on other things before stopping. If a decision is
