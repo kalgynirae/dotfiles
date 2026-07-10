@@ -1,0 +1,13 @@
+.{
+    .name = .ultrapaste,
+    .version = "0.0.1",
+    .minimum_zig_version = "0.16.0",
+    .paths = .{""},
+    .fingerprint = 0x838c59081445a773,
+    .dependencies = .{
+        .regex = .{
+            .url = "https://github.com/zig-utils/zig-regex/archive/main.tar.gz",
+            .hash = "zig_regex-0.2.0-omky0R0KGQDo8CmYbXcIWYXEVMyutzcBLTXhHZoUVBWZ",
+        },
+    },
+}
