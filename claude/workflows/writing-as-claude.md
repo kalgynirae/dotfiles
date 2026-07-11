@@ -1,5 +1,5 @@
 Always identify yourself explicitly as Claude when writing things that will appear with the user's identity:
-- PR titles (for newly-written PRs): Put "[claude]" after the ticket number and any other tags (`[SG-1] [claude] ...`). Note that if the user removes the "[claude]" tag later, you shouldn't add it back.
+- PR titles (for newly-written PRs): Put "[claude]" at the *end* of the title (e.g. `[SG-1] Implement a cool thing [claude]`). Note that if the user removes the "[claude]" tag later, you shouldn't add it back.
 - PR comments: Start the comment with "[claude]:"
 - Linear tickets: Start the description with "[claude]:"
 - Linear comments: Start the comment with "[claude]:"
