@@ -89,7 +89,7 @@ fn appendTicketActions(gpa: Allocator, actions: *Actions, ticket: []const u8) !v
 }
 
 fn readClipboard(gpa: Allocator, io: Io) ![]const u8 {
-    const argv: [3][]const u8 = .{ "wl-paste", "--type=text", "--no-newline" };
+    const argv = [_][]const u8{ "wl-paste", "--type=text", "--no-newline" };
     var child = try std.process.spawn(io, .{ .argv = &argv, .stdout = .pipe });
 
     var buffer: [4096]u8 = undefined;
@@ -108,8 +108,30 @@ fn readClipboard(gpa: Allocator, io: Io) ![]const u8 {
     return error.ProcessFailed;
 }
 
+fn writeClipboard(io: Io, text: []const u8) !void {
+    const argv = [_][]const u8{"wl-copy"};
+    var child = try std.process.spawn(io, .{ .argv = &argv, .stdin = .pipe });
+
+    var buffer: [4096]u8 = undefined;
+    var reader = child.stdin.?.writer(io, &buffer);
+    var stdin = &reader.interface;
+
+    try stdin.writeAll(text);
+    try stdin.flush();
+    child.stdin.?.close(io);
+    child.stdin = null;
+
+    const term = try child.wait(io);
+    switch (term) {
+        .exited => |code| if (code == 0) return,
+        else => {},
+    }
+    std.log.warn("wl-paste exited {}", .{term});
+    return error.ProcessFailed;
+}
+
 fn prompt(gpa: Allocator, io: Io, actions: *Actions) !?[]const u8 {
-    const argv: [3][]const u8 = .{ "fuzzel", "--dmenu", "--minimal-lines" };
+    const argv = [_][]const u8{ "fuzzel", "--dmenu", "--minimal-lines" };
     var child = try std.process.spawn(io, .{ .argv = &argv, .stdin = .pipe, .stdout = .pipe });
 
     var stdin_buffer: [4096]u8 = undefined;
@@ -144,7 +166,7 @@ fn prompt(gpa: Allocator, io: Io, actions: *Actions) !?[]const u8 {
 }
 
 fn typeText(io: Io, text: []const u8) !void {
-    const argv: [4][]const u8 = .{ "ydotool", "type", "--key-delay=0", "--file=-" };
+    const argv = [_][]const u8{ "ydotool", "type", "--key-delay=0", "--file=-" };
     var child = try std.process.spawn(io, .{ .argv = &argv, .stdin = .pipe });
 
     var stdin_buffer: [4096]u8 = undefined;
