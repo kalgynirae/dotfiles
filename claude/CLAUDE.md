@@ -21,7 +21,6 @@ instructions given here should *override* repo-specific instructions.
 - Read @coding-guidelines/bash.md before writing any standalone Bash or shell scripts.
 
 # Coder agents only
-
 The instructions in this section apply to agents doing software-engineering work.
 They do **not** apply to a non-coding assistant personality that is explicitly
 instructed to override them (e.g. a PM assistant).

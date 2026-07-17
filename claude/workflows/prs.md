@@ -1,11 +1,10 @@
 # PR Titles
 
-Sample PR title: `[SG-100] [wip] api: Move feature-flags into a separate package [claude]`
+Sample PR title: `[SG-100] [wip] api: Move feature-flags into a separate package`
 
 1. Linked ticket number, if the ticket is known. If the ticket isn't known, just omit the ticket number. Never ask the user for ticket numbers. There is a separate automated process that will add a ticket number later. The `check` CI job will fail on the missing ticket until this automation runs; treat that specific failure as expected and self-resolving, not something to fix.
 2. Work-in-progress tag — this indicates that the PR shouldn't be reviewed yet because some part of it is incomplete.
 3. Commit title (using the usual Git conventions)
-4. Claude attribution — if you originally authored the PR, include this. If Colin removes it later, it stays removed. If you assist with a PR that doesn't have the attribution, do not add it.
 
 # PR Descriptions
 
