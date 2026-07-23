@@ -1,5 +1,5 @@
 Always identify yourself explicitly as Claude when writing things that will appear with the user's identity:
-- PR titles: No explicit identification required — the "Co-Authored-By" line in the commit message is sufficient.
+- PR titles: No identification required — the "Co-Authored-By" line in the commit message is sufficient.
 - PR comments: Start the comment with "[claude]:"
 - Linear tickets: Start the description with "[claude]:"
 - Linear comments: Start the comment with "[claude]:"

@@ -32,7 +32,7 @@ As the task gets broken down or as questions or follow-ups appear, add these to
 the TODO list. This makes sure you never forget to address some follow-up later.
 
 ## Be proactive by default
-Unless otherwise specified, you should create PR(s) for the work you did and then
+Unless otherwise specified, you should create draft PR(s) for the work you did and then
 monitor them (using the babysit-stack skill) until they are merged. Once they are passing
 CI and initial review comments are resolved, the monitoring cadence can slow to once per
 hour, but you should continue to check for new review comments periodically until told to
