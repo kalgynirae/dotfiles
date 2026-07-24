@@ -41,3 +41,5 @@ Verify the stack first: Before pushing changes, always verify that there are no 
 After verifying the stack:
 - If the repo uses Graphite: use `jfd` to push to Graphite. This submits all commits in the `stack` revset as a 1:1 mapping of PRs to commits.
 - If the repo does not use Graphite: use `jj git push -c stack` to push all commits in the stack (this creates an automatically-named branch for each commit). Then use `gh` to create a PR for each branch.
+
+To push a fresh commit (e.g. to retrigger CI), use `jj metaedit --force-rewrite <id>` to get a fresh commit hash, then push normally.
