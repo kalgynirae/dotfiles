@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# usage: <SCRIPT> NAME
+
+usage() {
+  awk <"$0" -v script="$0" '/$^/{exit}; NR==2,0{gsub(/<SCRIPT>/, script); print substr($0, 3)}'
+}
+
+if (( $# != 1 )); then
+  usage >&2
+  exit 1
+fi
+
+if [[ $1 == --help ]]; then
+  usage
+  exit 0
+fi
+
+coder() {
+  command coder --no-version-warning "$@"
+}
+
+args=(
+  --template fusion
+  --parameter timezone="$(timedatectl show -p Timezone --value)"
+  --parameter use_shpool=false
+)
+if ! coder list -a -o json | jq -e --arg name "$1" 'any(.name == $name)' >/dev/null; then
+  echo >&2 "Creating new workspace..."
+  if ! coder create "$1" -y "${args[@]}"; then
+    echo >&2 "Failed to create workspace"
+    exit 1
+  fi
+else
+  echo >&2 "Connecting to existing workspace..."
+fi
+
+if ! ssh-with-terminfo "main.$1.colin.coder"; then
+  # (Assuming an unexpected disconnect,) attempt to fix the terminal state
+  reset -I
+fi
