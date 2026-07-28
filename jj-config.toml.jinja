@@ -47,11 +47,11 @@ log-graph-prioritize = "coalesce(tops, trunk())"
 file_annotate = "join(' ', commit.commit_id().short(8), pad_start(12, truncate_end(12, commit.author().timestamp().ago())), pad_start(9, truncate_end(9, commit.author().name())), pad_start(3, line_number), content)"
 git_push_bookmark = '"colin/push-" ++ change_id.short(8)'
 log = '''replace(
-  regex:'#(\d{5,7})',
+  regex:'#(\d{4,7})',
   builtin_log_compact,
   |captures| hyperlink(
-    'https://app.graphite.com/github/pr/braidlending/braid/' ++ captures.get(1),
-    '#' ++ captures.get(1)
+    git_web_url() ++ '/pull/' ++ captures.get(1),
+    captures.get(0)
   )
 )'''
 
