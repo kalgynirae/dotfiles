@@ -376,6 +376,39 @@ up() {
   if in-git-repo; then git checkout "$@"; else hg update "$@"; fi
 }
 
+r() {
+  local repo path_append
+  case ${1%/} in
+    dotfiles|d)
+      if [[ $CODESPACES ]]; then
+        repo=/workspaces/.codespaces/.persistedshare/dotfiles
+      elif [[ $CODER ]]; then
+        repo=~/.config/coderv2/dotfiles
+      else
+        repo=~/dotfiles
+      fi
+      ;;
+    *)
+      if [[ -d ~/code/$1 ]]; then
+        repo=~/code/$1
+      elif [[ -d ~/$1 ]]; then
+        repo=~/$1
+      fi
+      ;;
+  esac
+  if [[ $repo ]]; then
+    if cd "$repo"; then
+      rename-tmux-window "$(basename "$repo")"
+      if [[ $path_append ]]; then
+        PATH=$PATH:$path_append
+      fi
+    fi
+  else
+    echo >&2 "Unknown repo: ${1@Q}"
+    return 1
+  fi
+}
+
 git_prompt_path=/usr/share/git/git-prompt.sh
 if [[ -e /etc/fedora-release ]]; then
   git_prompt_path=/usr/share/git-core/contrib/completion/git-prompt.sh
