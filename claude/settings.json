@@ -3,6 +3,7 @@
   "env": {
     "CLAUDE_CODE_ENABLE_AUTO_MODE": "1"
   },
+  "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
       "Bash(gh *)",
@@ -41,10 +42,9 @@
     ]
   },
   "awaySummaryEnabled": false,
-  "includeCoAuthoredBy": false,
+  "tui": "fullscreen",
   "theme": "dark-ansi",
   "preferredNotifChannel": "terminal_bell",
   "skipAutoPermissionPrompt": true,
-  "defaultMode": "acceptEdits",
-  "tui": "fullscreen"
+  "defaultMode": "acceptEdits"
 }
