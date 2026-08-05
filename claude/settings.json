@@ -41,6 +41,11 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "claude-status",
+    "padding": 0
+  },
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
   "theme": "dark-ansi",

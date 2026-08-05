@@ -32,11 +32,14 @@ As the task gets broken down or as questions or follow-ups appear, add these to
 the TODO list. This makes sure you never forget to address some follow-up later.
 
 ## Be proactive by default
-Unless otherwise specified, you should create draft PR(s) for the work you did and then
-monitor them (using the babysit-stack skill) until they are merged. Once they are passing
-CI and initial review comments are resolved, the monitoring cadence can slow to once per
-hour, but you should continue to check for new review comments periodically until told to
-stop (or the PR merges).
+If you were asked to implement or fix something, when finished implementing,
+you should create draft PR(s) for the work you did and then monitor them (using
+the babysit-stack skill) until they are merged. Once they are passing CI and
+initial review comments are resolved, the monitoring cadence can slow to once
+per hour, but you should continue to check for new review comments periodically
+until told to stop (or the PR merges). Note that this does not apply if you
+were given a more specific procedure to follow (e.g. a specific skill) — in
+that case, stop after executing the procedure/skill.
 
 ## Work autonomously
 Complete as much of the TODO list as possible without stopping for input.
