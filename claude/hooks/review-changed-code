@@ -1,25 +1,80 @@
 #!/usr/bin/env bash
-# Stop hook: prompt one self-review pass over changed code against Colin's
-# guidelines before finishing. Blocks the stop once per distinct working-copy diff
-# (fingerprint dedup), so each set of changes earns exactly one review and an
-# unchanged tree never loops.
-if [[ -e .no-review-hook ]]; then
+# Record state at UserPromptSubmit; prompt review at Stop if anything changed
+
+set -u
+
+fail() {
+  printf >&2 '%s\n' "[review-changed-code] unexpected failure (ignore this, it's just here to be visible to Colin): $1"
+  exit 1
+}
+
+if ! command -v jq &>/dev/null; then
+  fail "jq not found"
+fi
+
+input=$(cat)
+event=$(jq <<<"$input" -r .hook_event_name)
+prompt_id=$(jq <<<"$input" -r .prompt_id)
+
+if root=$(jj root 2>/dev/null); then
+  vcs=jj
+elif root=$(git rev-parse --show-toplevel 2>/dev/null); then
+  vcs=git
+else
   exit 0
 fi
 
-# Working-copy diff: jj if this is a jj repo, else git.
-diff=$(jj diff --git 2>/dev/null)
-[[ -z "$diff" ]] && diff=$(git diff HEAD 2>/dev/null)
-[[ -n "$diff" ]] || exit 0
+if [[ -e "$root/.no-review-hook" ]]; then
+  exit 0
+fi
 
-# Block only once per distinct diff: re-blocks when the diff changes (e.g. after an
-# edit made during the review) and converges once it stops changing.
-fp=$(printf '%s' "$diff" | sha1sum | cut -d" " -f1)
-key=$(printf '%s' "$PWD" | sha1sum | cut -d" " -f1)
-statefile="${TMPDIR:-/tmp}/claude-code-review-$key"
-[[ -f "$statefile" && "$(cat "$statefile" 2>/dev/null)" == "$fp" ]] && exit 0
-printf '%s' "$fp" >"$statefile"
+statefile=$XDG_RUNTIME_DIR/review-changed-code-$(systemd-escape --path "$root")
 
-reason="Before stopping, do a review pass over the code you changed this session, per the guidelines in ~/.claude/coding-guidelines/review.md. Read that file, then re-read the added/changed lines and fix any violations. If it already complies, say so briefly and stop."
+changed_paths() {
+  if [[ $vcs == jj ]]; then
+    jj diff --name-only --from base --to @
+  else
+    if git rev-parse --verify HEAD &>/dev/null; then
+      git diff HEAD --name-only || return 1
+    fi
+    git ls-files --others --exclude-standard
+  fi
+}
 
-jq -n --arg r "$reason" '{decision: "block", reason: $r}'
+if ! paths=$(changed_paths); then
+  fail "failed to list changed files"
+fi
+
+checksums() {
+  local paths=$1
+  xargs <<<"$paths" -d '\n' -r sha1sum | sort
+}
+
+if ! current_checksums=$(checksums "$paths"); then
+  fail "failed to compute checksums"
+fi
+
+if [[ $event == UserPromptSubmit ]]; then
+  printf >"$statefile" '%s\n%s\n' "$prompt_id" "$current_checksums"
+  exit
+elif [[ $event == Stop ]]; then
+  if ! [[ -f $statefile ]]; then
+    fail "no state file exists for this turn (expected $statefile)"
+  fi
+  baseline_prompt_id=$(head -n 1 "$statefile")
+  if [[ $baseline_prompt_id != $prompt_id ]]; then
+    fail "recorded prompt_id doesn't match (did UserPromptSubmit not fire for this turn?)"
+  fi
+
+  changed=$(comm -13 <(tail -n +2 "$statefile") <(printf '%s\n' "$current_checksums") | sed 's/^[\\]*[0-9a-f]*  //')
+  if [[ ! $changed ]]; then
+    exit 0
+  fi
+
+  printf >"$statefile" '%s\n%s\n' "$prompt_id" "$current_checksums"
+
+  reason="Before stopping, do a review pass over the code you changed this turn, per the guidelines in ~/.claude/coding-guidelines/review.md. Read that file, then re-read the added/changed lines in these files and fix any violations. If they already comply, say so briefly and stop."
+  jq -n --arg r "$reason" '{decision: "block", reason: $r}'
+else
+  fail "unsupported event: ${event@Q}"
+fi

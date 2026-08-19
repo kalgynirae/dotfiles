@@ -29,16 +29,11 @@
     "resolve-merge-conflicts": "off"
   },
   "hooks": {
+    "UserPromptSubmit": [
+      {"hooks": [{"type": "command", "command": "$HOME/.claude/hooks/review-changed-code", "timeout": 5}]}
+    ],
     "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/review-changed-code",
-            "timeout": 10
-          }
-        ]
-      }
+      {"hooks": [{"type": "command", "command": "$HOME/.claude/hooks/review-changed-code", "timeout": 5}]}
     ]
   },
   "statusLine": {
