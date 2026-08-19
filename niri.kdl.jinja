@@ -206,8 +206,10 @@ binds {
     Super+Print { screenshot-window; }
     Alt+Print { spawn "screenshot" "--region" "--text"; }
     XF86Tools { spawn "sh" "-c" "hyprpicker | tr '[:upper:]' '[:lower:]' | wl-copy -n"; }
-    Mod+Ctrl+C { spawn "swappypaste"; }
-    Mod+Ctrl+V { spawn "ultrapaste"; }
+    Mod+Ctrl+C { spawn "swappypaste" "swap"; }
+    Mod+Ctrl+Shift+C { spawn "swappypaste" "swap" "--shift"; }
+    Mod+Ctrl+V { spawn "swappypaste" "offer"; }
+    Mod+Ctrl+Shift+V { spawn "swappypaste" "offer" "--shift"; }
 
     Mod+Shift+Q { quit; }
     Ctrl+Alt+Delete { quit; }
