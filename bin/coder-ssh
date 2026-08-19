@@ -21,6 +21,7 @@ coder() {
 
 args=(
   --template fusion
+  --use-parameter-defaults
   --parameter timezone="$(timedatectl show -p Timezone --value)"
   --parameter use_shpool=false
 )
@@ -34,7 +35,4 @@ else
   echo >&2 "Connecting to existing workspace..."
 fi
 
-if ! ssh-with-terminfo "main.$1.colin.coder"; then
-  # (Assuming an unexpected disconnect,) attempt to fix the terminal state
-  reset -I
-fi
+ssh-with-terminfo "main.$1.colin.coder"
