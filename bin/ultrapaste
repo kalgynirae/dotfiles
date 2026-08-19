@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-cd ~/dotfiles/ultrapaste && zig build run -Doptimize=ReleaseSafe

@@ -4,6 +4,14 @@ const Io = std.Io;
 
 const Regex = @import("regex").Regex;
 
+const TypeTool = enum {
+    wtype,
+};
+
+const ClipboardTool = enum {
+    wl_clipboard,
+};
+
 const Actions = std.ArrayList([]const u8);
 
 pub fn main(init: std.process.Init) !void {
@@ -48,7 +56,7 @@ fn parsePrNumber(gpa: Allocator, text: []const u8) !?[]const u8 {
     defer regex.deinit();
 
     if (try regex.find(text)) |match| {
-        if (match.slice.len == 5) {
+        if (4 <= match.slice.len and match.slice.len < 7) {
             var mut_match = match;
             defer mut_match.deinit(gpa);
             return match.slice;
