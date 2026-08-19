@@ -1,18 +1,41 @@
 #!/usr/bin/env bash
-# usage: <SCRIPT> NAME
+# usage: <SCRIPT> NAME [-t TEMPLATE]
 
 usage() {
   awk <"$0" -v script="$0" '/$^/{exit}; NR==2,0{gsub(/<SCRIPT>/, script); print substr($0, 3)}'
 }
 
-if (( $# != 1 )); then
+name=
+template=fusion
+
+while (( $# )); do
+  case "$1" in
+    --help)
+      usage
+      exit 0
+      ;;
+    -t)
+      if (( $# < 2 )); then
+        echo >&2 "missing value for -t"
+        exit 2
+      fi
+      template=$2
+      shift 2
+      ;;
+    *)
+      if [[ $name ]]; then
+        echo >&2 "unrecognized argument: ${1@Q}"
+        exit 2
+      fi
+      name=$1
+      shift
+      ;;
+  esac
+done
+
+if [[ ! $name ]]; then
   usage >&2
   exit 1
-fi
-
-if [[ $1 == --help ]]; then
-  usage
-  exit 0
 fi
 
 coder() {
@@ -20,14 +43,19 @@ coder() {
 }
 
 args=(
-  --template fusion
+  --template "$template"
   --use-parameter-defaults
-  --parameter timezone="$(timedatectl show -p Timezone --value)"
-  --parameter use_shpool=false
 )
-if ! coder list -a -o json | jq -e --arg name "$1" 'any(.name == $name)' >/dev/null; then
+if [[ $template == fusion ]]; then
+  args+=(
+    --parameter timezone="$(timedatectl show -p Timezone --value)"
+    --parameter use_shpool=false
+  )
+fi
+
+if ! coder list -a -o json | jq -e --arg name "$name" 'any(.name == $name)' >/dev/null; then
   echo >&2 "Creating new workspace..."
-  if ! coder create "$1" -y "${args[@]}"; then
+  if ! coder create "$name" -y "${args[@]}"; then
     echo >&2 "Failed to create workspace"
     exit 1
   fi
@@ -35,4 +63,4 @@ else
   echo >&2 "Connecting to existing workspace..."
 fi
 
-ssh-with-terminfo "main.$1.colin.coder"
+ssh-with-terminfo "main.$name.colin.coder"
