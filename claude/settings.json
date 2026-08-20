@@ -19,6 +19,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "claude-fable-5[1m]",
   "skillOverrides": {
     "address-reviewer-feedback": "off",
     "link-stack-to-linear": "off",
@@ -30,10 +31,26 @@
   },
   "hooks": {
     "UserPromptSubmit": [
-      {"hooks": [{"type": "command", "command": "$HOME/.claude/hooks/review-changed-code", "timeout": 5}]}
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/review-changed-code",
+            "timeout": 5
+          }
+        ]
+      }
     ],
     "Stop": [
-      {"hooks": [{"type": "command", "command": "$HOME/.claude/hooks/review-changed-code", "timeout": 5}]}
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/review-changed-code",
+            "timeout": 5
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
@@ -46,5 +63,6 @@
   "theme": "dark-ansi",
   "preferredNotifChannel": "terminal_bell",
   "skipAutoPermissionPrompt": true,
-  "defaultMode": "acceptEdits"
+  "defaultMode": "acceptEdits",
+  "effortLevel": "high"
 }
