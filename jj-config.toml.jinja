@@ -28,7 +28,7 @@ auto-track-bookmarks = "colin/*"
 tip = "latest(visible())"
 
 # Stack navigation
-current = "coalesce((@ & empty() & heads(@::))-, @)"
+current = "coalesce((@ & empty() & heads(@::))- & mutable(), @)"
 tops = "heads(current:: ~ empty() & visible())"
 top = "exactly(tops, 1)"
 bottoms = "roots(::current & mutable() & visible())"
