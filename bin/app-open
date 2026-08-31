@@ -2,7 +2,9 @@
 # usage: $0 FILE...
 
 firstfile=$1
-if ! mimetype=$(xdg-mime query filetype "$firstfile"); then
+if [[ $firstfile =~ ^([:alpha:][[:alnum:]\.+-]*): ]]; then
+  mimetype=x-scheme-handler/${BASH_REMATCH[1]}
+elif ! mimetype=$(xdg-mime query filetype "$firstfile"); then
   echo >&2 "Failed to query filetype for ${firstfile@Q}"
   exit 1
 fi
