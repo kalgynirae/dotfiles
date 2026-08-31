@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if ! jj root >/dev/null; then
+if ! repo_root=$(jj root >/dev/null); then
   echo >&2 "Failed to get repository root. Is this a jj repo?"
   exit 1
 fi
@@ -62,29 +62,64 @@ if (( ${#bookmarks[@]} != ${#changes[@]} )); then
   exit 1
 fi
 
-for (( i = ${#bookmarks[@]} - 1; i >= 0; i-- )); do
-  if ! gt untrack "${bookmarks[i]}" --force; then
-    echo >&2 "$0: 'gt untrack' failed; aborting"
-    exit 1
-  fi
-done
+case "$(basename "$repo_root")" in
+  braid|braid-*)
+    for (( i = ${#bookmarks[@]} - 1; i >= 0; i-- )); do
+      if ! gt untrack "${bookmarks[i]}" --force; then
+        echo >&2 "$0: 'gt untrack' failed; aborting"
+        exit 1
+      fi
+    done
 
-# TODO: Figure out the correct base for the stack instead of assuming main.
-# It might be someone else's PR. Might make sense to find the first non-tracked
-# remote bookmark?
-previous=main
-for b in "${bookmarks[@]}"; do
-  if ! gt track "$b" --parent "$previous"; then
-    echo >&2 "$0: 'gt track' failed; aborting"
-    exit 1
-  fi
-  previous=$b
-done
+    # TODO: Figure out the correct base for the stack instead of assuming main.
+    # It might be someone else's PR. Might make sense to find the first non-tracked
+    # remote bookmark?
+    previous=main
+    for b in "${bookmarks[@]}"; do
+      if ! gt track "$b" --parent "$previous"; then
+        echo >&2 "$0: 'gt track' failed; aborting"
+        exit 1
+      fi
+      previous=$b
+    done
 
-if ! gt submit --draft --no-edit --branch "${bookmarks[-1]}" --force; then
-  echo >&2 "$0: 'gt submit' failed"
-  exit 1
-fi
+    if ! gt submit --draft --no-edit --branch "${bookmarks[-1]}" --force; then
+      echo >&2 "$0: 'gt submit' failed"
+      exit 1
+    fi
 
-# Update jj state after the gt-submit
-jj util snapshot
+    # Update jj state after the gt-submit
+    jj util snapshot
+    ;;
+  *)
+    repo=$(jj git remote list | grep '^origin ' | perl -ne '/:(.*)\.git/ && print $1')
+    existing_prs=$(gh --repo "$repo" pr list --author @me --json number,title,url,isDraft,baseRefName,headRefName)
+
+    # TODO: Figure out the correct base for the stack instead of assuming main.
+    # It might be someone else's PR. Might make sense to find the first non-tracked
+    # remote bookmark?
+    previous=main
+    for b in "${bookmarks[@]}"; do
+      if pr=$(jq <<<"$existing_prs" --arg head "$b" '.[]|select(.headRefName == $head)' -e); then
+        jq <<<"$pr" '"\u001b[34m\u001b]8;;\(.url)\u001b\\#\(.number) \(if .isDraft then "[draft]" else "" end) \(.title)\u001b]8;;\u001b\\\u001b[39m"' -r
+      else
+        title=$(jj show "$b" -T 'description.first_line()' --no-patch)
+        body=$(jj show "$b" -T 'description.lines().skip(1).join("\n")' --no-patch)
+        echo >&2 "Creating new PR for $b..."
+        if ! gh --repo "$repo" pr create --draft --base "$previous" --head "$b" --title "$title" --body "$body"; then
+          echo >&2 "$0: 'gh pr create' failed; aborting"
+          exit 1
+        fi
+        gh --repo "$repo" pr list --head "$b" --json number,url,title,isDraft --jq '.[]|"\u001b[34m\u001b]8;;\(.url)\u001b\\#\(.number) \(if .isDraft then "[draft]" else "" end) \(.title)\u001b]8;;\u001b\\\u001b[38m"'
+      fi
+      previous=$b
+    done
+
+    if (( ${#bookmarks[@]} > 1 )); then
+      repo_name=${repo##*/}
+      git_repo_path=~/code/$repo_name
+      echo >&2 "Running 'gh stack link' (in $git_repo_path)..."
+      ( cd "$git_repo_path" && gh stack link "${bookmarks[@]}" )
+    fi
+    ;;
+esac
