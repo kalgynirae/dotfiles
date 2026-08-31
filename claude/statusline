@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+jq -r '
+  def fg($n): "\u001b[3\($n)m\(.)\u001b[39m";
+  def formatUsage: . as $pct | "\($pct | round)%" | fg(if $pct >= 85 then 1 elif $pct >= 60 then 3 else 2 end);
+  [
+    "model \(.model.display_name | fg(7)) \(.effort.level)",
+    "context \(.context_window.used_percentage | try formatUsage catch "-")",
+    ( [ "usage",
+        "5h \(.rate_limits.five_hour.used_percentage | try formatUsage catch "-")",
+        "7d \(.rate_limits.seven_day.used_percentage | try formatUsage catch "-")"
+      ] | join(" ")
+    ),
+    "cost \("$\(.cost.total_cost_usd | round)" | fg(7))",
+    "+\(.cost.total_lines_added)/-\(.cost.total_lines_removed)",
+    "\(.session_name // .session_id | tostring | fg(6))"
+  ] | join(" | ") | "\u001b[2m\(.)\u001b[22m"
+'

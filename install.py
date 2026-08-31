@@ -41,6 +41,7 @@ configs: dict[str, Output] = {
     ".claude/settings.json": symlink_to("claude/settings.json"),
     ".claude/skills/babysit-stack/SKILL.md": symlink_to("claude/skills/babysit-stack.md"),
     ".claude/skills/handle-pr-feedback/SKILL.md": symlink_to("claude/skills/handle-pr-feedback.md"),
+    ".claude/statusline": symlink_to("claude/statusline"),
     ".claude/workflows/jj.md": symlink_to("claude/workflows/jj.md"),
     ".claude/workflows/prs.md": symlink_to("claude/workflows/prs.md"),
     ".claude/workflows/writing-as-claude.md": symlink_to("claude/workflows/writing-as-claude.md"),
