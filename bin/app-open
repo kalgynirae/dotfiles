@@ -15,7 +15,7 @@ app=${desktopfile%.desktop}
 case "$XDG_CURRENT_DESKTOP" in
   niri)
     systemd-run --user --quiet --collect \
-      --working-directory=$PWD \
+      --working-directory="$PWD" \
       --slice="app-$(systemd-escape --suffix=slice "$app")" \
       --property=BindsTo=graphical-session.target \
       --property=KillMode=process \
