@@ -57,11 +57,12 @@
     "type": "command",
     "command": "$HOME/.claude/statusline"
   },
+  "effortLevel": "high",
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
   "theme": "dark-ansi",
   "preferredNotifChannel": "terminal_bell",
   "skipAutoPermissionPrompt": true,
   "defaultMode": "acceptEdits",
-  "effortLevel": "high"
+  "feedbackDrafts": "off"
 }
