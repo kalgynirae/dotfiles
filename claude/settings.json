@@ -19,7 +19,6 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
   "skillOverrides": {
     "address-reviewer-feedback": "off",
     "link-stack-to-linear": "off",
@@ -57,12 +56,12 @@
     "type": "command",
     "command": "$HOME/.claude/statusline"
   },
+  "feedbackDrafts": "off",
   "effortLevel": "high",
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
   "theme": "dark-ansi",
   "preferredNotifChannel": "terminal_bell",
   "skipAutoPermissionPrompt": true,
-  "defaultMode": "acceptEdits",
-  "feedbackDrafts": "off"
+  "defaultMode": "acceptEdits"
 }
