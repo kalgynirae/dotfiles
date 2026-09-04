@@ -5,6 +5,15 @@ if ! repo_root=$(jj root >/dev/null); then
   exit 1
 fi
 
+case "$(basename "$repo_root")" in
+  braid|braid-*)
+    mode=graphite
+    ;;
+  *)
+    mode=github
+    ;;
+esac
+
 read -rd '' JIFFYDIFFY <<JIFFYDIFFY
 _______________________________________________________________________
 ______  /__(_)__  __/__  __/____  ____  __ \__(_)__  __/__  __/____  __
@@ -62,8 +71,8 @@ if (( ${#bookmarks[@]} != ${#changes[@]} )); then
   exit 1
 fi
 
-case "$(basename "$repo_root")" in
-  braid|braid-*)
+case "$mode" in
+  graphite)
     for (( i = ${#bookmarks[@]} - 1; i >= 0; i-- )); do
       if ! gt untrack "${bookmarks[i]}" --force; then
         echo >&2 "$0: 'gt untrack' failed; aborting"
@@ -91,7 +100,10 @@ case "$(basename "$repo_root")" in
     # Update jj state after the gt-submit
     jj util snapshot
     ;;
-  *)
+  github)
+    # First, push all bookmarks
+    jj git push -r stack
+
     repo=$(jj git remote list | grep '^origin ' | perl -ne '/:(.*)\.git/ && print $1')
     existing_prs=$(gh --repo "$repo" pr list --author @me --json number,title,url,isDraft,baseRefName,headRefName)
 
