@@ -14,6 +14,7 @@ instructions given here should *override* repo-specific instructions.
 # Coding guidelines
 
 ## Comments
+- Comments should be used *sparingly*. Comments should never explain things that are clear from the code itself.
 - Comments should only describe the final code's intent, not the decisions/changes that produced it.
 - Read @coding-guidelines/comments.md before writing code in any language.
 
