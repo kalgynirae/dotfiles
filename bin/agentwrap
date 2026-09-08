@@ -3,16 +3,16 @@
 #   <SCRIPT> status
 #   <SCRIPT> [-p NAME] edit
 #   <SCRIPT> [-p NAME] save [--force]
-#   <SCRIPT> [-p NAME] run COMMAND [ARGS...]
+#   <SCRIPT> [-p NAME] run [COMMAND [ARGS...]]
 #
 # Commands:
-#   status  Show which profile is currently being edited
-#   edit    Applies the profile's saved patch to the current repo
-#   save    Stores the current repo's changes as a profile
-#   run     Runs COMMAND in a new mount namespace with the patch applied
+#   status      Show which profile is currently active or being edited
+#   edit        Edit the profile in the current repo
+#   save        Save the current repo's changes as a profile
+#   run         Run COMMAND (default: $SHELL) with the profile's patch applied
 #
 # Options:
-#   -p|--profile NAME   which profile to use (default: repo dirname up to the first -)
+#   -p|--profile NAME   which profile to use (default: repo dirname up to "-")
 #   --force             save over an existing profile even if 'edit' wasn't used
 #
 # Profiles are stored in ~/.config/agentwrap/<NAME>.patch.
@@ -69,6 +69,11 @@ while (( $# > 0 )); do
   esac
 done
 
+if [[ ! $mode ]]; then
+  usage >&2
+  exit 2
+fi
+
 if ! repo_root=$(git rev-parse --show-toplevel); then
   log "Current directory isn't in a git repo"
   exit 1
@@ -81,9 +86,6 @@ fi
 
 repo_dirname=${repo_root##*/}
 repo_name=${repo_dirname%%-*}
-config_dir=$HOME/.config/agentwrap
-patch_path=$config_dir/$profile.patch
-edited_profile_path=$config_dir/.edited-profile
 
 if [[ ! $profile ]]; then
   if [[ $mode == save && -f $edited_profile_path ]]; then
@@ -97,6 +99,10 @@ if ! [[ $profile =~ [:alnum:][[:alnum:]_-]* ]]; then
   log "Invalid profile name: ${profile@Q}"
   exit 1
 fi
+
+config_dir=$HOME/.config/agentwrap
+patch_path=$config_dir/$profile.patch
+edited_profile_path=$config_dir/.edited-profile
 
 if [[ ! -e $config_dir ]]; then
   mkdir "$config_dir"
@@ -160,11 +166,17 @@ case "$mode" in
     if (( ${#run_args[@]} < 1 )); then
       run_args+=("${SHELL:-bash}")
     fi
+
+    log "Running ${run_args[*]@Q} in profile ${profile@Q}"
+
     if ! tmpdir=$(mktemp -d --tmpdir "$script_basename.XXXX"); then
       log "Failed to create tempdir"
       exit 1
     fi
-    log "Using tempdir $tmpdir"
+    if ! mkdir "$tmpdir"/agentwrap; then
+      log "Failed to create agentwrap directory in tempdir"
+      exit 1
+    fi
     if ! pathlines=$(set -o pipefail; git apply --numstat "$patch_path" | awk '{ print $3 }' ); then
       log "Failed to parse patchfile"
       exit 1
@@ -179,27 +191,49 @@ case "$mode" in
       exit 1
     fi
 
-    unshare --mount --user --map-current-user --keep-caps bash -c '
+    if ! (
+      mkdir "$tmpdir"/agentwrap/bin || exit 1
+      cd "$tmpdir"/agentwrap/bin || exit 1
+      printf >agentwrap-unwrap %s '
+#!/usr/bin/env bash
+invoked_command_name=$(basename "$0")
+repo_root='"${repo_root@Q}"'
+tmpdir='"${tmpdir@Q}"'
+PATH=${PATH#$tmpdir/agentwrap/bin:}
+unshare --mount --map-current-user --keep-caps bash -c '"'"'
+  repo_root=$1
+  tmpdir=$2
+  shift 2
+  mount --bind "$tmpdir"/agentwrap/original-repo "$repo_root"
+  cd "$PWD"
+  exec setpriv --inh-caps=-all -- "$@"
+'"'"' agentwrap-unwrap-inner "$repo_root" "$tmpdir" "$invoked_command_name" "$@"
+' || exit 1
+      chmod +x agentwrap-unwrap || exit 1
+      ln -s agentwrap-unwrap git || exit 1
+      ln -s agentwrap-unwrap jj || exit 1
+    ); then
+      log "Failed to set up unwrap scripts"
+      exit 1
+    fi
+
+    unshare --mount --map-current-user --keep-caps bash -c '
       repo_root=$1
       tmpdir=$2
       shift 2
 
-      undo_skip_worktree() {
-        (cd "$tmpdir" && find . -type f -exec git -C "$repo_root" update-index --no-skip-worktree {} +)
-      }
-      trap undo_skip_worktree EXIT
+      mkdir "$tmpdir"/agentwrap/original-repo
+      mount --bind "$repo_root" "$tmpdir"/agentwrap/original-repo
 
-      if ! (cd "$tmpdir" && find . -type f -exec git -C "$repo_root" update-index --skip-worktree {} +); then
-        echo >&2 "$0: Failed to set skip-worktree for patched files"
+      if ! (
+        cd "$tmpdir" && \
+        find . -name agentwrap -prune -o -type f -exec mount -v --bind --make-private -o ro {} "$repo_root/{}" \;
+      ); then
+        echo >&2 "$0: Failed to set up bind mounts for patched files"
         exit 1
       fi
 
-      if ! (cd "$tmpdir" && find . -type f -exec mount -v --bind -o ro {} "$repo_root/{}" \;); then
-        echo >&2 "$0: Failed to set up bind mounts"
-        exit 1
-      fi
-
-      setpriv --inh-caps=-all -- "$@"
+      PATH=$tmpdir/agentwrap/bin:$PATH exec setpriv --inh-caps=-all -- "$@"
     ' agentwrap-inner "$repo_root" "$tmpdir" "${run_args[@]}"
     ;;
 esac
