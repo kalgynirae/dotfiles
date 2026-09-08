@@ -1,0 +1,205 @@
+#!/usr/bin/env bash
+# usage:
+#   <SCRIPT> status
+#   <SCRIPT> [-p NAME] edit
+#   <SCRIPT> [-p NAME] save [--force]
+#   <SCRIPT> [-p NAME] run COMMAND [ARGS...]
+#
+# Commands:
+#   status  Show which profile is currently being edited
+#   edit    Applies the profile's saved patch to the current repo
+#   save    Stores the current repo's changes as a profile
+#   run     Runs COMMAND in a new mount namespace with the patch applied
+#
+# Options:
+#   -p|--profile NAME   which profile to use (default: repo dirname up to the first -)
+#   --force             save over an existing profile even if 'edit' wasn't used
+#
+# Profiles are stored in ~/.config/agentwrap/<NAME>.patch.
+
+script_basename=$(basename "$0")
+
+usage() {
+  awk <"$0" -v script="$script_basename" '/$^/{exit}; NR==2,0{gsub(/<SCRIPT>/, script); print substr($0, 3)}'
+}
+
+log() {
+  printf >&2 '%s: %s\n' "$script_basename" "$*"
+}
+
+profile=
+force=
+mode=
+run_args=()
+while (( $# > 0 )); do
+  case "$1" in
+    --help)
+      usage
+      exit
+      ;;
+    -p|--profile)
+      if (( $# < 2 )); then
+        usage >&2
+        exit 2
+      fi
+      profile=$2
+      shift 2
+      ;;
+    --force)
+      force=yes
+      shift
+      ;;
+    status|edit|save|run)
+      if [[ $mode ]]; then
+        usage >&2
+        exit 2
+      fi
+      mode=$1
+      shift
+      ;;
+    *)
+      if [[ $mode == run ]]; then
+        run_args+=("$@")
+        shift $#
+      else
+        usage >&2
+        exit 2
+      fi
+      ;;
+  esac
+done
+
+if ! repo_root=$(git rev-parse --show-toplevel); then
+  log "Current directory isn't in a git repo"
+  exit 1
+fi
+
+if ! [[ $repo_root -ef $PWD ]]; then
+  log "Current directory isn't the repo root"
+  exit 1
+fi
+
+repo_dirname=${repo_root##*/}
+repo_name=${repo_dirname%%-*}
+config_dir=$HOME/.config/agentwrap
+patch_path=$config_dir/$profile.patch
+edited_profile_path=$config_dir/.edited-profile
+
+if [[ ! $profile ]]; then
+  if [[ $mode == save && -f $edited_profile_path ]]; then
+    profile=$(<"$edited_profile_path")
+  else
+    profile=$repo_name
+  fi
+fi
+
+if ! [[ $profile =~ [:alnum:][[:alnum:]_-]* ]]; then
+  log "Invalid profile name: ${profile@Q}"
+  exit 1
+fi
+
+if [[ ! -e $config_dir ]]; then
+  mkdir "$config_dir"
+fi
+
+case "$mode" in
+  status)
+    if [[ -f $edited_profile_path ]]; then
+      cat "$edited_profile_path"
+    else
+      log "No profile is currently being edited"
+      exit 1
+    fi
+    ;;
+  edit)
+    if [[ -f $patch_path ]]; then
+      if ! git diff-index --quiet HEAD; then
+        log "Refusing to apply patch for editing because the repo has uncommitted changes"
+        exit 1
+      fi
+      if ! git apply "$patch_path"; then
+        log "Failed to apply patch to the current repo"
+        exit 1
+      fi
+    else
+      log "Editing empty profile ${profile@Q}"
+    fi
+    if ! printf >"$edited_profile_path" '%s\n' "$profile"; then
+      log "Failed to record the last-edited profile"
+      exit 1
+    fi
+    ;;
+  save)
+    if [[ -f $edited_profile_path ]]; then
+      edited_profile=$(<"$edited_profile_path")
+    fi
+    if [[ $profile != "$edited_profile" && ! $force ]]; then
+      log "Refusing to overwrite profile ${profile@Q} when the last-edited profile is ${edited_profile@Q}."
+      log "Either 'edit' this profile first or use --force."
+      exit 1
+    fi
+    if git diff --summary | grep '^ delete'; then
+      log "Deletions aren't supported; replace with an empty file instead"
+      exit 1
+    fi
+    if ! git diff >"$patch_path"; then
+      log "Failed to save patch"
+      exit 1
+    fi
+    log "Saved patch to profile ${profile@Q}"
+    if ! rm "$edited_profile_path"; then
+      log "Failed to clear $edited_profile_path"
+      exit 1
+    fi
+    if ! git apply --reverse "$patch_path"; then
+      log "Failed to undo the profile edits in the repo (undo them manually)"
+      exit 1
+    fi
+    ;;
+  run)
+    if (( ${#run_args[@]} < 1 )); then
+      run_args+=("${SHELL:-bash}")
+    fi
+    if ! tmpdir=$(mktemp -d --tmpdir "$script_basename.XXXX"); then
+      log "Failed to create tempdir"
+      exit 1
+    fi
+    log "Using tempdir $tmpdir"
+    if ! pathlines=$(set -o pipefail; git apply --numstat "$patch_path" | awk '{ print $3 }' ); then
+      log "Failed to parse patchfile"
+      exit 1
+    fi
+    mapfile <<<"$pathlines" -t paths
+    if ! cp -t "$tmpdir" --parents "${paths[@]}"; then
+      log "Failed to copy modified paths into tempdir"
+      exit 1
+    fi
+    if ! (cd "$tmpdir" && git apply "$patch_path"); then
+      log "Failed to apply patchfile"
+      exit 1
+    fi
+
+    unshare --mount --user --map-current-user --keep-caps bash -c '
+      repo_root=$1
+      tmpdir=$2
+      shift 2
+
+      undo_skip_worktree() {
+        (cd "$tmpdir" && find . -type f -exec git -C "$repo_root" update-index --no-skip-worktree {} +)
+      }
+      trap undo_skip_worktree EXIT
+
+      if ! (cd "$tmpdir" && find . -type f -exec git -C "$repo_root" update-index --skip-worktree {} +); then
+        echo >&2 "$0: Failed to set skip-worktree for patched files"
+        exit 1
+      fi
+
+      if ! (cd "$tmpdir" && find . -type f -exec mount -v --bind -o ro {} "$repo_root/{}" \;); then
+        echo >&2 "$0: Failed to set up bind mounts"
+        exit 1
+      fi
+
+      setpriv --inh-caps=-all -- "$@"
+    ' agentwrap-inner "$repo_root" "$tmpdir" "${run_args[@]}"
+    ;;
+esac
