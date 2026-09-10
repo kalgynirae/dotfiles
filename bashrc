@@ -49,13 +49,17 @@ alias uncommas="tr , '\n'"
 # Disable C-s/C-q pausing and resuming output
 stty -ixon
 
-_prompt_command() {
+_colin_bashrc_cmd() {
   history -a
   if [[ $TMUX ]]; then
-    eval "$(tmux showenv -s DARK_THEME)"
+    for var in SHLVL TERM DARK_THEME; do
+      eval "$(tmux showenv -s "$var" 2>/dev/null)"
+    done
   fi
 }
-PROMPT_COMMAND="_prompt_command${PROMPT_COMMAND:+"; $PROMPT_COMMAND"}"
+if [[ ! $PROMPT_COMMAND == *_colin_bashrc_cmd* ]]; then
+  PROMPT_COMMAND="_colin_bashrc_cmd${PROMPT_COMMAND:+"; $PROMPT_COMMAND"}"
+fi
 
 cal() {
   local year
