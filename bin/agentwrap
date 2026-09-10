@@ -123,17 +123,22 @@ case "$mode" in
         log "Refusing to apply patch for editing because the repo has uncommitted changes"
         exit 1
       fi
-      if ! git apply "$patch_path"; then
+      if ! git apply --allow-empty "$patch_path"; then
         log "Failed to apply patch to the current repo"
         exit 1
       fi
+      log "Applying patch for profile ${profile@Q} to the repo..."
     else
-      log "Editing empty profile ${profile@Q}"
+      log "No patch exists for profile ${profile@Q}; starting fresh"
     fi
     if ! printf >"$edited_profile_path" '%s\n' "$profile"; then
-      log "Failed to record the last-edited profile"
+      log "Failed to record profile edit state."
+      log "(You can still edit, but you might need --force to save. Be cautious.)"
       exit 1
     fi
+    log "Profile patch applied. You may now make edits."
+    log "- Use 'git diff' to see the current changes."
+    log "- When finished, run '$script_basename save'."
     ;;
   save)
     if [[ -f $edited_profile_path ]]; then
@@ -157,7 +162,7 @@ case "$mode" in
       log "Failed to clear $edited_profile_path"
       exit 1
     fi
-    if ! git apply --reverse "$patch_path"; then
+    if ! git apply --reverse "$patch_path" --allow-empty; then
       log "Failed to undo the profile edits in the repo (undo them manually)"
       exit 1
     fi
@@ -194,13 +199,12 @@ case "$mode" in
     if ! (
       mkdir "$tmpdir"/agentwrap/bin || exit 1
       cd "$tmpdir"/agentwrap/bin || exit 1
-      printf >agentwrap-unwrap %s '
-#!/usr/bin/env bash
+      printf >agentwrap-unwrap %s '#!/usr/bin/env bash
 invoked_command_name=$(basename "$0")
 repo_root='"${repo_root@Q}"'
 tmpdir='"${tmpdir@Q}"'
 PATH=${PATH#$tmpdir/agentwrap/bin:}
-unshare --mount --map-current-user --keep-caps bash -c '"'"'
+exec unshare --mount --map-current-user --keep-caps bash -c '"'"'
   repo_root=$1
   tmpdir=$2
   shift 2
@@ -217,7 +221,7 @@ unshare --mount --map-current-user --keep-caps bash -c '"'"'
       exit 1
     fi
 
-    unshare --mount --map-current-user --keep-caps bash -c '
+    exec unshare --mount --map-current-user --keep-caps bash -c '
       repo_root=$1
       tmpdir=$2
       shift 2
