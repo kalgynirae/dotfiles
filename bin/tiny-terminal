@@ -1,3 +1,2 @@
 #!/bin/bash
-
-exec alacritty --class tiny-terminal --dimensions 80 8
+exec ghostty --class=org.lumeh.tinyterminal --window-width=80 --window-height=8 --font-size=11

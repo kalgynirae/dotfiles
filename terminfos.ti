@@ -1,8 +1,3 @@
-alacritty|upstream alacritty plus Tc,
-	Tc,
-	Dsbp=\E[?2004l, Enbp=\E[?2004h,
-	use=alacritty,
-
 tmux-256color|upstream tmux-256color plus bce and kitty underline stuff,
 	bce,
 	Setulc=\E[58:2:%p1%{65536}%/%d:%p1%{256}%/%{255}%&%d:%p1%{255}%&%d%;m,
