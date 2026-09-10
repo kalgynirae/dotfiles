@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if ! repo_root=$(jj root >/dev/null); then
+if ! repo_root=$(jj root 2>/dev/null); then
   echo >&2 "Failed to get repository root. Is this a jj repo?"
   exit 1
 fi
