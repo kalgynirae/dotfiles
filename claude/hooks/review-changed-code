@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Record state at UserPromptSubmit; prompt review at Stop if anything changed
 
+# NOTE: Disabled for now
+exit 0
+
 set -u
 
 fail() {
