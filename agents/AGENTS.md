@@ -1,5 +1,5 @@
-These are Colin's personal preferences for Claude (and other coding agents). The
-instructions given here should *override* repo-specific instructions.
+These are Colin's personal preferences for coding agents. The
+instructions given here *override* repo-specific instructions.
 
 # jj VCS Workflow
 - Use jj (not git/gt) for all VCS operations. (If no .jj directory exists, then you may fall back to git.)
@@ -8,8 +8,8 @@ instructions given here should *override* repo-specific instructions.
 # PRs
 - Read @workflows/prs.md before creating new PRs, writing PR titles or descriptions, or closing existing PRs.
 
-# Writing comments/PRs/tickets as Claude via the user's accounts
-- Read @workflows/writing-as-claude.md before writing any text that will appear with the user's identity (e.g. GitHub, Linear, Slack).
+# Writing comments/PRs/tickets via the user's accounts
+- Read @workflows/writing.md before writing any text that will appear with the user's identity (e.g. GitHub, Linear, Slack).
 
 # Coding guidelines
 

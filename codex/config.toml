@@ -1,1 +1,5 @@
 allow_login_shell = false
+
+[tui]
+status_line = ["model-with-reasoning", "current-dir", "context-used", "five-hour-limit", "weekly-limit", "thread-title"]
+status_line_use_colors = true

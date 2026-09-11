@@ -116,8 +116,8 @@ class Symlink(Output):
         if dest.is_symlink():
             if os.readlink(dest) == dest_to_source_relpath:
                 return Result.ok()
-            else:
-                raise RuntimeError("dest is already a symlink")
+            elif dest.exists():
+                raise RuntimeError("dest is already a valid symlink")
         if dest.is_dir():
             raise RuntimeError("dest is already a directory")
         if dest.exists() and not dest.is_file():
