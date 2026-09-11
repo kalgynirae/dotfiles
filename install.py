@@ -45,6 +45,7 @@ configs: dict[str, Output] = {
     ".claude/workflows/jj.md": symlink_to("claude/workflows/jj.md"),
     ".claude/workflows/prs.md": symlink_to("claude/workflows/prs.md"),
     ".claude/workflows/writing-as-claude.md": symlink_to("claude/workflows/writing-as-claude.md"),
+    ".codex/config.toml": symlink_to("codex/config.toml"),
     ".config/electron-flags.conf": symlink_to("electron-flags.conf"),
     ".config/environment.d/environment.conf": symlink_to("environment.conf"),
     ".config/fontconfig/fonts.conf": symlink_to("fonts.conf"),
