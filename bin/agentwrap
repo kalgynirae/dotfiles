@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-# usage:
-#   <SCRIPT> status
-#   <SCRIPT> [-p NAME] edit
-#   <SCRIPT> [-p NAME] save [--force]
-#   <SCRIPT> [-p NAME] run [COMMAND [ARGS...]]
+# usage: <SCRIPT> status
+#        <SCRIPT> [-p NAME] edit
+#        <SCRIPT> [-p NAME] save [--force]
+#        <SCRIPT> [-p NAME] run [COMMAND [ARGS...]]
 #
 # Commands:
-#   status      Show which profile is currently active or being edited
+#   status      Show which profile is currently being edited
 #   edit        Edit the profile in the current repo
 #   save        Save the current repo's changes as a profile
 #   run         Run COMMAND (default: $SHELL) with the profile's patch applied
@@ -16,6 +15,11 @@
 #   --force             save over an existing profile even if 'edit' wasn't used
 #
 # Profiles are stored in ~/.config/agentwrap/<NAME>.patch.
+#
+# Known issues:
+#   - Codex needs allow_login_shell=false in ~/.codex/config.toml to prevent it
+#     bypassing the git/jj wrappers.
+#
 
 script_basename=$(basename "$0")
 
@@ -74,8 +78,8 @@ if [[ ! $mode ]]; then
   exit 2
 fi
 
-if ! repo_root=$(git rev-parse --show-toplevel); then
-  log "Current directory isn't in a git repo"
+if ! repo_root=$(git rev-parse --show-toplevel || jj root --ignore-working-copy); then
+  log "Current directory isn't in a git or jj repo"
   exit 1
 fi
 
@@ -203,7 +207,21 @@ case "$mode" in
 invoked_command_name=$(basename "$0")
 repo_root='"${repo_root@Q}"'
 tmpdir='"${tmpdir@Q}"'
-PATH=${PATH#$tmpdir/agentwrap/bin:}
+
+old_ifs=$IFS
+IFS=:
+pathdirs=($PATH)
+IFS=$old_ifs
+
+# Remove the agentwrap bin dir from PATH
+agentwrap_bin_dir=$(dirname "$0")
+PATH=
+for dir in "${pathdirs[@]}"; do
+  if ! [[ $dir -ef $agentwrap_bin_dir ]]; then
+    PATH=${PATH:+"$PATH:"}$dir
+  fi
+done
+
 exec unshare --mount --map-current-user --keep-caps bash -c '"'"'
   repo_root=$1
   tmpdir=$2
