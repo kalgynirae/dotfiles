@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+current_name=$(niri msg --json workspaces | jq '.[]|select(.is_focused)|if .name then .name else "" end' -r)
+new_name=$(prompt 'Workspace Name' "$current_name")
+if [[ $new_name ]]; then
+  niri msg action set-workspace-name "$new_name"
+else
+  niri msg action unset-workspace-name
+fi

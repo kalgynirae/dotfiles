@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+prompt=${1:?}
+# If an option is provided, insert an empty option first so empty input is possible.
+options=${2:+$'\n'$2}
+bemenu <<<"$options" --prompt "$prompt" --fn "Berkeley Mono Variable Medium SemiCondensed" --no-overlap

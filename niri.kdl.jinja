@@ -147,6 +147,7 @@ binds {
     Mod+Ctrl+WheelScrollDown { focus-workspace-down; }
     Mod+Shift+Ctrl+WheelScrollUp { move-workspace-up; }
     Mod+Shift+Ctrl+WheelScrollDown { move-workspace-down; }
+    Mod+Comma hotkey-overlay-title="Rename workspace" { spawn "niri-rename-workspace"; }
 
     // Monitors
     Mod+N hotkey-overlay-title="Focus next monitor" { focus-monitor-next; }
@@ -179,8 +180,6 @@ binds {
 
     Mod+BracketLeft { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
-    Mod+Comma { consume-window-into-column; }
-    Mod+Period { expel-window-from-column; }
 
     Mod+U { switch-preset-column-width; }
     Mod+Shift+U { expand-column-to-available-width; }
@@ -206,10 +205,10 @@ binds {
     Super+Print { screenshot-window; }
     Alt+Print { spawn "screenshot" "--region" "--text"; }
     XF86Tools { spawn "sh" "-c" "hyprpicker | tr '[:upper:]' '[:lower:]' | wl-copy -n"; }
-    Mod+Ctrl+C { spawn "swappypaste" "swap"; }
-    Mod+Ctrl+Shift+C { spawn "swappypaste" "swap" "--shift"; }
-    Mod+Ctrl+V { spawn "swappypaste" "offer"; }
-    Mod+Ctrl+Shift+V { spawn "swappypaste" "offer" "--shift"; }
+    Mod+Ctrl+C hotkey-overlay-title="Swap-paste" { spawn "swappypaste" "swap"; }
+    Mod+Ctrl+Shift+C hotkey-overlay-title="Swap-paste (with Shift)" { spawn "swappypaste" "swap" "--shift"; }
+    Mod+Ctrl+V hotkey-overlay-title="Offer paste options" { spawn "swappypaste" "offer"; }
+    Mod+Ctrl+Shift+V hotkey-overlay-title="Offer paste options (with Shift)" { spawn "swappypaste" "offer" "--shift"; }
 
     Mod+Shift+Q { quit; }
     Ctrl+Alt+Delete { quit; }
