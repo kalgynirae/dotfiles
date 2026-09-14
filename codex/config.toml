@@ -9,10 +9,13 @@ status_line = ["model-with-reasoning", "current-dir", "context-used", "five-hour
 status_line_use_colors = true
 
 [tui.model_availability_nux]
-gpt-6-astra = 2
+gpt-6-astra = 4
 
 [projects."/home/colin/code/braid"]
 trust_level = "trusted"
 
 [projects."/home/colin/code/fusion"]
+trust_level = "trusted"
+
+[projects."/home/colin/code/fusion-simple-queue"]
 trust_level = "trusted"
