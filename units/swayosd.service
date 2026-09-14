@@ -1,5 +1,5 @@
 [Unit]
-PartOf=graphical-session.target
+PartOf=graphical-session.target pipewire-pulse.service
 After=graphical-session.target
 
 [Service]
