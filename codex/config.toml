@@ -17,5 +17,11 @@ trust_level = "trusted"
 [projects."/home/colin/code/fusion"]
 trust_level = "trusted"
 
+[projects."/home/colin/code/fusion-docs"]
+trust_level = "trusted"
+
+[projects."/home/colin/code/fusion-dotfiles"]
+trust_level = "trusted"
+
 [projects."/home/colin/code/fusion-simple-queue"]
 trust_level = "trusted"
