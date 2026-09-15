@@ -120,12 +120,12 @@ binds {
     Mod+Q hotkey-overlay-title="Close Window" { close-window; }
 
     // Windows
-    Mod+H hotkey-overlay-title="Focus left" { focus-column-left; }
-    Mod+L hotkey-overlay-title="Focus right" { focus-column-right; }
-    Mod+J hotkey-overlay-title="Focus down" { focus-window-down; }
-    Mod+K hotkey-overlay-title="Focus up" { focus-window-up; }
-    Mod+Shift+H hotkey-overlay-title="Move Column left" { move-column-left; }
-    Mod+Shift+L hotkey-overlay-title="Move Column right" { move-column-right; }
+    Mod+H hotkey-overlay-title="Focus left" { focus-column-or-monitor-left; }
+    Mod+L hotkey-overlay-title="Focus right" { focus-column-or-monitor-right; }
+    Mod+J hotkey-overlay-title="Focus down" { focus-window-or-workspace-down; }
+    Mod+K hotkey-overlay-title="Focus up" { focus-window-or-workspace-up; }
+    Mod+Shift+H hotkey-overlay-title="Move Column left" { move-column-left-or-to-monitor-left; }
+    Mod+Shift+L hotkey-overlay-title="Move Column right" { move-column-right-or-to-monitor-right; }
     Mod+Shift+J hotkey-overlay-title="Move Window down" { move-window-down-or-to-workspace-down; }
     Mod+Shift+K hotkey-overlay-title="Move Window up" { move-window-up-or-to-workspace-up; }
     Mod+Home { focus-column-first; }
@@ -168,15 +168,6 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Shift+1 { move-column-to-workspace 1; }
-    Mod+Shift+2 { move-column-to-workspace 2; }
-    Mod+Shift+3 { move-column-to-workspace 3; }
-    Mod+Shift+4 { move-column-to-workspace 4; }
-    Mod+Shift+5 { move-column-to-workspace 5; }
-    Mod+Shift+6 { move-column-to-workspace 6; }
-    Mod+Shift+7 { move-column-to-workspace 7; }
-    Mod+Shift+8 { move-column-to-workspace 8; }
-    Mod+Shift+9 { move-column-to-workspace 9; }
 
     Mod+BracketLeft { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
