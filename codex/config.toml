@@ -4,12 +4,18 @@ model_reasoning_effort = "high"
 service_tier = "default"
 approvals_reviewer = "auto_review"
 
+[notice]
+hide_rate_limit_model_nudge = true
+
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "context-used", "five-hour-limit", "weekly-limit", "thread-title"]
 status_line_use_colors = true
 
 [tui.model_availability_nux]
 gpt-6-astra = 4
+
+[projects."/home/colin"]
+trust_level = "trusted"
 
 [projects."/home/colin/code/braid"]
 trust_level = "trusted"
@@ -24,4 +30,7 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/home/colin/code/fusion-simple-queue"]
+trust_level = "trusted"
+
+[projects."/home/colin/code/fusion-coder-git-auth"]
 trust_level = "trusted"
