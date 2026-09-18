@@ -76,7 +76,7 @@ elif [[ $event == Stop ]]; then
 
   printf >"$statefile" '%s\n%s\n' "$prompt_id" "$current_checksums"
 
-  reason="Before stopping, do a review pass over the code you changed this turn, per the guidelines in ~/.claude/coding-guidelines/review.md. Read that file, then re-read the added/changed lines in these files and fix any violations. If they already comply, say so briefly and stop."
+  reason="Before stopping, do a review pass over the code you changed this turn, per the guidelines in ~/.config/agents/review.md. Read that file, then re-read the added/changed lines in these files and fix any violations. If they already comply, say so briefly and stop."
   jq -n --arg r "$reason" '{decision: "block", reason: $r}'
 else
   fail "unsupported event: ${event@Q}"
