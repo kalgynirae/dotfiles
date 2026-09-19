@@ -381,9 +381,10 @@ up() {
 }
 
 r() {
-  local repo path_append
+  local repo path_append tmux=yes
   case ${1%/} in
     dotfiles|d)
+      tmux=
       if [[ $CODESPACES ]]; then
         repo=/workspaces/.codespaces/.persistedshare/dotfiles
       elif [[ $CODER ]]; then
@@ -402,9 +403,15 @@ r() {
   esac
   if [[ $repo ]]; then
     if cd "$repo"; then
-      rename-tmux-window "$(basename "$repo")"
       if [[ $path_append ]]; then
         PATH=$PATH:$path_append
+      fi
+    fi
+    if [[ $tmux ]]; then
+      if [[ -v TMUX ]]; then
+        rename-tmux-window "$(basename "$repo")"
+      else
+        tmux new-session -s "$(basename "$repo")" -A
       fi
     fi
   else
