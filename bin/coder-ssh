@@ -49,7 +49,7 @@ args=(
 if [[ $template == fusion ]]; then
   args+=(
     --parameter timezone="$(timedatectl show -p Timezone --value)"
-    --parameter use_shpool=false
+    --parameter size=braid
   )
 fi
 
