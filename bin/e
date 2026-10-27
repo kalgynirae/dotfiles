@@ -2,17 +2,26 @@
 
 if [[ $1 == --conflicts ]]; then
   shift
-  if (( $# > 0 )); then
-    args=("$@")
+  if jj root &>/dev/null; then
+    if (( $# > 0 )); then
+      jj_args=("$@")
+    else
+      jj_args=(-r @-)
+    fi
+    mapfile -d '' -t paths < <(jj log --no-graph -T'conflicted_files.map(|f| f.path()).join("\0") ++ "\0"' "${jj_args[@]}")
+  elif git rev-parse --is-inside-work-tree &>/dev/null; then
+    mapfile -d '' -t paths < <(git diff --name-only -z --diff-filter=U --relative)
   else
-    args=(-r @-)
+    echo >&2 "e: current directory is not a git or jj repo"
+    exit 1
   fi
-  jj log --no-graph -T'conflicted_files.map(|f| f.path()).join("\0") ++ "\0"' "${args[@]}" | xargs -0 e
-  exit
+  editor_args=("${paths[@]}")
+else
+  editor_args=("$@")
 fi
 
 if [[ $NVIM_LISTEN_ADDRESS ]]; then
-  exec nvr --nostart -O "$@"
+  exec nvr --nostart -O "${editor_args[@]}"
 else
-  exec "$EDITOR" "$@"
+  exec "$EDITOR" "${editor_args[@]}"
 fi
