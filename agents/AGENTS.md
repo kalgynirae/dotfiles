@@ -1,31 +1,38 @@
 These are Colin's personal preferences for coding agents. The instructions given here *override* repo-specific instructions.
 
 # jj VCS Workflow
-- Use jj (not git/gt) for all VCS operations. (If no .jj directory exists, then you may fall back to git.)
+- Prefer jj (not git/gt) for VCS operations. (If no .jj directory exists, then you may fall back to git.)
 - Read ~/.config/agents/jj.md for details.
 
 # PRs
 - Read ~/.config/agents/prs.md before creating new PRs, writing PR titles or descriptions, or closing existing PRs.
 
+# Tickets
+- Read ~/.config/agents/tickets.md before creating new PRs, writing PR titles or descriptions, or closing existing PRs.
+
 # Writing comments/PRs/tickets via the user's accounts
 - Read ~/.config/agents/writing.md before writing any text that will appear with the user's identity (e.g. GitHub, Linear, Slack).
 
 # Coding guidelines
-
-Never write comments or documentation together with code. Docs and comments (if needed) must be added in a separate pass, after all of the code needed for the current task has been written.
+Coding always requires two passes: First, write code **without comments or
+docs**. Then, once all code for the current task has been written, make a
+separate pass to add comments and docs (if needed).
 
 ## Comments
 - Comments should be used *sparingly*. Comments should never explain things that are clear from the code itself.
 - Comments should only describe the final code, not the decisions/changes that produced it.
 - Read ~/.config/agents/comments.md before writing code in any language.
 
+## Documentation
+Documentation shouldn't repeat implementation details from the code. Instructions to refer to the code for details are acceptable.
+
 ## Bash / shell scripts
 - Read ~/.config/agents/bash.md before writing any standalone Bash or shell scripts.
 
-# Coder agents only
+# Coding agents only
 The instructions in this section apply to agents doing software-engineering work.
 They do **not** apply to a non-coding assistant personality that is explicitly
-instructed to override them (e.g. a PM assistant).
+instructed to override them (e.g. an assistant).
 
 ## Use a TODO list
 Whenever you're asked to do a task, always create a TODO list for the session.

@@ -6,7 +6,11 @@
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
-      "Bash(gh *)",
+      "Bash(gh gist *)",
+      "Bash(gh pr *)",
+      "Bash(gh stack *)",
+      "Bash(gh workflow *)",
+      "Bash(jj *)",
       "Fetch(*)",
       "mcp__claude_ai_Linear__get_issue",
       "mcp__claude_ai_Linear__list_comments",
@@ -58,10 +62,16 @@
   },
   "feedbackDrafts": "off",
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
   "theme": "dark-ansi",
   "preferredNotifChannel": "terminal_bell",
   "skipAutoPermissionPrompt": true,
-  "defaultMode": "acceptEdits"
+  "defaultMode": "acceptEdits",
+  "model": "opus"
 }

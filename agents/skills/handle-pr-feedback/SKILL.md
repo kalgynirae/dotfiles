@@ -3,17 +3,9 @@ name: handle-pr-feedback
 description: Address feedback from reviewers for a set of commits by fetching comments from GitHub, making changes, and writing a list of the changes made.
 ---
 
-# Handle PR Feedback
+Starting at the bottom of the stack, do the following:
 
-## Input
-
-- Accept input as a jj revset. If not given, use `stack`.
-
-## Workflow
-
-Starting at the root commit of the revset, do the following:
-
-1. Use the jj bookmark for the current commit (`jj log -r <id> --no-graph -T 'local_bookmarks.map(|b| b.name())'`) to look up the corresponding GitHub PR: `gh pr view <bookmark>`
+1. Determine the corresponding PR.
 
 2. Build a comment ledger with: `change_id`, `branch`, `pr_number`, `comment_url`, `author`, `file_line`, `summary`, `action_type`, `status`, and `notes`. Give this a heading with the commit's change ID and branch name, and append it to the file: `<repo>/scratch/handle-pr-feedback-<session>.md`.
 
@@ -30,11 +22,11 @@ Starting at the root commit of the revset, do the following:
 4. Implement fixes holistically:
 - Apply fixes by concern area, not comment order, to avoid conflicting patches.
 - Keep changes minimal and local unless the comment requires broader refactor.
-- For stack-wide concerns, place the fix in the lowest PR where it logically belongs.
+- For stack-wide concerns, place the fix in the lowest PR where it logically belongs (or, if necessary, a new PR inserted specifically for the fix).
 - Summarize changes made in the ledger.
 
 5. Validate:
-- If code changes were made, use `$verify-changes` for tests, lint, typechecks, and build steps.
+- If code changes were made, re-run lint/tests to verify that the changes are correct (or let CI do this).
 - If no code changes are needed, validate by tracing the exact code path and checking current behavior against reviewer intent.
 
 6. Mark comments resolved:
@@ -43,8 +35,4 @@ Starting at the root commit of the revset, do the following:
 
 7. Final pass:
 - Confirm every ledger row is `addressed`.
-- If code changes were made, confirm `$verify-changes` succeeded or clearly report any blocker.
-
-## Output
-
 - Return a concise summary of the actions taken and point to the ledger file for details.
