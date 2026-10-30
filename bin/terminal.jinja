@@ -64,7 +64,7 @@ fi
 
 case "$TERMINAL" in
   ghostty)
-    args=(ghostty --working-directory="${cwd:-home}")
+    args=(ghostty +new-window --working-directory="${cwd:-home}")
     if [[ $split ]]; then
       args+=(--initial-command='sleep 0.1; niri msg action consume-or-expel-window-left; bash -i')
     fi
