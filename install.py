@@ -76,7 +76,7 @@ configs: dict[str, Output] = {
     ".config/sway/config": render("sway.jinja"),
     ".config/swaylock/config": symlink_to("swaylock"),
     ".config/systemd/user/niri-workspace-manager.service": symlink_to("niri-workspace-manager/niri-workspace-manager.service"),
-    ".config/user-dirs.dirs": symlink_to("user-dirs.dirs"),
+    ".config/user-dirs.dirs": render("user-dirs.dirs.jinja"),
     ".config/waybar/config": render("waybar.jinja"),
     ".config/waybar/style.css": render("waybar.css.jinja"),
     ".config/wezterm/wezterm.lua": render("wezterm.lua.jinja"),
