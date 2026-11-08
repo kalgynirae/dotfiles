@@ -1,0 +1,308 @@
+" kalgynirae's colorscheme
+hi clear
+let g:colors_name="kalgykai"
+
+function! s:hi(group, guifg, guibg, guisp, gui)
+  let args = ""
+  if a:guifg != ""
+    let args = args." guifg=".a:guifg
+  endif
+  if a:guibg != ""
+    let args = args." guibg=".a:guibg
+  endif
+  if a:guisp != ""
+    let args = args." guisp=".a:guisp
+  endif
+  if a:gui != ""
+    let args = args." gui=".a:gui
+  endif
+  if args == ""
+    let args = "NONE"
+  else
+    let args = args." cterm=NONE"
+  endif
+  execute "hi" a:group args
+endfunction
+
+let s:none = ""
+let s:reset = "NONE"
+
+if &background == "dark"
+  let s:bg = "#{{ dark_bg }}"
+  let s:brightbg = "#{{ dark_brightbg }}"
+  let s:shadow = "#{{ dark_shadow }}"
+  let s:veryfaint = "#{{ dark_veryfaint }}"
+  let s:faint = "#{{ dark_faint }}"
+  let s:subtle = "#{{ dark_subtle }}"
+  let s:normal = "#{{ dark_normal }}"
+  let s:bright = "#{{ dark_bright }}"
+  let s:verybright = "#ffffff"
+  let s:red = "#{{ dark_red }}"
+  let s:orange = "#{{ dark_orange }}"
+  let s:yellow = "#{{ dark_yellow }}"
+  let s:green = "#{{ dark_green }}"
+  let s:cyan = "#{{ dark_cyan }}"
+  let s:blue = "#{{ dark_blue }}"
+  let s:violet = "#{{ dark_violet }}"
+  let s:magenta = "#{{ dark_magenta }}"
+  let s:brightred = "#{{ dark_red_bright }}"
+  let s:brightorange = "#{{ dark_orange_bright }}"
+  let s:brightyellow = "#{{ dark_yellow_bright }}"
+  let s:brightgreen = "#{{ dark_green_bright }}"
+  let s:brightcyan = "#{{ dark_cyan_bright }}"
+  let s:brightblue = "#{{ dark_blue_bright }}"
+  let s:brightviolet = "#{{ dark_violet_bright }}"
+  let s:brightmagenta = "#{{ dark_magenta_bright }}"
+  let s:dimred = "#{{ dark_red_dim }}"
+  let s:dimorange = "#{{ dark_orange_dim }}"
+  let s:dimyellow = "#{{ dark_yellow_dim }}"
+  let s:dimgreen = "#{{ dark_green_dim }}"
+  let s:dimcyan = "#{{ dark_cyan_dim }}"
+  let s:dimblue = "#{{ dark_blue_dim }}"
+  let s:dimviolet = "#{{ dark_violet_dim }}"
+  let s:dimmagenta = "#{{ dark_magenta_dim }}"
+  let s:bgred = "#{{ dark_red_bg }}"
+  let s:bgorange = "#{{ dark_orange_bg }}"
+  let s:bgyellow = "#{{ dark_yellow_bg }}"
+  let s:bggreen = "#{{ dark_green_bg }}"
+  let s:bgcyan = "#{{ dark_cyan_bg }}"
+  let s:bgblue = "#{{ dark_blue_bg }}"
+  let s:bgviolet = "#{{ dark_violet_bg }}"
+  let s:bgmagenta = "#{{ dark_magenta_bg }}"
+  let s:hlred = "#{{ dark_red_hl }}"
+  let s:hlorange = "#{{ dark_orange_hl }}"
+  let s:hlyellow = "#{{ dark_yellow_hl }}"
+  let s:hlgreen = "#{{ dark_green_hl }}"
+  let s:hlcyan = "#{{ dark_cyan_hl }}"
+  let s:hlblue = "#{{ dark_blue_hl }}"
+  let s:hlviolet = "#{{ dark_violet_hl }}"
+  let s:hlmagenta = "#{{ dark_magenta_hl }}"
+else
+  let s:bg = "#{{ light_bg }}"
+  let s:brightbg = "#{{ light_brightbg }}"
+  let s:shadow = "#{{ light_shadow }}"
+  let s:veryfaint = "#{{ light_veryfaint }}"
+  let s:faint = "#{{ light_faint }}"
+  let s:subtle = "#{{ light_subtle }}"
+  let s:normal = "#{{ light_normal }}"
+  let s:bright = "#{{ light_bright }}"
+  let s:verybright = "#000000"
+  let s:red = "#{{ light_red }}"
+  let s:orange = "#{{ light_orange }}"
+  let s:yellow = "#{{ light_yellow }}"
+  let s:green = "#{{ light_green }}"
+  let s:cyan = "#{{ light_cyan }}"
+  let s:blue = "#{{ light_blue }}"
+  let s:violet = "#{{ light_violet }}"
+  let s:magenta = "#{{ light_magenta }}"
+  let s:brightred = "#{{ light_red_bright }}"
+  let s:brightorange = "#{{ light_orange_bright }}"
+  let s:brightyellow = "#{{ light_yellow_bright }}"
+  let s:brightgreen = "#{{ light_green_bright }}"
+  let s:brightcyan = "#{{ light_cyan_bright }}"
+  let s:brightblue = "#{{ light_blue_bright }}"
+  let s:brightviolet = "#{{ light_violet_bright }}"
+  let s:brightmagenta = "#{{ light_magenta_bright }}"
+  let s:dimred = "#{{ light_red_dim }}"
+  let s:dimorange = "#{{ light_orange_dim }}"
+  let s:dimyellow = "#{{ light_yellow_dim }}"
+  let s:dimgreen = "#{{ light_green_dim }}"
+  let s:dimcyan = "#{{ light_cyan_dim }}"
+  let s:dimblue = "#{{ light_blue_dim }}"
+  let s:dimviolet = "#{{ light_violet_dim }}"
+  let s:dimmagenta = "#{{ light_magenta_dim }}"
+  let s:bgred = "#{{ light_red_bg }}"
+  let s:bgorange = "#{{ light_orange_bg }}"
+  let s:bgyellow = "#{{ light_yellow_bg }}"
+  let s:bggreen = "#{{ light_green_bg }}"
+  let s:bgcyan = "#{{ light_cyan_bg }}"
+  let s:bgblue = "#{{ light_blue_bg }}"
+  let s:bgviolet = "#{{ light_violet_bg }}"
+  let s:bgmagenta = "#{{ light_magenta_bg }}"
+  let s:hlred = "#{{ light_red_hl }}"
+  let s:hlorange = "#{{ light_orange_hl }}"
+  let s:hlyellow = "#{{ light_yellow_hl }}"
+  let s:hlgreen = "#{{ light_green_hl }}"
+  let s:hlcyan = "#{{ light_cyan_hl }}"
+  let s:hlblue = "#{{ light_blue_hl }}"
+  let s:hlviolet = "#{{ light_violet_hl }}"
+  let s:hlmagenta = "#{{ light_magenta_hl }}"
+end
+
+" Note: use "nocombine" in the gui arg to override instead of combining
+
+call s:hi("Normal",         s:reset,          s:reset,          s:none,           s:none)
+call s:hi("NormalFg",       s:normal,       s:reset,          s:none,           s:none)
+call s:hi("ColorColumn",    s:reset,          s:brightbg,       s:none,           s:none)
+call s:hi("Cursor",         s:none,           s:none,           s:none,           s:none)
+call s:hi("CursorInsert",   "bg",             s:brightmagenta,  s:none,           s:reset)
+call s:hi("CursorReplace",  "bg",             s:brightmagenta,  s:none,           s:reset)
+call s:hi("CursorColumn",   s:reset,          s:brightbg,       s:none,           s:none)
+call s:hi("CursorLine",     s:reset,          s:brightbg,       s:none,           s:none)
+call s:hi("CursorLineNr",   s:faint,      s:reset,          s:none,           "bold")
+call s:hi("GitGutterAddLineNr", s:green,      s:reset,          s:none,           s:none)
+call s:hi("GitGutterChangeLineNr", s:yellow,  s:reset,          s:none,           s:none)
+call s:hi("GitGutterChangeDeleteLineNr", s:orange, s:reset,     s:none,           s:none)
+call s:hi("GitGutterDeleteLineNr", s:red,     s:reset,          s:none,           s:none)
+call s:hi("LineNr",         s:faint,      s:reset,          s:none,           s:none)
+call s:hi("SpellBad",       s:reset,          s:bgred,          s:red,            s:none)
+call s:hi("SpellCap",       s:reset,          s:bgyellow,       s:yellow,         s:none)
+call s:hi("SpellLocal",     s:reset,          s:bgyellow,       s:yellow,         s:none)
+call s:hi("SpellRare",      s:reset,          s:bgyellow,       s:yellow,         s:none)
+call s:hi("TabLine",        s:subtle,          s:brightbg,         s:none,           s:none)
+call s:hi("TabLineFill",    s:reset,          s:brightbg,         s:none,           s:reset)
+call s:hi("TabLineSel",     s:reset,          s:faint,      s:none,           "bold")
+call s:hi("TermCursor",     "bg",             s:brightviolet,   s:none,           s:reset)
+call s:hi("Visual",         s:bright,       s:bg,       s:none,           "reverse")
+call s:hi("VisualNOS",      s:reset,          s:reset,          s:none,           "reverse")
+
+call s:hi("DiagnosticError", s:brightred,     s:reset,          s:none,           "italic")
+call s:hi("DiagnosticWarn", s:brightorange,   s:reset,          s:none,           "italic")
+call s:hi("DiagnosticInfo", s:brightblue,     s:reset,          s:none,           "italic")
+call s:hi("DiagnosticHint", s:brightcyan,     s:reset,          s:none,           "italic")
+call s:hi("DiagnosticUnderlineError", s:none, s:none,           s:brightred,      "underline")
+call s:hi("DiagnosticUnderlineWarn", s:none,  s:none,           s:brightorange,   "underline")
+call s:hi("DiagnosticUnderlineInfo", s:none,  s:none,           s:none,           s:reset)
+call s:hi("DiagnosticUnderlineHint", s:none,  s:none,           s:none,           s:reset)
+
+call s:hi("StatusLine",     s:reset,          s:subtle,          s:none,           "bold")
+call s:hi("StatusLineNC",   s:faint,      s:brightbg,         s:none,           s:reset)
+call s:hi("User1",          s:bg,       s:yellow,         s:none,           "bold")   " replace mode
+call s:hi("User2",          s:bg,       s:green,          s:none,           "bold")   " insert mode
+call s:hi("User3",          s:bg,       s:cyan,           s:none,           "bold")   " visual mode
+call s:hi("User4",          s:bg,       s:blue,           s:none,           "bold")   " (unused)
+call s:hi("User5",          s:bg,       s:violet,         s:none,           "bold")   " terminal mode
+call s:hi("User6",          s:brightred,      s:faint,      s:none,           "bold")   " error count
+call s:hi("User7",          s:brightorange,   s:faint,      s:none,           "bold")   " warning count
+call s:hi("User8",          s:brightcyan,     s:faint,      s:none,           "bold")   " (unused)
+call s:hi("User9",          s:brightblue,     s:faint,      s:none,           "bold")   " (unused)
+
+call s:hi("Boolean",        s:blue,           s:reset,          s:none,           s:none)
+call s:hi("Character",      s:yellow,         s:reset,          s:none,           s:none)
+call s:hi("Comment",        s:subtle,          s:reset,          s:none,           s:none)
+call s:hi("Conditional",    s:subtle,          s:reset,          s:none,           "bold")
+call s:hi("Constant",       s:violet,         s:reset,          s:none,           s:none)
+call s:hi("Debug",          s:brightmagenta,  s:reset,          s:none,           "bold")
+call s:hi("Define",         s:cyan,           s:reset,          s:none,           s:none)
+call s:hi("Delimiter",      s:subtle,          s:reset,          s:none,           s:none)
+call s:hi("DiffAdd",        s:green,          s:reset,          s:none,           s:none)
+call s:hi("DiffChange",     s:orange,         s:reset,          s:none,           s:none)
+call s:hi("DiffDelete",     s:red,            s:reset,          s:none,           s:none)
+call s:hi("DiffText",       s:subtle,          s:reset,          s:none,           "bold")
+call s:hi("Directory",      s:blue,           s:reset,          s:none,           "bold")
+call s:hi("Error",          s:reset,          s:bgred,          s:none,           s:none)
+call s:hi("ErrorMsg",       s:brightred,      s:reset,          s:none,           "italic")
+call s:hi("Exception",      s:subtle,          s:reset,          s:none,           "bold")
+call s:hi("Float",          s:blue,           s:reset,          s:none,           s:none)
+call s:hi("FoldColumn",     s:faint,      s:reset,          s:none,           s:none)
+call s:hi("Folded",         s:faint,      s:reset,          s:none,           s:none)
+call s:hi("Function",       s:green,          s:reset,          s:none,           s:none)
+call s:hi("Identifier",     s:reset,          s:reset,          s:none,           s:none)
+call s:hi("Ignore",         s:subtle,          s:reset,          s:none,           s:none)
+call s:hi("Include",        s:subtle,          s:reset,          s:none,           "bold")
+call s:hi("IncSearch",      s:reset,          s:hlyellow,       s:none,           s:reset)
+call s:hi("Keyword",        s:subtle,          s:reset,          s:none,           "bold")
+call s:hi("Label",          s:subtle,          s:reset,          s:none,           "bold")
+call s:hi("Macro",          s:magenta,        s:reset,          s:none,           "italic")
+call s:hi("MatchParen",     s:brightorange,   s:reset,          s:none,           s:none)
+call s:hi("ModeMsg",        s:brightyellow,   s:reset,          s:none,           s:none)
+call s:hi("MoreMsg",        s:brightyellow,   s:reset,          s:none,           s:none)
+call s:hi("NonText",        s:faint,      s:reset,          s:none,           s:none)
+call s:hi("Number",         s:blue,           s:reset,          s:none,           s:none)
+call s:hi("Operator",       s:subtle,          s:reset,          s:none,           s:none)
+call s:hi("Pmenu",          s:reset,          s:shadow,      s:none,           s:none)
+call s:hi("PmenuSel",       s:reset,          s:faint,      s:none,           "bold")
+call s:hi("PmenuSbar",      s:reset,          s:brightbg,         s:none,           s:none)
+call s:hi("PmenuThumb",     s:reset,          s:green,          s:none,           s:none)
+call s:hi("PreCondit",      s:yellow,         s:reset,          s:none,           "bold")
+call s:hi("PreProc",        s:violet,         s:reset,          s:none,           "italic")
+call s:hi("Question",       s:cyan,           s:reset,          s:none,           s:none)
+call s:hi("Repeat",         s:subtle,          s:reset,          s:none,           "bold")
+call s:hi("Search",         s:reset,          s:hlyellow,       s:none,           s:none)
+call s:hi("SignColumn",     s:blue,           s:reset,          s:none,           s:none)
+call s:hi("Special",        s:orange,         s:reset,          s:none,           "italic")
+call s:hi("SpecialChar",    s:orange,         s:reset,          s:none,           "italic")
+call s:hi("SpecialComment", s:brightviolet,   s:reset,          s:none,           s:none)
+call s:hi("SpecialKey",     s:cyan,           s:reset,          s:none,           "italic")
+call s:hi("Statement",      s:subtle,          s:reset,          s:none,           "bold")
+call s:hi("StorageClass",   s:brightorange,   s:reset,          s:none,           "italic")
+call s:hi("String",         s:yellow,         s:reset,          s:none,           s:none)
+call s:hi("Structure",      s:cyan,           s:reset,          s:none,           s:none)
+call s:hi("Tag",            s:blue,           s:reset,          s:none,           "italic")
+call s:hi("Title",          s:brightorange,   s:reset,          s:none,           s:none)
+call s:hi("Todo",           s:brightred,      s:reset,          s:none,           s:none)
+call s:hi("Type",           s:cyan,           s:reset,          s:none,           s:reset)
+call s:hi("Typedef",        s:cyan,           s:reset,          s:none,           s:none)
+call s:hi("Underlined",     s:reset,          s:reset,          s:none,           "underline")
+call s:hi("VertSplit",      s:faint,      s:reset,          s:none,           "bold")
+call s:hi("WarningMsg",     s:verybright,   s:reset,          s:none,           "bold")
+call s:hi("WildMenu",       s:blue,           s:shadow,      s:none,           s:none)
+call s:hi("diffAdded",      s:green,          s:reset,          s:none,           s:none)
+call s:hi("diffFile",       s:bright,       s:reset,          s:none,           "bold")
+call s:hi("diffIndexLine",  s:bright,       s:reset,          s:none,           "bold")
+call s:hi("diffLine",       s:cyan,           s:reset,          s:none,           s:none)
+call s:hi("diffNewFile",    s:bright,       s:reset,          s:none,           "bold")
+call s:hi("diffRemoved",    s:red,            s:reset,          s:none,           s:none)
+call s:hi("diffSubname",    s:bright,       s:reset,          s:none,           "bold")
+
+call s:hi("htmlLink",       s:reset,          s:reset,          "fg",             "underline")
+
+call s:hi("Bold",           s:none,           s:none,           s:none,           "bold")
+
+call s:hi("TSConstBuiltin", s:blue,           s:none,           s:none,           s:none)
+call s:hi("TSFuncBuiltin",  s:green,          s:none,           s:none,           s:none)
+call s:hi("TSFuncMacro",    s:violet,         s:none,           s:none,           s:none)
+call s:hi("TSFunction",     s:green,          s:none,           s:none,           s:none)
+call s:hi("TSMethod",       s:green,          s:none,           s:none,           s:none)
+call s:hi("TSParameter",    s:subtle,          s:none,           s:none,           s:none)
+call s:hi("TSType",         s:cyan,           s:none,           s:none,           s:none)
+call s:hi("TSVariable",     s:normal,       s:reset,          s:none,           s:none)
+
+hi link commentTSConstant TSStrong
+
+hi link docstring Comment
+hi link pythonTSNone TSParameter
+hi link pythonTSVariableBuiltin TSParameter
+
+hi link hgcommitAdded DiffAdd
+hi link hgcommitChanged DiffChange
+hi link hgcommitRemoved DiffDelete
+
+hi link phpMemberSelector Delimiter
+hi link phpVarSelector Identifier
+
+hi link rubyStringDelimiter String
+
+hi link rustTSField TSParameter
+
+hi link helpNote SpecialComment
+hi link vimCommentTitle SpecialComment
+
+" Note: TS highlight groups get linked to standard nvim groups by default, but
+" this seems to happen at some point after the colorscheme is loaded.
+" Sometimes I want to remove one of those links (so that highlighting can be
+" determined by *other* groups that the item may be in simultaneously). This
+" is the only way I've found that successfully gets rid of the link.
+augroup kalgykai
+  autocmd!
+  au BufEnter * hi link TSConstructor NONE
+  au BufEnter * hi link TSLiteral NONE
+  au BufEnter * hi link TSNamespace NONE
+augroup END
+
+let g:terminal_color_0 = s:faint
+let g:terminal_color_1 = s:red
+let g:terminal_color_2 = s:green
+let g:terminal_color_3 = s:yellow
+let g:terminal_color_4 = s:blue
+let g:terminal_color_5 = s:magenta
+let g:terminal_color_6 = s:cyan
+let g:terminal_color_7 = s:bright
+let g:terminal_color_8 = s:subtle
+let g:terminal_color_9 = s:brightred
+let g:terminal_color_10 = s:brightgreen
+let g:terminal_color_11 = s:brightyellow
+let g:terminal_color_12 = s:brightblue
+let g:terminal_color_13 = s:brightmagenta
+let g:terminal_color_14 = s:brightcyan
+let g:terminal_color_15 = s:verybright
