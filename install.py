@@ -75,6 +75,7 @@ configs: dict[str, Output] = {
     ".config/ssh-with-dotfiles/collect": symlink_to("ssh-with-dotfiles/collect"),
     ".config/sway/config": render("sway.jinja"),
     ".config/swaylock/config": symlink_to("swaylock"),
+    ".config/systemd/user/app-com.mitchellh.ghostty.service.d/gtk-im-module.conf": symlink_to("ghostty/gtk-im-module.conf"),
     ".config/systemd/user/niri-workspace-manager.service": symlink_to("niri-workspace-manager/niri-workspace-manager.service"),
     ".config/user-dirs.dirs": render("user-dirs.dirs.jinja"),
     ".config/waybar/config": render("waybar.jinja"),
