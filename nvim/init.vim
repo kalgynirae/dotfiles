@@ -1,38 +1,22 @@
-set autoindent
-set autoread
 if $DARK_THEME == "yes"
   set background=dark
 else
   set background=light
 endif
-set backupcopy=yes
 set colorcolumn=89
-set completeopt=menu
 set cursorline
-set display=lastline
-set encoding=utf-8
-set exrc secure
-set guicursor=n-v-sm:block-Cursor,i-c-ci-ve:ver20-CursorInsert,o-r-cr:hor20-CursorReplace
-set hlsearch incsearch
-set inccommand=nosplit
-set laststatus=2
-set linebreak
+set expandtab shiftwidth=4 softtabstop=-1
+set guicursor=n-v-sm:block-Cursor,i-c-ci-ve:ver20-CursorInsert,o-r-cr:hor20-CursorReplace,t:block
+set guifont=Berkeley\ Mono\ Variable
+set ignorecase smartcase
+set linebreak breakindent breakindentopt=shift:2,min:40,sbr showbreak=↪\ 
 set list listchars=tab:‣\ ,extends:»,precedes:«,nbsp:‧,trail:░
-set mouse=a
-set nowrap
 set number
-set ruler
 set scrolloff=3 sidescrolloff=5
-set shada='50,h
-set shiftwidth=4 softtabstop=-1 expandtab smarttab
-set showcmd
-set signcolumn=no
-set smartcase
-set spelllang=en_us
+set spell spelllang=en_us spelloptions=camel
 set splitbelow splitright
-set termguicolors
-set updatetime=100
 set undofile
+set updatetime=500
 set wildignore+=*/node_modules/*
 set wildignorecase
 set wildmode=list:longest
@@ -104,13 +88,13 @@ tnoremap <c-\>] <c-\><c-n>pi
 autocmd TermOpen * setlocal nonumber signcolumn=no
 autocmd TermClose * if exists('b:overlay_terminal') | call feedkeys('') | else | exe bufwinnr(str2nr(expand('<abuf>')))..'q' | endif
 
-" Neovide
-set guifont=Iosevka\ Term:h18
-let g:neovide_cursor_vfx_mode = "pixiedust"
-let g:neovide_cursor_animation_length = 0.03
-let g:neovide_cursor_vfx_particle_density = 30.0
-let g:neovide_cursor_vfx_particle_lifetime = 2.0
-let g:neovide_cursor_vfx_particle_speed = 5.0
-lua require("kalgyutil")
-nmap <C-+> <Cmd>call v:lua.change_guifont_size(1)<CR>
-nmap <C--> <Cmd>call v:lua.change_guifont_size(-1)<CR>
+if exists("g:neovide")
+  let g:neovide_cursor_vfx_mode = "pixiedust"
+  let g:neovide_cursor_animation_length = 0.03
+  let g:neovide_cursor_vfx_particle_density = 30.0
+  let g:neovide_cursor_vfx_particle_lifetime = 2.0
+  let g:neovide_cursor_vfx_particle_speed = 5.0
+  lua require("kalgyutil")
+  nmap <C-+> <Cmd>call v:lua.change_guifont_size(1)<CR>
+  nmap <C--> <Cmd>call v:lua.change_guifont_size(-1)<CR>
+endif
