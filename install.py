@@ -67,7 +67,7 @@ configs: dict[str, Output] = {
     ".config/nvim/autoload": symlink_to("nvim/autoload"),
     ".config/nvim/colors/kalgykai.vim": render("nvim/colors/kalgykai.vim.jinja"),
     ".config/nvim/ftplugin": symlink_to("nvim/ftplugin"),
-    ".config/nvim/init.vim": symlink_to("nvim/init.vim"),
+    ".config/nvim/init.lua": symlink_to("nvim/init.lua"),
     ".config/nvim/lua": symlink_to("nvim/lua"),
     ".config/paru/paru.conf": symlink_to("paru.conf"),
     ".config/qt5ct/qt5ct.conf": render("qt5ct.conf.jinja"),
