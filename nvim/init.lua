@@ -53,6 +53,7 @@ vim.keymap.set("n", "<LocalLeader>r", "<Cmd>call wordhighlight#highlight_under_c
 vim.keymap.set("n", "<LocalLeader>s", "<Cmd>setlocal spell! spell?<CR>")
 vim.keymap.set("n", "<LocalLeader>v", "<Cmd>setlocal virtualedit=all<CR>")
 vim.keymap.set("n", "<F5>", "<Cmd>make<CR>")
+vim.keymap.set("n", "U", "<Cmd>redo<CR>")
 -- Emacs editing shortcuts
 vim.keymap.set({ "c", "i" }, "<c-a>", "<Home>")
 vim.keymap.set({ "c", "i" }, "<c-e>", "<End>")
